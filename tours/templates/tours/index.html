@@ -1,0 +1,6 @@
+<h3>Tour list</h3>
+<ul>
+{% for tour in tours %}
+  <li><a href="/tours/{{ tour.id }}/">{{ tour.title }}</a></li>
+{% endfor %}
+</ul>
