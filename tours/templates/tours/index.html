@@ -3,4 +3,8 @@
 {% for tour in tours %}
   <li><a href="/tours/{{ tour.id }}/">{{ tour.title }}</a></li>
 {% endfor %}
+{% for render in renders %}
+  <li>{{ render.title }}</a></li>
+{% endfor %}
+
 </ul>
