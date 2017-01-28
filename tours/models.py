@@ -37,3 +37,6 @@ class Section(models.Model):
 
 class Paragraph(Section):
     description = models.TextField(max_length=5000)
+
+class Image(Section):
+    path = models.ImageField(upload_to=settings.UPLOAD_DIR)
