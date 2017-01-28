@@ -22,3 +22,18 @@ class Tour(models.Model):
 
     def __str__(self):
         return str(self.title)
+
+class Section(models.Model):
+    title = models.CharField(max_length=50)
+    tour = models.ForeignKey(
+        Tour,
+        null=True,
+        on_delete=models.CASCADE
+    )
+    position = models.IntegerField()
+
+    class Meta:
+        abstract = True
+
+class Paragraph(Section):
+    description = models.CharField(max_length=150)
