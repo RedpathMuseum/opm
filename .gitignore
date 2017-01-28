@@ -1,4 +1,5 @@
 *.sqlite3
 env
 tours/static/bower_components
+tours/static/renders
 *.pyc
