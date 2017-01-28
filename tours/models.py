@@ -8,6 +8,9 @@ class Render(models.Model):
     specmap_path = models.FileField(upload_to=settings.UPLOAD_DIR)
     normalmap_path = models.FileField(upload_to=settings.UPLOAD_DIR)
 
+    def __str__(self):
+        return str(self.title)
+
 class Tour(models.Model):
     title = models.CharField(max_length=50)
     description = models.CharField(max_length=150)
@@ -17,3 +20,5 @@ class Tour(models.Model):
         on_delete=models.CASCADE
     )
 
+    def __str__(self):
+        return str(self.title)
