@@ -13,7 +13,7 @@ class Render(models.Model):
 
 class Tour(models.Model):
     title = models.CharField(max_length=50)
-    description = models.CharField(max_length=150)
+    description = models.TextField(max_length=5000)
     render = models.ForeignKey(
         Render,
         null=True,
@@ -36,4 +36,4 @@ class Section(models.Model):
         abstract = True
 
 class Paragraph(Section):
-    description = models.CharField(max_length=150)
+    description = models.TextField(max_length=5000)
