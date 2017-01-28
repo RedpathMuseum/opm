@@ -32,6 +32,9 @@ class Section(models.Model):
     )
     position = models.IntegerField()
 
+    def __str__(self):
+        return str(self.title)
+
     class Meta:
         abstract = True
 
