@@ -43,3 +43,24 @@ class Paragraph(Section):
 
 class Image(Section):
     path = models.ImageField(upload_to=settings.UPLOAD_DIR)
+
+class Annotation(models.Model):
+    title = models.CharField(max_length=50)
+    target_pos_x = models.FloatField(null=True)
+    target_pos_y = models.FloatField(null=True)
+    target_pos_z = models.FloatField(null=True)
+
+    camera_pos_x = models.FloatField(null=True)
+    camera_pos_y = models.FloatField(null=True)
+    camera_pos_z = models.FloatField(null=True)
+
+    annotation_text = models.TextField(max_length=4000)
+
+    tour = models.ForeignKey(
+        Tour,
+        null=True,
+        on_delete=models.CASCADE
+    )
+
+    def __str__(self):
+        return str(self.title)

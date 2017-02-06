@@ -2,6 +2,7 @@ from django.http import HttpResponse
 from django.shortcuts import render
 from django.conf import settings
 from os.path import basename,join
+from django.contrib.admin.views.decorators import staff_member_required
 
 from .models import Tour
 from .models import Render
@@ -26,3 +27,10 @@ def detail(request, tour_id):
     renderObj.specmap_path = basename(renderObj.specmap_path.path)
     renderObj.normalmap_path = basename(renderObj.normalmap_path.path)
     return render(request, 'tours/view.html', {'tour': tour, 'renderObj': renderObj, 'renders_2': renders_2})
+
+
+
+@staff_member_required
+
+def annotations_admin_view(request):
+    return render(request, 'tours/annotations_menu.html')

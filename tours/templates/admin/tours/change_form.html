@@ -1,0 +1,131 @@
+{% extends "admin/change_form.html" %}
+{% load i18n admin_urls %}
+
+
+{% block after_field_sets %}
+{% load staticfiles %}
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"></link>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script type="text/javascript"></script>
+
+<script>
+
+  // var object_to_load_obj_path = "{% static "renders/" %}{{renderObj.object_path}}";
+  var object_to_load_obj_path ="";
+  var object_to_load_colormap_path = "{% static "renders/" %}{{ renderObj.colormap_path }}";
+  var object_to_load_specmap_path = "{% static "renders/" %}{{ renderObj.specmap_path }}";
+  var object_to_load_normalmap_path = "{% static "renders/" %}{{ renderObj.normalmap_path }}";
+  function changeAllObjPaths(render_obj) {
+    object_to_load_obj_path = "{% static "renders/" %}"+render_obj;
+    console.log(object_to_load_obj_path);
+    console.log(object_to_load_colormap_path);
+    console.log('GGG');
+    init();
+  }
+
+</script>
+
+<div class="" style="height: 100%; ">
+  <div class="col-lg-9 col-md-9 col-sm-6" id="3d_content" style=" height:100%; overflow-y:hidden; overflow-x: hidden; ">
+
+    <!--<img src="images/redpath.jpg" alt="redpath" />-->
+    <!--Called by 3D web content when interactions occur-->
+    <div id="controls-dock" class="col-lg-1 col-md-1 col-sm-1" >
+
+      <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Upload Model</button>
+
+        <!-- Modal -->
+        <div class="modal fade" id="myModal" role="dialog">
+          <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Choose Model to Upload</h4>
+              </div>
+              <div class="modal-body" style="overflow-y: auto; height=100%;">
+                <ul>
+                {% for render in renders_2 %}
+                  <li onClick=changeAllObjPaths("{{render.object_path}}")>{{ render.title }}</li>
+                {% endfor %}
+                </ul>
+
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-default" >Add Model from Desktop</button>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+
+    </div>
+    <div id="blocker"></div>
+    <div id="mydiv"></div>
+    <canvas id="canvas3D" ></canvas>
+
+  </div>
+  <div class="col-lg-3 col-md-3 col-sm-6" id="docked_content" style="height:100%; overflow-y: auto">
+
+    <!-- <h1>Hommo erectus</h1> -->
+    <!-- <h3>Homo erectus</h3>
+    <p>
+      Homo erectus is an extinct hominid species that was found to have lived between 1.9 mya and 70 000 years ago. Conflicting hypotheses suggest that H. erectus either arose from the australopithecines in East Africa and then migrated throughout Eurasia, or evolved in Eurasia and subsequently migrated to Africa.
+      These early hominids demonstrated a greater cranial capacity than Homo habilis, roughly double the volume exhibited by Au. afarensis. The skull is less prognathic than that of the australopithecines, with larger brow ridges and less prominent cheekbones. This slender, long-limbed species stood at an average of 1.79m in height.
+      H. erectus was the first to use fire to cook, as well as the first to make sophisticated hand axes out of stone. These Acheulean tools allowed the butchering of larger animals as prey. H. erectus also produced the first wooden spears and bowls
+    </p>
+
+    <h3>Oldowan Tools (c. 2.6 to 1.2 mya B.P.)</h3>
+    <p>
+      The oldest known stone tools belong to the Oldowan and were discovered in Ethiopia near Hadar. They appear around the same period as the genus Homo. The tools consisted primarily of jagged choppers and scrapers crudely shaped from the cores of stones. It is thought by some that the small flakes produced through chipping cores represented a technological and economic revolution, as they allowed hominids to slice through hide in order to gain access to meat or to process the scraps left at abandoned carnivore kills.
+    </p>
+    <h3>Acheulean Tools (c. 1.4 million to 200 000 mya B.P.)</h3>
+    <p>
+      The Acheulean tradition is associated with Homo erectus, with its earliest examples of technology coming from Konso-Gardula, Ethiopia. The Acheulean was primarily a handaxe industry, with the production of core-based tools. The technology attests to the growing development of cognitive skills, as both the striking technique and final form of the handaxe had to be premeditated before its manufacture. Due to the handaxe’s wide range of functions as a heavy duty cutting tool, it is sometimes popularly described as “the Swiss Army Knife of the Lower Paleolithic”.
+    </p> -->
+
+    <form>
+      <div class="form-group">
+        <label for="">Article name</label>
+        <textarea class="form-control" rows="1" id="article-title"></textarea>
+        <button class="btn-primary" >Edit</button>
+        <button class="btn-success" >Save</button>
+        <button class="btn-danger" >Delete</button>
+      </div>
+    </form>
+
+    <form>
+      <div class="form-group">
+        <label for="comments">Add Title</label>
+        <textarea class="form-control" rows="1" id="comment"></textarea>
+      </div>
+      <div class="form-group">
+        <label for="comment">Add Text</label>
+        <textarea class="form-control" rows="5" id="paragraph"></textarea>
+        <button class="btn-primary" >Edit</button>
+        <button class="btn-success" >Save</button>
+        <button class="btn-danger" >Delete</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+
+<script src="{% static "bower_components/jquery/dist/jquery.js" %}" ></script>
+<script src="{% static "bower_components/three.js/build/three.js" %}" ></script>
+<script src="{% static "bower_components/threejs-trackball-controls/TrackballControls.js" %}" ></script>
+<script src="{% static "bower_components/tween.js/src/Tween.js" %}" ></script>
+<script src="{% static "bower_components/dat-gui/build/dat.gui.js" %}" ></script>
+<script src="{% static "scripts/STLLoader.js" %}" ></script>
+<script src="{% static "scripts/OBJLoader.js" %}" ></script>
+<script src="{% static "scripts/CSS3DRenderer.js" %}" ></script>
+<script src="{% static "scripts/render-window.js" %}" ></script>
+
+
+
+{% endblock %}
