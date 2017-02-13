@@ -2,7 +2,10 @@
 {% load i18n admin_urls %}
 
 
-{% block after_field_sets %}
+{% block inline_field_sets %}
+{% for inline_admin_formset in inline_admin_formsets %}
+    {% include inline_admin_formset.opts.template %}
+{% endfor %}
 {% load staticfiles %}
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
@@ -12,8 +15,9 @@
 
 <script>
 
-  // var object_to_load_obj_path = "{% static "renders/" %}{{renderObj.object_path}}";
-  var object_to_load_obj_path ="";
+  var object_to_load_obj_path = "{% static "renders/" %}{{renderObj.object_path}}";
+  // var object_to_load_obj_path = "{% static "renders/" %}Low.json";
+  // var object_to_load_obj_path =" ";
   var object_to_load_colormap_path = "{% static "renders/" %}{{ renderObj.colormap_path }}";
   var object_to_load_specmap_path = "{% static "renders/" %}{{ renderObj.specmap_path }}";
   var object_to_load_normalmap_path = "{% static "renders/" %}{{ renderObj.normalmap_path }}";
