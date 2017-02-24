@@ -15,12 +15,12 @@
 
 <script>
 
-  var object_to_load_obj_path = "{% static "renders/" %}{{renderObj.object_path}}";
+  var object_to_load_obj_path = "{% static "renders/" %}{{original.render.object_path}}";
   // var object_to_load_obj_path = "{% static "renders/" %}Low.json";
   // var object_to_load_obj_path =" ";
-  var object_to_load_colormap_path = "{% static "renders/" %}{{ renderObj.colormap_path }}";
-  var object_to_load_specmap_path = "{% static "renders/" %}{{ renderObj.specmap_path }}";
-  var object_to_load_normalmap_path = "{% static "renders/" %}{{ renderObj.normalmap_path }}";
+  var object_to_load_colormap_path = "{% static "renders/" %}{{ original.render.colormap_path }}";
+  var object_to_load_specmap_path = "{% static "renders/" %}{{ original.render.specmap_path }}";
+  var object_to_load_normalmap_path = "{% static "renders/" %}{{ original.render.normalmap_path }}";
   function changeAllObjPaths(render_obj) {
     object_to_load_obj_path = "{% static "renders/" %}"+render_obj;
     console.log(object_to_load_obj_path);
@@ -95,25 +95,27 @@
 
     <form>
       <div class="form-group">
-        <label for="">Article name</label>
+        <label for="">Annotation</label>
         <textarea class="form-control" rows="1" id="article-title"></textarea>
-        <button class="btn-primary" >Edit</button>
+        <button type="button" class="btn-primary" >Edit</button>
         <button class="btn-success" >Save</button>
         <button class="btn-danger" >Delete</button>
       </div>
     </form>
 
     <form>
+
       <div class="form-group">
-        <label for="comments">Add Title</label>
-        <textarea class="form-control" rows="1" id="comment"></textarea>
-      </div>
-      <div class="form-group">
-        <label for="comment">Add Text</label>
-        <textarea class="form-control" rows="5" id="paragraph"></textarea>
-        <button class="btn-primary" >Edit</button>
-        <button class="btn-success" >Save</button>
-        <button class="btn-danger" >Delete</button>
+        <div style="visibility: hidden;" id="annot-txt-buffer">
+          <label for="comment">Add Text</label>
+          <textarea class="form-control" rows="5" id="paragraph" ></textarea>
+
+        </div>
+        <button type="button" class="btn-primary" value ="New Annotation" onClick=NewAnnotation() > New Annotation</button>
+
+        <button type="submit" class="btn-success" value ="Save Annotation" onClick=CancelNewAnnotation() >Save</button>
+        <button type="button" class="btn-danger" value ="Cancel Annotation" onClick=CancelNewAnnotation() >Cancel </button>
+
       </div>
     </form>
   </div>
@@ -128,7 +130,7 @@
 <script src="{% static "scripts/STLLoader.js" %}" ></script>
 <script src="{% static "scripts/OBJLoader.js" %}" ></script>
 <script src="{% static "scripts/CSS3DRenderer.js" %}" ></script>
-<script src="{% static "scripts/render-window.js" %}" ></script>
+<script src="{% static "scripts/render-window-admin.js" %}" ></script>
 
 
 

@@ -12,8 +12,10 @@ class ParagraphInline(admin.TabularInline):
 class ImageInline(admin.TabularInline):
     model = Image
 
+
 class AnnotationInline(admin.TabularInline):
     model = Annotation
+    template = './admin/tours/annotations/custom-annot-inline.html'
 
 class TourAdmin(admin.ModelAdmin):
     inlines = [ ParagraphInline, ImageInline, AnnotationInline ]
