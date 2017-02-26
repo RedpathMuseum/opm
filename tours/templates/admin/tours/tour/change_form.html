@@ -1,3 +1,4 @@
+
 {% extends "admin/change_form.html" %}
 {% load i18n admin_urls %}
 
@@ -7,6 +8,7 @@
     {% include inline_admin_formset.opts.template %}
 {% endfor %}
 {% load staticfiles %}
+
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"></link>
@@ -133,5 +135,26 @@
 <script src="{% static "scripts/render-window-admin.js" %}" ></script>
 
 
+<!-- Script to load annotations -->
+<script>
+
+  //Delete when objects are put in seperate folders
+  var Annotation_Set = new AnnotationSet();
+  // var annote = "{% for inline_admin_formset in inline_admin_formsets %}{% if inline_admin_formset.opts.verbose_name == 'annotation' %}{{ inline_admin_formset.opts.get_annotations }}{% for annot in inline_admin_formset.form %}{% endfor %}{% endif %}{% endfor %}";
+  // var annote = {{tour_annot}};
+  // console.log(annote);
+
+
+  for (var i=0;i< 2; i++){
+    var cam_pos = new THREE.Vector3(0,0,0);
+    var target_pos = new THREE.Vector3(0,0,0);
+    var Annot_obj = new AnnotationObj(cam_pos, target_pos);
+    // Annot_obj.text = "{{annotation.annotation_text}}";
+    console.log(Annot_obj);
+    Annotation_Set.AddAnnotation(Annot_obj);
+    console.log(Annotation_Set);
+
+  }
+</script>
 
 {% endblock %}

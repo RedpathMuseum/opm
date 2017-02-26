@@ -154,12 +154,14 @@ var Element = function ( id, x, y, z, ry ) {
 };
 //3D Web content initialization
 
-
 init();
 animate();
 
 
+
+
 function init() {
+
 
     // HTML Container for the 3D widget
     var canvas3D = document.getElementById('canvas3D');
@@ -812,7 +814,7 @@ function loadLeePerrySmith( callback ) {
     LeePerryMesh.scale.set( 10, 10, 10 );
     //scene.add( new THREE.FaceNormalsHelper( mesh, 1 ) );
     //scene.add( new THREE.VertexNormalsHelper( mesh, 1 ) );
-    console.log('Loaded Perry Smith')
+    console.log('Loaded Perrys Smith')
   } );
 }
 
@@ -833,7 +835,7 @@ function loadJSON( callback ) {
     LeePerryMesh.scale.set( 3, 3, 3 );
     //scene.add( new THREE.FaceNormalsHelper( mesh, 1 ) );
     //scene.add( new THREE.VertexNormalsHelper( mesh, 1 ) );
-    console.log('Loaded Perry Smith')
+    console.log('Loaded Perrys Smith')
   } );
 }
 //JSON Loader

@@ -152,6 +152,10 @@ var Element = function ( id, x, y, z, ry ) {
 				return object;
 
 };
+
+
+
+
 //3D Web content initialization
 
 
@@ -579,8 +583,7 @@ AnnotationSet.prototype.PlayTour = function(){
 
 }
 
-//Delete when objects are put in seperate folders
-var Annotation_Set = new AnnotationSet();
+
 
 //TODO: Recode this function and put in GUI to handle user putting object out of sight
 function ResetCamera() {
@@ -815,7 +818,7 @@ function loadLeePerrySmith( callback ) {
     LeePerryMesh.scale.set( 10, 10, 10 );
     //scene.add( new THREE.FaceNormalsHelper( mesh, 1 ) );
     //scene.add( new THREE.VertexNormalsHelper( mesh, 1 ) );
-    console.log('Loaded Perry Smith')
+    console.log('Loaded Perryz Smith')
   } );
 }
 

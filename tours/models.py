@@ -1,6 +1,8 @@
 from django.db import models
 from django.conf import settings
 
+from os.path import basename,join
+
 class Render(models.Model):
     title = models.CharField(max_length=50)
     object_path = models.FileField(upload_to=settings.UPLOAD_DIR)
@@ -32,6 +34,11 @@ class Section(models.Model):
     )
     position = models.IntegerField()
 
+    # Inherited method to get class name of the a model.
+    #Necessary to filter etween different types of content that Section childs
+    def class_name(self):
+        return self.__class__.__name__
+
     def __str__(self):
         return str(self.title)
 
@@ -41,8 +48,13 @@ class Section(models.Model):
 class Paragraph(Section):
     description = models.TextField(max_length=5000)
 
+
 class Image(Section):
     path = models.ImageField(upload_to=settings.UPLOAD_DIR)
+
+    def file_name(self):
+        image_name = basename(self.path.name)
+        return image_name
 
 class Annotation(models.Model):
     title = models.CharField(max_length=50)
