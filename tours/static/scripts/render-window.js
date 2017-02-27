@@ -436,6 +436,10 @@ var AnnotationSet = function () {
     this.queue.curr_annot_index = 0;
 };
 
+AnnotationSet.prototype.Size = function () {
+  return 5;
+};
+
 AnnotationSet.prototype.AddAnnotation = function(AnnotationObj) {
   this.queue.push(AnnotationObj);
 };
@@ -519,15 +523,21 @@ AnnotationSet.prototype.NextView = function(){
 
   //camera.up = new THREE.Vector3(0,1,0);
 
-//TODO:Make this a function of AnnotationSet
-  for(var i = 0; i<= cameraGUI.Tips.length-1; i++){
-    if(i!=this.queue.curr_annot_index){
-      document.getElementById("tooltip"+i).style.visibility='hidden';
-    }
-    else{
-      document.getElementById("tooltip"+i).style.visibility='visible';
-    }
-  }
+// //TODO:Make this a function of AnnotationSet
+//   for(var i = 0; i<= this.queue.length-1; i++){
+//     if(i!=this.queue.curr_annot_index){
+//       document.getElementById("tooltip"+i).style.visibility='hidden';
+//       document.getElementById("tooltip"+i).style.zIndex=-1;
+//     }
+//     else{
+//       document.getElementById("tooltip"+i).style.visibility='visible';
+//       document.getElementById("tooltip"+i).style.zIndex=5;
+//     }
+//   }
+
+  //Changing annotation text
+  //TODO: Choose multi div vs single div design and apply cahnges to PreviousView function
+  document.getElementById("annotation").getElementsByTagName("p")[0].innerHTML = this.queue[this.queue.curr_annot_index].text;
 
 };
 
@@ -615,6 +625,7 @@ function SkeyDown(event){
     annot_buffer.camera_position.copy(CurrCamPos);
     console.log("BUFFER", annot_buffer);
     Annotation_Set.AddAnnotation(annot_buffer);
+
     console.log(annot_buffer.name, "ADDED ANNOTATION TO ANNOTATION SET");
     console.log(Annotation_Set, "THIS IS THE ANNOTATION SET");
     cameraGUI.Annot[camcounter] = annot_buffer.camera_position.x;
@@ -638,15 +649,24 @@ function SkeyDown(event){
 
     });
 
-    CreateToolTip(tooltiptext[camcounter], camcounter);
+
+    // CreateToolTip(tooltiptext[camcounter], camcounter);
     // ViewMenu.add(cameraGUI, 'annotcampos').listen();
+    console.log(Annotation_Set.queue.length);
+    CreateToolTip(Annotation_Set.queue[Annotation_Set.queue.length-1].text, Annotation_Set.queue.length-1);
     camcounter += 1;
     console.log("AnnotCamPos=  ", AnnotCamPos[camcounter -1]);
 
   }
 
 }
+function PopulateDiv(id, text) {
+  var div = document.getElementById(id);
+  p_tag = div.getElementsByTagName("p")[0];
+  p_tag.innerHTML  = text;
 
+
+}
 function CreateToolTip(tooltiptext, camcounter){
   //Function to remove a div
   // if(annotcounter != 0){
@@ -682,6 +702,7 @@ function CreateToolTip(tooltiptext, camcounter){
   var list = document.getElementsByClassName("bubble")[0];
   list.style.top = "10px";
   list.style.left = "1px";
+
 
 }
 

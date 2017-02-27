@@ -1,0 +1,16 @@
+div.bubble {
+  display: block;
+  margin: 0 auto 40px auto;
+  width: 250px;
+  background-color: White;
+  border: solid 6px #143463;
+  border-radius: 20px;
+  text-align: center;
+  position: absolute;
+  z-index: 5;
+}
+div.bubble p {
+  margin: 10px;
+  font-size: 11px;
+  color: #143463;
+}

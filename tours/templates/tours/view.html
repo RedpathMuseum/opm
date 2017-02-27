@@ -3,7 +3,8 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script type="text/javascript"></script>
 {% load staticfiles %}
-
+<link rel="stylesheet" href="{% static "styles/" %}main.scss">
+<link rel="stylesheet" href="{% static "styles/" %}that.css">
 
 <!-- Script to load 3D object  -->
 <script>
@@ -30,7 +31,7 @@
 
     <!--<img src="images/redpath.jpg" alt="redpath" />-->
     <!--Called by 3D web content when interactions occur-->
-    <div id="controls-dock" class="col-lg-1 col-md-1 col-sm-1" >
+    <!-- <div id="controls-dock" class="col-lg-1 col-md-1 col-sm-1" > -->
 
       <!-- <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Upload Model</button> -->
 
@@ -62,9 +63,12 @@
         </div> -->
 
 
-    </div>
+    <!-- </div> -->
     <div id="blocker"></div>
     <div id="mydiv"></div>
+    <div class= "bubble" id="annotation">
+      <p></p>
+    </div>
     <canvas id="canvas3D" ></canvas>
 
   </div>
@@ -166,7 +170,7 @@
   var Annotation_Set = new AnnotationSet();
   var i = 0;
   var annotations = JSON.parse({{annotations_list|safe}});
-  console.log(annotations.length);
+  console.log(annotations);
   console.log(annotations[0].fields.position);
 
 
@@ -174,7 +178,9 @@
       var cam_pos = new THREE.Vector3(annotations[i].fields.camera_pos_x,annotations[i].fields.camera_pos_y,annotations[i].fields.camera_pos_z);
       var target_pos = new THREE.Vector3(annotations[i].fields.target_pos_x,annotations[i].fields.target_pos_y,annotations[i].fields.target_pos_z);
       var Annot_obj = new AnnotationObj(cam_pos, target_pos);
-      // Annot_obj.text = "{{annotation.annotation_text}}";
+      Annot_obj.text = annotations[i].fields.annotation_text;
+      // CreateToolTip(Annot_obj.text, i);
+      PopulateDiv("annotation", Annot_obj.text);
       console.log(Annot_obj);
       Annotation_Set.AddAnnotation(Annot_obj);
       console.log(Annotation_Set);
