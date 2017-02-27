@@ -58,6 +58,7 @@ class Image(Section):
 
 class Annotation(models.Model):
     title = models.CharField(max_length=50)
+    position = models.IntegerField()
     target_pos_x = models.FloatField(null=True)
     target_pos_y = models.FloatField(null=True)
     target_pos_z = models.FloatField(null=True)

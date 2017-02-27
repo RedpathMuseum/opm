@@ -141,9 +141,12 @@
   //Delete when objects are put in seperate folders
   var Annotation_Set = new AnnotationSet();
   // var annote = "{% for inline_admin_formset in inline_admin_formsets %}{% if inline_admin_formset.opts.verbose_name == 'annotation' %}{{ inline_admin_formset.opts.get_annotations }}{% for annot in inline_admin_formset.form %}{% endfor %}{% endif %}{% endfor %}";
-  // var annote = {{tour_annot}};
-  // console.log(annote);
+{% for annot in tour_annot %}
 
+  var annote = {{annot}};
+  console.log(annote);
+
+{% endfor %}
 
   for (var i=0;i< 2; i++){
     var cam_pos = new THREE.Vector3(0,0,0);

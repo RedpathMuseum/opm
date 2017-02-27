@@ -4,6 +4,10 @@ from django.conf import settings
 from os.path import basename,join
 from django.contrib.admin.views.decorators import staff_member_required
 
+import simplejson
+import json
+from django.core import serializers
+
 from .models import Tour
 from .models import Render
 from .models import Paragraph
@@ -43,7 +47,9 @@ def detail(request, tour_id):
 
     annotations = Annotation.objects.filter(tour__id=tour_id)
 
-
+    annotations = annotations.order_by('position')
+    annotations_json = serializers.serialize("json", annotations)
+    annotations_list = json.dumps(annotations_json)
 
     POSITION_FIELD_MAPPING = {
     Paragraph: 'position',
@@ -62,7 +68,7 @@ def detail(request, tour_id):
         'renders_2': renders_2,
         'paragraphs': paragraphs,
         'images': images,
-        'annotations': annotations,
+        'annotations_list': annotations_list,
         'all_content': all_content
         })
 

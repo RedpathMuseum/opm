@@ -159,3 +159,24 @@
   // }
 
 </script>
+
+<!-- Script to load annotations -->
+<script>
+
+  var Annotation_Set = new AnnotationSet();
+  var i = 0;
+  var annotations = JSON.parse({{annotations_list|safe}});
+  console.log(annotations.length);
+  console.log(annotations[0].fields.position);
+
+
+  for(var i=0; i< annotations.length; i++){
+      var cam_pos = new THREE.Vector3(annotations[i].fields.camera_pos_x,annotations[i].fields.camera_pos_y,annotations[i].fields.camera_pos_z);
+      var target_pos = new THREE.Vector3(annotations[i].fields.target_pos_x,annotations[i].fields.target_pos_y,annotations[i].fields.target_pos_z);
+      var Annot_obj = new AnnotationObj(cam_pos, target_pos);
+      // Annot_obj.text = "{{annotation.annotation_text}}";
+      console.log(Annot_obj);
+      Annotation_Set.AddAnnotation(Annot_obj);
+      console.log(Annotation_Set);
+  }
+</script>
