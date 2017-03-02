@@ -524,20 +524,20 @@ AnnotationSet.prototype.NextView = function(){
   //camera.up = new THREE.Vector3(0,1,0);
 
 // //TODO:Make this a function of AnnotationSet
-//   for(var i = 0; i<= this.queue.length-1; i++){
-//     if(i!=this.queue.curr_annot_index){
-//       document.getElementById("tooltip"+i).style.visibility='hidden';
-//       document.getElementById("tooltip"+i).style.zIndex=-1;
-//     }
-//     else{
-//       document.getElementById("tooltip"+i).style.visibility='visible';
-//       document.getElementById("tooltip"+i).style.zIndex=5;
-//     }
-//   }
+  for(var i = 0; i<= this.queue.length-1; i++){
+    if(i!=this.queue.curr_annot_index){
+      document.getElementById("tooltip"+i).style.visibility='hidden';
+      document.getElementById("tooltip"+i).style.zIndex=-1;
+    }
+    else{
+      document.getElementById("tooltip"+i).style.visibility='visible';
+      document.getElementById("tooltip"+i).style.zIndex=5;
+    }
+  }
 
   //Changing annotation text
   //TODO: Choose multi div vs single div design and apply cahnges to PreviousView function
-  document.getElementById("annotation").getElementsByTagName("p")[0].innerHTML = this.queue[this.queue.curr_annot_index].text;
+  // document.getElementById("annotation").getElementsByTagName("p")[0].innerHTML = this.queue[this.queue.curr_annot_index].text;
 
 };
 
@@ -699,9 +699,10 @@ function CreateToolTip(tooltiptext, camcounter){
 
   console.log(color);
 
-  var list = document.getElementsByClassName("bubble")[0];
+  var list = document.getElementsByClassName("bubble")[camcounter];
   list.style.top = "10px";
   list.style.left = "1px";
+  list.style.zIndex = camcounter;
 
 
 }

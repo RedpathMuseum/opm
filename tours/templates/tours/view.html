@@ -66,9 +66,9 @@
     <!-- </div> -->
     <div id="blocker"></div>
     <div id="mydiv"></div>
-    <div class= "bubble" id="annotation">
+    <!-- <div class= "bubble" id="annotation">
       <p></p>
-    </div>
+    </div> -->
     <canvas id="canvas3D" ></canvas>
 
   </div>
@@ -179,8 +179,8 @@
       var target_pos = new THREE.Vector3(annotations[i].fields.target_pos_x,annotations[i].fields.target_pos_y,annotations[i].fields.target_pos_z);
       var Annot_obj = new AnnotationObj(cam_pos, target_pos);
       Annot_obj.text = annotations[i].fields.annotation_text;
-      // CreateToolTip(Annot_obj.text, i);
-      PopulateDiv("annotation", Annot_obj.text);
+      CreateToolTip(Annot_obj.text, i);
+      // PopulateDiv("annotation", Annot_obj.text);
       console.log(Annot_obj);
       Annotation_Set.AddAnnotation(Annot_obj);
       console.log(Annotation_Set);
