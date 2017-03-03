@@ -17,10 +17,10 @@
 
 <script>
 
-  var object_to_load_obj_path = "{% static "renders/" %}{{original.render.object_path}}";
-  var object_to_load_colormap_path = "{% static "renders/" %}{{ original.render.colormap_path }}";
-  var object_to_load_specmap_path = "{% static "renders/" %}{{ original.render.specmap_path }}";
-  var object_to_load_normalmap_path = "{% static "renders/" %}{{ original.render.normalmap_path }}";
+  var object_to_load_obj_path = "{% static "renders/" %}" + "{{original.render.object_path}}".split(/[\\/]/).pop();
+  var object_to_load_colormap_path = "{% static "renders/" %}" + "{{ original.render.colormap_path }}".split(/[\\/]/).pop();
+  var object_to_load_specmap_path = "{% static "renders/" %}" + "{{ original.render.specmap_path }}".split(/[\\/]/).pop();
+  var object_to_load_normalmap_path = "{% static "renders/" %}" + "{{ original.render.normalmap_path }}".split(/[\\/]/).pop();
   function changeAllObjPaths(render_obj) {
     object_to_load_obj_path = "{% static "renders/" %}"+render_obj;
     console.log(object_to_load_obj_path);
