@@ -630,16 +630,16 @@ function SkeyDown(event){
     }
 
     cameraGUI.Tips[camcounter] = 'Tip'+camcounter;
-    ViewMenu.add(cameraGUI.Tips, camcounter, cameraGUI.Tips[camcounter]).onChange(function(newValue){
-      var Tips_array_current_index = this.property;
-      console.log('-------Previous tooltip text = ', Tips_array_current_index);
-      tooltiptext[Tips_array_current_index] = newValue;
-      console.log('-------New tooltip text ', tooltiptext[Tips_array_current_index]);
-      console.log('-------On Change TOOLTIP_ID ', "tooltip"+Tips_array_current_index );
+    //ViewMenu.add(cameraGUI.Tips, camcounter, cameraGUI.Tips[camcounter]).onChange(function(newValue){
+    //  var Tips_array_current_index = this.property;
+    //  console.log('-------Previous tooltip text = ', Tips_array_current_index);
+    //  tooltiptext[Tips_array_current_index] = newValue;
+    //  console.log('-------New tooltip text ', tooltiptext[Tips_array_current_index]);
+    //  console.log('-------On Change TOOLTIP_ID ', "tooltip"+Tips_array_current_index );
 
-      ChangeToolTipText(tooltiptext[Tips_array_current_index], "tooltip"+Tips_array_current_index);
+    //  ChangeToolTipText(tooltiptext[Tips_array_current_index], "tooltip"+Tips_array_current_index);
 
-    });
+    //});
 
     CreateToolTip(tooltiptext[camcounter], camcounter);
     // ViewMenu.add(cameraGUI, 'annotcampos').listen();
@@ -713,6 +713,8 @@ function CancelNewAnnotation(){
   console.log(annot_buffer);
   window.removeEventListener("keydown", NkeyDown, false);
 }
+
+
 
 var annot_buffer;
 function FreezeSphere(camlookatpoint, camposalongnormal) {

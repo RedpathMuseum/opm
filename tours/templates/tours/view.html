@@ -70,6 +70,7 @@
 
   var Annotation_Set = new AnnotationSet();
   var i = 0;
+  console.log({{annotations_list|safe}});
   var annotations = JSON.parse({{annotations_list|safe}});
   console.log(annotations);
   console.log(annotations[0].fields.position);

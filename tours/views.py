@@ -1,4 +1,4 @@
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 from django.shortcuts import render
 from django.conf import settings
 from os.path import basename,join
@@ -77,9 +77,13 @@ def get_annotations(request):
     tour_annot = Annotation.objects.all()
     return render(request, './admin/tours/tour/change_form.html', {'tour_annot': tour_annot})
 
+def add_annotation(request, tour_id):
+    print(request.body)
+    return JsonResponse({'success': 'true'})
 
 
 @staff_member_required
 
 def annotations_admin_view(request):
     return render(request, 'tours/annotations_menu.html')
+

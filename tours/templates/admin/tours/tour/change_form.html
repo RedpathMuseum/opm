@@ -93,7 +93,7 @@
         </div>
         <button type="button" class="btn-primary" value ="New Annotation" onClick=NewAnnotation() > New Annotation</button>
 
-        <button type="submit" class="btn-success" value ="Save Annotation" onClick=CancelNewAnnotation() >Save</button>
+        <button type="button" class="btn-success" value ="Save Annotation" onClick=SaveNewAnnotation() >Save</button>
         <button type="button" class="btn-danger" value ="Cancel Annotation" onClick=CancelNewAnnotation() >Cancel </button>
 
       </div>
@@ -135,6 +135,29 @@
     console.log(Annotation_Set);
 
   }
+ function SaveNewAnnotation() {
+     console.log("Save new Annotation");
+     var annot = Annotation_Set.queue[Annotation_Set.queue.length-1];
+     var data = {
+         camera_position: {},
+         camera_target: {},
+         name: "",
+         position: 0
+     };
+     data.camera_position.x = annot.camera_position.x;
+     data.camera_position.y = annot.camera_position.y;
+     data.camera_position.z = annot.camera_position.z;
+     data.camera_target.x = annot.camera_target.x;
+     data.camera_target.y = annot.camera_target.y;
+     data.camera_target.z = annot.camera_target.z;
+     data.name = annot.name;
+     data.text = annot.text;
+     data.position = Annotation_Set.queue.length-1;
+     console.log(data);
+     $.post('/tours/add_annotation/1/', {annotation: data}, function(data) {
+         console.log(data);
+     })
+ }
 </script>
 
 {% endblock %}
