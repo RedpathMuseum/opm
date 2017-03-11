@@ -78,7 +78,34 @@ def get_annotations(request):
     return render(request, './admin/tours/tour/change_form.html', {'tour_annot': tour_annot})
 
 def add_annotation(request, tour_id):
-    print(request.body)
+
+    #Load JSON of new annotation from POST request in change_form.html
+    loaded_json = json.loads(request.body.decode('utf-8'))
+    annotation_json = loaded_json["annotation"]
+
+    # Create new annotation model from JSON and save it
+    new_annotation =Annotation(
+        title = annotation_json["name"],
+        position=annotation_json["position"],
+
+        camera_pos_x = annotation_json["camera_position"]["x"],
+        camera_pos_y = annotation_json["camera_position"]["y"],
+        camera_pos_z = annotation_json["camera_position"]["z"],
+
+        target_pos_x = annotation_json["camera_target"]["x"],
+        target_pos_y = annotation_json["camera_target"]["y"],
+        target_pos_z = annotation_json["camera_target"]["z"],
+
+        annotation_text = annotation_json["text"],
+        tour_id = tour_id  )
+
+    new_annotation.save()
+
+    #Uncomment to check if the new annotation is saved as a ForeignKey to the tour being edited
+    # saved_annotations = Annotation.objects.filter(tour__id=tour_id)
+    # print(saved_annotations)
+    # print(request.body)
+
     return JsonResponse({'success': 'true'})
 
 
@@ -86,4 +113,3 @@ def add_annotation(request, tour_id):
 
 def annotations_admin_view(request):
     return render(request, 'tours/annotations_menu.html')
-

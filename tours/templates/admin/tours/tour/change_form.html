@@ -118,12 +118,14 @@
 
   //Delete when objects are put in seperate folders
   var Annotation_Set = new AnnotationSet();
+  var last_pos = 0;
 {% for annot in tour_annot %}
 
+  last_pos = {{annot.position}};
   var annote = {{annot}};
-  console.log(annote);
 
 {% endfor %}
+
 
   for (var i=0;i< 2; i++){
     var cam_pos = new THREE.Vector3(0,0,0);
@@ -197,7 +199,7 @@
              }
          }
      });
-     $.post('/tours/add_annotation/{{original.id}}/', {annotation: data}, function(data) {
+     $.post('/tours/add_annotation/{{original.id}}/', JSON.stringify({annotation: data}), function(data) {
          console.log(data);
      })
  }
