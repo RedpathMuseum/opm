@@ -197,7 +197,7 @@
              }
          }
      });
-     $.post('/tours/add_annotation/1/', {annotation: data}, function(data) {
+     $.post('/tours/add_annotation/{{original.id}}/', {annotation: data}, function(data) {
          console.log(data);
      })
  }
