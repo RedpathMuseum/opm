@@ -130,7 +130,7 @@
   for (var i=0;i< 2; i++){
     var cam_pos = new THREE.Vector3(0,0,0);
     var target_pos = new THREE.Vector3(0,0,0);
-    var Annot_obj = new AnnotationObj(cam_pos, target_pos);
+    var Annot_obj = new AnnotationObj(target_pos,cam_pos);
     // Annot_obj.text = "{{annotation.annotation_text}}";
     console.log(Annot_obj);
     Annotation_Set.AddAnnotation(Annot_obj);

@@ -79,7 +79,7 @@
   for(var i=0; i< annotations.length; i++){
       var cam_pos = new THREE.Vector3(annotations[i].fields.camera_pos_x,annotations[i].fields.camera_pos_y,annotations[i].fields.camera_pos_z);
       var target_pos = new THREE.Vector3(annotations[i].fields.target_pos_x,annotations[i].fields.target_pos_y,annotations[i].fields.target_pos_z);
-      var Annot_obj = new AnnotationObj(cam_pos, target_pos);
+      var Annot_obj = new AnnotationObj(target_pos, cam_pos);
       Annot_obj.text = annotations[i].fields.annotation_text;
       CreateToolTip(Annot_obj.text, i);
       // PopulateDiv("annotation", Annot_obj.text);

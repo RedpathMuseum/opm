@@ -504,17 +504,16 @@ AnnotationSet.prototype.NextView = function(){
     y: this.queue[this.queue.curr_annot_index].camera_target.y,
     z: this.queue[this.queue.curr_annot_index].camera_target.z
   };
-  var tween_lookat = new TWEEN.Tween(from)
+  var tween_lookat = new TWEEN.Tween(from_t)
     .to(to_t, 1000)
-    .easing(TWEEN.Easing.Exponential.InOut)
+    .easing(TWEEN.Easing.Linear.None)
     .onUpdate(function () {
 
     controls.target.x = from_t.x;
     controls.target.y = from_t.y;
     controls.target.z = from_t.z;
 
-    //controls.target = next_cam_target;
-    camera.up = new THREE.Vector3(0,1,0);
+    //camera.up = new THREE.Vector3(0,1,0);
 
   })
   tween_lookat.start();
@@ -684,7 +683,7 @@ function CreateToolTip(tooltiptext, camcounter){
   var newPTag = pTagArray.join("");
 
   newdiv.innerHTML = newPTag;
-  newdiv.setAttribute("class", "bubble");
+  newdiv.setAttribute("class", "element");
   var div_id = "tooltip"+camcounter;
   newdiv.setAttribute("id", div_id);
   mydiv.appendChild(newdiv);
@@ -692,17 +691,17 @@ function CreateToolTip(tooltiptext, camcounter){
 
   //Change annotation
   var color = window.getComputedStyle(
-    document.querySelector('.bubble'), ':after'
+    document.querySelector('.element'), ':after'
   ).getPropertyValue('left');
   console.log(color);
   color = "30px";
 
   console.log(color);
 
-  var list = document.getElementsByClassName("bubble")[camcounter];
+  var list = document.getElementsByClassName("element")[camcounter];
   list.style.top = "10px";
   list.style.left = "1px";
-  list.style.zIndex = camcounter;
+  list.style.zIndex = -1-camcounter;
 
 
 }
