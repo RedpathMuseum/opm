@@ -15,6 +15,14 @@ div.bubble p {
   color: #143463;
 }
 
+.play-btn {
+
+  position: relative;/* or absolute */
+   top: 80%;
+   left: 50%;
+  z-index: 5;
+  text-align: center;
+}
 
 .element {
         margin: 10px;

@@ -1,6 +1,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"></link>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="https://use.fontawesome.com/5fcca142be.js"></script>
 <script type="text/javascript"></script>
 {% load staticfiles %}
 <link rel="stylesheet" href="{% static "styles/" %}main.scss">
@@ -31,12 +32,19 @@
 
     <div id="blocker"></div>
     <div id="mydiv"></div>
+    <button class="fa fa-step-backward fa-2x play-btn" ></button>
+    <button class="fa fa-play-circle fa-2x play-btn" ></button>
+    <button class="fa fa-pause fa-2x play-btn"></button>
+    <button class="fa fa-step-forward fa-2x play-btn" ></button>
+
     <canvas id="canvas3D" >
 
     </canvas>
 
+
   </div>
   <div class="col-lg-3 col-md-3 col-sm-6" id="docked_content" style="height:100%; overflow-y: auto">
+
     <h1>{{tour.title}}</h1>
     {% for section in all_content %}
       {% if section.class_name == 'Paragraph' %}
