@@ -436,9 +436,6 @@ var AnnotationSet = function () {
     this.queue.curr_annot_index = 0;
 };
 
-AnnotationSet.prototype.Size = function () {
-  return 5;
-};
 
 AnnotationSet.prototype.AddAnnotation = function(AnnotationObj) {
   this.queue.push(AnnotationObj);
@@ -518,9 +515,6 @@ AnnotationSet.prototype.NextView = function(){
   })
   tween_lookat.start();
   tween_camera.start();
-  // controls.target = this.queue[this.queue.curr_annot_index].camera_target;
-
-  //camera.up = new THREE.Vector3(0,1,0);
 
 // //TODO:Make this a function of AnnotationSet
   for(var i = 0; i<= this.queue.length-1; i++){
@@ -534,9 +528,6 @@ AnnotationSet.prototype.NextView = function(){
     }
   }
 
-  //Changing annotation text
-  //TODO: Choose multi div vs single div design and apply cahnges to PreviousView function
-  // document.getElementById("annotation").getElementsByTagName("p")[0].innerHTML = this.queue[this.queue.curr_annot_index].text;
 
 };
 
@@ -587,7 +578,7 @@ AnnotationSet.prototype.PlayTour = function(){
 
     //TODO: Remove this when Play button is integrated
     playing_tour=false;
-  
+
     TWEEN.removeAll();
     var from = {
       x: camera.position.x,
@@ -661,8 +652,7 @@ AnnotationSet.prototype.PlayTour = function(){
 
 }
 
-//Delete when objects are put in seperate folders
-var Annotation_Set = new AnnotationSet();
+
 
 //TODO: Recode this function and put in GUI to handle user putting object out of sight
 function ResetCamera() {
