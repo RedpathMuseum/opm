@@ -33,9 +33,9 @@
     <div id="blocker"></div>
     <div id="mydiv"></div>
     <button class="fa fa-step-backward fa-2x play-btn" ></button>
-    <button class="fa fa-play-circle fa-2x play-btn" ></button>
+    <button class="fa fa-play-circle fa-2x play-btn" onClick=PlayTour()></button>
     <button class="fa fa-pause fa-2x play-btn"></button>
-    <button class="fa fa-step-forward fa-2x play-btn" ></button>
+    <button class="fa fa-step-forward fa-2x play-btn" onClick=NextView()></button>
 
     <canvas id="canvas3D" >
 
@@ -97,4 +97,7 @@
       Annotation_Set.AddAnnotation(Annot_obj);
       console.log(Annotation_Set);
   }
+
+  function PlayTour(){ Annotation_Set.PlayTour(); };
+  function NextView(){ Annotation_Set.NextView(); };
 </script>
