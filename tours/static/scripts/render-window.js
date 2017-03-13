@@ -488,7 +488,7 @@ AnnotationSet.prototype.NextView = function(){
     camera.position.z = from.z;
 
     //controls.target = next_cam_target;
-    //camera.up = new THREE.Vector3(0,1,0);
+    camera.up = new THREE.Vector3(0,1,0);
 
   })
   // tween_camera.start();
@@ -585,7 +585,78 @@ AnnotationSet.prototype.PlayTour = function(){
     datGUI.add(cameraGUI, 'nextview');
     datGUI.add(cameraGUI, 'previousview');
 
+    //TODO: Remove this when Play button is integrated
     playing_tour=false;
+  
+    TWEEN.removeAll();
+    var from = {
+      x: camera.position.x,
+      y: camera.position.y,
+      z: camera.position.z
+    };
+    var next_cam_pos = this.queue[this.queue.curr_annot_index].camera_position;
+    var next_cam_target = this.queue[this.queue.curr_annot_index].camera_target;
+    var to = {
+      x: this.queue[this.queue.curr_annot_index].camera_position.x,
+      y: this.queue[this.queue.curr_annot_index].camera_position.y,
+      z: this.queue[this.queue.curr_annot_index].camera_position.z
+    };
+    var tween_camera = new TWEEN.Tween(from)
+      .to(to, 3000)
+      .easing(TWEEN.Easing.Exponential.InOut)
+      .onUpdate(function () {
+
+      camera.position.x = from.x;
+      camera.position.y = from.y;
+      camera.position.z = from.z;
+
+      //controls.target = next_cam_target;
+      camera.up = new THREE.Vector3(0,1,0);
+
+    })
+    // tween_camera.start();
+
+    var from_t = {
+      x: controls.target.x,
+      y: controls.target.y,
+      z: controls.target.z
+    };
+
+    var to_t = {
+      x: this.queue[this.queue.curr_annot_index].camera_target.x,
+      y: this.queue[this.queue.curr_annot_index].camera_target.y,
+      z: this.queue[this.queue.curr_annot_index].camera_target.z
+    };
+    var tween_lookat = new TWEEN.Tween(from_t)
+      .to(to_t, 1000)
+      .easing(TWEEN.Easing.Linear.None)
+      .onUpdate(function () {
+
+      controls.target.x = from_t.x;
+      controls.target.y = from_t.y;
+      controls.target.z = from_t.z;
+
+      //camera.up = new THREE.Vector3(0,1,0);
+
+    })
+    tween_lookat.start();
+    tween_camera.start();
+    // controls.target = this.queue[this.queue.curr_annot_index].camera_target;
+
+    //camera.up = new THREE.Vector3(0,1,0);
+
+  // //TODO:Make this a function of AnnotationSet
+    for(var i = 0; i<= this.queue.length-1; i++){
+      if(i!=this.queue.curr_annot_index){
+        document.getElementById("tooltip"+i).style.visibility='hidden';
+        document.getElementById("tooltip"+i).style.zIndex=-1;
+      }
+      else{
+        document.getElementById("tooltip"+i).style.visibility='visible';
+        document.getElementById("tooltip"+i).style.zIndex=5;
+      }
+    }
+
   }
 
 }
@@ -698,10 +769,11 @@ function CreateToolTip(tooltiptext, camcounter){
 
   console.log(color);
 
-  var list = document.getElementsByClassName("element")[camcounter];
-  list.style.top = "10px";
-  list.style.left = "1px";
-  list.style.zIndex = -1-camcounter;
+  var annot_div = document.getElementsByClassName("element")[camcounter];
+  annot_div.style.top = "10px";
+  annot_div.style.left = "1px";
+  annot_div.style.zIndex = -1-camcounter;
+  annot_div.style.visibility = "hidden";
 
 
 }

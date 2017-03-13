@@ -17,6 +17,7 @@ div.bubble p {
 
 
 .element {
+        margin: 10px;
 				width: 200px;
 				height: 80px;
 				box-shadow: 0px 0px 12px rgba(0,255,255,0.5);
