@@ -14,6 +14,7 @@ var camcounter =0;
 var tour_counter=0;
 
 var DebugMode = false;
+var InEditMode = false;
 //JSON Loader's variables for files paths
 // var object_to_load_obj_path = '../models/Homo_Erectus/Low_180.json';
 // var object_to_load_colormap_path = '../models/Homo_Erectus/ALBEDO1k.jpg';
@@ -124,7 +125,6 @@ datGUI.add(cameraGUI, 'SelectSphere').onChange(function(newValue){
 });
 datGUI.add(cameraGUI, 'playtour');
 
-var InEditMode = true;
 function ChangeEditMode(newValue){
   InEditMode = newValue;
   console.log("InEditMode changed to: ", InEditMode);
@@ -354,8 +354,11 @@ function onTouchMove( event ) {
     console.log('This is mouse x relative '+mouse.x);
     console.log('This is mouse y relative '+mouse.y);
   }
+  if(InEditMode ==  true)
+  {
+      checkIntersection();
+  }
 
-  checkIntersection();
 }
 
 function checkIntersection() {

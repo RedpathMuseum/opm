@@ -7,6 +7,7 @@ var canvas_rect = canvas_dim.getBoundingClientRect();
 //Set true in browser console to debug THREE.js actions
 
 var DebugMode = false;
+var InEditMode = true;
 
 var LENGTH = screen.height;
 var WIDTH = screen.width * .75;
@@ -362,7 +363,11 @@ function onTouchMove( event ) {
     console.log('This is mouse y relative '+mouse.y);
   }
 
-  checkIntersection();
+  if(InEditMode ==  true)
+  {
+      checkIntersection();
+  }
+  
 }
 
 function checkIntersection() {
