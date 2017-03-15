@@ -87,7 +87,7 @@
       <div class="form-group">
         <div style="visibility: hidden;" id="annot-txt-buffer">
           <label for="comment">Add Text</label>
-          <textarea class="form-control" rows="5" id="paragraph" ></textarea>
+          <textarea class="form-control" rows="5" id="annot-txt-buffer-val" ></textarea>
 
         </div>
         <button type="button" class="btn-primary" value ="New Annotation" onClick=NewAnnotation() > New Annotation</button>
@@ -139,6 +139,8 @@
  function SaveNewAnnotation() {
      console.log("Save new Annotation");
      var annot = Annotation_Set.queue[Annotation_Set.queue.length-1];
+     annot.text = document.getElementById("annot-txt-buffer-val").value
+     document.getElementById("annot-txt-buffer").style.visibility = "hidden"
      var data = {
          camera_position: {},
          camera_target: {},
