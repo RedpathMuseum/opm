@@ -1,4 +1,6 @@
 var container, camera, scene, renderer, css3d_renderer, LeePerryMesh, controls, group;
+var canvas_dim =  document.getElementById('canvas3D');
+var canvas_rect = canvas_dim.getBoundingClientRect();
 /*var WIDTH = 3/4 * screen.width;*/
 var LENGTH = screen.height;
 var WIDTH = screen.width * .75;
@@ -71,62 +73,62 @@ var pTagArray = [];
 //Variables for annotation sphere
 
 //GUI Controls
-// var camcounter_gui = 0;
-// var cameraGUI = new function () {
-//   this.message = 'cameraGUI';
-//   this.playtour = function() { Annotation_Set.PlayTour(); };
-//   this.nextview = function() { Annotation_Set.NextView(); };
-//   this.previousview = function() { Annotation_Set.PreviousView(); };
-//   this.changeorder = function() { ChangeAnnotOrder(); };
-//   this.EditMode  = false;
-//   this.NewAnnotation = function() { NewAnnotation(); };
-//   this.CancelNewAnnotation = function() { CancelNewAnnotation(); };
-//   this.SelectSphere = 0;
-//   this.Annot = new Array();
-//   this.Tips = new Array();
-//
-//
-// };
-//
-// cameraGUI.annotcampos = 0;
-//
-// var ViewMenu;
-//
-// var datGUI = new dat.GUI();
-//
-// datGUI.add(cameraGUI, 'message');
-// datGUI.add(cameraGUI, 'EditMode').onChange(function(newValue){
-//   console.log("Value changed to:  ", newValue);
-//   ChangeEditMode(newValue);
-//   if(newValue ==true){
-//     ViewMenu = datGUI.addFolder('ViewMenu');
-//     datGUI.add(cameraGUI, 'NewAnnotation');
-//     datGUI.add(cameraGUI, 'CancelNewAnnotation');
-//   }
-//   else{
-//
-//   }
-//
-//
-// });
-// datGUI.add(cameraGUI, 'SelectSphere').onChange(function(newValue){
-//   console.log("cameraGUI.SelectSphere = ", cameraGUI.SelectSphere );
-//   camcounter_gui =  newValue;
-//   console.log("camcounter_gui = ", camcounter_gui);
-//
-//
-//
-//
-//
-// });
-// datGUI.add(cameraGUI, 'playtour');
-//
-// var InEditMode = true;
-// function ChangeEditMode(newValue){
-//   InEditMode = newValue;
-//   console.log("InEditMode changed to: ", InEditMode);
-// }
-// datGUI.add(cameraGUI, 'changeorder');
+var camcounter_gui = 0;
+var cameraGUI = new function () {
+  this.message = 'cameraGUI';
+  this.playtour = function() { Annotation_Set.PlayTour(); };
+  this.nextview = function() { Annotation_Set.NextView(); };
+  this.previousview = function() { Annotation_Set.PreviousView(); };
+  this.changeorder = function() { ChangeAnnotOrder(); };
+  this.EditMode  = false;
+  this.NewAnnotation = function() { NewAnnotation(); };
+  this.CancelNewAnnotation = function() { CancelNewAnnotation(); };
+  this.SelectSphere = 0;
+  this.Annot = new Array();
+  this.Tips = new Array();
+
+
+};
+
+cameraGUI.annotcampos = 0;
+
+var ViewMenu;
+
+var datGUI = new dat.GUI();
+
+datGUI.add(cameraGUI, 'message');
+datGUI.add(cameraGUI, 'EditMode').onChange(function(newValue){
+  console.log("Value changed to:  ", newValue);
+  ChangeEditMode(newValue);
+  if(newValue ==true){
+    ViewMenu = datGUI.addFolder('ViewMenu');
+    datGUI.add(cameraGUI, 'NewAnnotation');
+    datGUI.add(cameraGUI, 'CancelNewAnnotation');
+  }
+  else{
+
+  }
+
+
+});
+datGUI.add(cameraGUI, 'SelectSphere').onChange(function(newValue){
+  console.log("cameraGUI.SelectSphere = ", cameraGUI.SelectSphere );
+  camcounter_gui =  newValue;
+  console.log("camcounter_gui = ", camcounter_gui);
+
+
+
+
+
+});
+datGUI.add(cameraGUI, 'playtour');
+
+var InEditMode = true;
+function ChangeEditMode(newValue){
+  InEditMode = newValue;
+  console.log("InEditMode changed to: ", InEditMode);
+}
+datGUI.add(cameraGUI, 'changeorder');
 //GUI Controls
 
 
@@ -343,13 +345,13 @@ function onTouchMove( event ) {
   console.log('This is mouse x real '+event.clientX);
   console.log('This is mouse y real '+event.clientY);
 
-  mouse.x = ( x / window.innerWidth ) * 2 - 1;
-  mouse.y = - ( y / window.innerHeight ) * 2 + 1;
+  mouse.x = ( (x - canvas_rect.left) / (canvas_rect.right - canvas_rect.left) ) * 2 - 1;
+  mouse.y = - ( (y -  canvas_rect.top) / (canvas_rect.bottom - canvas_rect.top) ) * 2 + 1;
 
-
+  console.log("canvas_rect = ", canvas_rect)
   console.log('This is mouse x relative '+mouse.x);
   console.log('This is mouse y relative '+mouse.y);
-  checkIntersection(mouse.y);
+  checkIntersection();
 }
 
 function checkIntersection() {
@@ -915,7 +917,9 @@ function loadJSON( callback ) {
 }
 //JSON Loader
 
+
 function onWindowResize() {
+
 
 
       // camera.aspect = window.innerWidth / window.innerHeight;
@@ -929,7 +933,7 @@ function onWindowResize() {
 }
 
 function animate() {
-
+    canvas_rect = canvas_dim.getBoundingClientRect();
     requestAnimationFrame( animate );
     controls.update();
     TWEEN.update();

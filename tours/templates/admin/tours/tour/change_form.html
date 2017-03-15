@@ -4,9 +4,7 @@
 
 
 {% block after_related_objects %}
-<!-- {% for inline_admin_formset in inline_admin_formsets %}
-    {% include inline_admin_formset.opts.template %}
-{% endfor %} -->
+
 {% load staticfiles %}
 
 
@@ -205,6 +203,8 @@
      })
  }
 </script>
+
+<!-- OVerwriting the submit row with a custom block -->
 {% block submit_butt_bottom %}
 <div class="submit-row col-lg-12 col-md-12 col-sm-12">
 <input type="submit" value="Save" class="default" name="_save">
@@ -217,7 +217,9 @@
 <input type="submit" value="Save and continue editing" name="_continue">
 </div>
 {% endblock %}
-{% endblock %}
-{% block submit_buttons_bottom %}
 
+{% endblock %}
+
+<!-- This blank is needed to be able to overwrite the default html of the submit row above  -->
+{% block submit_buttons_bottom %}
 {% endblock %}
