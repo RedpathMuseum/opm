@@ -8,13 +8,18 @@ from .models import Annotation
 
 class ParagraphInline(admin.TabularInline):
     model = Paragraph
+    extra = 0
 
 class ImageInline(admin.TabularInline):
     model = Image
+    extra = 0
 
 class AnnotationInline(admin.TabularInline):
     model = Annotation
-    template = './admin/tours/annotations/custom-annot-inline.html'
+    extra = 0
+    max_num = 0
+    # template = './admin/tours/annotations/custom-annot-inline.html'
+
 
 class TourAdmin(admin.ModelAdmin):
     inlines = [ ParagraphInline, ImageInline, AnnotationInline]
