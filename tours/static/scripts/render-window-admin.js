@@ -1,7 +1,13 @@
 var container, camera, scene, renderer, css3d_renderer, LeePerryMesh, controls, group;
+
+//Global variables for pointing in 3D view
 var canvas_dim =  document.getElementById('canvas3D');
 var canvas_rect = canvas_dim.getBoundingClientRect();
-/*var WIDTH = 3/4 * screen.width;*/
+
+//Set true in browser console to debug THREE.js actions
+
+var DebugMode = false;
+
 var LENGTH = screen.height;
 var WIDTH = screen.width * .75;
 if (screen.width <= 960) {
@@ -341,16 +347,21 @@ function onTouchMove( event ) {
     x = event.clientX;
     y = event.clientY;
   }
-
-  console.log('This is mouse x real '+event.clientX);
-  console.log('This is mouse y real '+event.clientY);
+  if (DebugMode == true)
+  {
+    console.log('This is mouse x real '+event.clientX);
+    console.log('This is mouse y real '+event.clientY);
+  }
 
   mouse.x = ( (x - canvas_rect.left) / (canvas_rect.right - canvas_rect.left) ) * 2 - 1;
   mouse.y = - ( (y -  canvas_rect.top) / (canvas_rect.bottom - canvas_rect.top) ) * 2 + 1;
+  if (DebugMode == true)
+  {
+    console.log("canvas_rect = ", canvas_rect)
+    console.log('This is mouse x relative '+mouse.x);
+    console.log('This is mouse y relative '+mouse.y);
+  }
 
-  console.log("canvas_rect = ", canvas_rect)
-  console.log('This is mouse x relative '+mouse.x);
-  console.log('This is mouse y relative '+mouse.y);
   checkIntersection();
 }
 
@@ -363,11 +374,7 @@ function checkIntersection() {
     mouseHelper.position.copy( p );
     intersection.point.copy( p );
     var n = intersects[ 0 ].face.normal.clone();
-    console.log("before mult scalar");
-    console.log(n);
     n.multiplyScalar( 10 );
-    console.log("Ater multscalar before adding p");
-    console.log(n);
     n.add( intersects[ 0 ].point );
     intersection.normal.copy( intersects[ 0 ].face.normal );
     mouseHelper.lookAt( n );
@@ -375,20 +382,23 @@ function checkIntersection() {
     line.geometry.vertices[ 1 ].copy( n );
     line.geometry.verticesNeedUpdate = true;
     intersection.intersects = true;
-    console.log("interesect normal after mult scalar ");
-    console.log(n);
-    console.log("intersect point ");
-    console.log(p);
+    //console.log("interesect normal after mult scalar ");
+    //console.log(n);
+    //console.log("intersect point ");
+    //console.log(p);
     camlookatpoint = line.geometry.vertices[ 0 ].copy( intersection.point );
-    console.log("camlookatpoint");
-    console.log(camlookatpoint);
     camposalongnormal = line.geometry.vertices[ 1 ].copy( n );
-    console.log("camposalongnormal");
-    console.log(camposalongnormal);
-    console.log('camcurrentlook');
-    console.log(camera.getWorldDirection());
-    console.log('camcurrentposition');
-    console.log(camera.position);
+    if(DebugMode == true)
+    {
+      console.log("camlookatpoint");
+      console.log(camlookatpoint);
+      console.log("camposalongnormal");
+      console.log(camposalongnormal);
+      console.log('camcurrentlook');
+      console.log(camera.getWorldDirection());
+      console.log('camcurrentposition');
+      console.log(camera.position);
+    }
     CurrSphereData[0] = camlookatpoint;
     CurrSphereData[1] = camposalongnormal;
     if(InEditMode == true){
