@@ -382,10 +382,6 @@ function checkIntersection() {
     line.geometry.vertices[ 1 ].copy( n );
     line.geometry.verticesNeedUpdate = true;
     intersection.intersects = true;
-    //console.log("interesect normal after mult scalar ");
-    //console.log(n);
-    //console.log("intersect point ");
-    //console.log(p);
     camlookatpoint = line.geometry.vertices[ 0 ].copy( intersection.point );
     camposalongnormal = line.geometry.vertices[ 1 ].copy( n );
     if(DebugMode == true)
