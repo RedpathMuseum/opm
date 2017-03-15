@@ -1,4 +1,6 @@
 var container, camera, scene, renderer, css3d_renderer, LeePerryMesh, controls, group;
+var canvas_dim =  document.getElementById('canvas3D');
+var canvas_rect = canvas_dim.getBoundingClientRect();
 /*var WIDTH = 3/4 * screen.width;*/
 var LENGTH = screen.height;
 var WIDTH = screen.width * .75;
@@ -341,8 +343,8 @@ function onTouchMove( event ) {
   console.log('This is mouse x real '+event.clientX);
   console.log('This is mouse y real '+event.clientY);
 
-  mouse.x = ( x / window.innerWidth ) * 2 - 1;
-  mouse.y = - ( y / window.innerHeight ) * 2 + 1;
+  mouse.x = ( (x - canvas_rect.left) / (canvas_rect.right - canvas_rect.left) ) * 2 - 1;
+  mouse.y = - ( (y -  canvas_rect.top) / (canvas_rect.bottom - canvas_rect.top) ) * 2 + 1;
 
 
   console.log('This is mouse x relative '+mouse.x);
@@ -937,7 +939,7 @@ function onWindowResize() {
 }
 
 function animate() {
-
+    canvas_rect = canvas_dim.getBoundingClientRect();
     requestAnimationFrame( animate );
     controls.update();
     TWEEN.update();
