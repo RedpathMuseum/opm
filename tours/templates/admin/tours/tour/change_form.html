@@ -3,10 +3,10 @@
 {% load i18n admin_urls %}
 
 
-{% block inline_field_sets %}
-{% for inline_admin_formset in inline_admin_formsets %}
+{% block after_related_objects %}
+<!-- {% for inline_admin_formset in inline_admin_formsets %}
     {% include inline_admin_formset.opts.template %}
-{% endfor %}
+{% endfor %} -->
 {% load staticfiles %}
 
 
@@ -71,6 +71,7 @@
     <canvas id="canvas3D" ></canvas>
 
   </div>
+
   <div class="col-lg-3 col-md-3 col-sm-6" id="docked_content" style="height:100%; overflow-y: auto">
 
     <form>
@@ -204,5 +205,19 @@
      })
  }
 </script>
+{% block submit_butt_bottom %}
+<div class="submit-row col-lg-12 col-md-12 col-sm-12">
+<input type="submit" value="Save" class="default" name="_save">
+
+
+  <p class="deletelink-box"><a href="/admin/tours/tour/1/delete/" class="deletelink">Delete</a></p>
+
+
+<input type="submit" value="Save and add another" name="_addanother">
+<input type="submit" value="Save and continue editing" name="_continue">
+</div>
+{% endblock %}
+{% endblock %}
+{% block submit_buttons_bottom %}
 
 {% endblock %}
