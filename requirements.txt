@@ -1,2 +1,4 @@
 Django==1.10.5
-six==1.10.0
+olefile==0.44
+Pillow==4.0.0
+simplejson==3.10.0

@@ -239,18 +239,18 @@ function init() {
 
 
   // TODO Save STLLoader initialization dead code block
-    //Loading a .stl file
-    //var loader = new THREE.STLLoader();
+    // Loading a .stl file
+    var loader = new THREE.STLLoader();
 
-    //loader.load( '../models/kaplan.STL', function ( geometry ) {
+    loader.load( '../../static/models/Arrow_Necklace.stl', function ( geometry ) {
 
-    //    var material = new THREE.MeshPhongMaterial( { color: 0xff5533 } );
-    //    mesh = new THREE.Mesh( geometry, material );
-    //    stl_1 = mesh.clone();
-    //    scene.add( stl_1 );
+       var material = new THREE.MeshPhongMaterial( { color: 0xff5533 } );
+       mesh = new THREE.Mesh( geometry, material );
+      //  stl_1 = mesh.clone();
+       scene.add( mesh );
 
-    //   }
-    //  );
+      }
+     );
 
       // camera.lookAt(stl_1.position)
       // camera.position.x=stl_1.position.x - 40;
@@ -393,17 +393,21 @@ function checkIntersection() {
     CurrSphereData[0] = camlookatpoint;
     CurrSphereData[1] = camposalongnormal;
     if(InEditMode == true){
-      Sphere.position.copy(camlookatpoint);
-      Sphere.visible = true;
+      // Sphere.position.copy(camlookatpoint);
+      // Sphere.visible = true;
+      mesh.position.copy(camlookatpoint);
+      mesh.visible = true;
     }
     else{
-      Sphere.visible= false;
+      // Sphere.visible= false;
+      mesh.visible= false;
     }
 
   }
   else {
     intersection.intersects = false;
-    Sphere.visible = false;
+    // Sphere.visible = false;
+    mesh.visible = false;
   }
 }
 //Code for Raycaster
@@ -765,8 +769,6 @@ function CreateToolTip(tooltiptext, camcounter){
   console.log(color);
 
   var annot_div = document.getElementsByClassName("element")[camcounter];
-  annot_div.style.top = "10px";
-  annot_div.style.left = "1px";
   annot_div.style.zIndex = -1-camcounter;
   annot_div.style.visibility = "hidden";
 
@@ -803,10 +805,10 @@ function FreezeSphere(camlookatpoint, camposalongnormal) {
 
   //FreezeMarker
   console.log('FreezingSphere');
-  var dummySphereGeo = new THREE.SphereGeometry( 5, 32, 32 );
-  var dummyMaterial = new THREE.MeshBasicMaterial( {color: 0xffff00} );
-  var dummySphere = new THREE.Mesh( dummySphereGeo, dummyMaterial );
-  dummySphere.position.copy(camlookatpoint);
+  // var dummySphereGeo = new THREE.SphereGeometry( 5, 32, 32 );
+  // var dummyMaterial = new THREE.MeshBasicMaterial( {color: 0xffff00} );
+  // var dummySphere = new THREE.Mesh( dummySphereGeo, dummyMaterial );
+  mesh.position.copy(camlookatpoint);
 
   var dummycamposnormal = new THREE.Vector3();
   dummycamposnormal.copy(camposalongnormal);
