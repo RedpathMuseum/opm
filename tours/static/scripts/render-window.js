@@ -242,10 +242,12 @@ function init() {
     // Loading a .stl file
     var loader = new THREE.STLLoader();
 
-    loader.load( '../../static/models/Arrow_Necklace.stl', function ( geometry ) {
+    loader.load( '../../static/models/Arrow.stl', function ( geometry ) {
 
        var material = new THREE.MeshPhongMaterial( { color: 0xff5533 } );
        mesh = new THREE.Mesh( geometry, material );
+       //mesh.scale.set(10,10,10);
+
       //  stl_1 = mesh.clone();
        scene.add( mesh );
 
@@ -397,17 +399,24 @@ function checkIntersection() {
       // Sphere.visible = true;
       mesh.position.copy(camlookatpoint);
       mesh.visible = true;
+      var focalPoint = new THREE.Vector3(
+          mesh.position.x + camposalongnormal.x,
+          mesh.position.y + camposalongnormal.y,
+          mesh.position.z + camposalongnormal.z
+      );
+      //mesh.up.set(1,0,0);
+      mesh.lookAt(focalPoint);
     }
     else{
       // Sphere.visible= false;
-      mesh.visible= false;
+      //mesh.visible= false;
     }
 
   }
   else {
     intersection.intersects = false;
     // Sphere.visible = false;
-    mesh.visible = false;
+    //mesh.visible = false;
   }
 }
 //Code for Raycaster
@@ -536,6 +545,10 @@ AnnotationSet.prototype.NextView = function(){
       document.getElementById("tooltip"+i).style.zIndex=5;
     }
   }
+  //Show annotation marker, now implemented as global pointer in the scene
+  mesh.position.copy(this.queue[this.queue.curr_annot_index].camera_target);
+  mesh.up.copy(this.queue[this.queue.curr_annot_index].camera_target);
+  mesh.visible = true;
 
 
 };
@@ -582,8 +595,7 @@ AnnotationSet.prototype.PlayTour = function(){
     // controls.target=AnnotCamLookatPts[tour_counter];
     camera.up = new THREE.Vector3(0,1,0);
 
-    datGUI.add(cameraGUI, 'nextview');
-    datGUI.add(cameraGUI, 'previousview');
+
 
     //TODO: Remove this when Play button is integrated
     playing_tour=false;
@@ -656,6 +668,10 @@ AnnotationSet.prototype.PlayTour = function(){
         document.getElementById("tooltip"+i).style.zIndex=5;
       }
     }
+
+    //Show annotation marker, now implemented as global pointer in the scene
+    mesh.position.copy(this.queue[this.queue.curr_annot_index].camera_target);
+    mesh.visible = true;
 
   }
 
