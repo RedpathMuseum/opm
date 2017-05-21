@@ -1,4 +1,4 @@
-var container, camera, scene, renderer, css3d_renderer, LeePerryMesh, controls, group;
+var container, camera, scene, scene_css3d, renderer, css3d_renderer, LeePerryMesh, controls, group;
 var canvas_dim =  document.getElementById('canvas3D');
 var canvas_rect = canvas_dim.getBoundingClientRect();
 /*var WIDTH = 3/4 * screen.width;*/
@@ -137,13 +137,13 @@ var pTagArray = [];
 var Element = function ( id, x, y, z, ry ) {
 
 				var div = document.createElement( 'div' );
-				div.style.width = '480px';
-				div.style.height = '360px';
+				div.style.width = '10%';
+				div.style.height = '10%';
 				div.style.backgroundColor = '#000';
 
 				var iframe = document.createElement( 'iframe' );
-				iframe.style.width = '480px';
-				iframe.style.height = '360px';
+				iframe.style.width = '10%';
+				iframe.style.height = '10%';
 				iframe.style.border = '0px';
 				iframe.src = [ 'http://www.youtube.com/embed/', id, '?rel=0' ].join( '' );
 				div.appendChild( iframe );
@@ -168,6 +168,7 @@ function init() {
 
     // HTML Container for the 3D widget
     var canvas3D = document.getElementById('canvas3D');
+    var css3d_div = document.getElementById('css3d_div');
 
     //Uncomment or place in main.css to set the canvas parameters
     // creaeting canvas for render window
@@ -180,20 +181,34 @@ function init() {
 
     // scene
     scene = new THREE.Scene();
+    //scene.background = new THREE.Color( 0x00ff00 );
+
+    scene_css3d = new THREE.Scene();
 
     // renderer
-    renderer = new THREE.WebGLRenderer({canvas: canvas3D} );
-    // renderer.setSize( window.innerWidth, window.innerHeight );
+    renderer = new THREE.WebGLRenderer({canvas: canvas3D});
+    renderer.alpha = true;
+    //renderer.setClearColor( 0x0fff00, 0.5 );
+    renderer.domElement.style.zIndex = 20;
+    //renderer.setSize( window.innerWidth, window.innerHeight );
     console.log( document.getElementById('3d_content').getBoundingClientRect());
     renderer.setSize( document.getElementById('3d_content').getBoundingClientRect().width, window.innerHeight );
-    renderer.setClearColor( 0xF2F2F2, 1);
+    renderer.setClearColor( 0xffffff, 0);
 
-    // CSS3D Renderer
-    css3d_renderer = new THREE.CSS3DRenderer( {canvas: canvas3D} );
-		css3d_renderer.setSize( window.innerWidth, window.innerHeight);
-		css3d_renderer.domElement.style.position = 'absolute';
-		css3d_renderer.domElement.style.top = 0;
-    canvas3D.appendChild( css3d_renderer.domElement );
+    //Cast renderers in DOM elements
+    //canvas3D.appendChild(renderer.domElement);
+    //css3d_renderer.domElement.appendChild(renderer.domElement);
+
+    // // CSS3D Renderer
+    css3d_renderer = new THREE.CSS3DRenderer();
+    //css3d_renderer.setSize(  document.getElementById('3d_content').getBoundingClientRect().width, window.innerHeight);
+    //css3d_renderer.domElement.style.position = 'absolute';
+    //css3d_renderer.domElement.style.top = 0;
+
+    //css3d_div.appendChild(css3d_renderer.domElement);
+    //css3d_renderer.domElement.appendChild(renderer.domElement);
+
+    //css3d_div.appendChild( css3d_renderer.domElement );
     // CSS3D Renderer
 
 
@@ -201,7 +216,8 @@ function init() {
 
     // camera
     camera = new THREE.PerspectiveCamera( 50, window.innerWidth/window.innerHeight, 1, 5000 );
-    camera.position.set(500, 350, 750);
+    //camera.position.set(500, 350, 750);
+    camera.position.set(0,0, -1000);
 
     scene.add( camera ); // required, because we are adding a light as a child of the camera
 
@@ -211,13 +227,21 @@ function init() {
 
     //3D Web content
     group = new THREE.Group();
-		group.add( new Element( 'njCDZWTI-xg', 4, 14, 35, 0 ) );
-		group.add( new Element( 'HDh4uK9PvJU', 0, 0, 0, Math.PI / 2 ) );
-		group.add( new Element( 'OX9I1KyNa8M', 0, 0, 0, Math.PI ) );
-		group.add( new Element( 'nhORZ6Ep_jE', 0, 0, 0, - Math.PI / 2 ) );
-		scene.add( group );
+		group.add( new Element( 'njCDZWTI-xg', -1000,-1110,1110, 0 ) );
+		//group.add( new Element( 'HDh4uK9PvJU', 0, 0, 0, Math.PI / 2 ) );
+		//group.add( new Element( 'OX9I1KyNa8M', 0, 0, 0, Math.PI ) );
+		group.add( new Element( 'nhORZ6Ep_jE', -1000,-1110,1110, - Math.PI / 2 ) );
+		scene_css3d.add( group );
     console.log('added group')
     console.log(group);
+
+    var grid_el = document.createElement( 'div' );
+    grid_el.className = 'element';
+    grid_el.style.backgroundColor = 'rgba(0,127,127,' + ( Math.random() * 0.5 + 0.25 ) + ')';
+    var object_div = new THREE.CSS3DObject( grid_el );
+    object_div.position.set( -1000,-1110,1110);
+    //object_div.scale.set(1,10,10);
+    scene_css3d.add(object_div);
 
     var blocker = document.getElementById( 'blocker' );
 		blocker.style.display = 'none';
@@ -302,8 +326,8 @@ function init() {
 
         // Controls
         controls = new THREE.TrackballControls( camera, canvas3D );
-      	controls.minDistance = 20;
-      	controls.maxDistance = 200;
+      	controls.minDistance = 1;
+      	controls.maxDistance = 1000;
 
         raycaster = new THREE.Raycaster()
 
@@ -956,6 +980,7 @@ function onWindowResize() {
 
       // renderer.setSize( window.innerWidth, window.innerHeight );
       renderer.setSize( document.getElementById('3d_content').getBoundingClientRect().width, window.innerHeight );
+      css3d_renderer.setSize( document.getElementById('3d_content').getBoundingClientRect().width, window.innerHeight );
 
 }
 
@@ -972,7 +997,7 @@ function render() {
 
     // camera.lookAt(cameraTarget.position);
     renderer.render( scene, camera );
-  // css3d_renderer.render ( scene, camera);
+    css3d_renderer.render( scene_css3d, camera);
 
     var intersects = raycaster.intersectObjects(scene.children);
 }
