@@ -46,6 +46,8 @@ var line;
 var mouseHelper;
 var mouse = new THREE.Vector2();
 
+//var DracoModule = Module;
+
 var intersection = {
 intersects: false,
 point: new THREE.Vector3(),
@@ -317,7 +319,9 @@ function init() {
 //				}, onProgress, onError );
 
         //Load JSON 3D object
-        loadJSON();
+        //loadJSON();
+        //loadOneModel();
+        loadDracoModel();
 
 
         //Code for Raycaster
@@ -960,15 +964,71 @@ function loadJSON( callback ) {
       normalScale: new THREE.Vector2( 0.75, 0.75 ),
       shininess: 25
     } );
+    var bufferGeometry = new THREE.BufferGeometry().fromGeometry( geometry );
+    //LeePerryMesh = new THREE.Mesh( bufferGeometry, material );
     LeePerryMesh = new THREE.Mesh( geometry, material );
-    scene.add( LeePerryMesh );
+
+    //scene.add( LeePerryMesh );
     LeePerryMesh.scale.set( 3, 3, 3 );
     //scene.add( new THREE.FaceNormalsHelper( mesh, 1 ) );
     //scene.add( new THREE.VertexNormalsHelper( mesh, 1 ) );
     console.log('Loaded Perrys Smith')
+
   } );
 }
 //JSON Loader
+
+//LoadOneDracoModel
+function loadDracoModel() {
+  var loader = new THREE.DRACOLoader();
+    loader.load( '../../static/models/leeperrysmith/LPS.drc', function ( geometry ) {
+      geometry.computeVertexNormals();
+      var material = new THREE.MeshPhongMaterial( {
+        specular: 0x111111,
+        map: textureLoader.load( '../../static/models/leeperrysmith/Map-COL.jpg' ),
+        specularMap: textureLoader.load('../../static/models/leeperrysmith/Map-SPEC.jpg' ),
+        normalMap: textureLoader.load( '../../static/models/leeperrysmith/Infinite-Level_02_Tangent_SmoothUV.jpg'),
+        normalScale: new THREE.Vector2( 0.75, 0.75 ),
+        shininess: 25
+      } );
+
+      //var bufferGeometry = new THREE.BufferGeometry().fromGeometry( geometry );
+      console.log("loadDracomodel - geometry = ",geometry);
+
+      var bufferGeometry = geometry;
+      bufferGeometry.computeVertexNormals();
+      bufferGeometry.computeBoundingBox();
+      const sizeX = bufferGeometry.boundingBox.max.x - bufferGeometry.boundingBox.min.x;
+      const sizeY = bufferGeometry.boundingBox.max.y - bufferGeometry.boundingBox.min.y;
+      const sizeZ = bufferGeometry.boundingBox.max.z - bufferGeometry.boundingBox.min.z;
+      const diagonalSize = Math.sqrt(sizeX * sizeX + sizeY * sizeY + sizeZ * sizeZ);
+      const scale = 1.0 / diagonalSize;
+      const midX = (bufferGeometry.boundingBox.min.x + bufferGeometry.boundingBox.max.x) / 2;
+      const midY = (bufferGeometry.boundingBox.min.y + bufferGeometry.boundingBox.max.y) / 2;
+      const midZ = (bufferGeometry.boundingBox.min.z + bufferGeometry.boundingBox.max.z) / 2;
+
+      //geometry.scale(scale,scale,scale);
+      geometry.scale(10,10,10);
+      var mesh = new THREE.Mesh( geometry, material );
+      scene.add( mesh );
+    } );
+}
+
+//LoadOneDracoModel
+function loadOneModel() {
+    let draco_file = new XMLHttpRequest();
+    draco_file.open("GET", "../../static/models/leeperrysmith/bunny.drc", true);
+    draco_file.responseType = "arraybuffer";
+    draco_file.send();
+
+    draco_file.onload = function(e) {
+      console.log("loadOneModel - draco_file.response = ", draco_file);
+      loadGeometry(draco_file.response);
+
+
+    }
+}
+
 
 function onWindowResize() {
 
@@ -1000,4 +1060,52 @@ function render() {
     css3d_renderer.render( scene_css3d, camera);
 
     var intersects = raycaster.intersectObjects(scene.children);
+}
+
+//loadGeometry
+function loadGeometry(raw_data) {
+  const fileDisplayArea = document.getElementById('fileDisplayArea');
+
+  var dracoLoader = new THREE.DRACOLoader();
+  var bufferGeometry = dracoLoader.decodeDracoFile(raw_data);
+
+  // const total_time = performance.now() - start_time;
+  // fileDisplayArea.innerText += "Total loading time is "
+  //   + total_time.toFixed(3).toString() + "ms\n";
+
+  //const material = new THREE.MeshStandardMaterial({vertexColors: THREE.VertexColors})
+  var material = new THREE.MeshPhongMaterial( {
+    specular: 0x111111,
+    map: textureLoader.load( object_to_load_colormap_path ),
+    specularMap: textureLoader.load( object_to_load_specmap_path ),
+    normalMap: textureLoader.load( object_to_load_normalmap_path),
+    normalScale: new THREE.Vector2( 0.75, 0.75 ),
+    shininess: 25
+  } );
+  let geometry;
+  // Point cloud does not have face indices.
+  if (bufferGeometry.index == null) {
+    geometry = new THREE.Points(bufferGeometry, material);
+  } else {
+    bufferGeometry.computeVertexNormals();
+    geometry = new THREE.Mesh(bufferGeometry, material);
+  }
+  // Compute range of the geometry coordinates for proper rendering.
+  bufferGeometry.computeBoundingBox();
+  const sizeX = bufferGeometry.boundingBox.max.x - bufferGeometry.boundingBox.min.x;
+  const sizeY = bufferGeometry.boundingBox.max.y - bufferGeometry.boundingBox.min.y;
+  const sizeZ = bufferGeometry.boundingBox.max.z - bufferGeometry.boundingBox.min.z;
+  const diagonalSize = Math.sqrt(sizeX * sizeX + sizeY * sizeY + sizeZ * sizeZ);
+  const scale = 1.0 / diagonalSize;
+  const midX = (bufferGeometry.boundingBox.min.x + bufferGeometry.boundingBox.max.x) / 2;
+  const midY = (bufferGeometry.boundingBox.min.y + bufferGeometry.boundingBox.max.y) / 2;
+  const midZ = (bufferGeometry.boundingBox.min.z + bufferGeometry.boundingBox.max.z) / 2;
+
+  geometry.scale.multiplyScalar(scale);
+  geometry.position.x = -midX * scale - numModels / 2 + loadedModel - 1;
+  geometry.position.y = -midY * scale;
+  geometry.position.z = -midZ * scale;
+  geometry.castShadow = true;
+  geometry.receiveShadow = true;
+  scene.add(geometry);
 }
