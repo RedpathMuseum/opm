@@ -258,10 +258,10 @@ function init() {
     scene.add( axisHelper );
 
     // lights
-    scene.add( new THREE.AmbientLight( 0x222222 ) );
+    scene.add( new THREE.AmbientLight( 0xffffff ) );
 
     var light = new THREE.PointLight( 0xffffff, 0.8 );
-    camera.add( light );
+    //camera.add( light );
 
 
   // TODO Save STLLoader initialization dead code block
@@ -981,13 +981,13 @@ function loadJSON( callback ) {
 //LoadOneDracoModel
 function loadDracoModel() {
   var loader = new THREE.DRACOLoader();
-    loader.load( '../../static/models/leeperrysmith/LPS.drc', function ( geometry ) {
+    loader.load( '../../static/models/Homo_Erectus/he_og/Taung_Child_Top/HEOG.drc', function ( geometry ) {
       geometry.computeVertexNormals();
       var material = new THREE.MeshPhongMaterial( {
         specular: 0x111111,
-        map: textureLoader.load( '../../static/models/leeperrysmith/Map-COL.jpg' ),
-        specularMap: textureLoader.load('../../static/models/leeperrysmith/Map-SPEC.jpg' ),
-        normalMap: textureLoader.load( '../../static/models/leeperrysmith/Infinite-Level_02_Tangent_SmoothUV.jpg'),
+        map: textureLoader.load( '../../static/models/Homo_Erectus/he_og/Taung_Child_Top/Taung_Child_Top01.jpg' ),
+        //specularMap: textureLoader.load('../../static/models/leeperrysmith/Map-SPEC.jpg' ),
+        normalMap: textureLoader.load( '../../static/models/Homo_Erectus/he_og/Taung_Child_Top/NormalMap_1.jpg'),
         normalScale: new THREE.Vector2( 0.75, 0.75 ),
         shininess: 25
       } );
@@ -1008,7 +1008,7 @@ function loadDracoModel() {
       const midZ = (bufferGeometry.boundingBox.min.z + bufferGeometry.boundingBox.max.z) / 2;
 
       //geometry.scale(scale,scale,scale);
-      geometry.scale(10,10,10);
+      //geometry.scale(10,10,10);
       var mesh = new THREE.Mesh( geometry, material );
       scene.add( mesh );
     } );
