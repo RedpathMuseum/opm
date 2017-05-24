@@ -981,13 +981,22 @@ function loadJSON( callback ) {
 //LoadOneDracoModel
 function loadDracoModel() {
   var loader = new THREE.DRACOLoader();
-    loader.load( '../../static/models/Homo_Erectus/he_og/Taung_Child_Top/HEOG.drc', function ( geometry ) {
+
+  //TODO: This takes out the extension and replaces it for a .drc. This is because the post_save signal function updates after a few saved_annotations
+  //Should solve this issue in backend else the input obj will always be needed and take storage space on server
+  object_to_load_obj_path = object_to_load_obj_path.substr(0, object_to_load_obj_path.lastIndexOf(".")) + ".drc";
+
+  // TEST speed .obj vs .obj
+  // object_to_load_path = "../../static\models\Homo_Erectus\he_og\Taung_Child_Top\Taung_Child_Top.obj"
+    loader.load( object_to_load_obj_path, function ( geometry ) {
       geometry.computeVertexNormals();
       var material = new THREE.MeshPhongMaterial( {
         specular: 0x111111,
-        map: textureLoader.load( '../../static/models/Homo_Erectus/he_og/Taung_Child_Top/Taung_Child_Top01.jpg' ),
+        //map: textureLoader.load( '../../static/models/Homo_Erectus/he_og/Taung_Child_Top/Taung_Child_Top01.jpg' ),
         //specularMap: textureLoader.load('../../static/models/leeperrysmith/Map-SPEC.jpg' ),
-        normalMap: textureLoader.load( '../../static/models/Homo_Erectus/he_og/Taung_Child_Top/NormalMap_1.jpg'),
+        //normalMap: textureLoader.load( '../../static/models/Homo_Erectus/he_og/Taung_Child_Top/NormalMap_1.jpg'),
+        map: textureLoader.load( object_to_load_colormap_path ),
+        normalMap: textureLoader.load( object_to_load_normalmap_path),
         normalScale: new THREE.Vector2( 0.75, 0.75 ),
         shininess: 25
       } );
@@ -1008,7 +1017,7 @@ function loadDracoModel() {
       const midZ = (bufferGeometry.boundingBox.min.z + bufferGeometry.boundingBox.max.z) / 2;
 
       //geometry.scale(scale,scale,scale);
-      //geometry.scale(10,10,10);
+      geometry.scale(10,10,10);
       var mesh = new THREE.Mesh( geometry, material );
       scene.add( mesh );
     } );
