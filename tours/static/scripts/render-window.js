@@ -76,64 +76,6 @@ var tooltiptext = [];
 var pTagArray = [];
 //Variables for annotation sphere
 
-//GUI Controls
-// var camcounter_gui = 0;
-// var cameraGUI = new function () {
-//   this.message = 'cameraGUI';
-//   this.playtour = function() { Annotation_Set.PlayTour(); };
-//   this.nextview = function() { Annotation_Set.NextView(); };
-//   this.previousview = function() { Annotation_Set.PreviousView(); };
-//   this.changeorder = function() { ChangeAnnotOrder(); };
-//   this.EditMode  = false;
-//   this.NewAnnotation = function() { NewAnnotation(); };
-//   this.CancelNewAnnotation = function() { CancelNewAnnotation(); };
-//   this.SelectSphere = 0;
-//   this.Annot = new Array();
-//   this.Tips = new Array();
-//
-//
-// };
-//
-// cameraGUI.annotcampos = 0;
-//
-// var ViewMenu;
-//
-// var datGUI = new dat.GUI();
-//
-// datGUI.add(cameraGUI, 'message');
-// datGUI.add(cameraGUI, 'EditMode').onChange(function(newValue){
-//   console.log("Value changed to:  ", newValue);
-//   ChangeEditMode(newValue);
-//   if(newValue ==true){
-//     ViewMenu = datGUI.addFolder('ViewMenu');
-//     datGUI.add(cameraGUI, 'NewAnnotation');
-//     datGUI.add(cameraGUI, 'CancelNewAnnotation');
-//   }
-//   else{
-//
-//   }
-//
-//
-// });
-// datGUI.add(cameraGUI, 'SelectSphere').onChange(function(newValue){
-//   console.log("cameraGUI.SelectSphere = ", cameraGUI.SelectSphere );
-//   camcounter_gui =  newValue;
-//   console.log("camcounter_gui = ", camcounter_gui);
-//
-//
-//
-//
-//
-// });
-// datGUI.add(cameraGUI, 'playtour');
-//
-// function ChangeEditMode(newValue){
-//   InEditMode = newValue;
-//   console.log("InEditMode changed to: ", InEditMode);
-// }
-// datGUI.add(cameraGUI, 'changeorder');
-//GUI Controls
-
 
 //3D Web content initialization
 var Element = function ( id, x, y, z, ry ) {
@@ -218,7 +160,6 @@ function init() {
 
     // camera
     camera = new THREE.PerspectiveCamera( 50, window.innerWidth/window.innerHeight, 1, 5000 );
-    //camera.position.set(500, 350, 750);
     camera.position.set(0,0, -1000);
 
     scene.add( camera ); // required, because we are adding a light as a child of the camera
@@ -228,28 +169,28 @@ function init() {
     Sphere.visible = false;
 
     //3D Web content
-    group = new THREE.Group();
-		group.add( new Element( 'njCDZWTI-xg', -1000,-1110,1110, 0 ) );
-		//group.add( new Element( 'HDh4uK9PvJU', 0, 0, 0, Math.PI / 2 ) );
-		//group.add( new Element( 'OX9I1KyNa8M', 0, 0, 0, Math.PI ) );
-		group.add( new Element( 'nhORZ6Ep_jE', -1000,-1110,1110, - Math.PI / 2 ) );
-		scene_css3d.add( group );
-    console.log('added group')
-    console.log(group);
-
-    var grid_el = document.createElement( 'div' );
-    grid_el.className = 'element';
-    grid_el.style.backgroundColor = 'rgba(0,127,127,' + ( Math.random() * 0.5 + 0.25 ) + ')';
-    var object_div = new THREE.CSS3DObject( grid_el );
-    object_div.position.set( -1000,-1110,1110);
-    //object_div.scale.set(1,10,10);
-    scene_css3d.add(object_div);
-
-    var blocker = document.getElementById( 'blocker' );
-		blocker.style.display = 'none';
-
-		document.addEventListener( 'mousedown', function () { blocker.style.display = ''; } );
-		document.addEventListener( 'mouseup', function () { blocker.style.display = 'none'; } );
+    // group = new THREE.Group();
+		// group.add( new Element( 'njCDZWTI-xg', -1000,-1110,1110, 0 ) );
+		// //group.add( new Element( 'HDh4uK9PvJU', 0, 0, 0, Math.PI / 2 ) );
+		// //group.add( new Element( 'OX9I1KyNa8M', 0, 0, 0, Math.PI ) );
+		// group.add( new Element( 'nhORZ6Ep_jE', -1000,-1110,1110, - Math.PI / 2 ) );
+		// scene_css3d.add( group );
+    // console.log('added group')
+    // console.log(group);
+    //
+    // var grid_el = document.createElement( 'div' );
+    // grid_el.className = 'element';
+    // grid_el.style.backgroundColor = 'rgba(0,127,127,' + ( Math.random() * 0.5 + 0.25 ) + ')';
+    // var object_div = new THREE.CSS3DObject( grid_el );
+    // object_div.position.set( -1000,-1110,1110);
+    // //object_div.scale.set(1,10,10);
+    // scene_css3d.add(object_div);
+    //
+    // var blocker = document.getElementById( 'blocker' );
+		// blocker.style.display = 'none';
+    //
+		// document.addEventListener( 'mousedown', function () { blocker.style.display = ''; } );
+		// document.addEventListener( 'mouseup', function () { blocker.style.display = 'none'; } );
     //3D Web content
 
 
@@ -750,21 +691,7 @@ function SkeyDown(event){
       }
     }
 
-    cameraGUI.Tips[camcounter] = 'Tip'+camcounter;
-    ViewMenu.add(cameraGUI.Tips, camcounter, cameraGUI.Tips[camcounter]).onChange(function(newValue){
-      var Tips_array_current_index = this.property;
-      console.log('-------Previous tooltip text = ', Tips_array_current_index);
-      tooltiptext[Tips_array_current_index] = newValue;
-      console.log('-------New tooltip text ', tooltiptext[Tips_array_current_index]);
-      console.log('-------On Change TOOLTIP_ID ', "tooltip"+Tips_array_current_index );
-
-      ChangeToolTipText(tooltiptext[Tips_array_current_index], "tooltip"+Tips_array_current_index);
-
-    });
-
-
-    // CreateToolTip(tooltiptext[camcounter], camcounter);
-    // ViewMenu.add(cameraGUI, 'annotcampos').listen();
+  
     console.log(Annotation_Set.queue.length);
     CreateToolTip(Annotation_Set.queue[Annotation_Set.queue.length-1].text, Annotation_Set.queue.length-1);
     camcounter += 1;

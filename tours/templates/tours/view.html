@@ -6,6 +6,7 @@
 {% load staticfiles %}
 <link rel="stylesheet" href="{% static "styles/" %}main.scss">
 <link rel="stylesheet" href="{% static "styles/" %}that.css">
+<link rel="stylesheet" href="{% static "styles/" %}article-list-basic.css">
 
 <!-- Script to load 3D object  -->
 <script>
@@ -32,13 +33,17 @@
 
     <div id="blocker"></div>
     <div id="mydiv"></div>
-    <button class="fa fa-step-backward fa-2x play-btn" ></button>
-    <button class="fa fa-play-circle fa-2x play-btn" onClick=PlayTour()></button>
-    <button class="fa fa-pause fa-2x play-btn"></button>
-    <button class="fa fa-step-forward fa-2x play-btn" onClick=NextView()></button>
-    <canvas id="canvas3D" >
+    <div class="icon-bar">
+      <i class="fa fa-step-backward fa-2x play-btn" ></i>
+      <i class="fa fa-play-circle fa-2x play-btn" onClick=PlayTour()></i>
+      <i class="fa fa-pause fa-2x play-btn"></i>
+      <i class="fa fa-step-forward fa-2x play-btn" onClick=NextView()></i>
+    </div>
+    <div id="canvas-container">
+      <canvas id="canvas3D" >
 
-    </canvas>
+      </canvas>
+    </div>
     <div id="css3d_div"></div>
 
 

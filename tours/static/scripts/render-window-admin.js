@@ -79,65 +79,6 @@ var tooltiptext = [];
 var pTagArray = [];
 //Variables for annotation sphere
 
-//GUI Controls
-// var camcounter_gui = 0;
-// var cameraGUI = new function () {
-//   this.message = 'cameraGUI';
-//   this.playtour = function() { Annotation_Set.PlayTour(); };
-//   this.nextview = function() { Annotation_Set.NextView(); };
-//   this.previousview = function() { Annotation_Set.PreviousView(); };
-//   this.changeorder = function() { ChangeAnnotOrder(); };
-//   this.EditMode  = false;
-//   this.NewAnnotation = function() { NewAnnotation(); };
-//   this.CancelNewAnnotation = function() { CancelNewAnnotation(); };
-//   this.SelectSphere = 0;
-//   this.Annot = new Array();
-//   this.Tips = new Array();
-//
-//
-// };
-//
-// cameraGUI.annotcampos = 0;
-//
-// var ViewMenu;
-//
-// var datGUI = new dat.GUI();
-//
-// datGUI.add(cameraGUI, 'message');
-// datGUI.add(cameraGUI, 'EditMode').onChange(function(newValue){
-//   console.log("Value changed to:  ", newValue);
-//   ChangeEditMode(newValue);
-//   if(newValue ==true){
-//     ViewMenu = datGUI.addFolder('ViewMenu');
-//     datGUI.add(cameraGUI, 'NewAnnotation');
-//     datGUI.add(cameraGUI, 'CancelNewAnnotation');
-//   }
-//   else{
-//
-//   }
-//
-//
-// });
-// datGUI.add(cameraGUI, 'SelectSphere').onChange(function(newValue){
-//   console.log("cameraGUI.SelectSphere = ", cameraGUI.SelectSphere );
-//   camcounter_gui =  newValue;
-//   console.log("camcounter_gui = ", camcounter_gui);
-//
-//
-//
-//
-//
-// });
-// datGUI.add(cameraGUI, 'playtour');
-//
-// var InEditMode = true;
-// function ChangeEditMode(newValue){
-//   InEditMode = newValue;
-//   console.log("InEditMode changed to: ", InEditMode);
-// }
-// datGUI.add(cameraGUI, 'changeorder');
-//GUI Controls
-
 
 //3D Web content initialization
 var Element = function ( id, x, y, z, ry ) {
@@ -196,15 +137,6 @@ function init() {
     renderer.setSize( document.getElementById('3d_content').getBoundingClientRect().width, window.innerHeight );
     renderer.setClearColor( 0xF2F2F2, 1);
 
-    // CSS3D Renderer
-    css3d_renderer = new THREE.CSS3DRenderer( {canvas: canvas3D} );
-		css3d_renderer.setSize( window.innerWidth, window.innerHeight);
-		css3d_renderer.domElement.style.position = 'absolute';
-		css3d_renderer.domElement.style.top = 0;
-    canvas3D.appendChild( css3d_renderer.domElement );
-    // CSS3D Renderer
-
-
 
 
     // camera
@@ -216,23 +148,6 @@ function init() {
     //Add annotation sphere
     scene.add( Sphere );
     Sphere.visible = false;
-
-    //3D Web content
-    group = new THREE.Group();
-		group.add( new Element( 'njCDZWTI-xg', 0, 0, 240, 0 ) );
-		group.add( new Element( 'HDh4uK9PvJU', 240, 0, 0, Math.PI / 2 ) );
-		group.add( new Element( 'OX9I1KyNa8M', 0, 0, - 240, Math.PI ) );
-		group.add( new Element( 'nhORZ6Ep_jE', - 240, 0, 0, - Math.PI / 2 ) );
-		scene.add( group );
-    console.log('added group')
-    console.log(group);
-
-    var blocker = document.getElementById( 'blocker' );
-		blocker.style.display = 'none';
-
-		document.addEventListener( 'mousedown', function () { blocker.style.display = ''; } );
-		document.addEventListener( 'mouseup', function () { blocker.style.display = 'none'; } );
-    //3D Web content
 
 
 
@@ -248,15 +163,17 @@ function init() {
 
   // TODO Save STLLoader initialization dead code block
     //Loading a .stl file
-    //var loader = new THREE.STLLoader();
-
-    //loader.load( '../models/kaplan.STL', function ( geometry ) {
-
+    // var loader = new THREE.STLLoader();
+    //
+    // loader.load( '../../static/models/Arrow.stl', function ( geometry ) {
+    //
     //    var material = new THREE.MeshPhongMaterial( { color: 0xff5533 } );
     //    mesh = new THREE.Mesh( geometry, material );
-    //    stl_1 = mesh.clone();
-    //    scene.add( stl_1 );
-
+    //    //mesh.scale.set(10,10,10);
+    //
+    //   //  stl_1 = mesh.clone();
+    //    scene.add( mesh );
+    //
     //   }
     //  );
 
@@ -299,7 +216,8 @@ function init() {
 //				}, onProgress, onError );
 
         //Load JSON 3D object
-        loadJSON();
+        // loadJSON();
+        loadDracoModel();
 
 
         //Code for Raycaster
@@ -308,8 +226,8 @@ function init() {
 
         // Controls
         controls = new THREE.TrackballControls( camera, canvas3D );
-      	controls.minDistance = 20;
-      	controls.maxDistance = 200;
+      	controls.minDistance = 1;
+      	controls.maxDistance = 1000;
 
         raycaster = new THREE.Raycaster()
 
@@ -367,7 +285,7 @@ function onTouchMove( event ) {
   {
       checkIntersection();
   }
-  
+
 }
 
 function checkIntersection() {
@@ -586,8 +504,6 @@ AnnotationSet.prototype.PlayTour = function(){
     // controls.target=AnnotCamLookatPts[tour_counter];
     camera.up = new THREE.Vector3(0,1,0);
 
-    datGUI.add(cameraGUI, 'nextview');
-    datGUI.add(cameraGUI, 'previousview');
 
     //TODO: Remove this when Play button is integrated
     playing_tour=false;
@@ -701,8 +617,6 @@ function SkeyDown(event){
     Annotation_Set.AddAnnotation(annot_buffer);
     console.log(annot_buffer.name, "ADDED ANNOTATION TO ANNOTATION SET");
     console.log(Annotation_Set, "THIS IS THE ANNOTATION SET");
-    cameraGUI.Annot[camcounter] = annot_buffer.camera_position.x;
-    // ViewMenu.add(cameraGUI.Annot, camcounter, cameraGUI.Annot[camcounter]).listen();
     document.getElementById("annot-txt-buffer").style.visibility='visible';
     for(var i = 0; i<= cameraGUI.Tips.length-1; i++){
       if(i!=camcounter){
@@ -711,24 +625,20 @@ function SkeyDown(event){
       }
     }
 
-    cameraGUI.Tips[camcounter] = 'Tip'+camcounter;
-    //ViewMenu.add(cameraGUI.Tips, camcounter, cameraGUI.Tips[camcounter]).onChange(function(newValue){
-    //  var Tips_array_current_index = this.property;
-    //  console.log('-------Previous tooltip text = ', Tips_array_current_index);
-    //  tooltiptext[Tips_array_current_index] = newValue;
-    //  console.log('-------New tooltip text ', tooltiptext[Tips_array_current_index]);
-    //  console.log('-------On Change TOOLTIP_ID ', "tooltip"+Tips_array_current_index );
-
-    //  ChangeToolTipText(tooltiptext[Tips_array_current_index], "tooltip"+Tips_array_current_index);
-
-    //});
-
-    CreateToolTip(tooltiptext[camcounter], camcounter);
-    // ViewMenu.add(cameraGUI, 'annotcampos').listen();
+    console.log(Annotation_Set.queue.length);
+    CreateToolTip(Annotation_Set.queue[Annotation_Set.queue.length-1].text, Annotation_Set.queue.length-1);
     camcounter += 1;
     console.log("AnnotCamPos=  ", AnnotCamPos[camcounter -1]);
 
   }
+
+}
+
+function PopulateDiv(id, text) {
+  var div = document.getElementById(id);
+  p_tag = div.getElementsByTagName("p")[0];
+  p_tag.innerHTML  = text;
+
 
 }
 
@@ -749,7 +659,7 @@ function CreateToolTip(tooltiptext, camcounter){
   var newPTag = pTagArray.join("");
 
   newdiv.innerHTML = newPTag;
-  newdiv.setAttribute("class", "bubble");
+  newdiv.setAttribute("class", "element");
   var div_id = "tooltip"+camcounter;
   newdiv.setAttribute("id", div_id);
   mydiv.appendChild(newdiv);
@@ -757,16 +667,16 @@ function CreateToolTip(tooltiptext, camcounter){
 
   //Change annotation
   var color = window.getComputedStyle(
-    document.querySelector('.bubble'), ':after'
+    document.querySelector('.element'), ':after'
   ).getPropertyValue('left');
   console.log(color);
   color = "30px";
 
   console.log(color);
 
-  var list = document.getElementsByClassName("bubble")[0];
-  list.style.top = "10px";
-  list.style.left = "1px";
+  var annot_div = document.getElementsByClassName("element")[camcounter];
+ annot_div.style.zIndex = -1-camcounter;
+ annot_div.style.visibility = "hidden";
 
 }
 
@@ -929,6 +839,65 @@ function loadJSON( callback ) {
 }
 //JSON Loader
 
+//LoadOneDracoModel
+function loadDracoModel() {
+  var loader = new THREE.DRACOLoader();
+
+  //TODO: This takes out the extension and replaces it for a .drc. This is because the post_save signal function updates after a few saved_annotations
+  //Should solve this issue in backend else the input obj will always be needed and take storage space on server
+  object_to_load_obj_path = object_to_load_obj_path.substr(0, object_to_load_obj_path.lastIndexOf(".")) + ".drc";
+
+  // TEST speed .obj vs .obj
+  // object_to_load_path = "../../static\models\Homo_Erectus\he_og\Taung_Child_Top\Taung_Child_Top.obj"
+    loader.load( object_to_load_obj_path, function ( geometry ) {
+      geometry.computeVertexNormals();
+      var material = new THREE.MeshPhongMaterial( {
+        specular: 0x111111,
+        //map: textureLoader.load( '../../static/models/Homo_Erectus/he_og/Taung_Child_Top/Taung_Child_Top01.jpg' ),
+        //specularMap: textureLoader.load('../../static/models/leeperrysmith/Map-SPEC.jpg' ),
+        //normalMap: textureLoader.load( '../../static/models/Homo_Erectus/he_og/Taung_Child_Top/NormalMap_1.jpg'),
+        map: textureLoader.load( object_to_load_colormap_path ),
+        normalMap: textureLoader.load( object_to_load_normalmap_path),
+        normalScale: new THREE.Vector2( 0.75, 0.75 ),
+        shininess: 25
+      } );
+
+      //var bufferGeometry = new THREE.BufferGeometry().fromGeometry( geometry );
+      console.log("loadDracomodel - geometry = ",geometry);
+
+      var bufferGeometry = geometry;
+      bufferGeometry.computeVertexNormals();
+      bufferGeometry.computeBoundingBox();
+      const sizeX = bufferGeometry.boundingBox.max.x - bufferGeometry.boundingBox.min.x;
+      const sizeY = bufferGeometry.boundingBox.max.y - bufferGeometry.boundingBox.min.y;
+      const sizeZ = bufferGeometry.boundingBox.max.z - bufferGeometry.boundingBox.min.z;
+      const diagonalSize = Math.sqrt(sizeX * sizeX + sizeY * sizeY + sizeZ * sizeZ);
+      const scale = 1.0 / diagonalSize;
+      const midX = (bufferGeometry.boundingBox.min.x + bufferGeometry.boundingBox.max.x) / 2;
+      const midY = (bufferGeometry.boundingBox.min.y + bufferGeometry.boundingBox.max.y) / 2;
+      const midZ = (bufferGeometry.boundingBox.min.z + bufferGeometry.boundingBox.max.z) / 2;
+
+      //geometry.scale(scale,scale,scale);
+      geometry.scale(10,10,10);
+      var mesh = new THREE.Mesh( geometry, material );
+      scene.add( mesh );
+    } );
+}
+
+//LoadOneDracoModel
+function loadOneModel() {
+    let draco_file = new XMLHttpRequest();
+    draco_file.open("GET", "../../static/models/leeperrysmith/bunny.drc", true);
+    draco_file.responseType = "arraybuffer";
+    draco_file.send();
+
+    draco_file.onload = function(e) {
+      console.log("loadOneModel - draco_file.response = ", draco_file);
+      loadGeometry(draco_file.response);
+
+
+    }
+}
 
 function onWindowResize() {
 
