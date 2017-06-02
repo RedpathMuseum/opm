@@ -307,31 +307,29 @@ function checkIntersection() {
     intersection.intersects = true;
     camlookatpoint = line.geometry.vertices[ 0 ].copy( intersection.point );
     camposalongnormal = line.geometry.vertices[ 1 ].copy( n );
-    if(DebugMode == true)
-    {
-      console.log("camlookatpoint");
-      console.log(camlookatpoint);
-      console.log("camposalongnormal");
-      console.log(camposalongnormal);
-      console.log('camcurrentlook');
-      console.log(camera.getWorldDirection());
-      console.log('camcurrentposition');
-      console.log(camera.position);
-    }
-    CurrSphereData[0] = camlookatpoint;
-    CurrSphereData[1] = camposalongnormal;
     if(InEditMode == true){
-      Sphere.position.copy(camlookatpoint);
-      Sphere.visible = true;
+      // Sphere.position.copy(camlookatpoint);
+      // Sphere.visible = true;
+      mesh.position.copy(camlookatpoint);
+      mesh.visible = true;
+      var focalPoint = new THREE.Vector3(
+          mesh.position.x + camposalongnormal.x,
+          mesh.position.y + camposalongnormal.y,
+          mesh.position.z + camposalongnormal.z
+      );
+      //mesh.up.set(1,0,0);
+      mesh.lookAt(focalPoint);
     }
     else{
-      Sphere.visible= false;
+      // Sphere.visible= false;
+      //mesh.visible= false;
     }
 
   }
   else {
     intersection.intersects = false;
-    Sphere.visible = false;
+    // Sphere.visible = false;
+    //mesh.visible = false;
   }
 }
 //Code for Raycaster
