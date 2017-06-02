@@ -11,7 +11,7 @@ from os.path import basename,join, dirname
 def create_draco(sender, instance, **kwargs):
 
     # TODO: Set Dev and Prod paths
-    pathToDracoEncoder = "C:///Users///Tfmenard/Documents/GitHub/opm/Debug/"
+    pathToDracoEncoder = settings.DRACO_DIR
 
     # TODO: Upload in a new folder and update the object_path field to the new directory
     upload_dir =  settings.UPLOAD_DIR

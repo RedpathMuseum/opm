@@ -128,3 +128,5 @@ STATICFILES_DIR = [
 ]
 
 UPLOAD_DIR = os.path.join(BASE_DIR, "tours/static/renders")
+
+DRACO_DIR = os.path.join(BASE_DIR, "tours/draco-build/")
