@@ -512,12 +512,17 @@ AnnotationSet.prototype.NextView = function(){
     else{
       document.getElementById("tooltip"+i).style.visibility='visible';
       document.getElementById("tooltip"+i).style.zIndex=5;
+      var curr_tooltip = document.getElementById("tooltip"+i);
     }
   }
   //Show annotation marker, now implemented as global pointer in the scene
   mesh.position.copy(this.queue[this.queue.curr_annot_index].camera_target);
   mesh.up.copy(this.queue[this.queue.curr_annot_index].camera_target);
   mesh.visible = true;
+  //set div position
+  var proj = toScreenPosition(mesh, camera);
+  curr_tooltip.style.left = proj.x + 'px';
+  curr_tooltip.style.top = proj.y + 'px';
 
 
 };
