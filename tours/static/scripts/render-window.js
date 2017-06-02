@@ -776,18 +776,16 @@ function FreezeSphere(camlookatpoint, camposalongnormal) {
 
   //FreezeMarker
   console.log('FreezingSphere');
-  // var dummySphereGeo = new THREE.SphereGeometry( 5, 32, 32 );
-  // var dummyMaterial = new THREE.MeshBasicMaterial( {color: 0xffff00} );
-  // var dummySphere = new THREE.Mesh( dummySphereGeo, dummyMaterial );
-  var marker_copy = new THREE.Mesh();
-  marker_copy.copy(mesh);
-  scene.add(marker_copy);
 
-  mesh.position.copy(camlookatpoint);
+  var marker_copy = new THREE.Mesh();
+  marker_copy = mesh.clone();
+
+
+  marker_copy.position.copy(camlookatpoint);
+  scene.add(marker_copy);
 
   var dummycamposnormal = new THREE.Vector3();
   dummycamposnormal.copy(camposalongnormal);
-
 
   AnnotSpheres.push(marker_copy);
   // AnnotCamPos.push(dummycamposnormal);
@@ -800,6 +798,8 @@ function FreezeSphere(camlookatpoint, camposalongnormal) {
 
   //-Change camera position and target
   console.log("camera.up=",camera.up);
+
+  //Note that you set controls.target to an object's position, it will follow its postiiton
   controls.target=marker_copy.position;
   camera.up = new THREE.Vector3(0,1,0);
 

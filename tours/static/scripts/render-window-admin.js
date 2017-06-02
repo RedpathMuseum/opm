@@ -714,10 +714,11 @@ function FreezeSphere(camlookatpoint, camposalongnormal) {
   console.log('FreezingSphere');
 
   var marker_copy = new THREE.Mesh();
-  marker_copy.copy(mesh);
-  scene.add(marker_copy);
+  marker_copy = mesh.clone();
 
-  mesh.position.copy(camlookatpoint);
+
+  marker_copy.position.copy(camlookatpoint);
+  scene.add(marker_copy);
 
   var dummycamposnormal = new THREE.Vector3();
   dummycamposnormal.copy(camposalongnormal);
