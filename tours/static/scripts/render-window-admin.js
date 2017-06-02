@@ -1,4 +1,4 @@
-var container, camera, scene, renderer, css3d_renderer, LeePerryMesh, controls, group;
+var container, camera, scene, renderer, css3d_renderer, LeePerryMesh, controls, group, draco_mesh;
 
 //Global variables for pointing in 3D view
 var canvas_dim =  document.getElementById('canvas3D');
@@ -160,22 +160,20 @@ function init() {
     var light = new THREE.PointLight( 0xffffff, 0.8 );
     camera.add( light );
 
+    // Loading a .stl file
+    var loader = new THREE.STLLoader();
+    //TODO: Use variable for market object
+    loader.load( '../../../../../static/models/Arrow.stl', function ( geometry ) {
 
-  // TODO Save STLLoader initialization dead code block
-    //Loading a .stl file
-    // var loader = new THREE.STLLoader();
-    //
-    // loader.load( '../../static/models/Arrow.stl', function ( geometry ) {
-    //
-    //    var material = new THREE.MeshPhongMaterial( { color: 0xff5533 } );
-    //    mesh = new THREE.Mesh( geometry, material );
-    //    //mesh.scale.set(10,10,10);
-    //
-    //   //  stl_1 = mesh.clone();
-    //    scene.add( mesh );
-    //
-    //   }
-    //  );
+       var material = new THREE.MeshPhongMaterial( { color: 0xff5533 } );
+       mesh = new THREE.Mesh( geometry, material );
+       //mesh.scale.set(10,10,10);
+
+      //  stl_1 = mesh.clone();
+       scene.add( mesh );
+
+      }
+     );
 
       // camera.lookAt(stl_1.position)
       // camera.position.x=stl_1.position.x - 40;
@@ -291,7 +289,7 @@ function onTouchMove( event ) {
 function checkIntersection() {
   // if ( ! LeePerryMesh ) return;
   raycaster.setFromCamera( mouse, camera );
-  var intersects = raycaster.intersectObjects( [ LeePerryMesh ] );
+  var intersects = raycaster.intersectObjects( [ draco_mesh ] );
   if ( intersects.length > 0 ) {
     var p = intersects[ 0 ].point;
     mouseHelper.position.copy( p );
@@ -307,6 +305,8 @@ function checkIntersection() {
     intersection.intersects = true;
     camlookatpoint = line.geometry.vertices[ 0 ].copy( intersection.point );
     camposalongnormal = line.geometry.vertices[ 1 ].copy( n );
+    CurrSphereData[0] = camlookatpoint;
+    CurrSphereData[1] = camposalongnormal;
     if(InEditMode == true){
       // Sphere.position.copy(camlookatpoint);
       // Sphere.visible = true;
@@ -712,27 +712,30 @@ function FreezeSphere(camlookatpoint, camposalongnormal) {
 
   //FreezeMarker
   console.log('FreezingSphere');
-  var dummySphereGeo = new THREE.SphereGeometry( 5, 32, 32 );
-  var dummyMaterial = new THREE.MeshBasicMaterial( {color: 0xffff00} );
-  var dummySphere = new THREE.Mesh( dummySphereGeo, dummyMaterial );
-  dummySphere.position.copy(camlookatpoint);
+
+  var marker_copy = new THREE.Mesh();
+  marker_copy.copy(mesh);
+  scene.add(marker_copy);
+
+  mesh.position.copy(camlookatpoint);
 
   var dummycamposnormal = new THREE.Vector3();
   dummycamposnormal.copy(camposalongnormal);
-  scene.add(dummySphere);
 
-  AnnotSpheres.push(dummySphere);
+  AnnotSpheres.push(marker_copy);
   // AnnotCamPos.push(dummycamposnormal);
 
-  AnnotCamLookatPts.push(dummySphere.position);
+  AnnotCamLookatPts.push(marker_copy.position);
   // console.log("AnnotCamPos = ", AnnotCamPos[camcounter]);
   // camera.lookAt(AnnotCamLookatPts[camcounter]);
   annot_buffer = new AnnotationObj(camlookatpoint, camposalongnormal);
-  annot_buffer.marker =  dummySphere;
+  annot_buffer.marker =  marker_copy;
 
   //-Change camera position and target
   console.log("camera.up=",camera.up);
-  controls.target=dummySphere.position;
+
+  //Note that you set controls.target to an object's position, it will follow its postiiton
+  controls.target=marker_copy.position;
   camera.up = new THREE.Vector3(0,1,0);
 
   // camera.position.x=AnnotCamPos[camcounter].x;
@@ -877,8 +880,8 @@ function loadDracoModel() {
 
       //geometry.scale(scale,scale,scale);
       geometry.scale(10,10,10);
-      var mesh = new THREE.Mesh( geometry, material );
-      scene.add( mesh );
+      draco_mesh = new THREE.Mesh( geometry, material );
+      scene.add( draco_mesh );
     } );
 }
 

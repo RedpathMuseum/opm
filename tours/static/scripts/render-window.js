@@ -1,4 +1,4 @@
-var container, camera, scene, scene_css3d, renderer, css3d_renderer, LeePerryMesh, controls, group;
+var container, camera, scene, scene_css3d, renderer, css3d_renderer, LeePerryMesh, controls, group, draco_mesh;
 var canvas_dim =  document.getElementById('canvas3D');
 var canvas_rect = canvas_dim.getBoundingClientRect();
 /*var WIDTH = 3/4 * screen.width;*/
@@ -335,7 +335,7 @@ function onTouchMove( event ) {
 function checkIntersection() {
   // if ( ! LeePerryMesh ) return;
   raycaster.setFromCamera( mouse, camera );
-  var intersects = raycaster.intersectObjects( [ LeePerryMesh ] );
+  var intersects = raycaster.intersectObjects( [ draco_mesh ] );
   if ( intersects.length > 0 ) {
     var p = intersects[ 0 ].point;
     mouseHelper.position.copy( p );
@@ -691,7 +691,7 @@ function SkeyDown(event){
       }
     }
 
-  
+
     console.log(Annotation_Set.queue.length);
     CreateToolTip(Annotation_Set.queue[Annotation_Set.queue.length-1].text, Annotation_Set.queue.length-1);
     camcounter += 1;
@@ -779,24 +779,28 @@ function FreezeSphere(camlookatpoint, camposalongnormal) {
   // var dummySphereGeo = new THREE.SphereGeometry( 5, 32, 32 );
   // var dummyMaterial = new THREE.MeshBasicMaterial( {color: 0xffff00} );
   // var dummySphere = new THREE.Mesh( dummySphereGeo, dummyMaterial );
+  var marker_copy = new THREE.Mesh();
+  marker_copy.copy(mesh);
+  scene.add(marker_copy);
+
   mesh.position.copy(camlookatpoint);
 
   var dummycamposnormal = new THREE.Vector3();
   dummycamposnormal.copy(camposalongnormal);
-  scene.add(dummySphere);
 
-  AnnotSpheres.push(dummySphere);
+
+  AnnotSpheres.push(marker_copy);
   // AnnotCamPos.push(dummycamposnormal);
 
-  AnnotCamLookatPts.push(dummySphere.position);
+  AnnotCamLookatPts.push(marker_copy.position);
   // console.log("AnnotCamPos = ", AnnotCamPos[camcounter]);
   // camera.lookAt(AnnotCamLookatPts[camcounter]);
   annot_buffer = new AnnotationObj(camlookatpoint, camposalongnormal);
-  annot_buffer.marker =  dummySphere;
+  annot_buffer.marker =  marker_copy;
 
   //-Change camera position and target
   console.log("camera.up=",camera.up);
-  controls.target=dummySphere.position;
+  controls.target=marker_copy.position;
   camera.up = new THREE.Vector3(0,1,0);
 
   // camera.position.x=AnnotCamPos[camcounter].x;
@@ -945,8 +949,8 @@ function loadDracoModel() {
 
       //geometry.scale(scale,scale,scale);
       geometry.scale(10,10,10);
-      var mesh = new THREE.Mesh( geometry, material );
-      scene.add( mesh );
+      var draco_mesh = new THREE.Mesh( geometry, material );
+      scene.add( draco_mesh );
     } );
 }
 
