@@ -687,15 +687,6 @@ function SkeyDown(event){
 
     console.log(annot_buffer.name, "ADDED ANNOTATION TO ANNOTATION SET");
     console.log(Annotation_Set, "THIS IS THE ANNOTATION SET");
-    cameraGUI.Annot[camcounter] = annot_buffer.camera_position.x;
-    ViewMenu.add(cameraGUI.Annot, camcounter, cameraGUI.Annot[camcounter]).listen();
-    for(var i = 0; i<= cameraGUI.Tips.length-1; i++){
-      if(i!=camcounter){
-        console.log(i);
-        document.getElementById("tooltip"+i).style.visibility='hidden';
-      }
-    }
-
 
     console.log(Annotation_Set.queue.length);
     CreateToolTip(Annotation_Set.queue[Annotation_Set.queue.length-1].text, Annotation_Set.queue.length-1);
