@@ -1,4 +1,4 @@
-var container, camera, scene, renderer, css3d_renderer, LeePerryMesh, controls, group, draco_mesh;
+var container, camera, scene, renderer, css3d_renderer, LeePerryMesh, loaded_mesh, controls, group;
 
 //Global variables for pointing in 3D view
 var canvas_dim =  document.getElementById('canvas3D');
@@ -289,7 +289,7 @@ function onTouchMove( event ) {
 function checkIntersection() {
   // if ( ! LeePerryMesh ) return;
   raycaster.setFromCamera( mouse, camera );
-  var intersects = raycaster.intersectObjects( [ draco_mesh ] );
+  var intersects = raycaster.intersectObjects( [ loaded_mesh ] );
   if ( intersects.length > 0 ) {
     var p = intersects[ 0 ].point;
     mouseHelper.position.copy( p );
@@ -881,8 +881,8 @@ function loadDracoModel() {
 
       //geometry.scale(scale,scale,scale);
       geometry.scale(10,10,10);
-      draco_mesh = new THREE.Mesh( geometry, material );
-      scene.add( draco_mesh );
+      loaded_mesh = new THREE.Mesh( geometry, material );
+      scene.add( loaded_mesh );
     } );
 }
 
