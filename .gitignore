@@ -3,3 +3,6 @@ env
 tours/static/bower_components
 tours/static/renders
 *.pyc
+tours\static\models\Homo_Erectus
+tours\static\models\cedar_wax
+tours\static\models\pigeon

@@ -1,26 +1,112 @@
-<div class="col-lg-9 col-md-9 col-sm-6" id="3d_content" style=" height:100%; overflow-y:hidden; overflow-x: hidden;">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"></link>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="https://use.fontawesome.com/5fcca142be.js"></script>
+<script type="text/javascript"></script>
+{% load staticfiles %}
+<link rel="stylesheet" href="{% static "styles/" %}main.scss">
+<link rel="stylesheet" href="{% static "styles/" %}that.css">
+<link rel="stylesheet" href="{% static "styles/" %}article-list-basic.css">
 
-  <!--<img src="images/redpath.jpg" alt="redpath" />-->
-  <!--Called by 3D web content when interactions occur-->
-  <div id="blocker"></div>
-  <div id="mydiv"></div>
-  <canvas id="canvas3D"></canvas>
+<!-- Script to load 3D object  -->
+<script>
 
+  // var object_to_load_obj_path = "{% static "renders/" %}{{renderObj.object_path}}";
+  var object_to_load_obj_path ="";
+  var object_to_load_colormap_path = "";
+  var object_to_load_specmap_path = "";
+  var object_to_load_normalmap_path = "";
+
+  object_to_load_obj_path = "{% static "renders/" %}{{ renderObj.object_path }}";
+  object_to_load_colormap_path = "{% static "renders/" %}{{ renderObj.colormap_path }}";
+  object_to_load_specmap_path = "{% static "renders/" %}{{ renderObj.specmap_path }}";
+  object_to_load_normalmap_path = "{% static "renders/" %}{{ renderObj.normalmap_path }}";
+  console.log(object_to_load_obj_path);
+  console.log(object_to_load_colormap_path);
+  console.log('GGG');
+
+
+</script>
+
+<div class="" style="height: 100%; ">
+  <div class="col-lg-9 col-md-9 col-sm-6" id="3d_content" style=" height:100%; overflow-y:hidden; overflow-x: hidden; ">
+
+    <div id="blocker"></div>
+    <div id="mydiv"></div>
+    <div class="icon-bar">
+      <i class="fa fa-step-backward fa-2x play-btn" ></i>
+      <i class="fa fa-play-circle fa-2x play-btn" onClick=PlayTour()></i>
+      <i class="fa fa-pause fa-2x play-btn"></i>
+      <i class="fa fa-step-forward fa-2x play-btn" onClick=NextView()></i>
+    </div>
+      <canvas id="canvas3D" >
+
+      </canvas>
+    <div id="css3d_div"></div>
+
+
+
+
+  </div>
+  <div class="col-lg-3 col-md-3 col-sm-6" id="docked_content" style="height:100%; overflow-y: auto">
+
+    <h1>{{tour.title}}</h1>
+    {% for section in all_content %}
+      {% if section.class_name == 'Paragraph' %}
+        <h3>{{section.title}}</h3>
+        <p>{{section.description}}</p>
+      {% endif %}
+
+      {% if section.class_name == 'Image' %}
+      <img src="{% static "renders/" %}{{section.file_name}}"></img>
+      {% endif %}
+    {% endfor %}
+  </div>
 </div>
 
-{% load staticfiles %}
-<script>
- var object_to_load_obj_path = "{% static "renders/" %}{{renderObj.object_path}}";
- var object_to_load_colormap_path = "{% static "renders/" %}{{ renderObj.colormap_path }}";
- var object_to_load_specmap_path = "{% static "renders/" %}{{ renderObj.specmap_path }}";
- var object_to_load_normalmap_path = "{% static "renders/" %}{{ renderObj.normalmap_path }}"
-</script>
+
 <script src="{% static "bower_components/jquery/dist/jquery.js" %}" ></script>
-<script src="{% static "bower_components/three.js/build/three.js" %}" ></script>
+<!-- <script src="{% static "bower_components/three.js/build/three.js" %}" ></script> -->
+<script src="https://cdn.rawgit.com/mrdoob/three.js/r84/build/three.min.js" ></script>
 <script src="{% static "bower_components/threejs-trackball-controls/TrackballControls.js" %}" ></script>
 <script src="{% static "bower_components/tween.js/src/Tween.js" %}" ></script>
 <script src="{% static "bower_components/dat-gui/build/dat.gui.js" %}" ></script>
+<script src="{% static "scripts/draco_decoder.js" %}"></script>
 <script src="{% static "scripts/STLLoader.js" %}" ></script>
 <script src="{% static "scripts/OBJLoader.js" %}" ></script>
+<script src="{% static "scripts/DRACOLoader.js" %}" ></script>
 <script src="{% static "scripts/CSS3DRenderer.js" %}" ></script>
 <script src="{% static "scripts/render-window.js" %}" ></script>
+
+<script>
+  var tools = "{% for section in all_content %}{% if section.class_name == 'Image' %}{{section.title}}{% endif %}{% endfor %}";
+  console.log(tools);
+</script>
+
+<!-- Script to load annotations -->
+<script>
+
+  var Annotation_Set = new AnnotationSet();
+  var i = 0;
+  console.log({{annotations_list|safe}});
+  var annotations = JSON.parse({{annotations_list|safe}});
+  console.log(annotations);
+  console.log(annotations[0].fields.position);
+
+
+  for(var i=0; i< annotations.length; i++){
+      var cam_pos = new THREE.Vector3(annotations[i].fields.camera_pos_x,annotations[i].fields.camera_pos_y,annotations[i].fields.camera_pos_z);
+      var target_pos = new THREE.Vector3(annotations[i].fields.target_pos_x,annotations[i].fields.target_pos_y,annotations[i].fields.target_pos_z);
+      var Annot_obj = new AnnotationObj(target_pos, cam_pos);
+      Annot_obj.text = annotations[i].fields.annotation_text;
+      CreateToolTip(Annot_obj.text, i);
+      // PopulateDiv("annotation", Annot_obj.text);
+      console.log(Annot_obj);
+      console.log("annotations.length = ",annotations.length)
+      Annotation_Set.AddAnnotation(Annot_obj);
+      console.log(Annotation_Set);
+  }
+
+  function PlayTour(){ Annotation_Set.PlayTour(); };
+  function NextView(){ Annotation_Set.NextView(); };
+</script>

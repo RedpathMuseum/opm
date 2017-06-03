@@ -1,0 +1,100 @@
+div.bubble {
+  display: block;
+  margin: 0 auto 40px auto;
+  width: 250px;
+  background-color: White;
+  border: solid 6px #143463;
+  border-radius: 20px;
+  text-align: center;
+  position: absolute;
+  z-index: 5;
+}
+div.bubble p {
+  margin: 10px;
+  font-size: 11px;
+  color: #143463;
+}
+
+.play-btn {
+
+  position: relative;/* or absolute */
+   top: 50%;
+   left: 45%;
+  z-index: 6;
+  text-align: center;
+}
+
+.play-btn:hover {
+
+  background: #4CAF50;
+}
+
+.element {
+        /*margin: 10px;*/
+				/*width: 200px;
+				height: 80px;*/
+        position: absolute;
+        top: 10%;
+        left: 1%;
+        bottom: 0px;
+        right: 0px;
+				box-shadow: 0px 0px 12px rgba(0,255,255,0.5);
+				border: 1px solid rgba(127,255,255,0.25);
+				text-align: center;
+				cursor: default;
+        z-index: 5;
+        background-color: rgba(0, 127, 127, 0.7);
+        height:25%;
+        width: 15%;
+        overflow-y: auto;
+        overflow-x: hidden;
+			}
+.element:hover {
+				box-shadow: 0px 0px 12px rgba(0,255,255,0.75);
+				border: 1px solid rgba(127,255,255,0.75);
+			}
+				.element .number {
+					position: absolute;
+					top: 20px;
+					right: 20px;
+					font-size: 12px;
+					color: rgba(127,255,255,0.75);
+				}
+.symbol {
+					position: absolute;
+					top: 40px;
+					left: 0px;
+					right: 0px;
+					font-size: 30px;
+					font-weight: bold;
+					color: rgba(255,255,255,0.75);
+					text-shadow: 0 0 10px rgba(0,255,255,0.95);
+				}
+.element  {
+
+					font-size: 12px;
+					color: rgba(127,255,255,0.75);
+				}
+.icon-bar {
+  width: 100%; /* Full-width */
+  background: linear-gradient(to right, rgba(247,4,37,0) 7%,rgba(247,4,37,1) 35%,rgba(247,4,37,1) 64%,rgba(247,4,37,0) 93%); /* Dark-grey background */
+  /*overflow: auto; /* Overflow due to float */*/
+}
+
+.icon-bar a {
+  float: left; /* Float links side by side */
+  text-align: center; /* Center-align text */
+  width: 20%; /* Equal width (5 icons with 20% width each = 100%)
+  padding: 12px 0; /* Some top and bottom padding */
+  transition: all 0.3s ease; /* Add transition for hover effects */
+  color: white; /* White text color */
+  font-size: 36px; /* Increased font size */
+}
+
+.icon-bar a:hover {
+  background-color: #000; /* Add a hover color */
+}
+
+.active {
+  background-color: #4CAF50; /* Add an active/current color */
+}
