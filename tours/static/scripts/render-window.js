@@ -293,7 +293,7 @@ function init() {
         }, false );
 
         window.addEventListener( 'mouseup', function() {
-          checkIntersection();
+          // checkIntersection();
           // if ( ! moved ){
           //   FreezeSphere(CurrSphereData[0], CurrSphereData[1]);
           // }
@@ -334,6 +334,7 @@ function onTouchMove( event ) {
 
 function checkIntersection() {
   // if ( ! LeePerryMesh ) return;
+  console.log("checkIntersection - BEGIN")
   raycaster.setFromCamera( mouse, camera );
   var intersects = raycaster.intersectObjects( [ loaded_mesh ] );
   if ( intersects.length > 0 ) {
@@ -516,8 +517,15 @@ AnnotationSet.prototype.NextView = function(){
     }
   }
   //Show annotation marker, now implemented as global pointer in the scene
+  console.log("------NEXTVIEW ENDING--------------")
+  console.log("NextView -(before position.copy) mesh.position = ", mesh.position);
+  console.log("NextView -(before position.copy) controls.target = ", this.queue[this.queue.curr_annot_index].camera_target);
   mesh.position.copy(this.queue[this.queue.curr_annot_index].camera_target);
+  console.log("NextView -(after position.copy) mesh.position = ", mesh.position);
+  console.log("NextView -(after position.copy) controls.target = ", this.queue[this.queue.curr_annot_index].camera_target);
   mesh.up.copy(this.queue[this.queue.curr_annot_index].camera_target);
+  console.log("NextView -(after up.copy) mesh.position = ", mesh.position);
+  console.log("NextView -(after up.copy) controls.target = ", this.queue[this.queue.curr_annot_index].camera_target);
   mesh.visible = true;
   //set div position
   var proj = toScreenPosition(mesh, camera);
@@ -560,10 +568,6 @@ AnnotationSet.prototype.PlayTour = function(){
 
   if(playing_tour==true){
     this.queue.curr_annot_index = 0;
-    camera.position.x = this.queue[this.queue.curr_annot_index].camera_position.x;
-    camera.position.y = this.queue[this.queue.curr_annot_index].camera_position.y;
-    camera.position.z = this.queue[this.queue.curr_annot_index].camera_position.z;
-    controls.target = this.queue[this.queue.curr_annot_index].camera_target;
 
     console.log("camera.up=",camera.up);
     // controls.target=AnnotCamLookatPts[tour_counter];
@@ -645,6 +649,7 @@ AnnotationSet.prototype.PlayTour = function(){
 
     //Show annotation marker, now implemented as global pointer in the scene
     mesh.position.copy(this.queue[this.queue.curr_annot_index].camera_target);
+    mesh.up.copy(this.queue[this.queue.curr_annot_index].camera_target);
     mesh.visible = true;
 
   }
