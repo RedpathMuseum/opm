@@ -1,4 +1,4 @@
 # opm
-Open platform for museum tours
+Open-Source platform for virtual museum tours
 
 Link to prototype under construction: redpath.mamss.ca/tours
