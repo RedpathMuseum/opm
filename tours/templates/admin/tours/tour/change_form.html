@@ -73,13 +73,17 @@
   <div class="col-lg-3 col-md-3 col-sm-6" id="docked_content" style="height:100%; overflow-y: auto">
 
     <form>
-      <div class="form-group">
-        <label for="">Annotation</label>
+      <div class="form-group" id="annotation-list">
+        <!-- <label for="">Annotation</label>
         <textarea class="form-control" rows="1" id="article-title"></textarea>
         <button type="button" class="btn-primary" >Edit</button>
         <button class="btn-success" >Save</button>
-        <button class="btn-danger" >Delete</button>
+        <button class="btn-danger" >Delete</button> -->
+
+
+
       </div>
+
     </form>
 
     <form>
@@ -113,31 +117,150 @@
 <script src="{% static "scripts/CSS3DRenderer.js" %}" ></script>
 <script src="{% static "scripts/render-window-admin.js" %}" ></script>
 
-
-<!-- Script to load annotations -->
+<!-- Load annotation script -->
 <script>
+function refreshAnnotationMenu( AnnotationSet) {
+  for(var i=0; i< AnnotationSet.queue.length; i++) {
+    refreshAnnotation(AnnotationSet.queue[i].id, i,AnnotationSet.queue[i].text);
+  }
 
-  //Delete when objects are put in seperate folders
-  var Annotation_Set = new AnnotationSet();
-  var last_pos = 0;
-{% for annot in tour_annot %}
+}
 
-  last_pos = {{annot.position}};
-  var annote = {{annot}};
+function createAnnotation(id, position, text) {
+  var newLabel = document.createElement("label");
+  newLabel.innerHTML = "Annotation "+(position+1);
+  newLabel.setAttribute("id",id);
 
-{% endfor %}
+  var newTextArea = document.createElement("textarea");
+  newTextArea.innerHTML = text;
+  newTextArea.setAttribute("class", "form-control");
+  newTextArea.setAttribute("rows", "1");
+
+  var newEditBtn = document.createElement("button");
+  newEditBtn.innerHTML = "Edit";
+  newEditBtn.setAttribute("class", "btn-primary");
+  newEditBtn.setAttribute("type", "button");
+
+  var newDeleteBtn = document.createElement("button");
+  newDeleteBtn.innerHTML = "Delete";
+  newDeleteBtn.setAttribute("class", "btn-danger");
+  newDeleteBtn.setAttribute("type", "button");
+  console.log("createAnnotation ---- Click --------");
+  newDeleteBtn.onclick = function() {
+      var id = newDeleteBtn.parentNode.id;
+      console.log("SETTING ONCLICK FUNCTION");
+      console.log(id);
+      DeleteAnnotation(id);
+      console.log("ONCLICK FUNCTION SET");
+    };
+
+  var newSaveBtn = document.createElement("button");
+  newSaveBtn.innerHTML = "Save";
+  newSaveBtn.setAttribute("class", "btn-success");
+  newSaveBtn.setAttribute("type", "button");
+
+  annotationList.appendChild(newLabel);
+  newLabel.appendChild(newTextArea);
+  newLabel.appendChild(newEditBtn);
+  newLabel.appendChild(newDeleteBtn);
+  newLabel.appendChild(newSaveBtn);
+
+}
+
+function refreshAnnotation(id, position, text) {
+  console.log("refreshAnnotation -- id =", id);
+  var trgtAnnot = document.getElementById(id);
+  var parent = document.getElementById("annotation-list");
+  trgtAnnot.parentNode.removeChild(trgtAnnot);
+  createAnnotation(id, position, text);
+
+}
+
+function removeAnnotationById(id) {
+  console.log("removeAnnotationById -- id = ", id);
+  var trgtAnnot = document.getElementById(id);
+  var parent = document.getElementById("annotation-list");
+  trgtAnnot.parentNode.removeChild(trgtAnnot);
+}
+var annotations_json;
+var Annotation_Set = new AnnotationSet();
+var annotationList = document.getElementById("annotation-list");
+//Get all annotations of current tour as JSON object
+  $.get('/tours/get_annotations/{{original.id}}/', function(data) {
+    console.log(data);
+    annotations_json = data;
+
+    //Load JSON object in an Annotation Set
+  for(var i=0; i< annotations_json.length; i++){
+      var cam_pos = new THREE.Vector3(annotations_json[i].camera_pos_x,annotations_json[i].camera_pos_y,annotations_json[i].camera_pos_z);
+      var target_pos = new THREE.Vector3(annotations_json[i].target_pos_x,annotations_json[i].target_pos_y,annotations_json[i].target_pos_z);
+      var Annot_obj = new AnnotationObj(target_pos, cam_pos);
+      Annot_obj.text = annotations_json[i].annotation_text;
+      Annot_obj.id = annotations_json[i].id
+      CreateToolTip(Annot_obj.text, i);
+      console.log("",Annot_obj.id)
+      console.log(Annot_obj);
+      console.log("annotations.length = ",annotations_json.length)
+      Annotation_Set.AddAnnotation(Annot_obj);
+      console.log(Annotation_Set);
 
 
-  for (var i=0;i< 2; i++){
-    var cam_pos = new THREE.Vector3(0,0,0);
-    var target_pos = new THREE.Vector3(0,0,0);
-    var Annot_obj = new AnnotationObj(target_pos,cam_pos);
-    // Annot_obj.text = "{{annotation.annotation_text}}";
-    console.log(Annot_obj);
-    Annotation_Set.AddAnnotation(Annot_obj);
-    console.log(Annotation_Set);
+      //Create Annotation Menu
+      createAnnotation(Annot_obj.id, i,
+         Annot_obj.text);
 
   }
+})
+</script>
+
+<!-- AJAX Setup -->
+<script>
+function getCookie(name) {
+    var cookieValue = null;
+    if (document.cookie && document.cookie != '') {
+        var cookies = document.cookie.split(';');
+        for (var i = 0; i < cookies.length; i++) {
+            var cookie = jQuery.trim(cookies[i]);
+            // Does this cookie string begin with the name we want?
+            if (cookie.substring(0, name.length + 1) == (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+}
+function csrfSafeMethod(method) {
+    // these HTTP methods do not require CSRF protection
+    return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+}
+function sameOrigin(url) {
+   // test that a given url is a same-origin URL
+   // url could be relative or scheme relative or absolute
+   var host = document.location.host; // host + port
+   var protocol = document.location.protocol;
+   var sr_origin = '//' + host;
+   var origin = protocol + sr_origin;
+   // Allow absolute or scheme relative URLs to same origin
+   return (url == origin || url.slice(0, origin.length + 1) == origin + '/') ||
+   (url == sr_origin || url.slice(0, sr_origin.length + 1) == sr_origin + '/') ||
+   // or any other URL that isn't scheme relative or absolute i.e relative.
+   !(/^(\/\/|http:|https:).*/.test(url));
+}
+var csrftoken = getCookie('csrftoken')
+$.ajaxSetup({
+    beforeSend: function(xhr, settings) {
+        if (!csrfSafeMethod(settings.type) && sameOrigin(settings.url)) {
+            // Send the token to same-origin, relative URLs only.
+            // Send the token only if the method warrants CSRF protection
+            // Using the CSRFToken value acquired earlier
+            xhr.setRequestHeader("X-CSRFToken", csrftoken);
+        }
+    }
+});
+</script>
+
+<script>
  function SaveNewAnnotation() {
      console.log("Save new Annotation");
      var annot = Annotation_Set.queue[Annotation_Set.queue.length-1];
@@ -159,57 +282,31 @@
      data.text = annot.text;
      data.position = Annotation_Set.queue.length-1;
      console.log(data);
-     function getCookie(name) {
-         var cookieValue = null;
-         if (document.cookie && document.cookie != '') {
-             var cookies = document.cookie.split(';');
-             for (var i = 0; i < cookies.length; i++) {
-                 var cookie = jQuery.trim(cookies[i]);
-                 // Does this cookie string begin with the name we want?
-                 if (cookie.substring(0, name.length + 1) == (name + '=')) {
-                     cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-                     break;
-                 }
-             }
-         }
-         return cookieValue;
-     }
-     function csrfSafeMethod(method) {
-         // these HTTP methods do not require CSRF protection
-         return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
-     }
-     function sameOrigin(url) {
-        // test that a given url is a same-origin URL
-        // url could be relative or scheme relative or absolute
-        var host = document.location.host; // host + port
-        var protocol = document.location.protocol;
-        var sr_origin = '//' + host;
-        var origin = protocol + sr_origin;
-        // Allow absolute or scheme relative URLs to same origin
-        return (url == origin || url.slice(0, origin.length + 1) == origin + '/') ||
-        (url == sr_origin || url.slice(0, sr_origin.length + 1) == sr_origin + '/') ||
-        // or any other URL that isn't scheme relative or absolute i.e relative.
-        !(/^(\/\/|http:|https:).*/.test(url));
-     }
-     var csrftoken = getCookie('csrftoken')
-     $.ajaxSetup({
-         beforeSend: function(xhr, settings) {
-             if (!csrfSafeMethod(settings.type) && sameOrigin(settings.url)) {
-                 // Send the token to same-origin, relative URLs only.
-                 // Send the token only if the method warrants CSRF protection
-                 // Using the CSRFToken value acquired earlier
-                 xhr.setRequestHeader("X-CSRFToken", csrftoken);
-             }
-         }
-     });
-     $.post('/tours/add_annotation/{{original.id}}/', JSON.stringify({annotation: data}), function(data) {
-         console.log(data);
+     $.post('/tours/add_annotation/{{original.id}}/', JSON.stringify({annotation: data}), function(data, status) {
+         console.log(data.id, Annotation_Set.queue.length-1, Annotation_Set.queue[Annotation_Set.queue.length-1].text);
+         Annotation_Set.queue[Annotation_Set.queue.length-1].id = data.id;
+         createAnnotation(data.id, Annotation_Set.queue.length-1, Annotation_Set.queue[Annotation_Set.queue.length-1].text);
+         refreshAnnotationMenu(Annotation_Set);
      })
+
  }
+
+function DeleteAnnotation(id){
+  $.get('/tours/delete_annotation/'+id, function(data) {
+    console.log(data);
+    console.log("Deleted annotation");
+    console.log("change_form.html-DeleteAnnotation() - Annotation_Set BEFORE= ",Annotation_Set);
+    Annotation_Set.DeleteAnnotation(data.position);
+    console.log("change_form.html-DeleteAnnotation() - Annotation_Set AFTER= ",Annotation_Set);
+    removeAnnotationById(id);
+    refreshAnnotationMenu(Annotation_Set);
+  })
+}
+
 </script>
 
 <!-- OVerwriting the submit row with a custom block -->
-{% block submit_butt_bottom %}
+{% block submit_butt_bottom %} 
 <div class="submit-row col-lg-12 col-md-12 col-sm-12">
 <input type="submit" value="Save" class="default" name="_save">
 
@@ -219,6 +316,12 @@
 
 <input type="submit" value="Save and add another" name="_addanother">
 <input type="submit" value="Save and continue editing" name="_continue">
+</div>
+<div class="col-lg-12 col-md-12 col-sm-12">
+<p><a href='/tours/{{original.id}}/'>/tours/{{original.id}}/</a></p>
+</div>
+<div class="submit-row col-lg-12 col-md-12 col-sm-12">
+  <input type="button" value="Generate QR Code" name=""><a href="https://www.the-qrcode-generator.com/"></a></input>
 </div>
 {% endblock %}
 

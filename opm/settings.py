@@ -10,7 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/1.10/ref/settings/
 """
 
-import os
+import os, sys
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -25,7 +25,7 @@ SECRET_KEY = '#^7e0hqlf+antm=8r0_fo7n3!fqhl__4hzqzy+#lk^zt81ooba'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['redpath.mamss.ca', 'localhost', '67.212.82.214']
 
 
 # Application definition
@@ -121,7 +121,7 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-STATIC_ROOT = '/var/www/opm/static/'
+STATIC_ROOT = "/var/www/opm/public/"
 
 STATICFILES_DIR = [
     os.path.join(BASE_DIR, "static"),
@@ -129,4 +129,55 @@ STATICFILES_DIR = [
 
 UPLOAD_DIR = os.path.join(BASE_DIR, "tours/static/renders")
 
-DRACO_DIR = os.path.join(BASE_DIR, "tours/draco-build/")
+DRACO_DIR = os.path.join(BASE_DIR, "Draco-Docker")
+
+DRACO_OUTPUT_PATH = os.path.join(BASE_DIR, "tours/static/renders")
+
+SITE_ROOT = os.path.join(BASE_DIR, "tours/draco-build/logs")
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': True,
+    'formatters': {
+        'standard': {
+            'format' : "[%(asctime)s] %(levelname)s [%(name)s:%(lineno)s] %(message)s",
+            'datefmt' : "%d/%b/%Y %H:%M:%S"
+        },
+    },
+    'handlers': {
+        'null': {
+            'level':'DEBUG',
+            'class':'logging.NullHandler',
+        },
+        'logfile': {
+            'level':'DEBUG',
+            'class':'logging.handlers.RotatingFileHandler',
+            'filename': SITE_ROOT + "/logfile",
+            'maxBytes': 50000,
+            'backupCount': 2,
+            'formatter': 'standard',
+        },
+        'console':{
+            'level':'INFO',
+            'class':'logging.StreamHandler',
+            'formatter': 'standard',
+			'stream': sys.stdout,
+        },
+    },
+    'loggers': {
+        'django': {
+            'handlers':['console'],
+            'propagate': True,
+            'level':'WARN',
+        },
+        'django.db.backends': {
+            'handlers': ['console'],
+            'level': 'DEBUG',
+            'propagate': False,
+        },
+        'Tours': {
+            'handlers': ['console', 'logfile'],
+            'level': 'DEBUG',
+        },
+    }
+}

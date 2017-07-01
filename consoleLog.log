@@ -1,0 +1,687 @@
+*** Starting uWSGI 2.0.15 (64bit) on [Fri Jun 30 20:50:11 2017] ***
+compiled with version: 4.8.5 20150623 (Red Hat 4.8.5-11) on 19 May 2017 14:33:49
+os: Linux-3.10.0-514.16.1.el7.x86_64 #1 SMP Wed Apr 12 15:04:24 UTC 2017
+nodename: netel-training-devin
+machine: x86_64
+clock source: unix
+pcre jit disabled
+detected number of CPU cores: 4
+current working directory: /etc/uwsgi.d
+detected binary path: /usr/sbin/uwsgi
+*** WARNING: you are running uWSGI as root !!! (use the --uid flag) *** 
+chdir() to /var/www/opm
+your processes number limit is 14745
+your memory page size is 4096 bytes
+detected max file descriptor number: 1024
+lock engine: pthread robust mutexes
+thunder lock: disabled (you can enable it with --thunder-lock)
+uwsgi socket 0 bound to UNIX address /run/uwsgi/opm.sock fd 3
+Python version: 3.4.5 (default, May 29 2017, 15:17:55)  [GCC 4.8.5 20150623 (Red Hat 4.8.5-11)]
+Set PythonHome to /root/.virtualenvs/opm-env-1/
+*** Python threads support is disabled. You can enable it with --enable-threads ***
+Python main interpreter initialized at 0xed6e20
+your server socket listen backlog is limited to 100 connections
+your mercy for graceful operations on workers is 60 seconds
+mapped 218304 bytes (213 KB) for 2 cores
+*** Operational MODE: preforking ***
+added /usr/bin/python3.4 to pythonpath.
+WSGI app 0 (mountpoint='') ready in 1 seconds on interpreter 0xed6e20 pid: 26816 (default app)
+*** uWSGI is running in multiple interpreter mode ***
+spawned uWSGI master process (pid: 26816)
+spawned uWSGI worker 1 (pid: 26818, cores: 1)
+spawned uWSGI worker 2 (pid: 26819, cores: 1)
+SIGINT/SIGQUIT received...killing workers...
+Sat Jul  1 00:50:57 2017 - received message 0 from emperor
+worker 1 buried after 1 seconds
+worker 2 buried after 1 seconds
+goodbye to uWSGI.
+VACUUM: unix socket /run/uwsgi/opm.sock removed.
+*** Starting uWSGI 2.0.15 (64bit) on [Fri Jun 30 20:51:00 2017] ***
+compiled with version: 4.8.5 20150623 (Red Hat 4.8.5-11) on 19 May 2017 14:33:49
+os: Linux-3.10.0-514.16.1.el7.x86_64 #1 SMP Wed Apr 12 15:04:24 UTC 2017
+nodename: netel-training-devin
+machine: x86_64
+clock source: unix
+pcre jit disabled
+detected number of CPU cores: 4
+current working directory: /etc/uwsgi.d
+detected binary path: /usr/sbin/uwsgi
+*** WARNING: you are running uWSGI as root !!! (use the --uid flag) *** 
+chdir() to /var/www/opm
+your processes number limit is 14745
+your memory page size is 4096 bytes
+detected max file descriptor number: 1024
+lock engine: pthread robust mutexes
+thunder lock: disabled (you can enable it with --thunder-lock)
+uwsgi socket 0 bound to UNIX address /run/uwsgi/opm.sock fd 3
+Python version: 3.4.5 (default, May 29 2017, 15:17:55)  [GCC 4.8.5 20150623 (Red Hat 4.8.5-11)]
+Set PythonHome to /root/.virtualenvs/opm-env-1/
+*** Python threads support is disabled. You can enable it with --enable-threads ***
+Python main interpreter initialized at 0xfe2e20
+your server socket listen backlog is limited to 100 connections
+your mercy for graceful operations on workers is 60 seconds
+mapped 218304 bytes (213 KB) for 2 cores
+*** Operational MODE: preforking ***
+added /usr/bin/python3.4 to pythonpath.
+WSGI app 0 (mountpoint='') ready in 1 seconds on interpreter 0xfe2e20 pid: 26848 (default app)
+*** uWSGI is running in multiple interpreter mode ***
+spawned uWSGI master process (pid: 26848)
+spawned uWSGI worker 1 (pid: 26850, cores: 1)
+spawned uWSGI worker 2 (pid: 26851, cores: 1)
+[pid: 26851|app: 0|req: 1/1] 70.80.186.230 () {42 vars in 838 bytes} [Sat Jul  1 00:51:23 2017] GET /tours => generated 0 bytes in 19 msecs (HTTP/1.1 301) 3 headers in 122 bytes (1 switches on core 0)
+announcing my loyalty to the Emperor...
+[pid: 26851|app: 0|req: 2/2] 70.80.186.230 () {42 vars in 840 bytes} [Sat Jul  1 00:51:24 2017] GET /tours/ => generated 975 bytes in 35 msecs (HTTP/1.1 200) 2 headers in 88 bytes (1 switches on core 0)
+[pid: 26851|app: 0|req: 3/3] 70.80.186.230 () {42 vars in 838 bytes} [Sat Jul  1 00:51:31 2017] GET /admin => generated 0 bytes in 1 msecs (HTTP/1.1 301) 3 headers in 122 bytes (1 switches on core 0)
+[pid: 26851|app: 0|req: 4/4] 70.80.186.230 () {42 vars in 840 bytes} [Sat Jul  1 00:51:31 2017] GET /admin/ => generated 7495 bytes in 89 msecs (HTTP/1.1 200) 6 headers in 251 bytes (1 switches on core 0)
+[pid: 26851|app: 0|req: 5/5] 70.80.186.230 () {42 vars in 840 bytes} [Sat Jul  1 00:51:31 2017] GET /static/admin/css/dashboard.css => generated 434 bytes in 2 msecs via sendfile() (HTTP/1.1 200) 4 headers in 139 bytes (0 switches on core 0)
+[pid: 26851|app: 0|req: 6/6] 70.80.186.230 () {42 vars in 832 bytes} [Sat Jul  1 00:51:31 2017] GET /static/admin/css/fonts.css => generated 423 bytes in 1 msecs via sendfile() (HTTP/1.1 200) 4 headers in 139 bytes (0 switches on core 0)
+[pid: 26851|app: 0|req: 7/7] 70.80.186.230 () {42 vars in 881 bytes} [Sat Jul  1 00:51:32 2017] GET /static/admin/img/icon-changelink.svg => generated 380 bytes in 1 msecs via sendfile() (HTTP/1.1 200) 4 headers in 144 bytes (1 switches on core 0)
+[pid: 26851|app: 0|req: 8/8] 70.80.186.230 () {44 vars in 912 bytes} [Sat Jul  1 00:51:32 2017] GET /static/admin/fonts/Roboto-Regular-webfont.woff => generated 80304 bytes in 1 msecs via sendfile() (HTTP/1.1 200) 4 headers in 157 bytes (0 switches on core 0)
+[pid: 26851|app: 0|req: 9/9] 70.80.186.230 () {44 vars in 906 bytes} [Sat Jul  1 00:51:32 2017] GET /static/admin/fonts/Roboto-Bold-webfont.woff => generated 82564 bytes in 1 msecs via sendfile() (HTTP/1.1 200) 4 headers in 157 bytes (0 switches on core 0)
+[pid: 26851|app: 0|req: 10/10] 70.80.186.230 () {44 vars in 908 bytes} [Sat Jul  1 00:51:32 2017] GET /static/admin/fonts/Roboto-Light-webfont.woff => generated 81348 bytes in 1 msecs via sendfile() (HTTP/1.1 200) 4 headers in 157 bytes (0 switches on core 0)
+[pid: 26850|app: 0|req: 1/11] 70.80.186.230 () {42 vars in 875 bytes} [Sat Jul  1 00:51:32 2017] GET /static/admin/img/icon-addlink.svg => generated 331 bytes in 23 msecs via sendfile() (HTTP/1.1 200) 4 headers in 144 bytes (0 switches on core 0)
+announcing my loyalty to the Emperor...
+[pid: 26851|app: 0|req: 11/12] 70.80.186.230 () {44 vars in 909 bytes} [Sat Jul  1 00:51:41 2017] GET /admin/tours/render/ => generated 4173 bytes in 63 msecs (HTTP/1.1 200) 7 headers in 405 bytes (1 switches on core 0)
+[pid: 26851|app: 0|req: 12/13] 70.80.186.230 () {42 vars in 857 bytes} [Sat Jul  1 00:51:41 2017] GET /static/admin/css/changelists.css => generated 6117 bytes in 1 msecs via sendfile() (HTTP/1.1 200) 4 headers in 140 bytes (0 switches on core 0)
+[pid: 26850|app: 0|req: 2/14] 70.80.186.230 () {42 vars in 824 bytes} [Sat Jul  1 00:51:41 2017] GET /static/admin/js/core.js => generated 7976 bytes in 1 msecs via sendfile() (HTTP/1.1 200) 4 headers in 154 bytes (0 switches on core 0)
+[pid: 26851|app: 0|req: 13/15] 70.80.186.230 () {42 vars in 804 bytes} [Sat Jul  1 00:51:41 2017] GET /admin/jsi18n/ => generated 3189 bytes in 9 msecs (HTTP/1.1 200) 3 headers in 93 bytes (2 switches on core 0)
+[pid: 26850|app: 0|req: 3/16] 70.80.186.230 () {42 vars in 838 bytes} [Sat Jul  1 00:51:41 2017] GET /static/admin/js/jquery.init.js => generated 363 bytes in 1 msecs via sendfile() (HTTP/1.1 200) 4 headers in 153 bytes (0 switches on core 0)
+[pid: 26851|app: 0|req: 14/17] 70.80.186.230 () {42 vars in 856 bytes} [Sat Jul  1 00:51:41 2017] GET /static/admin/js/vendor/jquery/jquery.js => generated 258648 bytes in 1 msecs via sendfile() (HTTP/1.1 200) 4 headers in 156 bytes (0 switches on core 0)
+[pid: 26850|app: 0|req: 4/18] 70.80.186.230 () {42 vars in 868 bytes} [Sat Jul  1 00:51:41 2017] GET /static/admin/js/admin/RelatedObjectLookups.js => generated 6577 bytes in 1 msecs via sendfile() (HTTP/1.1 200) 4 headers in 154 bytes (0 switches on core 0)
+[pid: 26851|app: 0|req: 15/19] 70.80.186.230 () {42 vars in 830 bytes} [Sat Jul  1 00:51:41 2017] GET /static/admin/js/actions.js => generated 6501 bytes in 1 msecs via sendfile() (HTTP/1.1 200) 4 headers in 154 bytes (0 switches on core 0)
+[pid: 26850|app: 0|req: 5/21] 70.80.186.230 () {42 vars in 828 bytes} [Sat Jul  1 00:51:41 2017] GET /static/admin/js/urlify.js => generated 8186 bytes in 1 msecs via sendfile() (HTTP/1.1 200) 4 headers in 154 bytes (0 switches on core 0)
+[pid: 26851|app: 0|req: 16/21] 70.80.186.230 () {42 vars in 838 bytes} [Sat Jul  1 00:51:41 2017] GET /static/admin/js/prepopulate.js => generated 1538 bytes in 1 msecs via sendfile() (HTTP/1.1 200) 4 headers in 154 bytes (0 switches on core 0)
+[pid: 26851|app: 0|req: 17/22] 70.80.186.230 () {42 vars in 860 bytes} [Sat Jul  1 00:51:41 2017] GET /static/admin/js/vendor/xregexp/xregexp.js => generated 128820 bytes in 1 msecs via sendfile() (HTTP/1.1 200) 4 headers in 156 bytes (0 switches on core 0)
+[pid: 26851|app: 0|req: 18/23] 70.80.186.230 () {42 vars in 873 bytes} [Sat Jul  1 00:51:42 2017] GET /static/admin/img/tooltag-add.svg => generated 331 bytes in 1 msecs via sendfile() (HTTP/1.1 200) 4 headers in 144 bytes (0 switches on core 0)
+[pid: 26851|app: 0|req: 19/24] 70.80.186.230 () {44 vars in 940 bytes} [Sat Jul  1 00:51:44 2017] GET /admin/tours/render/1/change/ => generated 6699 bytes in 67 msecs (HTTP/1.1 200) 7 headers in 405 bytes (1 switches on core 0)
+[pid: 26851|app: 0|req: 20/25] 70.80.186.230 () {42 vars in 813 bytes} [Sat Jul  1 00:51:45 2017] GET /admin/jsi18n/ => generated 3189 bytes in 8 msecs (HTTP/1.1 200) 3 headers in 93 bytes (1 switches on core 0)
+[pid: 26851|app: 0|req: 21/26] 70.80.186.230 () {42 vars in 847 bytes} [Sat Jul  1 00:51:45 2017] GET /static/admin/js/change_form.js => generated 698 bytes in 1 msecs via sendfile() (HTTP/1.1 200) 4 headers in 153 bytes (0 switches on core 0)
+[pid: 26851|app: 0|req: 22/27] 70.80.186.230 () {42 vars in 857 bytes} [Sat Jul  1 00:51:45 2017] GET /static/admin/js/prepopulate_init.js => generated 495 bytes in 1 msecs via sendfile() (HTTP/1.1 200) 4 headers in 153 bytes (0 switches on core 0)
+[pid: 26851|app: 0|req: 23/28] 70.80.186.230 () {42 vars in 858 bytes} [Sat Jul  1 00:51:46 2017] GET /static/admin/css/widgets.css => generated 10340 bytes in 1 msecs via sendfile() (HTTP/1.1 200) 4 headers in 141 bytes (0 switches on core 0)
+var/www/opm/tours/static/renders/LeePerrySmith_VTQYUnP.obj
+var/www/opm/tours/static/renders
+Failed loading the input mesh.
+[pid: 26851|app: 0|req: 24/29] 70.80.186.230 () {52 vars in 1198 bytes} [Sat Jul  1 00:54:15 2017] POST /admin/tours/render/1/change/ => generated 0 bytes in 685 msecs (HTTP/1.1 302) 8 headers in 550 bytes (1 switches on core 0)
+[pid: 26850|app: 0|req: 6/30] 70.80.186.230 () {46 vars in 1204 bytes} [Sat Jul  1 00:54:16 2017] GET /admin/tours/render/1/change/ => generated 6908 bytes in 123 msecs (HTTP/1.1 200) 8 headers in 487 bytes (1 switches on core 0)
+[pid: 26851|app: 0|req: 25/31] 70.80.186.230 () {42 vars in 813 bytes} [Sat Jul  1 00:54:16 2017] GET /admin/jsi18n/ => generated 3189 bytes in 9 msecs (HTTP/1.1 200) 3 headers in 93 bytes (1 switches on core 0)
+[pid: 26850|app: 0|req: 7/32] 70.80.186.230 () {42 vars in 867 bytes} [Sat Jul  1 00:54:16 2017] GET /static/admin/img/icon-yes.svg => generated 436 bytes in 1 msecs via sendfile() (HTTP/1.1 200) 4 headers in 144 bytes (0 switches on core 0)
+SIGINT/SIGQUIT received...killing workers...
+Sat Jul  1 01:00:04 2017 - received message 0 from emperor
+worker 1 buried after 1 seconds
+worker 2 buried after 1 seconds
+goodbye to uWSGI.
+VACUUM: unix socket /run/uwsgi/opm.sock removed.
+*** Starting uWSGI 2.0.15 (64bit) on [Fri Jun 30 21:00:07 2017] ***
+compiled with version: 4.8.5 20150623 (Red Hat 4.8.5-11) on 19 May 2017 14:33:49
+os: Linux-3.10.0-514.16.1.el7.x86_64 #1 SMP Wed Apr 12 15:04:24 UTC 2017
+nodename: netel-training-devin
+machine: x86_64
+clock source: unix
+pcre jit disabled
+detected number of CPU cores: 4
+current working directory: /etc/uwsgi.d
+detected binary path: /usr/sbin/uwsgi
+*** WARNING: you are running uWSGI as root !!! (use the --uid flag) *** 
+chdir() to /var/www/opm
+your processes number limit is 14745
+your memory page size is 4096 bytes
+detected max file descriptor number: 1024
+lock engine: pthread robust mutexes
+thunder lock: disabled (you can enable it with --thunder-lock)
+uwsgi socket 0 bound to UNIX address /run/uwsgi/opm.sock fd 3
+Python version: 3.4.5 (default, May 29 2017, 15:17:55)  [GCC 4.8.5 20150623 (Red Hat 4.8.5-11)]
+Set PythonHome to /root/.virtualenvs/opm-env-1/
+*** Python threads support is disabled. You can enable it with --enable-threads ***
+Python main interpreter initialized at 0x122be20
+your server socket listen backlog is limited to 100 connections
+your mercy for graceful operations on workers is 60 seconds
+mapped 218304 bytes (213 KB) for 2 cores
+*** Operational MODE: preforking ***
+added /usr/bin/python3.4 to pythonpath.
+WSGI app 0 (mountpoint='') ready in 0 seconds on interpreter 0x122be20 pid: 26958 (default app)
+*** uWSGI is running in multiple interpreter mode ***
+spawned uWSGI master process (pid: 26958)
+spawned uWSGI worker 1 (pid: 26960, cores: 1)
+spawned uWSGI worker 2 (pid: 26961, cores: 1)
+[pid: 26961|app: 0|req: 1/1] 70.80.186.230 () {46 vars in 980 bytes} [Sat Jul  1 01:00:21 2017] GET /admin/tours/render/1/change/ => generated 6699 bytes in 135 msecs (HTTP/1.1 200) 7 headers in 405 bytes (1 switches on core 0)
+announcing my loyalty to the Emperor...
+[pid: 26961|app: 0|req: 2/2] 70.80.186.230 () {42 vars in 813 bytes} [Sat Jul  1 01:00:21 2017] GET /admin/jsi18n/ => generated 3189 bytes in 5 msecs (HTTP/1.1 200) 3 headers in 93 bytes (1 switches on core 0)
+var/www/opm/tours/static/renders/LeePerrySmith_VTQYUnP.obj
+var/www/opm/tours/static/renders
+Failed loading the input mesh.
+[pid: 26961|app: 0|req: 3/3] 70.80.186.230 () {52 vars in 1198 bytes} [Sat Jul  1 01:01:16 2017] POST /admin/tours/render/1/change/ => generated 0 bytes in 565 msecs (HTTP/1.1 302) 8 headers in 550 bytes (1 switches on core 0)
+[pid: 26961|app: 0|req: 4/4] 70.80.186.230 () {46 vars in 1204 bytes} [Sat Jul  1 01:01:17 2017] GET /admin/tours/render/1/change/ => generated 6908 bytes in 66 msecs (HTTP/1.1 200) 8 headers in 487 bytes (1 switches on core 0)
+[pid: 26961|app: 0|req: 5/5] 70.80.186.230 () {42 vars in 813 bytes} [Sat Jul  1 01:01:17 2017] GET /admin/jsi18n/ => generated 3189 bytes in 8 msecs (HTTP/1.1 200) 3 headers in 93 bytes (1 switches on core 0)
+SIGINT/SIGQUIT received...killing workers...
+Sat Jul  1 01:02:59 2017 - received message 0 from emperor
+worker 1 buried after 1 seconds
+worker 2 buried after 1 seconds
+goodbye to uWSGI.
+VACUUM: unix socket /run/uwsgi/opm.sock removed.
+*** Starting uWSGI 2.0.15 (64bit) on [Fri Jun 30 21:03:02 2017] ***
+compiled with version: 4.8.5 20150623 (Red Hat 4.8.5-11) on 19 May 2017 14:33:49
+os: Linux-3.10.0-514.16.1.el7.x86_64 #1 SMP Wed Apr 12 15:04:24 UTC 2017
+nodename: netel-training-devin
+machine: x86_64
+clock source: unix
+pcre jit disabled
+detected number of CPU cores: 4
+current working directory: /etc/uwsgi.d
+detected binary path: /usr/sbin/uwsgi
+*** WARNING: you are running uWSGI as root !!! (use the --uid flag) *** 
+chdir() to /var/www/opm
+your processes number limit is 14745
+your memory page size is 4096 bytes
+detected max file descriptor number: 1024
+lock engine: pthread robust mutexes
+thunder lock: disabled (you can enable it with --thunder-lock)
+uwsgi socket 0 bound to UNIX address /run/uwsgi/opm.sock fd 3
+Python version: 3.4.5 (default, May 29 2017, 15:17:55)  [GCC 4.8.5 20150623 (Red Hat 4.8.5-11)]
+Set PythonHome to /root/.virtualenvs/opm-env-1/
+*** Python threads support is disabled. You can enable it with --enable-threads ***
+Python main interpreter initialized at 0x2412e20
+your server socket listen backlog is limited to 100 connections
+your mercy for graceful operations on workers is 60 seconds
+mapped 218304 bytes (213 KB) for 2 cores
+*** Operational MODE: preforking ***
+added /usr/bin/python3.4 to pythonpath.
+WSGI app 0 (mountpoint='') ready in 1 seconds on interpreter 0x2412e20 pid: 27064 (default app)
+*** uWSGI is running in multiple interpreter mode ***
+spawned uWSGI master process (pid: 27064)
+spawned uWSGI worker 1 (pid: 27066, cores: 1)
+spawned uWSGI worker 2 (pid: 27067, cores: 1)
+[pid: 27067|app: 0|req: 1/1] 70.80.186.230 () {46 vars in 980 bytes} [Sat Jul  1 01:03:21 2017] GET /admin/tours/render/1/change/ => generated 6699 bytes in 135 msecs (HTTP/1.1 200) 7 headers in 405 bytes (1 switches on core 0)
+announcing my loyalty to the Emperor...
+[pid: 27067|app: 0|req: 2/2] 70.80.186.230 () {42 vars in 813 bytes} [Sat Jul  1 01:03:21 2017] GET /admin/jsi18n/ => generated 3189 bytes in 5 msecs (HTTP/1.1 200) 3 headers in 93 bytes (1 switches on core 0)
+var/www/opm/tours/static/renders/LeePerrySmith_VTQYUnP.obj
+var/www/opm/tours/static/renders
+Failed loading the input mesh.
+[pid: 27067|app: 0|req: 3/3] 70.80.186.230 () {52 vars in 1198 bytes} [Sat Jul  1 01:03:23 2017] POST /admin/tours/render/1/change/ => generated 0 bytes in 575 msecs (HTTP/1.1 302) 8 headers in 550 bytes (1 switches on core 0)
+[pid: 27067|app: 0|req: 4/4] 70.80.186.230 () {46 vars in 1204 bytes} [Sat Jul  1 01:03:24 2017] GET /admin/tours/render/1/change/ => generated 6908 bytes in 66 msecs (HTTP/1.1 200) 8 headers in 487 bytes (1 switches on core 0)
+[pid: 27067|app: 0|req: 5/5] 70.80.186.230 () {42 vars in 813 bytes} [Sat Jul  1 01:03:24 2017] GET /admin/jsi18n/ => generated 3189 bytes in 8 msecs (HTTP/1.1 200) 3 headers in 93 bytes (1 switches on core 0)
+SIGINT/SIGQUIT received...killing workers...
+Sat Jul  1 01:05:36 2017 - received message 0 from emperor
+worker 1 buried after 1 seconds
+worker 2 buried after 1 seconds
+goodbye to uWSGI.
+VACUUM: unix socket /run/uwsgi/opm.sock removed.
+*** Starting uWSGI 2.0.15 (64bit) on [Fri Jun 30 21:05:39 2017] ***
+compiled with version: 4.8.5 20150623 (Red Hat 4.8.5-11) on 19 May 2017 14:33:49
+os: Linux-3.10.0-514.16.1.el7.x86_64 #1 SMP Wed Apr 12 15:04:24 UTC 2017
+nodename: netel-training-devin
+machine: x86_64
+clock source: unix
+pcre jit disabled
+detected number of CPU cores: 4
+current working directory: /etc/uwsgi.d
+detected binary path: /usr/sbin/uwsgi
+*** WARNING: you are running uWSGI as root !!! (use the --uid flag) *** 
+chdir() to /var/www/opm
+your processes number limit is 14745
+your memory page size is 4096 bytes
+detected max file descriptor number: 1024
+lock engine: pthread robust mutexes
+thunder lock: disabled (you can enable it with --thunder-lock)
+uwsgi socket 0 bound to UNIX address /run/uwsgi/opm.sock fd 3
+Python version: 3.4.5 (default, May 29 2017, 15:17:55)  [GCC 4.8.5 20150623 (Red Hat 4.8.5-11)]
+Set PythonHome to /root/.virtualenvs/opm-env-1/
+*** Python threads support is disabled. You can enable it with --enable-threads ***
+Python main interpreter initialized at 0x18a9e20
+your server socket listen backlog is limited to 100 connections
+your mercy for graceful operations on workers is 60 seconds
+mapped 218304 bytes (213 KB) for 2 cores
+*** Operational MODE: preforking ***
+added /usr/bin/python3.4 to pythonpath.
+WSGI app 0 (mountpoint='') ready in 1 seconds on interpreter 0x18a9e20 pid: 27156 (default app)
+*** uWSGI is running in multiple interpreter mode ***
+spawned uWSGI master process (pid: 27156)
+spawned uWSGI worker 1 (pid: 27158, cores: 1)
+spawned uWSGI worker 2 (pid: 27159, cores: 1)
+[pid: 27159|app: 0|req: 1/1] 70.80.186.230 () {46 vars in 980 bytes} [Sat Jul  1 01:06:04 2017] GET /admin/tours/render/1/change/ => generated 6699 bytes in 135 msecs (HTTP/1.1 200) 7 headers in 405 bytes (1 switches on core 0)
+announcing my loyalty to the Emperor...
+[pid: 27158|app: 0|req: 1/2] 70.80.186.230 () {42 vars in 813 bytes} [Sat Jul  1 01:06:05 2017] GET /admin/jsi18n/ => generated 3189 bytes in 36 msecs (HTTP/1.1 200) 3 headers in 93 bytes (1 switches on core 0)
+announcing my loyalty to the Emperor...
+var/www/opm/tours/static/renders/LeePerrySmith_VTQYUnP.obj
+var/www/opm/tours/static/renders
+Encoder options:
+  Compression level = 7
+  Positions: Quantization = 14 bits
+  Texture coordinates: Quantization = 12 bits
+
+Encoded mesh saved to /draco/objPool/LeePerrySmith_VTQYUnP.drc (14 ms to encode)
+
+Encoded size = 40679 bytes
+
+For better compression, increase the compression level '-cl' (up to 10).
+
+[pid: 27158|app: 0|req: 2/3] 70.80.186.230 () {52 vars in 1198 bytes} [Sat Jul  1 01:06:15 2017] POST /admin/tours/render/1/change/ => generated 0 bytes in 664 msecs (HTTP/1.1 302) 8 headers in 550 bytes (1 switches on core 0)
+[pid: 27158|app: 0|req: 3/4] 70.80.186.230 () {46 vars in 1204 bytes} [Sat Jul  1 01:06:15 2017] GET /admin/tours/render/1/change/ => generated 6908 bytes in 109 msecs (HTTP/1.1 200) 8 headers in 487 bytes (1 switches on core 0)
+[pid: 27158|app: 0|req: 4/5] 70.80.186.230 () {42 vars in 813 bytes} [Sat Jul  1 01:06:15 2017] GET /admin/jsi18n/ => generated 3189 bytes in 8 msecs (HTTP/1.1 200) 3 headers in 93 bytes (1 switches on core 0)
+[pid: 27159|app: 0|req: 2/6] 70.80.186.230 () {42 vars in 840 bytes} [Sat Jul  1 01:06:37 2017] GET /tours/ => generated 975 bytes in 6 msecs (HTTP/1.1 200) 2 headers in 88 bytes (1 switches on core 0)
+[pid: 27158|app: 0|req: 5/7] 70.80.186.230 () {44 vars in 917 bytes} [Sat Jul  1 01:07:05 2017] GET /admin/tours/ => generated 3387 bytes in 60 msecs (HTTP/1.1 200) 6 headers in 251 bytes (1 switches on core 0)
+[pid: 27158|app: 0|req: 6/8] 70.80.186.230 () {44 vars in 911 bytes} [Sat Jul  1 01:07:09 2017] GET /admin/tours/tour/ => generated 3025 bytes in 56 msecs (HTTP/1.1 200) 7 headers in 405 bytes (1 switches on core 0)
+[pid: 27158|app: 0|req: 7/9] 70.80.186.230 () {42 vars in 802 bytes} [Sat Jul  1 01:07:09 2017] GET /admin/jsi18n/ => generated 3189 bytes in 8 msecs (HTTP/1.1 200) 3 headers in 93 bytes (1 switches on core 0)
+[pid: 27159|app: 0|req: 3/10] 70.80.186.230 () {44 vars in 924 bytes} [Sat Jul  1 01:07:11 2017] GET /admin/tours/tour/add/ => generated 28141 bytes in 137 msecs (HTTP/1.1 200) 7 headers in 405 bytes (1 switches on core 0)
+[pid: 27159|app: 0|req: 4/11] 70.80.186.230 () {42 vars in 832 bytes} [Sat Jul  1 01:07:11 2017] GET /static/admin/js/inlines.js => generated 13404 bytes in 3 msecs via sendfile() (HTTP/1.1 200) 4 headers in 155 bytes (0 switches on core 0)
+[pid: 27158|app: 0|req: 8/12] 70.80.186.230 () {42 vars in 806 bytes} [Sat Jul  1 01:07:11 2017] GET /admin/jsi18n/ => generated 3189 bytes in 10 msecs (HTTP/1.1 200) 3 headers in 93 bytes (1 switches on core 0)
+[pid: 27159|app: 0|req: 5/13] 70.80.186.230 () {42 vars in 870 bytes} [Sat Jul  1 01:07:11 2017] GET /static/bower_components/tween.js/src/Tween.js => generated 13537 bytes in 2 msecs via sendfile() (HTTP/1.1 200) 4 headers in 155 bytes (0 switches on core 0)
+[pid: 27158|app: 0|req: 9/14] 70.80.186.230 () {42 vars in 876 bytes} [Sat Jul  1 01:07:11 2017] GET /static/bower_components/dat-gui/build/dat.gui.js => generated 100889 bytes in 3 msecs via sendfile() (HTTP/1.1 200) 4 headers in 156 bytes (0 switches on core 0)
+[pid: 27159|app: 0|req: 6/15] 70.80.186.230 () {42 vars in 922 bytes} [Sat Jul  1 01:07:11 2017] GET /static/bower_components/threejs-trackball-controls/TrackballControls.js => generated 14331 bytes in 1 msecs via sendfile() (HTTP/1.1 200) 4 headers in 155 bytes (0 switches on core 0)
+[pid: 27159|app: 0|req: 7/16] 70.80.186.230 () {42 vars in 834 bytes} [Sat Jul  1 01:07:11 2017] GET /static/scripts/STLLoader.js => generated 11178 bytes in 1 msecs via sendfile() (HTTP/1.1 200) 4 headers in 155 bytes (0 switches on core 0)
+[pid: 27158|app: 0|req: 10/17] 70.80.186.230 () {42 vars in 842 bytes} [Sat Jul  1 01:07:11 2017] GET /static/scripts/draco_decoder.js => generated 824327 bytes in 3 msecs via sendfile() (HTTP/1.1 200) 4 headers in 156 bytes (2 switches on core 0)
+[pid: 27159|app: 0|req: 8/18] 70.80.186.230 () {42 vars in 834 bytes} [Sat Jul  1 01:07:11 2017] GET /static/scripts/OBJLoader.js => generated 18548 bytes in 1 msecs via sendfile() (HTTP/1.1 200) 4 headers in 155 bytes (0 switches on core 0)
+[pid: 27159|app: 0|req: 9/19] 70.80.186.230 () {42 vars in 854 bytes} [Sat Jul  1 01:07:11 2017] GET /static/scripts/render-window-admin.js => generated 29172 bytes in 1 msecs via sendfile() (HTTP/1.1 200) 4 headers in 155 bytes (0 switches on core 0)
+[pid: 27159|app: 0|req: 10/20] 70.80.186.230 () {42 vars in 842 bytes} [Sat Jul  1 01:07:11 2017] GET /static/scripts/CSS3DRenderer.js => generated 5969 bytes in 1 msecs via sendfile() (HTTP/1.1 200) 4 headers in 154 bytes (0 switches on core 0)
+[pid: 27158|app: 0|req: 11/19] 70.80.186.230 () {42 vars in 838 bytes} [Sat Jul  1 01:07:11 2017] GET /static/scripts/DRACOLoader.js => generated 12503 bytes in 1 msecs via sendfile() (HTTP/1.1 200) 4 headers in 155 bytes (0 switches on core 0)
+[pid: 27159|app: 0|req: 11/22] 70.80.186.230 () {42 vars in 830 bytes} [Sat Jul  1 01:07:13 2017] GET /admin/tours/tour/add/.drc => generated 0 bytes in 1 msecs (HTTP/1.1 301) 3 headers in 142 bytes (1 switches on core 0)
+[pid: 27158|app: 0|req: 12/23] 70.80.186.230 () {42 vars in 826 bytes} [Sat Jul  1 01:07:13 2017] GET /static/models/Arrow.stl => generated 98184 bytes in 1 msecs via sendfile() (HTTP/1.1 200) 4 headers in 157 bytes (0 switches on core 0)
+[pid: 27158|app: 0|req: 13/24] 70.80.186.230 () {42 vars in 832 bytes} [Sat Jul  1 01:07:13 2017] GET /admin/tours/tour/add/.drc/ => generated 0 bytes in 7 msecs (HTTP/1.1 302) 7 headers in 300 bytes (1 switches on core 0)
+[01/Jul/2017 01:07:13] WARNING [django.request:152] Not Found: /tours/get_annotations/
+[pid: 27159|app: 0|req: 12/25] 70.80.186.230 () {44 vars in 864 bytes} [Sat Jul  1 01:07:13 2017] GET /tours/get_annotations// => generated 3264 bytes in 10 msecs (HTTP/1.1 404) 2 headers in 80 bytes (1 switches on core 0)
+[01/Jul/2017 01:07:13] WARNING [django.request:152] Not Found: /admin/tours/tour/add/.drc/change/
+[pid: 27159|app: 0|req: 13/26] 70.80.186.230 () {42 vars in 846 bytes} [Sat Jul  1 01:07:13 2017] GET /admin/tours/tour/add/.drc/change/ => generated 1814 bytes in 14 msecs (HTTP/1.1 404) 3 headers in 94 bytes (1 switches on core 0)
+[pid: 27158|app: 0|req: 14/27] 70.80.186.230 () {42 vars in 880 bytes} [Sat Jul  1 01:07:33 2017] GET /static/admin/img/inline-delete.svg => generated 560 bytes in 1 msecs via sendfile() (HTTP/1.1 200) 4 headers in 144 bytes (0 switches on core 0)
+[pid: 27159|app: 0|req: 14/28] 70.80.186.230 () {52 vars in 1177 bytes} [Sat Jul  1 01:07:47 2017] POST /admin/tours/tour/add/ => generated 29732 bytes in 171 msecs (HTTP/1.1 200) 7 headers in 405 bytes (1 switches on core 0)
+[pid: 27159|app: 0|req: 15/29] 70.80.186.230 () {42 vars in 806 bytes} [Sat Jul  1 01:07:47 2017] GET /admin/jsi18n/ => generated 3189 bytes in 7 msecs (HTTP/1.1 200) 3 headers in 93 bytes (1 switches on core 0)
+[01/Jul/2017 01:07:48] WARNING [django.request:152] Not Found: /tours/get_annotations/
+[pid: 27159|app: 0|req: 16/30] 70.80.186.230 () {44 vars in 864 bytes} [Sat Jul  1 01:07:48 2017] GET /tours/get_annotations// => generated 3264 bytes in 10 msecs (HTTP/1.1 404) 2 headers in 80 bytes (1 switches on core 0)
+[pid: 27158|app: 0|req: 15/31] 70.80.186.230 () {42 vars in 832 bytes} [Sat Jul  1 01:07:48 2017] GET /admin/tours/tour/add/.drc/ => generated 0 bytes in 7 msecs (HTTP/1.1 302) 7 headers in 300 bytes (1 switches on core 0)
+[01/Jul/2017 01:07:48] WARNING [django.request:152] Not Found: /admin/tours/tour/add/.drc/change/
+[pid: 27159|app: 0|req: 17/32] 70.80.186.230 () {42 vars in 846 bytes} [Sat Jul  1 01:07:48 2017] GET /admin/tours/tour/add/.drc/change/ => generated 1814 bytes in 13 msecs (HTTP/1.1 404) 3 headers in 94 bytes (1 switches on core 0)
+[pid: 27159|app: 0|req: 18/33] 70.80.186.230 () {52 vars in 1177 bytes} [Sat Jul  1 01:07:59 2017] POST /admin/tours/tour/add/ => generated 0 bytes in 301 msecs (HTTP/1.1 302) 8 headers in 547 bytes (1 switches on core 0)
+[pid: 27159|app: 0|req: 19/34] 70.80.186.230 () {46 vars in 1192 bytes} [Sat Jul  1 01:08:00 2017] GET /admin/tours/tour/1/change/ => generated 30404 bytes in 134 msecs (HTTP/1.1 200) 8 headers in 487 bytes (1 switches on core 0)
+[pid: 27159|app: 0|req: 20/35] 70.80.186.230 () {42 vars in 811 bytes} [Sat Jul  1 01:08:00 2017] GET /admin/jsi18n/ => generated 3189 bytes in 8 msecs (HTTP/1.1 200) 3 headers in 93 bytes (1 switches on core 0)
+[01/Jul/2017 01:08:00] WARNING [django.request:152] Not Found: /static/renders/LeePerrySmith_VTQYUnP.drc
+[pid: 27159|app: 0|req: 21/36] 70.80.186.230 () {42 vars in 865 bytes} [Sat Jul  1 01:08:00 2017] GET /static/renders/LeePerrySmith_VTQYUnP.drc => generated 1830 bytes in 7 msecs (HTTP/1.1 404) 2 headers in 80 bytes (1 switches on core 0)
+<QuerySet []>
+True
+get_annotations --- RETURNING
+[pid: 27159|app: 0|req: 22/37] 70.80.186.230 () {44 vars in 872 bytes} [Sat Jul  1 01:08:00 2017] GET /tours/get_annotations/1/ => generated 2 bytes in 4 msecs (HTTP/1.1 200) 2 headers in 80 bytes (1 switches on core 0)
+[pid: 27159|app: 0|req: 23/38] 70.80.186.230 () {44 vars in 871 bytes} [Sat Jul  1 01:08:06 2017] GET /tours/ => generated 1292 bytes in 7 msecs (HTTP/1.1 200) 2 headers in 88 bytes (1 switches on core 0)
+[pid: 27159|app: 0|req: 24/39] 70.80.186.230 () {42 vars in 868 bytes} [Sat Jul  1 01:08:06 2017] GET /static/static_images/redpath-inside.jpg => generated 13467 bytes in 1 msecs via sendfile() (HTTP/1.1 200) 4 headers in 143 bytes (0 switches on core 0)
+[pid: 27158|app: 0|req: 16/40] 70.80.186.230 () {44 vars in 887 bytes} [Sat Jul  1 01:08:18 2017] GET /tours/1/ => generated 5818 bytes in 117 msecs (HTTP/1.1 200) 2 headers in 88 bytes (2 switches on core 0)
+[pid: 27159|app: 0|req: 25/41] 70.80.186.230 () {42 vars in 829 bytes} [Sat Jul  1 01:08:18 2017] GET /static/scripts/render-window.js => generated 42378 bytes in 1 msecs via sendfile() (HTTP/1.1 200) 4 headers in 155 bytes (0 switches on core 0)
+[01/Jul/2017 01:08:19] WARNING [django.request:152] Not Found: /static/renders/LeePerrySmith_VTQYUnP.drc
+[pid: 27159|app: 0|req: 26/42] 70.80.186.230 () {42 vars in 847 bytes} [Sat Jul  1 01:08:19 2017] GET /static/renders/LeePerrySmith_VTQYUnP.drc => generated 1830 bytes in 7 msecs (HTTP/1.1 404) 2 headers in 80 bytes (1 switches on core 0)
+SIGINT/SIGQUIT received...killing workers...
+Sat Jul  1 01:11:07 2017 - received message 0 from emperor
+worker 1 buried after 1 seconds
+worker 2 buried after 1 seconds
+goodbye to uWSGI.
+VACUUM: unix socket /run/uwsgi/opm.sock removed.
+*** Starting uWSGI 2.0.15 (64bit) on [Fri Jun 30 21:11:10 2017] ***
+compiled with version: 4.8.5 20150623 (Red Hat 4.8.5-11) on 19 May 2017 14:33:49
+os: Linux-3.10.0-514.16.1.el7.x86_64 #1 SMP Wed Apr 12 15:04:24 UTC 2017
+nodename: netel-training-devin
+machine: x86_64
+clock source: unix
+pcre jit disabled
+detected number of CPU cores: 4
+current working directory: /etc/uwsgi.d
+detected binary path: /usr/sbin/uwsgi
+*** WARNING: you are running uWSGI as root !!! (use the --uid flag) *** 
+chdir() to /var/www/opm
+your processes number limit is 14745
+your memory page size is 4096 bytes
+detected max file descriptor number: 1024
+lock engine: pthread robust mutexes
+thunder lock: disabled (you can enable it with --thunder-lock)
+uwsgi socket 0 bound to UNIX address /run/uwsgi/opm.sock fd 3
+Python version: 3.4.5 (default, May 29 2017, 15:17:55)  [GCC 4.8.5 20150623 (Red Hat 4.8.5-11)]
+Set PythonHome to /root/.virtualenvs/opm-env-1/
+*** Python threads support is disabled. You can enable it with --enable-threads ***
+Python main interpreter initialized at 0x1b82e20
+your server socket listen backlog is limited to 100 connections
+your mercy for graceful operations on workers is 60 seconds
+mapped 218304 bytes (213 KB) for 2 cores
+*** Operational MODE: preforking ***
+added /usr/bin/python3.4 to pythonpath.
+WSGI app 0 (mountpoint='') ready in 0 seconds on interpreter 0x1b82e20 pid: 27250 (default app)
+*** uWSGI is running in multiple interpreter mode ***
+spawned uWSGI master process (pid: 27250)
+spawned uWSGI worker 1 (pid: 27252, cores: 1)
+spawned uWSGI worker 2 (pid: 27253, cores: 1)
+[pid: 27253|app: 0|req: 1/1] 70.80.186.230 () {44 vars in 915 bytes} [Sat Jul  1 01:12:10 2017] GET /admin/tours/ => generated 3387 bytes in 108 msecs (HTTP/1.1 200) 6 headers in 251 bytes (1 switches on core 0)
+announcing my loyalty to the Emperor...
+[pid: 27253|app: 0|req: 2/2] 70.80.186.230 () {44 vars in 915 bytes} [Sat Jul  1 01:12:12 2017] GET /admin/tours/render/ => generated 4173 bytes in 60 msecs (HTTP/1.1 200) 7 headers in 405 bytes (1 switches on core 0)
+[pid: 27253|app: 0|req: 3/3] 70.80.186.230 () {42 vars in 804 bytes} [Sat Jul  1 01:12:12 2017] GET /admin/jsi18n/ => generated 3189 bytes in 8 msecs (HTTP/1.1 200) 3 headers in 93 bytes (1 switches on core 0)
+[pid: 27253|app: 0|req: 4/4] 70.80.186.230 () {44 vars in 940 bytes} [Sat Jul  1 01:12:13 2017] GET /admin/tours/render/1/change/ => generated 6699 bytes in 64 msecs (HTTP/1.1 200) 7 headers in 405 bytes (1 switches on core 0)
+[pid: 27253|app: 0|req: 5/5] 70.80.186.230 () {42 vars in 813 bytes} [Sat Jul  1 01:12:14 2017] GET /admin/jsi18n/ => generated 3189 bytes in 8 msecs (HTTP/1.1 200) 3 headers in 93 bytes (1 switches on core 0)
+var/www/opm/tours/static/renders/LeePerrySmith_VTQYUnP.obj
+var/www/opm/tours/static/renders
+Encoder options:
+  Compression level = 7
+  Positions: Quantization = 14 bits
+  Texture coordinates: Quantization = 12 bits
+
+Encoded mesh saved to /draco/objPool/LeePerrySmith_VTQYUnP.drc (14 ms to encode)
+
+Encoded size = 40679 bytes
+
+For better compression, increase the compression level '-cl' (up to 10).
+
+[pid: 27253|app: 0|req: 6/6] 70.80.186.230 () {52 vars in 1198 bytes} [Sat Jul  1 01:12:25 2017] POST /admin/tours/render/1/change/ => generated 0 bytes in 553 msecs (HTTP/1.1 302) 8 headers in 550 bytes (1 switches on core 0)
+[pid: 27253|app: 0|req: 7/7] 70.80.186.230 () {46 vars in 1204 bytes} [Sat Jul  1 01:12:26 2017] GET /admin/tours/render/1/change/ => generated 6908 bytes in 67 msecs (HTTP/1.1 200) 8 headers in 487 bytes (1 switches on core 0)
+[pid: 27252|app: 0|req: 1/8] 70.80.186.230 () {42 vars in 813 bytes} [Sat Jul  1 01:12:26 2017] GET /admin/jsi18n/ => generated 3189 bytes in 32 msecs (HTTP/1.1 200) 3 headers in 93 bytes (1 switches on core 0)
+announcing my loyalty to the Emperor...
+[pid: 27253|app: 0|req: 8/9] 70.80.186.230 () {42 vars in 842 bytes} [Sat Jul  1 01:12:36 2017] GET /tours/1 => generated 0 bytes in 1 msecs (HTTP/1.1 301) 3 headers in 124 bytes (1 switches on core 0)
+[pid: 27252|app: 0|req: 2/10] 70.80.186.230 () {42 vars in 844 bytes} [Sat Jul  1 01:12:36 2017] GET /tours/1/ => generated 5818 bytes in 54 msecs (HTTP/1.1 200) 2 headers in 88 bytes (1 switches on core 0)
+[01/Jul/2017 01:12:36] WARNING [django.request:152] Not Found: /static/renders/LeePerrySmith_VTQYUnP.drc
+[pid: 27252|app: 0|req: 3/11] 70.80.186.230 () {42 vars in 847 bytes} [Sat Jul  1 01:12:36 2017] GET /static/renders/LeePerrySmith_VTQYUnP.drc => generated 1830 bytes in 9 msecs (HTTP/1.1 404) 2 headers in 80 bytes (1 switches on core 0)
+SIGINT/SIGQUIT received...killing workers...
+Sat Jul  1 01:18:52 2017 - received message 0 from emperor
+worker 1 buried after 1 seconds
+worker 2 buried after 1 seconds
+goodbye to uWSGI.
+VACUUM: unix socket /run/uwsgi/opm.sock removed.
+*** Starting uWSGI 2.0.15 (64bit) on [Fri Jun 30 21:18:55 2017] ***
+compiled with version: 4.8.5 20150623 (Red Hat 4.8.5-11) on 19 May 2017 14:33:49
+os: Linux-3.10.0-514.16.1.el7.x86_64 #1 SMP Wed Apr 12 15:04:24 UTC 2017
+nodename: netel-training-devin
+machine: x86_64
+clock source: unix
+pcre jit disabled
+detected number of CPU cores: 4
+current working directory: /etc/uwsgi.d
+detected binary path: /usr/sbin/uwsgi
+*** WARNING: you are running uWSGI as root !!! (use the --uid flag) *** 
+chdir() to /var/www/opm
+your processes number limit is 14745
+your memory page size is 4096 bytes
+detected max file descriptor number: 1024
+lock engine: pthread robust mutexes
+thunder lock: disabled (you can enable it with --thunder-lock)
+uwsgi socket 0 bound to UNIX address /run/uwsgi/opm.sock fd 3
+Python version: 3.4.5 (default, May 29 2017, 15:17:55)  [GCC 4.8.5 20150623 (Red Hat 4.8.5-11)]
+Set PythonHome to /root/.virtualenvs/opm-env-1/
+*** Python threads support is disabled. You can enable it with --enable-threads ***
+Python main interpreter initialized at 0xeb7e20
+your server socket listen backlog is limited to 100 connections
+your mercy for graceful operations on workers is 60 seconds
+mapped 218304 bytes (213 KB) for 2 cores
+*** Operational MODE: preforking ***
+added /usr/bin/python3.4 to pythonpath.
+WSGI app 0 (mountpoint='') ready in 0 seconds on interpreter 0xeb7e20 pid: 27346 (default app)
+*** uWSGI is running in multiple interpreter mode ***
+spawned uWSGI master process (pid: 27346)
+spawned uWSGI worker 1 (pid: 27348, cores: 1)
+spawned uWSGI worker 2 (pid: 27349, cores: 1)
+[pid: 27348|app: 0|req: 1/1] 70.80.186.230 () {42 vars in 840 bytes} [Sat Jul  1 01:19:49 2017] GET /admin/ => generated 7493 bytes in 124 msecs (HTTP/1.1 200) 6 headers in 251 bytes (1 switches on core 0)
+announcing my loyalty to the Emperor...
+[pid: 27349|app: 0|req: 1/2] 70.80.186.230 () {44 vars in 909 bytes} [Sat Jul  1 01:19:59 2017] GET /admin/tours/render/ => generated 4173 bytes in 132 msecs (HTTP/1.1 200) 7 headers in 405 bytes (1 switches on core 0)
+announcing my loyalty to the Emperor...
+[pid: 27348|app: 0|req: 2/3] 70.80.186.230 () {42 vars in 804 bytes} [Sat Jul  1 01:19:59 2017] GET /admin/jsi18n/ => generated 3189 bytes in 8 msecs (HTTP/1.1 200) 3 headers in 93 bytes (1 switches on core 0)
+[pid: 27348|app: 0|req: 3/4] 70.80.186.230 () {44 vars in 940 bytes} [Sat Jul  1 01:20:02 2017] GET /admin/tours/render/1/change/ => generated 6699 bytes in 66 msecs (HTTP/1.1 200) 7 headers in 405 bytes (1 switches on core 0)
+[pid: 27348|app: 0|req: 4/5] 70.80.186.230 () {42 vars in 813 bytes} [Sat Jul  1 01:20:02 2017] GET /admin/jsi18n/ => generated 3189 bytes in 8 msecs (HTTP/1.1 200) 3 headers in 93 bytes (1 switches on core 0)
+var/www/opm/tours/static/renders/LeePerrySmith_VTQYUnP.obj
+var/www/opm/tours/static/renders
+Encoder options:
+  Compression level = 7
+  Positions: Quantization = 14 bits
+  Texture coordinates: Quantization = 12 bits
+
+Encoded mesh saved to /draco/objPool/LeePerrySmith_VTQYUnP.drc (14 ms to encode)
+
+Encoded size = 40679 bytes
+
+For better compression, increase the compression level '-cl' (up to 10).
+
+[pid: 27348|app: 0|req: 5/6] 70.80.186.230 () {52 vars in 1198 bytes} [Sat Jul  1 01:20:07 2017] POST /admin/tours/render/1/change/ => generated 0 bytes in 630 msecs (HTTP/1.1 302) 8 headers in 550 bytes (1 switches on core 0)
+[pid: 27349|app: 0|req: 2/7] 70.80.186.230 () {46 vars in 1204 bytes} [Sat Jul  1 01:20:08 2017] GET /admin/tours/render/1/change/ => generated 6908 bytes in 65 msecs (HTTP/1.1 200) 8 headers in 487 bytes (1 switches on core 0)
+[pid: 27348|app: 0|req: 6/8] 70.80.186.230 () {42 vars in 813 bytes} [Sat Jul  1 01:20:08 2017] GET /admin/jsi18n/ => generated 3189 bytes in 9 msecs (HTTP/1.1 200) 3 headers in 93 bytes (1 switches on core 0)
+[pid: 27349|app: 0|req: 3/9] 70.80.186.230 () {42 vars in 844 bytes} [Sat Jul  1 01:20:40 2017] GET /tours/1/ => generated 5818 bytes in 37 msecs (HTTP/1.1 200) 2 headers in 88 bytes (1 switches on core 0)
+[pid: 27348|app: 0|req: 7/10] 70.80.186.230 () {42 vars in 847 bytes} [Sat Jul  1 01:20:40 2017] GET /static/renders/LeePerrySmith_VTQYUnP.drc => generated 40679 bytes in 2 msecs via sendfile() (HTTP/1.1 200) 4 headers in 157 bytes (0 switches on core 0)
+[01/Jul/2017 01:20:41] WARNING [django.request:152] Not Found: /static/renders/Map-COL_R9LcUML.jpg
+[pid: 27348|app: 0|req: 8/11] 70.80.186.230 () {42 vars in 860 bytes} [Sat Jul  1 01:20:41 2017] GET /static/renders/Map-COL_R9LcUML.jpg => generated 1812 bytes in 8 msecs (HTTP/1.1 404) 2 headers in 80 bytes (1 switches on core 0)
+[01/Jul/2017 01:20:41] WARNING [django.request:152] Not Found: /static/renders/Infinite-Level_02_Tangen_i1KR1aq_bVFepP0.jpg
+[pid: 27349|app: 0|req: 4/12] 70.80.186.230 () {42 vars in 910 bytes} [Sat Jul  1 01:20:41 2017] GET /static/renders/Infinite-Level_02_Tangen_i1KR1aq_bVFepP0.jpg => generated 1887 bytes in 8 msecs (HTTP/1.1 404) 2 headers in 80 bytes (1 switches on core 0)
+[01/Jul/2017 01:30:25] WARNING [django.request:152] Not Found: /mysql/admin/
+[pid: 27349|app: 0|req: 5/13] 213.118.243.196 () {34 vars in 422 bytes} [Sat Jul  1 01:30:25 2017] HEAD /mysql/admin/ => generated 2301 bytes in 8 msecs (HTTP/1.1 404) 2 headers in 80 bytes (1 switches on core 0)
+[01/Jul/2017 01:30:25] WARNING [django.request:152] Not Found: /mysql/dbadmin/
+[pid: 27348|app: 0|req: 9/14] 213.118.243.196 () {34 vars in 426 bytes} [Sat Jul  1 01:30:25 2017] HEAD /mysql/dbadmin/ => generated 2307 bytes in 8 msecs (HTTP/1.1 404) 2 headers in 80 bytes (1 switches on core 0)
+[01/Jul/2017 01:30:25] WARNING [django.request:152] Not Found: /mysql/sqlmanager/
+[pid: 27348|app: 0|req: 10/15] 213.118.243.196 () {34 vars in 432 bytes} [Sat Jul  1 01:30:25 2017] HEAD /mysql/sqlmanager/ => generated 2316 bytes in 8 msecs (HTTP/1.1 404) 2 headers in 80 bytes (1 switches on core 0)
+[01/Jul/2017 01:30:25] WARNING [django.request:152] Not Found: /mysql/mysqlmanager/
+[pid: 27349|app: 0|req: 6/16] 213.118.243.196 () {34 vars in 436 bytes} [Sat Jul  1 01:30:25 2017] HEAD /mysql/mysqlmanager/ => generated 2322 bytes in 8 msecs (HTTP/1.1 404) 2 headers in 80 bytes (1 switches on core 0)
+[01/Jul/2017 01:30:26] WARNING [django.request:152] Not Found: /phpmyadmin/
+[pid: 27348|app: 0|req: 11/17] 213.118.243.196 () {34 vars in 420 bytes} [Sat Jul  1 01:30:26 2017] HEAD /phpmyadmin/ => generated 2298 bytes in 8 msecs (HTTP/1.1 404) 2 headers in 80 bytes (1 switches on core 0)
+[01/Jul/2017 01:30:26] WARNING [django.request:152] Not Found: /phpMyadmin/
+[pid: 27348|app: 0|req: 12/18] 213.118.243.196 () {34 vars in 420 bytes} [Sat Jul  1 01:30:26 2017] HEAD /phpMyadmin/ => generated 2298 bytes in 8 msecs (HTTP/1.1 404) 2 headers in 80 bytes (1 switches on core 0)
+[01/Jul/2017 01:30:26] WARNING [django.request:152] Not Found: /phpMyAdmin/
+[pid: 27348|app: 0|req: 13/19] 213.118.243.196 () {34 vars in 420 bytes} [Sat Jul  1 01:30:26 2017] HEAD /phpMyAdmin/ => generated 2298 bytes in 8 msecs (HTTP/1.1 404) 2 headers in 80 bytes (1 switches on core 0)
+[01/Jul/2017 01:30:26] WARNING [django.request:152] Not Found: /phpmyAdmin/
+[pid: 27348|app: 0|req: 14/20] 213.118.243.196 () {34 vars in 420 bytes} [Sat Jul  1 01:30:26 2017] HEAD /phpmyAdmin/ => generated 2298 bytes in 8 msecs (HTTP/1.1 404) 2 headers in 80 bytes (1 switches on core 0)
+[01/Jul/2017 01:30:27] WARNING [django.request:152] Not Found: /phpmyadmin2/
+[pid: 27348|app: 0|req: 15/21] 213.118.243.196 () {34 vars in 422 bytes} [Sat Jul  1 01:30:27 2017] HEAD /phpmyadmin2/ => generated 2301 bytes in 8 msecs (HTTP/1.1 404) 2 headers in 80 bytes (1 switches on core 0)
+[01/Jul/2017 01:30:27] WARNING [django.request:152] Not Found: /phpmyadmin3/
+[pid: 27349|app: 0|req: 7/22] 213.118.243.196 () {34 vars in 422 bytes} [Sat Jul  1 01:30:27 2017] HEAD /phpmyadmin3/ => generated 2301 bytes in 8 msecs (HTTP/1.1 404) 2 headers in 80 bytes (1 switches on core 0)
+[01/Jul/2017 01:30:27] WARNING [django.request:152] Not Found: /phpmyadmin4/
+[pid: 27348|app: 0|req: 16/23] 213.118.243.196 () {34 vars in 422 bytes} [Sat Jul  1 01:30:27 2017] HEAD /phpmyadmin4/ => generated 2301 bytes in 8 msecs (HTTP/1.1 404) 2 headers in 80 bytes (1 switches on core 0)
+[01/Jul/2017 01:30:27] WARNING [django.request:152] Not Found: /2phpmyadmin/
+[pid: 27348|app: 0|req: 17/24] 213.118.243.196 () {34 vars in 422 bytes} [Sat Jul  1 01:30:27 2017] HEAD /2phpmyadmin/ => generated 2301 bytes in 8 msecs (HTTP/1.1 404) 2 headers in 80 bytes (1 switches on core 0)
+[01/Jul/2017 01:30:28] WARNING [django.request:152] Not Found: /phpmy/
+[pid: 27348|app: 0|req: 18/25] 213.118.243.196 () {34 vars in 410 bytes} [Sat Jul  1 01:30:28 2017] HEAD /phpmy/ => generated 2283 bytes in 7 msecs (HTTP/1.1 404) 2 headers in 80 bytes (1 switches on core 0)
+[01/Jul/2017 01:30:28] WARNING [django.request:152] Not Found: /phppma/
+[pid: 27349|app: 0|req: 8/26] 213.118.243.196 () {34 vars in 412 bytes} [Sat Jul  1 01:30:28 2017] HEAD /phppma/ => generated 2286 bytes in 8 msecs (HTTP/1.1 404) 2 headers in 80 bytes (1 switches on core 0)
+[01/Jul/2017 01:30:28] WARNING [django.request:152] Not Found: /myadmin/
+[pid: 27348|app: 0|req: 19/27] 213.118.243.196 () {34 vars in 414 bytes} [Sat Jul  1 01:30:28 2017] HEAD /myadmin/ => generated 2289 bytes in 8 msecs (HTTP/1.1 404) 2 headers in 80 bytes (1 switches on core 0)
+[01/Jul/2017 01:30:28] WARNING [django.request:152] Not Found: /shopdb/
+[pid: 27348|app: 0|req: 20/28] 213.118.243.196 () {34 vars in 412 bytes} [Sat Jul  1 01:30:28 2017] HEAD /shopdb/ => generated 2286 bytes in 8 msecs (HTTP/1.1 404) 2 headers in 80 bytes (1 switches on core 0)
+[01/Jul/2017 01:30:28] WARNING [django.request:152] Not Found: /MyAdmin/
+[pid: 27348|app: 0|req: 21/29] 213.118.243.196 () {34 vars in 414 bytes} [Sat Jul  1 01:30:28 2017] HEAD /MyAdmin/ => generated 2289 bytes in 8 msecs (HTTP/1.1 404) 2 headers in 80 bytes (1 switches on core 0)
+[01/Jul/2017 01:30:29] WARNING [django.request:152] Not Found: /program/
+[pid: 27348|app: 0|req: 22/30] 213.118.243.196 () {34 vars in 414 bytes} [Sat Jul  1 01:30:29 2017] HEAD /program/ => generated 2289 bytes in 8 msecs (HTTP/1.1 404) 2 headers in 80 bytes (1 switches on core 0)
+[01/Jul/2017 01:30:29] WARNING [django.request:152] Not Found: /PMA/
+[pid: 27348|app: 0|req: 23/31] 213.118.243.196 () {34 vars in 406 bytes} [Sat Jul  1 01:30:29 2017] HEAD /PMA/ => generated 2277 bytes in 8 msecs (HTTP/1.1 404) 2 headers in 80 bytes (1 switches on core 0)
+[01/Jul/2017 01:30:29] WARNING [django.request:152] Not Found: /dbadmin/
+[pid: 27348|app: 0|req: 24/32] 213.118.243.196 () {34 vars in 414 bytes} [Sat Jul  1 01:30:29 2017] HEAD /dbadmin/ => generated 2289 bytes in 8 msecs (HTTP/1.1 404) 2 headers in 80 bytes (1 switches on core 0)
+[01/Jul/2017 01:30:29] WARNING [django.request:152] Not Found: /pma/
+[pid: 27348|app: 0|req: 25/33] 213.118.243.196 () {34 vars in 406 bytes} [Sat Jul  1 01:30:29 2017] HEAD /pma/ => generated 2277 bytes in 8 msecs (HTTP/1.1 404) 2 headers in 80 bytes (1 switches on core 0)
+[01/Jul/2017 01:30:29] WARNING [django.request:152] Not Found: /db/
+[pid: 27348|app: 0|req: 26/34] 213.118.243.196 () {34 vars in 404 bytes} [Sat Jul  1 01:30:29 2017] HEAD /db/ => generated 2274 bytes in 8 msecs (HTTP/1.1 404) 2 headers in 80 bytes (1 switches on core 0)
+[pid: 27348|app: 0|req: 27/35] 213.118.243.196 () {34 vars in 410 bytes} [Sat Jul  1 01:30:29 2017] HEAD /admin/ => generated 0 bytes in 3 msecs (HTTP/1.1 302) 7 headers in 292 bytes (1 switches on core 0)
+[01/Jul/2017 01:30:29] WARNING [django.request:152] Not Found: /mysql/
+[pid: 27348|app: 0|req: 28/36] 213.118.243.196 () {34 vars in 410 bytes} [Sat Jul  1 01:30:29 2017] HEAD /mysql/ => generated 2283 bytes in 8 msecs (HTTP/1.1 404) 2 headers in 80 bytes (1 switches on core 0)
+[01/Jul/2017 01:30:30] WARNING [django.request:152] Not Found: /database/
+[pid: 27348|app: 0|req: 29/37] 213.118.243.196 () {34 vars in 416 bytes} [Sat Jul  1 01:30:30 2017] HEAD /database/ => generated 2292 bytes in 8 msecs (HTTP/1.1 404) 2 headers in 80 bytes (1 switches on core 0)
+[01/Jul/2017 01:30:30] WARNING [django.request:152] Not Found: /db/phpmyadmin/
+[pid: 27348|app: 0|req: 30/38] 213.118.243.196 () {34 vars in 426 bytes} [Sat Jul  1 01:30:30 2017] HEAD /db/phpmyadmin/ => generated 2307 bytes in 8 msecs (HTTP/1.1 404) 2 headers in 80 bytes (1 switches on core 0)
+[01/Jul/2017 01:30:30] WARNING [django.request:152] Not Found: /db/phpMyAdmin/
+[pid: 27348|app: 0|req: 31/39] 213.118.243.196 () {34 vars in 426 bytes} [Sat Jul  1 01:30:30 2017] HEAD /db/phpMyAdmin/ => generated 2307 bytes in 8 msecs (HTTP/1.1 404) 2 headers in 80 bytes (1 switches on core 0)
+[01/Jul/2017 01:30:30] WARNING [django.request:152] Not Found: /sqlmanager/
+[pid: 27348|app: 0|req: 32/40] 213.118.243.196 () {34 vars in 420 bytes} [Sat Jul  1 01:30:30 2017] HEAD /sqlmanager/ => generated 2298 bytes in 7 msecs (HTTP/1.1 404) 2 headers in 80 bytes (1 switches on core 0)
+[01/Jul/2017 01:30:30] WARNING [django.request:152] Not Found: /mysqlmanager/
+[pid: 27349|app: 0|req: 9/41] 213.118.243.196 () {34 vars in 424 bytes} [Sat Jul  1 01:30:30 2017] HEAD /mysqlmanager/ => generated 2304 bytes in 8 msecs (HTTP/1.1 404) 2 headers in 80 bytes (1 switches on core 0)
+[01/Jul/2017 01:30:30] WARNING [django.request:152] Not Found: /php-myadmin/
+[pid: 27349|app: 0|req: 10/42] 213.118.243.196 () {34 vars in 422 bytes} [Sat Jul  1 01:30:30 2017] HEAD /php-myadmin/ => generated 2301 bytes in 8 msecs (HTTP/1.1 404) 2 headers in 80 bytes (1 switches on core 0)
+[01/Jul/2017 01:30:30] WARNING [django.request:152] Not Found: /phpmy-admin/
+[pid: 27348|app: 0|req: 33/43] 213.118.243.196 () {34 vars in 422 bytes} [Sat Jul  1 01:30:30 2017] HEAD /phpmy-admin/ => generated 2301 bytes in 8 msecs (HTTP/1.1 404) 2 headers in 80 bytes (1 switches on core 0)
+[01/Jul/2017 01:30:30] WARNING [django.request:152] Not Found: /mysqladmin/
+[pid: 27349|app: 0|req: 11/44] 213.118.243.196 () {34 vars in 420 bytes} [Sat Jul  1 01:30:30 2017] HEAD /mysqladmin/ => generated 2298 bytes in 8 msecs (HTTP/1.1 404) 2 headers in 80 bytes (1 switches on core 0)
+[01/Jul/2017 01:30:30] WARNING [django.request:152] Not Found: /mysql-admin/
+[pid: 27349|app: 0|req: 12/45] 213.118.243.196 () {34 vars in 422 bytes} [Sat Jul  1 01:30:30 2017] HEAD /mysql-admin/ => generated 2301 bytes in 8 msecs (HTTP/1.1 404) 2 headers in 80 bytes (1 switches on core 0)
+[01/Jul/2017 01:30:31] WARNING [django.request:152] Not Found: /admin/phpmyadmin/
+[pid: 27349|app: 0|req: 13/46] 213.118.243.196 () {34 vars in 432 bytes} [Sat Jul  1 01:30:31 2017] HEAD /admin/phpmyadmin/ => generated 4755 bytes in 13 msecs (HTTP/1.1 404) 2 headers in 80 bytes (1 switches on core 0)
+[01/Jul/2017 01:30:31] WARNING [django.request:152] Not Found: /admin/phpMyAdmin/
+[pid: 27348|app: 0|req: 34/47] 213.118.243.196 () {34 vars in 432 bytes} [Sat Jul  1 01:30:31 2017] HEAD /admin/phpMyAdmin/ => generated 4755 bytes in 13 msecs (HTTP/1.1 404) 2 headers in 80 bytes (1 switches on core 0)
+[01/Jul/2017 01:30:31] WARNING [django.request:152] Not Found: /admin/sysadmin/
+[pid: 27348|app: 0|req: 35/48] 213.118.243.196 () {34 vars in 428 bytes} [Sat Jul  1 01:30:31 2017] HEAD /admin/sysadmin/ => generated 4749 bytes in 13 msecs (HTTP/1.1 404) 2 headers in 80 bytes (1 switches on core 0)
+[01/Jul/2017 01:30:31] WARNING [django.request:152] Not Found: /admin/sqladmin/
+[pid: 27349|app: 0|req: 14/49] 213.118.243.196 () {34 vars in 428 bytes} [Sat Jul  1 01:30:31 2017] HEAD /admin/sqladmin/ => generated 4749 bytes in 12 msecs (HTTP/1.1 404) 2 headers in 80 bytes (1 switches on core 0)
+[01/Jul/2017 01:30:31] WARNING [django.request:152] Not Found: /admin/db/
+[pid: 27349|app: 0|req: 15/50] 213.118.243.196 () {34 vars in 416 bytes} [Sat Jul  1 01:30:31 2017] HEAD /admin/db/ => generated 4731 bytes in 13 msecs (HTTP/1.1 404) 2 headers in 80 bytes (1 switches on core 0)
+[01/Jul/2017 01:30:31] WARNING [django.request:152] Not Found: /admin/web/
+[pid: 27348|app: 0|req: 36/51] 213.118.243.196 () {34 vars in 418 bytes} [Sat Jul  1 01:30:31 2017] HEAD /admin/web/ => generated 4734 bytes in 13 msecs (HTTP/1.1 404) 2 headers in 80 bytes (1 switches on core 0)
+[01/Jul/2017 01:30:31] WARNING [django.request:152] Not Found: /admin/pMA/
+[pid: 27348|app: 0|req: 37/52] 213.118.243.196 () {34 vars in 418 bytes} [Sat Jul  1 01:30:31 2017] HEAD /admin/pMA/ => generated 4734 bytes in 13 msecs (HTTP/1.1 404) 2 headers in 80 bytes (1 switches on core 0)
+[01/Jul/2017 01:30:31] WARNING [django.request:152] Not Found: /mysql/pma/
+[pid: 27349|app: 0|req: 16/53] 213.118.243.196 () {34 vars in 418 bytes} [Sat Jul  1 01:30:31 2017] HEAD /mysql/pma/ => generated 2295 bytes in 8 msecs (HTTP/1.1 404) 2 headers in 80 bytes (1 switches on core 0)
+[01/Jul/2017 01:30:31] WARNING [django.request:152] Not Found: /mysql/db/
+[pid: 27348|app: 0|req: 38/54] 213.118.243.196 () {34 vars in 416 bytes} [Sat Jul  1 01:30:31 2017] HEAD /mysql/db/ => generated 2292 bytes in 8 msecs (HTTP/1.1 404) 2 headers in 80 bytes (1 switches on core 0)
+[01/Jul/2017 01:30:32] WARNING [django.request:152] Not Found: /mysql/web/
+[pid: 27349|app: 0|req: 17/55] 213.118.243.196 () {34 vars in 418 bytes} [Sat Jul  1 01:30:32 2017] HEAD /mysql/web/ => generated 2295 bytes in 8 msecs (HTTP/1.1 404) 2 headers in 80 bytes (1 switches on core 0)
+[01/Jul/2017 01:30:32] WARNING [django.request:152] Not Found: /mysql/pMA/
+[pid: 27348|app: 0|req: 39/56] 213.118.243.196 () {34 vars in 418 bytes} [Sat Jul  1 01:30:32 2017] HEAD /mysql/pMA/ => generated 2295 bytes in 8 msecs (HTTP/1.1 404) 2 headers in 80 bytes (1 switches on core 0)
+[01/Jul/2017 01:30:32] WARNING [django.request:152] Not Found: /sql/phpmanager/
+[pid: 27349|app: 0|req: 18/57] 213.118.243.196 () {34 vars in 428 bytes} [Sat Jul  1 01:30:32 2017] HEAD /sql/phpmanager/ => generated 2310 bytes in 8 msecs (HTTP/1.1 404) 2 headers in 80 bytes (1 switches on core 0)
+[01/Jul/2017 01:30:32] WARNING [django.request:152] Not Found: /sql/php-myadmin/
+[pid: 27349|app: 0|req: 19/58] 213.118.243.196 () {34 vars in 430 bytes} [Sat Jul  1 01:30:32 2017] HEAD /sql/php-myadmin/ => generated 2313 bytes in 8 msecs (HTTP/1.1 404) 2 headers in 80 bytes (1 switches on core 0)
+[01/Jul/2017 01:30:32] WARNING [django.request:152] Not Found: /sql/phpmy-admin/
+[pid: 27349|app: 0|req: 20/59] 213.118.243.196 () {34 vars in 430 bytes} [Sat Jul  1 01:30:32 2017] HEAD /sql/phpmy-admin/ => generated 2313 bytes in 8 msecs (HTTP/1.1 404) 2 headers in 80 bytes (1 switches on core 0)
+[01/Jul/2017 01:30:32] WARNING [django.request:152] Not Found: /sql/sql/
+[pid: 27349|app: 0|req: 21/60] 213.118.243.196 () {34 vars in 414 bytes} [Sat Jul  1 01:30:32 2017] HEAD /sql/sql/ => generated 2289 bytes in 8 msecs (HTTP/1.1 404) 2 headers in 80 bytes (1 switches on core 0)
+[01/Jul/2017 01:30:32] WARNING [django.request:152] Not Found: /sql/myadmin/
+[pid: 27349|app: 0|req: 22/61] 213.118.243.196 () {34 vars in 422 bytes} [Sat Jul  1 01:30:32 2017] HEAD /sql/myadmin/ => generated 2301 bytes in 7 msecs (HTTP/1.1 404) 2 headers in 80 bytes (1 switches on core 0)
+[01/Jul/2017 01:30:32] WARNING [django.request:152] Not Found: /sql/webadmin/
+[pid: 27348|app: 0|req: 40/62] 213.118.243.196 () {34 vars in 424 bytes} [Sat Jul  1 01:30:32 2017] HEAD /sql/webadmin/ => generated 2304 bytes in 8 msecs (HTTP/1.1 404) 2 headers in 80 bytes (1 switches on core 0)
+[01/Jul/2017 01:30:33] WARNING [django.request:152] Not Found: /sql/sqlweb/
+[pid: 27349|app: 0|req: 23/63] 213.118.243.196 () {34 vars in 420 bytes} [Sat Jul  1 01:30:32 2017] HEAD /sql/sqlweb/ => generated 2298 bytes in 8 msecs (HTTP/1.1 404) 2 headers in 80 bytes (1 switches on core 0)
+[01/Jul/2017 01:30:33] WARNING [django.request:152] Not Found: /sql/websql/
+[pid: 27349|app: 0|req: 24/64] 213.118.243.196 () {34 vars in 420 bytes} [Sat Jul  1 01:30:33 2017] HEAD /sql/websql/ => generated 2298 bytes in 8 msecs (HTTP/1.1 404) 2 headers in 80 bytes (1 switches on core 0)
+[01/Jul/2017 01:30:33] WARNING [django.request:152] Not Found: /sql/webdb/
+[pid: 27349|app: 0|req: 25/65] 213.118.243.196 () {34 vars in 418 bytes} [Sat Jul  1 01:30:33 2017] HEAD /sql/webdb/ => generated 2295 bytes in 8 msecs (HTTP/1.1 404) 2 headers in 80 bytes (1 switches on core 0)
+[01/Jul/2017 01:30:33] WARNING [django.request:152] Not Found: /sql/sqladmin/
+[pid: 27349|app: 0|req: 26/66] 213.118.243.196 () {34 vars in 424 bytes} [Sat Jul  1 01:30:33 2017] HEAD /sql/sqladmin/ => generated 2304 bytes in 8 msecs (HTTP/1.1 404) 2 headers in 80 bytes (1 switches on core 0)
+[01/Jul/2017 01:30:33] WARNING [django.request:152] Not Found: /sql/sql-admin/
+[pid: 27348|app: 0|req: 41/67] 213.118.243.196 () {34 vars in 426 bytes} [Sat Jul  1 01:30:33 2017] HEAD /sql/sql-admin/ => generated 2307 bytes in 8 msecs (HTTP/1.1 404) 2 headers in 80 bytes (1 switches on core 0)
+[01/Jul/2017 01:30:33] WARNING [django.request:152] Not Found: /sql/phpmyadmin2/
+[pid: 27349|app: 0|req: 27/68] 213.118.243.196 () {34 vars in 430 bytes} [Sat Jul  1 01:30:33 2017] HEAD /sql/phpmyadmin2/ => generated 2313 bytes in 8 msecs (HTTP/1.1 404) 2 headers in 80 bytes (1 switches on core 0)
+[01/Jul/2017 01:30:33] WARNING [django.request:152] Not Found: /sql/phpMyAdmin2/
+[pid: 27349|app: 0|req: 28/69] 213.118.243.196 () {34 vars in 430 bytes} [Sat Jul  1 01:30:33 2017] HEAD /sql/phpMyAdmin2/ => generated 2313 bytes in 8 msecs (HTTP/1.1 404) 2 headers in 80 bytes (1 switches on core 0)
+[01/Jul/2017 01:30:33] WARNING [django.request:152] Not Found: /sql/phpMyAdmin/
+[pid: 27348|app: 0|req: 42/70] 213.118.243.196 () {34 vars in 428 bytes} [Sat Jul  1 01:30:33 2017] HEAD /sql/phpMyAdmin/ => generated 2310 bytes in 8 msecs (HTTP/1.1 404) 2 headers in 80 bytes (1 switches on core 0)
+[01/Jul/2017 01:30:33] WARNING [django.request:152] Not Found: /db/myadmin/
+[pid: 27349|app: 0|req: 29/71] 213.118.243.196 () {34 vars in 420 bytes} [Sat Jul  1 01:30:33 2017] HEAD /db/myadmin/ => generated 2298 bytes in 8 msecs (HTTP/1.1 404) 2 headers in 80 bytes (1 switches on core 0)
+[01/Jul/2017 01:30:34] WARNING [django.request:152] Not Found: /db/webadmin/
+[pid: 27349|app: 0|req: 30/72] 213.118.243.196 () {34 vars in 422 bytes} [Sat Jul  1 01:30:33 2017] HEAD /db/webadmin/ => generated 2301 bytes in 8 msecs (HTTP/1.1 404) 2 headers in 80 bytes (1 switches on core 0)
+[01/Jul/2017 01:30:34] WARNING [django.request:152] Not Found: /db/dbweb/
+[pid: 27349|app: 0|req: 31/73] 213.118.243.196 () {34 vars in 416 bytes} [Sat Jul  1 01:30:34 2017] HEAD /db/dbweb/ => generated 2292 bytes in 8 msecs (HTTP/1.1 404) 2 headers in 80 bytes (1 switches on core 0)
+[01/Jul/2017 01:30:34] WARNING [django.request:152] Not Found: /db/websql/
+[pid: 27348|app: 0|req: 43/74] 213.118.243.196 () {34 vars in 418 bytes} [Sat Jul  1 01:30:34 2017] HEAD /db/websql/ => generated 2295 bytes in 8 msecs (HTTP/1.1 404) 2 headers in 80 bytes (1 switches on core 0)
+[01/Jul/2017 01:30:34] WARNING [django.request:152] Not Found: /db/webdb/
+[pid: 27349|app: 0|req: 32/75] 213.118.243.196 () {34 vars in 416 bytes} [Sat Jul  1 01:30:34 2017] HEAD /db/webdb/ => generated 2292 bytes in 8 msecs (HTTP/1.1 404) 2 headers in 80 bytes (1 switches on core 0)
+[01/Jul/2017 01:30:34] WARNING [django.request:152] Not Found: /db/dbadmin/
+[pid: 27349|app: 0|req: 33/76] 213.118.243.196 () {34 vars in 420 bytes} [Sat Jul  1 01:30:34 2017] HEAD /db/dbadmin/ => generated 2298 bytes in 8 msecs (HTTP/1.1 404) 2 headers in 80 bytes (1 switches on core 0)
+[01/Jul/2017 01:30:34] WARNING [django.request:152] Not Found: /db/db-admin/
+[pid: 27348|app: 0|req: 44/77] 213.118.243.196 () {34 vars in 422 bytes} [Sat Jul  1 01:30:34 2017] HEAD /db/db-admin/ => generated 2301 bytes in 8 msecs (HTTP/1.1 404) 2 headers in 80 bytes (1 switches on core 0)
+[01/Jul/2017 01:30:34] WARNING [django.request:152] Not Found: /db/phpmyadmin3/
+[pid: 27349|app: 0|req: 34/78] 213.118.243.196 () {34 vars in 428 bytes} [Sat Jul  1 01:30:34 2017] HEAD /db/phpmyadmin3/ => generated 2310 bytes in 8 msecs (HTTP/1.1 404) 2 headers in 80 bytes (1 switches on core 0)
+[01/Jul/2017 01:30:34] WARNING [django.request:152] Not Found: /db/phpMyAdmin3/
+[pid: 27348|app: 0|req: 45/79] 213.118.243.196 () {34 vars in 428 bytes} [Sat Jul  1 01:30:34 2017] HEAD /db/phpMyAdmin3/ => generated 2310 bytes in 8 msecs (HTTP/1.1 404) 2 headers in 80 bytes (1 switches on core 0)
+[01/Jul/2017 01:30:34] WARNING [django.request:152] Not Found: /db/phpMyAdmin-3/
+[pid: 27349|app: 0|req: 35/80] 213.118.243.196 () {34 vars in 430 bytes} [Sat Jul  1 01:30:34 2017] HEAD /db/phpMyAdmin-3/ => generated 2313 bytes in 8 msecs (HTTP/1.1 404) 2 headers in 80 bytes (1 switches on core 0)
+[01/Jul/2017 01:30:35] WARNING [django.request:152] Not Found: /administrator/phpmyadmin/
+[pid: 27349|app: 0|req: 36/81] 213.118.243.196 () {34 vars in 448 bytes} [Sat Jul  1 01:30:35 2017] HEAD /administrator/phpmyadmin/ => generated 2340 bytes in 8 msecs (HTTP/1.1 404) 2 headers in 80 bytes (1 switches on core 0)
+[01/Jul/2017 01:30:35] WARNING [django.request:152] Not Found: /administrator/phpMyAdmin/
+[pid: 27349|app: 0|req: 37/82] 213.118.243.196 () {34 vars in 448 bytes} [Sat Jul  1 01:30:35 2017] HEAD /administrator/phpMyAdmin/ => generated 2340 bytes in 8 msecs (HTTP/1.1 404) 2 headers in 80 bytes (1 switches on core 0)
+[01/Jul/2017 01:30:35] WARNING [django.request:152] Not Found: /administrator/db/
+[pid: 27349|app: 0|req: 38/83] 213.118.243.196 () {34 vars in 432 bytes} [Sat Jul  1 01:30:35 2017] HEAD /administrator/db/ => generated 2316 bytes in 8 msecs (HTTP/1.1 404) 2 headers in 80 bytes (1 switches on core 0)
+[01/Jul/2017 01:30:35] WARNING [django.request:152] Not Found: /administrator/web/
+[pid: 27349|app: 0|req: 39/84] 213.118.243.196 () {34 vars in 434 bytes} [Sat Jul  1 01:30:35 2017] HEAD /administrator/web/ => generated 2319 bytes in 8 msecs (HTTP/1.1 404) 2 headers in 80 bytes (1 switches on core 0)
+[01/Jul/2017 01:30:35] WARNING [django.request:152] Not Found: /administrator/pma/
+[pid: 27349|app: 0|req: 40/85] 213.118.243.196 () {34 vars in 434 bytes} [Sat Jul  1 01:30:35 2017] HEAD /administrator/pma/ => generated 2319 bytes in 8 msecs (HTTP/1.1 404) 2 headers in 80 bytes (1 switches on core 0)
+[01/Jul/2017 01:30:35] WARNING [django.request:152] Not Found: /administrator/PMA/
+[pid: 27348|app: 0|req: 46/86] 213.118.243.196 () {34 vars in 434 bytes} [Sat Jul  1 01:30:35 2017] HEAD /administrator/PMA/ => generated 2319 bytes in 8 msecs (HTTP/1.1 404) 2 headers in 80 bytes (1 switches on core 0)
+[01/Jul/2017 01:30:35] WARNING [django.request:152] Not Found: /administrator/admin/
+[pid: 27348|app: 0|req: 47/87] 213.118.243.196 () {34 vars in 438 bytes} [Sat Jul  1 01:30:35 2017] HEAD /administrator/admin/ => generated 2325 bytes in 8 msecs (HTTP/1.1 404) 2 headers in 80 bytes (1 switches on core 0)
+[01/Jul/2017 01:30:35] WARNING [django.request:152] Not Found: /phpMyAdmin2/
+[pid: 27349|app: 0|req: 41/88] 213.118.243.196 () {34 vars in 422 bytes} [Sat Jul  1 01:30:35 2017] HEAD /phpMyAdmin2/ => generated 2301 bytes in 8 msecs (HTTP/1.1 404) 2 headers in 80 bytes (1 switches on core 0)
+[01/Jul/2017 01:30:35] WARNING [django.request:152] Not Found: /phpMyAdmin3/
+[pid: 27348|app: 0|req: 48/89] 213.118.243.196 () {34 vars in 422 bytes} [Sat Jul  1 01:30:35 2017] HEAD /phpMyAdmin3/ => generated 2301 bytes in 8 msecs (HTTP/1.1 404) 2 headers in 80 bytes (1 switches on core 0)
+[01/Jul/2017 01:30:36] WARNING [django.request:152] Not Found: /phpMyAdmin4/
+[pid: 27348|app: 0|req: 49/90] 213.118.243.196 () {34 vars in 422 bytes} [Sat Jul  1 01:30:36 2017] HEAD /phpMyAdmin4/ => generated 2301 bytes in 8 msecs (HTTP/1.1 404) 2 headers in 80 bytes (1 switches on core 0)
+[01/Jul/2017 01:30:36] WARNING [django.request:152] Not Found: /phpMyAdmin-3/
+[pid: 27348|app: 0|req: 50/91] 213.118.243.196 () {34 vars in 424 bytes} [Sat Jul  1 01:30:36 2017] HEAD /phpMyAdmin-3/ => generated 2304 bytes in 8 msecs (HTTP/1.1 404) 2 headers in 80 bytes (1 switches on core 0)
+[01/Jul/2017 01:30:36] WARNING [django.request:152] Not Found: /php-my-admin/
+[pid: 27349|app: 0|req: 42/92] 213.118.243.196 () {34 vars in 424 bytes} [Sat Jul  1 01:30:36 2017] HEAD /php-my-admin/ => generated 2304 bytes in 8 msecs (HTTP/1.1 404) 2 headers in 80 bytes (1 switches on core 0)
+[01/Jul/2017 01:30:36] WARNING [django.request:152] Not Found: /PMA2011/
+[pid: 27349|app: 0|req: 43/93] 213.118.243.196 () {34 vars in 414 bytes} [Sat Jul  1 01:30:36 2017] HEAD /PMA2011/ => generated 2289 bytes in 8 msecs (HTTP/1.1 404) 2 headers in 80 bytes (1 switches on core 0)
+[01/Jul/2017 01:30:36] WARNING [django.request:152] Not Found: /PMA2012/
+[pid: 27348|app: 0|req: 51/94] 213.118.243.196 () {34 vars in 414 bytes} [Sat Jul  1 01:30:36 2017] HEAD /PMA2012/ => generated 2289 bytes in 8 msecs (HTTP/1.1 404) 2 headers in 80 bytes (1 switches on core 0)
+[01/Jul/2017 01:30:36] WARNING [django.request:152] Not Found: /PMA2013/
+[pid: 27348|app: 0|req: 52/95] 213.118.243.196 () {34 vars in 414 bytes} [Sat Jul  1 01:30:36 2017] HEAD /PMA2013/ => generated 2289 bytes in 8 msecs (HTTP/1.1 404) 2 headers in 80 bytes (1 switches on core 0)
+[01/Jul/2017 01:30:36] WARNING [django.request:152] Not Found: /PMA2014/
+[pid: 27349|app: 0|req: 44/96] 213.118.243.196 () {34 vars in 414 bytes} [Sat Jul  1 01:30:36 2017] HEAD /PMA2014/ => generated 2289 bytes in 8 msecs (HTTP/1.1 404) 2 headers in 80 bytes (1 switches on core 0)
+[01/Jul/2017 01:30:36] WARNING [django.request:152] Not Found: /PMA2015/
+[pid: 27348|app: 0|req: 53/97] 213.118.243.196 () {34 vars in 414 bytes} [Sat Jul  1 01:30:36 2017] HEAD /PMA2015/ => generated 2289 bytes in 8 msecs (HTTP/1.1 404) 2 headers in 80 bytes (1 switches on core 0)
+[01/Jul/2017 01:30:36] WARNING [django.request:152] Not Found: /PMA2016/
+[pid: 27349|app: 0|req: 45/98] 213.118.243.196 () {34 vars in 414 bytes} [Sat Jul  1 01:30:36 2017] HEAD /PMA2016/ => generated 2289 bytes in 8 msecs (HTTP/1.1 404) 2 headers in 80 bytes (1 switches on core 0)
+[01/Jul/2017 01:30:37] WARNING [django.request:152] Not Found: /PMA2017/
+[pid: 27348|app: 0|req: 54/99] 213.118.243.196 () {34 vars in 414 bytes} [Sat Jul  1 01:30:37 2017] HEAD /PMA2017/ => generated 2289 bytes in 8 msecs (HTTP/1.1 404) 2 headers in 80 bytes (1 switches on core 0)
+[01/Jul/2017 01:30:37] WARNING [django.request:152] Not Found: /PMA2018/
+[pid: 27349|app: 0|req: 46/100] 213.118.243.196 () {34 vars in 414 bytes} [Sat Jul  1 01:30:37 2017] HEAD /PMA2018/ => generated 2289 bytes in 8 msecs (HTTP/1.1 404) 2 headers in 80 bytes (1 switches on core 0)
+[01/Jul/2017 01:30:37] WARNING [django.request:152] Not Found: /pma2011/
+[pid: 27349|app: 0|req: 47/101] 213.118.243.196 () {34 vars in 414 bytes} [Sat Jul  1 01:30:37 2017] HEAD /pma2011/ => generated 2289 bytes in 8 msecs (HTTP/1.1 404) 2 headers in 80 bytes (1 switches on core 0)
+[01/Jul/2017 01:30:37] WARNING [django.request:152] Not Found: /pma2012/
+[pid: 27349|app: 0|req: 48/102] 213.118.243.196 () {34 vars in 414 bytes} [Sat Jul  1 01:30:37 2017] HEAD /pma2012/ => generated 2289 bytes in 8 msecs (HTTP/1.1 404) 2 headers in 80 bytes (1 switches on core 0)
+[01/Jul/2017 01:30:37] WARNING [django.request:152] Not Found: /pma2013/
+[pid: 27349|app: 0|req: 49/103] 213.118.243.196 () {34 vars in 414 bytes} [Sat Jul  1 01:30:37 2017] HEAD /pma2013/ => generated 2289 bytes in 8 msecs (HTTP/1.1 404) 2 headers in 80 bytes (1 switches on core 0)
+[01/Jul/2017 01:30:37] WARNING [django.request:152] Not Found: /pma2014/
+[pid: 27349|app: 0|req: 50/104] 213.118.243.196 () {34 vars in 414 bytes} [Sat Jul  1 01:30:37 2017] HEAD /pma2014/ => generated 2289 bytes in 8 msecs (HTTP/1.1 404) 2 headers in 80 bytes (1 switches on core 0)
+[01/Jul/2017 01:30:37] WARNING [django.request:152] Not Found: /pma2015/
+[pid: 27349|app: 0|req: 51/105] 213.118.243.196 () {34 vars in 414 bytes} [Sat Jul  1 01:30:37 2017] HEAD /pma2015/ => generated 2289 bytes in 8 msecs (HTTP/1.1 404) 2 headers in 80 bytes (1 switches on core 0)
+[01/Jul/2017 01:30:37] WARNING [django.request:152] Not Found: /pma2016/
+[pid: 27348|app: 0|req: 55/106] 213.118.243.196 () {34 vars in 414 bytes} [Sat Jul  1 01:30:37 2017] HEAD /pma2016/ => generated 2289 bytes in 8 msecs (HTTP/1.1 404) 2 headers in 80 bytes (1 switches on core 0)
+[01/Jul/2017 01:30:37] WARNING [django.request:152] Not Found: /pma2017/
+[pid: 27349|app: 0|req: 52/107] 213.118.243.196 () {34 vars in 414 bytes} [Sat Jul  1 01:30:37 2017] HEAD /pma2017/ => generated 2289 bytes in 8 msecs (HTTP/1.1 404) 2 headers in 80 bytes (1 switches on core 0)
+[01/Jul/2017 01:30:38] WARNING [django.request:152] Not Found: /pma2018/
+[pid: 27348|app: 0|req: 56/108] 213.118.243.196 () {34 vars in 414 bytes} [Sat Jul  1 01:30:38 2017] HEAD /pma2018/ => generated 2289 bytes in 8 msecs (HTTP/1.1 404) 2 headers in 80 bytes (1 switches on core 0)
+[01/Jul/2017 01:30:38] WARNING [django.request:152] Not Found: /phpmyadmin2011/
+[pid: 27349|app: 0|req: 53/109] 213.118.243.196 () {34 vars in 428 bytes} [Sat Jul  1 01:30:38 2017] HEAD /phpmyadmin2011/ => generated 2310 bytes in 8 msecs (HTTP/1.1 404) 2 headers in 80 bytes (1 switches on core 0)
+[01/Jul/2017 01:30:38] WARNING [django.request:152] Not Found: /phpmyadmin2012/
+[pid: 27349|app: 0|req: 54/110] 213.118.243.196 () {34 vars in 428 bytes} [Sat Jul  1 01:30:38 2017] HEAD /phpmyadmin2012/ => generated 2310 bytes in 8 msecs (HTTP/1.1 404) 2 headers in 80 bytes (1 switches on core 0)
+[01/Jul/2017 01:30:38] WARNING [django.request:152] Not Found: /phpmyadmin2013/
+[pid: 27348|app: 0|req: 57/111] 213.118.243.196 () {34 vars in 428 bytes} [Sat Jul  1 01:30:38 2017] HEAD /phpmyadmin2013/ => generated 2310 bytes in 8 msecs (HTTP/1.1 404) 2 headers in 80 bytes (1 switches on core 0)
+[01/Jul/2017 01:30:38] WARNING [django.request:152] Not Found: /phpmyadmin2014/
+[pid: 27349|app: 0|req: 55/112] 213.118.243.196 () {34 vars in 428 bytes} [Sat Jul  1 01:30:38 2017] HEAD /phpmyadmin2014/ => generated 2310 bytes in 8 msecs (HTTP/1.1 404) 2 headers in 80 bytes (1 switches on core 0)
+[01/Jul/2017 01:30:39] WARNING [django.request:152] Not Found: /phpmyadmin2016/
+[pid: 27348|app: 0|req: 58/113] 213.118.243.196 () {34 vars in 428 bytes} [Sat Jul  1 01:30:39 2017] HEAD /phpmyadmin2016/ => generated 2310 bytes in 8 msecs (HTTP/1.1 404) 2 headers in 80 bytes (1 switches on core 0)
+[01/Jul/2017 01:30:40] WARNING [django.request:152] Not Found: /phpmyadmin2017/
+[pid: 27349|app: 0|req: 56/114] 213.118.243.196 () {34 vars in 428 bytes} [Sat Jul  1 01:30:40 2017] HEAD /phpmyadmin2017/ => generated 2310 bytes in 8 msecs (HTTP/1.1 404) 2 headers in 80 bytes (1 switches on core 0)
+[01/Jul/2017 01:30:40] WARNING [django.request:152] Not Found: /phpmyadmin2018/
+[pid: 27348|app: 0|req: 59/115] 213.118.243.196 () {34 vars in 428 bytes} [Sat Jul  1 01:30:40 2017] HEAD /phpmyadmin2018/ => generated 2310 bytes in 8 msecs (HTTP/1.1 404) 2 headers in 80 bytes (1 switches on core 0)
+[01/Jul/2017 01:30:41] WARNING [django.request:152] Not Found: /phpmanager/
+[pid: 27348|app: 0|req: 60/116] 213.118.243.196 () {34 vars in 420 bytes} [Sat Jul  1 01:30:41 2017] HEAD /phpmanager/ => generated 2298 bytes in 8 msecs (HTTP/1.1 404) 2 headers in 80 bytes (1 switches on core 0)
+[pid: 27348|app: 0|req: 61/117] 70.80.186.230 () {42 vars in 840 bytes} [Sat Jul  1 01:38:46 2017] GET /admin/ => generated 7493 bytes in 51 msecs (HTTP/1.1 200) 6 headers in 251 bytes (1 switches on core 0)
+[pid: 27349|app: 0|req: 57/118] 70.80.186.230 () {44 vars in 909 bytes} [Sat Jul  1 01:38:49 2017] GET /admin/tours/render/ => generated 4173 bytes in 80 msecs (HTTP/1.1 200) 7 headers in 405 bytes (1 switches on core 0)
+[pid: 27348|app: 0|req: 62/119] 70.80.186.230 () {42 vars in 804 bytes} [Sat Jul  1 01:38:49 2017] GET /admin/jsi18n/ => generated 3189 bytes in 8 msecs (HTTP/1.1 200) 3 headers in 93 bytes (1 switches on core 0)
+[pid: 27348|app: 0|req: 63/120] 70.80.186.230 () {44 vars in 940 bytes} [Sat Jul  1 01:38:51 2017] GET /admin/tours/render/1/change/ => generated 6699 bytes in 65 msecs (HTTP/1.1 200) 7 headers in 405 bytes (1 switches on core 0)
+[pid: 27348|app: 0|req: 64/121] 70.80.186.230 () {42 vars in 813 bytes} [Sat Jul  1 01:38:51 2017] GET /admin/jsi18n/ => generated 3189 bytes in 6 msecs (HTTP/1.1 200) 3 headers in 93 bytes (1 switches on core 0)
+var/www/opm/tours/static/renders/LeePerrySmith_VTQYUnP.obj
+var/www/opm/tours/static/renders
+Encoder options:
+  Compression level = 7
+  Positions: Quantization = 14 bits
+  Texture coordinates: Quantization = 12 bits
+
+Encoded mesh saved to /draco/objPool/LeePerrySmith_VTQYUnP.drc (14 ms to encode)
+
+Encoded size = 40679 bytes
+
+For better compression, increase the compression level '-cl' (up to 10).
+
+[pid: 27348|app: 0|req: 65/122] 70.80.186.230 () {52 vars in 1202 bytes} [Sat Jul  1 01:40:50 2017] POST /admin/tours/render/1/change/ => generated 0 bytes in 682 msecs (HTTP/1.1 302) 8 headers in 512 bytes (4 switches on core 0)
+[pid: 27348|app: 0|req: 66/123] 70.80.186.230 () {46 vars in 1157 bytes} [Sat Jul  1 01:40:51 2017] GET /admin/tours/render/ => generated 4353 bytes in 77 msecs (HTTP/1.1 200) 8 headers in 487 bytes (1 switches on core 0)
+[pid: 27348|app: 0|req: 67/124] 70.80.186.230 () {42 vars in 804 bytes} [Sat Jul  1 01:40:51 2017] GET /admin/jsi18n/ => generated 3189 bytes in 8 msecs (HTTP/1.1 200) 3 headers in 93 bytes (1 switches on core 0)
+[pid: 27349|app: 0|req: 58/125] 70.80.186.230 () {42 vars in 844 bytes} [Sat Jul  1 01:40:57 2017] GET /tours/1/ => generated 5834 bytes in 20 msecs (HTTP/1.1 200) 2 headers in 88 bytes (1 switches on core 0)
+[pid: 27348|app: 0|req: 68/126] 70.80.186.230 () {44 vars in 902 bytes} [Sat Jul  1 01:40:58 2017] GET /static/renders/LeePerrySmith_VTQYUnP.drc => generated 40679 bytes in 2 msecs via sendfile() (HTTP/1.1 200) 4 headers in 157 bytes (0 switches on core 0)
+[01/Jul/2017 01:40:58] WARNING [django.request:152] Not Found: /static/renders/Map-COL_8HVoQUO_48TbEdN.jpg
+[01/Jul/2017 01:40:58] WARNING [django.request:152] Not Found: /static/renders/Infinite-Level_02_Tangen_MUQFNvn_r0ovfGM.jpg
+[pid: 27349|app: 0|req: 59/127] 70.80.186.230 () {42 vars in 910 bytes} [Sat Jul  1 01:40:58 2017] GET /static/renders/Infinite-Level_02_Tangen_MUQFNvn_r0ovfGM.jpg => generated 1887 bytes in 12 msecs (HTTP/1.1 404) 2 headers in 80 bytes (1 switches on core 0)
+[pid: 27348|app: 0|req: 69/128] 70.80.186.230 () {42 vars in 876 bytes} [Sat Jul  1 01:40:58 2017] GET /static/renders/Map-COL_8HVoQUO_48TbEdN.jpg => generated 1836 bytes in 12 msecs (HTTP/1.1 404) 2 headers in 80 bytes (1 switches on core 0)
+[pid: 27349|app: 0|req: 60/129] 70.80.186.230 () {42 vars in 840 bytes} [Sat Jul  1 01:41:07 2017] GET /admin/ => generated 7493 bytes in 52 msecs (HTTP/1.1 200) 6 headers in 251 bytes (1 switches on core 0)
+[pid: 27349|app: 0|req: 61/130] 70.80.186.230 () {44 vars in 909 bytes} [Sat Jul  1 01:41:09 2017] GET /admin/tours/render/ => generated 4173 bytes in 61 msecs (HTTP/1.1 200) 7 headers in 405 bytes (1 switches on core 0)
+[pid: 27349|app: 0|req: 62/131] 70.80.186.230 () {42 vars in 804 bytes} [Sat Jul  1 01:41:09 2017] GET /admin/jsi18n/ => generated 3189 bytes in 8 msecs (HTTP/1.1 200) 3 headers in 93 bytes (1 switches on core 0)
+[pid: 27349|app: 0|req: 63/132] 70.80.186.230 () {44 vars in 940 bytes} [Sat Jul  1 01:41:11 2017] GET /admin/tours/render/1/change/ => generated 6731 bytes in 64 msecs (HTTP/1.1 200) 7 headers in 405 bytes (1 switches on core 0)
+[pid: 27348|app: 0|req: 70/133] 70.80.186.230 () {42 vars in 813 bytes} [Sat Jul  1 01:41:11 2017] GET /admin/jsi18n/ => generated 3189 bytes in 8 msecs (HTTP/1.1 200) 3 headers in 93 bytes (1 switches on core 0)
+[pid: 27348|app: 0|req: 71/134] 70.80.186.230 () {42 vars in 844 bytes} [Sat Jul  1 01:44:51 2017] GET /tours/1/ => generated 5834 bytes in 37 msecs (HTTP/1.1 200) 2 headers in 88 bytes (1 switches on core 0)
+[pid: 27348|app: 0|req: 72/135] 70.80.186.230 () {44 vars in 902 bytes} [Sat Jul  1 01:44:52 2017] GET /static/renders/LeePerrySmith_VTQYUnP.drc => generated 0 bytes in 1 msecs (HTTP/1.1 304) 1 headers in 58 bytes (0 switches on core 0)
+[pid: 27348|app: 0|req: 73/136] 70.80.186.230 () {42 vars in 876 bytes} [Sat Jul  1 01:44:53 2017] GET /static/renders/Map-COL_8HVoQUO_48TbEdN.jpg => generated 148269 bytes in 2 msecs via sendfile() (HTTP/1.1 200) 4 headers in 144 bytes (0 switches on core 0)
+[pid: 27349|app: 0|req: 64/137] 70.80.186.230 () {42 vars in 910 bytes} [Sat Jul  1 01:44:53 2017] GET /static/renders/Infinite-Level_02_Tangen_MUQFNvn_r0ovfGM.jpg => generated 146793 bytes in 3 msecs via sendfile() (HTTP/1.1 200) 4 headers in 144 bytes (0 switches on core 0)
+[pid: 27348|app: 0|req: 74/138] 70.80.186.230 () {42 vars in 840 bytes} [Sat Jul  1 01:45:44 2017] GET /admin/ => generated 7493 bytes in 52 msecs (HTTP/1.1 200) 6 headers in 251 bytes (1 switches on core 0)
+[01/Jul/2017 01:49:50] WARNING [django.request:152] Not Found: /invoker/EJBInvokerServlet
+[pid: 27349|app: 0|req: 65/139] 5.188.10.104 () {34 vars in 478 bytes} [Sat Jul  1 01:49:50 2017] GET /invoker/EJBInvokerServlet => generated 2342 bytes in 9 msecs (HTTP/1.1 404) 2 headers in 80 bytes (1 switches on core 0)
+[01/Jul/2017 01:49:51] WARNING [django.request:152] Not Found: /invoker/EJBInvokerServlet
+[pid: 27349|app: 0|req: 66/140] 5.188.10.104 () {34 vars in 478 bytes} [Sat Jul  1 01:49:51 2017] GET /invoker/EJBInvokerServlet => generated 2342 bytes in 8 msecs (HTTP/1.1 404) 2 headers in 80 bytes (1 switches on core 0)
+[01/Jul/2017 01:49:51] WARNING [django.request:152] Not Found: /invoker/EJBInvokerServlet
+[pid: 27349|app: 0|req: 67/141] 5.188.10.104 () {34 vars in 478 bytes} [Sat Jul  1 01:49:51 2017] GET /invoker/EJBInvokerServlet => generated 2342 bytes in 8 msecs (HTTP/1.1 404) 2 headers in 80 bytes (1 switches on core 0)

@@ -73,9 +73,29 @@ def detail(request, tour_id):
         })
 
 #Getter function for annotations in the custom change_form.html for Tour Models
-def get_annotations(request):
+def get_annotations(request, tour_id):
     tour_annot = Annotation.objects.all()
-    return render(request, './admin/tours/tour/change_form.html', {'tour_annot': tour_annot})
+    # TODO: Add the if statement
+    # if request.method == 'GET':
+    #     return render(request, './admin/tours/tour/change_form.html', {'tour_annot': tour_annot})
+    # elif request.method == 'POST':
+    #     print("POST request -- do nothing")
+    #     return
+    annotations = Annotation.objects.filter(tour__id=tour_id)
+
+    annotations = annotations.order_by('position')
+    # annotations_json = serializers.serialize("json", annotations)
+    # annotations_list = json.dumps(annotations)
+
+    # Note that ids are in the queryset by default, the name of the variable is just to make this explicit
+    annotations_values_with_ids = annotations.values()
+    annotations_list = list(annotations_values_with_ids)
+    print(annotations_values_with_ids)
+    print(request.method == 'GET')
+    print("get_annotations --- RETURNING")
+    return JsonResponse(annotations_list, safe=False)
+
+
 
 def add_annotation(request, tour_id):
 
@@ -100,14 +120,21 @@ def add_annotation(request, tour_id):
         tour_id = tour_id  )
 
     new_annotation.save()
+    newObjId = new_annotation.pk
 
     #Uncomment to check if the new annotation is saved as a ForeignKey to the tour being edited
     # saved_annotations = Annotation.objects.filter(tour__id=tour_id)
     # print(saved_annotations)
     # print(request.body)
 
-    return JsonResponse({'success': 'true'})
+    return JsonResponse({'id': newObjId})
 
+def delete_annotation(request, annotation_id):
+
+    annotObj = Annotation.objects.get(pk=annotation_id)
+    position = annotObj.position
+    annotObj.delete()
+    return JsonResponse({'position': position})
 
 @staff_member_required
 

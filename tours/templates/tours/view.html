@@ -33,16 +33,22 @@
 
     <div id="blocker"></div>
     <div id="mydiv"></div>
-    <div class="icon-bar">
-      <i class="fa fa-step-backward fa-2x play-btn" ></i>
-      <i class="fa fa-play-circle fa-2x play-btn" onClick=PlayTour()></i>
-      <i class="fa fa-pause fa-2x play-btn"></i>
-      <i class="fa fa-step-forward fa-2x play-btn" onClick=NextView()></i>
-    </div>
-      <canvas id="canvas3D" >
+    <div id="contain">
+      <div id="icon-bar" class="icon-bar" style="z-index: 30;">
+        <div id="annotation-badge" class="numberCircle fa play-btn badge"></div>
+        <i class="fa fa-step-backward fa-2x play-btn" onClick=PreviousView()></i>
+        <!-- <i id="play-stop"></i> -->
+        <i class="fa fa-play-circle fa-2x play-btn" onClick=StopTour()></i>
+        <i class="fa fa-pause fa-2x play-btn" onClick=StopTour()></i>
+        <i class="fa fa-step-forward fa-2x play-btn" onClick=NextView()></i>
+
+      </div>
+      <canvas id="canvas3D">
 
       </canvas>
-    <div id="css3d_div"></div>
+    </div>
+
+    <!-- <div id="css3d_div"></div> -->
 
 
 
@@ -63,6 +69,8 @@
     {% endfor %}
   </div>
 </div>
+<div class="fa fa-2x scan-qr-code badge scan-qr-code-index col-lg-3 col-md-3 col-sm-6 col-lg-offset-9 col-md-offset-9col-sm-offset-6" ><a href="https://webqr.com/index.html">SCAN QR CODE</a></div>
+
 
 
 <script src="{% static "bower_components/jquery/dist/jquery.js" %}" ></script>
@@ -93,6 +101,8 @@
   console.log(annotations);
   console.log(annotations[0].fields.position);
 
+  var badge = document.getElementById("annotation-badge");
+
 
   for(var i=0; i< annotations.length; i++){
       var cam_pos = new THREE.Vector3(annotations[i].fields.camera_pos_x,annotations[i].fields.camera_pos_y,annotations[i].fields.camera_pos_z);
@@ -107,6 +117,48 @@
       console.log(Annotation_Set);
   }
 
-  function PlayTour(){ Annotation_Set.PlayTour(); };
-  function NextView(){ Annotation_Set.NextView(); };
+  function PlayTour(){
+    //TODO: Make the function work
+    // togglePlayBtn();
+    Annotation_Set.StartAnnotationTour(); };
+    badge.innerHTML = Annotation_Set.queue.curr_annot_index+1;
+  function StopTour(){
+    Annotation_Set.StopAnnotationTour();
+    badge.innerHTML = Annotation_Set.queue.curr_annot_index+1;
+   };
+  function NextView(){
+    Annotation_Set.NextAnnotation();
+    badge.innerHTML = Annotation_Set.queue.curr_annot_index+1;
+  };
+  function PreviousView(){
+    Annotation_Set.PreviousAnnotation();
+    badge.innerHTML = Annotation_Set.queue.curr_annot_index+1;
+   };
+
+  var playBtn = document.createElement('i');
+  playBtn.setAttribute("class","fa fa-play-circle fa-2x play-btn");
+  playBtn.onclick = PlayTour;
+
+
+  var stopBtn = document.createElement('i');
+  stopBtn.setAttribute("class","fa fa-play-pause fa-2x play-btn");
+  stopBtn.onclick = StopTour;
+  var playingTour = false;
+  // document.getElementById("icon-bar").appendChild(playBtn);
+
+  function togglePlayBtn() {
+
+    if(playingTour) {
+      stopBtn.parentNode.removeChild(stopBtn);
+      playBtn.parentNode.appendChild(playBtn);
+      playingTour = false;
+    }
+    else {
+      console.log("lalalla")
+      playBtn.parentNode.appendChild(stopBtn);
+      playBtn.parentNode.removeChild(playBtn);
+      playingTour =true;
+    }
+
+  }
 </script>

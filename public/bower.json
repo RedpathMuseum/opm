@@ -1,0 +1,12 @@
+{
+  "name": "open-museum",
+  "private": true,
+  "dependencies": {
+    "three.js": "threejs#*",
+    "threejs-trackball-controls": "*",
+    "THREEOrbitControls": "^71.1.0",
+    "tween.js": "tweenjs#^16.3.5",
+    "dat-gui": "0.5.1",
+    "jquery": "^3.1.1"
+  }
+}
