@@ -1,0 +1,28 @@
+#Fileplaced in /etc/nginx/conf.d/redpath.conf
+upstream django {
+    server 127.0.0.1:8001;
+}
+
+# configuration of the server
+server {
+    # the port your site will be served on
+    listen      80;
+    # the domain name it will serve for
+    server_name 67.212.82.214; # substitute your machine's IP address or FQDN
+    charset     utf-8;
+
+    # max upload size
+    client_max_body_size 75M;   # adjust to taste
+
+    location /static {
+        root /var/www/opm/public; # your Django project's static files - amend as required
+    }
+
+    # Finally, send all non-media requests to the Django server.
+    location / {
+        #uwsgi_pass  django;
+        #include     /etc/nginx/uwsgi_params; # the uwsgi_params file you installed
+		include /etc/nginx/uwsgi_params;
+		uwsgi_pass unix:/run/uwsgi/opm.sock;
+    }
+}

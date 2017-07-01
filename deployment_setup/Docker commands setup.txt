@@ -1,0 +1,7 @@
+docker build -t dracomnt .
+docker run -d -it --name dracoctn2 dracomnt bash #Create a container named "dracoctn2" from image "dracomnt" and make it run bash so it stays up
+
+# Compression operation
+docker cp path-to-input-obj/filename.obj dracoctn4:/draco/objPool
+docker exec dracoctn4 /draco/draco_encoder -i /draco/objPool/filename.obj -o /draco/filename.drc
+docker cp path-to-ouput-drc dracoctn4:/draco/objPool/dracofilename.drc

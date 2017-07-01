@@ -1,0 +1,9 @@
+#/etc/uwsgi.d/opm_uwsgi.conf probably usesless file
+description "uWSGI starter for opm"
+
+start on (local-filesystems and runlevel [2345])
+stop on runlevel [016]
+
+respawn
+
+exec /usr/sbin/uwsgi --emperor /etc/uwsgi.d/redpath_uwsgi.ini
