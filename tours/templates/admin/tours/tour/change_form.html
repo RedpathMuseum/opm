@@ -21,7 +21,6 @@
   var object_to_load_colormap_path = "{{ media }}renders/" + "{{ original.render.colormap_path }}".split(/[\\/]/).pop();
   var object_to_load_specmap_path = "{{ media }}renders/" + "{{ original.render.specmap_path }}".split(/[\\/]/).pop();
   var object_to_load_normalmap_path = "{{ media }}renders/" + "{{ original.render.normalmap_path }}".split(/[\\/]/).pop();
-  alert(object_to_load_obj_path);
   function changeAllObjPaths(render_obj) {
     object_to_load_obj_path = "{% static "renders/" %}"+render_obj;
     console.log(object_to_load_obj_path);

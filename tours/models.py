@@ -5,10 +5,10 @@ from os.path import basename,join
 
 class Render(models.Model):
     title = models.CharField(max_length=50)
-    object_path = models.FileField(upload_to=settings.MEDIA_ROOT)
-    colormap_path = models.FileField(upload_to=settings.MEDIA_ROOT)
-    specmap_path = models.FileField(upload_to=settings.MEDIA_ROOT)
-    normalmap_path = models.FileField(upload_to=settings.MEDIA_ROOT)
+    object_path = models.FileField(upload_to=settings.MEDIA_ROOT+"/renders")
+    colormap_path = models.FileField(upload_to=settings.MEDIA_ROOT+"/renders")
+    specmap_path = models.FileField(upload_to=settings.MEDIA_ROOT+"/renders")
+    normalmap_path = models.FileField(upload_to=settings.MEDIA_ROOT+"/renders")
 
     def __str__(self):
         return str(self.title)
@@ -50,7 +50,7 @@ class Paragraph(Section):
 
 
 class Image(Section):
-    path = models.ImageField(upload_to=settings.MEDIA_ROOT)
+    path = models.ImageField(upload_to=settings.MEDIA_ROOT+"/images")
 
     def file_name(self):
         image_name = basename(self.path.name)

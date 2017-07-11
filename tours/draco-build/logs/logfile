@@ -643,3 +643,8 @@
 [11/Jul/2017 01:08:05] DEBUG [Tours:86] os.system argument = 
 [11/Jul/2017 01:08:05] DEBUG [Tours:87] C:\Users\Tfmenard\Documents\GitHub\redpath_prod\opm\Draco-Docker draco_encoder.exe -i /media/C:/Users/Tfmenard/Documents/GitHub/redpath_prod/opm/tours/media/renders/PasengerPigeon.obj -o /media/C:/Users/Tfmenard/Documents/GitHub/redpath_prod/opm/tours/media/renders/PasengerPigeon.drc
 [11/Jul/2017 01:08:05] DEBUG [Tours:92] New object path = /media/media/C%3A/Users/Tfmenard/Documents/GitHub/redpath_prod/opm/tours/media/renders/PasengerPigeon.drc
+[11/Jul/2017 03:15:34] DEBUG [Tours:19] pathToDracoEncoder = 
+[11/Jul/2017 03:15:34] DEBUG [Tours:20] C:\Users\Tfmenard\Documents\GitHub\redpath_prod\opm\Draco-Docker
+[11/Jul/2017 03:15:34] DEBUG [Tours:24] UPLOAD_DIR= 
+[11/Jul/2017 03:15:35] DEBUG [Tours:28] objInputPath= 
+[11/Jul/2017 03:15:35] DEBUG [Tours:37] strIn= 
