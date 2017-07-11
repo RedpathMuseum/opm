@@ -593,3 +593,53 @@
 [01/Jul/2017 01:40:51] DEBUG [Tours:86] os.system argument = 
 [01/Jul/2017 01:40:51] DEBUG [Tours:87] /var/www/opm/Draco-Docker draco_encoder.exe -i var/www/opm/tours/static/renders/LeePerrySmith_VTQYUnP.obj -o var/www/opm/tours/static/renders/LeePerrySmith_VTQYUnP.drc
 [01/Jul/2017 01:40:51] DEBUG [Tours:92] New object path = var/www/opm/tours/static/renders/LeePerrySmith_VTQYUnP.drc
+[11/Jul/2017 00:56:20] DEBUG [Tours:19] pathToDracoEncoder = 
+[11/Jul/2017 00:56:20] DEBUG [Tours:20] C:\Users\Tfmenard\Documents\GitHub\redpath_prod\opm\Draco-Docker
+[11/Jul/2017 00:56:20] DEBUG [Tours:24] UPLOAD_DIR= 
+[11/Jul/2017 00:56:20] DEBUG [Tours:25] C:\Users\Tfmenard\Documents\GitHub\redpath_prod\opm\tours/static/renders
+[11/Jul/2017 00:56:20] DEBUG [Tours:28] objInputPath= 
+[11/Jul/2017 00:56:20] DEBUG [Tours:29] C%3A/Users/Tfmenard/Documents/GitHub/redpath_prod/opm/tours/static/renders/PasengerPigeon.obj
+[11/Jul/2017 00:56:20] DEBUG [Tours:32] dracoOutputPath= 
+[11/Jul/2017 00:56:20] DEBUG [Tours:33] C:\Users\Tfmenard\Documents\GitHub\redpath_prod\opm\tours/static/renders
+[11/Jul/2017 00:56:20] DEBUG [Tours:37] strIn= 
+[11/Jul/2017 00:56:20] DEBUG [Tours:38] C%3A/Users/Tfmenard/Documents/GitHub/redpath_prod/opm/tours/static/renders/PasengerPigeon.obj
+[11/Jul/2017 00:56:20] DEBUG [Tours:39] strOut= 
+[11/Jul/2017 00:56:20] DEBUG [Tours:40] C:\Users\Tfmenard\Documents\GitHub\redpath_prod\opm\tours/static/renders
+[11/Jul/2017 00:56:20] DEBUG [Tours:44] strIn=unquote(strIn) = 
+[11/Jul/2017 00:56:20] DEBUG [Tours:45] C:/Users/Tfmenard/Documents/GitHub/redpath_prod/opm/tours/static/renders/PasengerPigeon.obj
+[11/Jul/2017 00:56:20] DEBUG [Tours:49] fileNameWExt= 
+[11/Jul/2017 00:56:20] DEBUG [Tours:50] PasengerPigeon.obj
+[11/Jul/2017 00:56:20] DEBUG [Tours:54] fileName= 
+[11/Jul/2017 00:56:20] DEBUG [Tours:55] PasengerPigeon
+[11/Jul/2017 00:56:20] DEBUG [Tours:59] strInPath= 
+[11/Jul/2017 00:56:20] DEBUG [Tours:60] C:/Users/Tfmenard/Documents/GitHub/redpath_prod/opm/tours/static/renders
+[11/Jul/2017 00:56:20] DEBUG [Tours:64] strOutPath= strInPath
+[11/Jul/2017 00:56:20] DEBUG [Tours:65] C:/Users/Tfmenard/Documents/GitHub/redpath_prod/opm/tours/static/renders
+[11/Jul/2017 00:56:20] DEBUG [Tours:86] os.system argument = 
+[11/Jul/2017 00:56:20] DEBUG [Tours:87] C:\Users\Tfmenard\Documents\GitHub\redpath_prod\opm\Draco-Docker draco_encoder.exe -i C:/Users/Tfmenard/Documents/GitHub/redpath_prod/opm/tours/static/renders/PasengerPigeon.obj -o C:/Users/Tfmenard/Documents/GitHub/redpath_prod/opm/tours/static/renders/PasengerPigeon.drc
+[11/Jul/2017 00:56:20] DEBUG [Tours:92] New object path = C%3A/Users/Tfmenard/Documents/GitHub/redpath_prod/opm/tours/static/renders/PasengerPigeon.drc
+[11/Jul/2017 01:08:05] DEBUG [Tours:19] pathToDracoEncoder = 
+[11/Jul/2017 01:08:05] DEBUG [Tours:20] C:\Users\Tfmenard\Documents\GitHub\redpath_prod\opm\Draco-Docker
+[11/Jul/2017 01:08:05] DEBUG [Tours:24] UPLOAD_DIR= 
+[11/Jul/2017 01:08:05] DEBUG [Tours:25] C:\Users\Tfmenard\Documents\GitHub\redpath_prod\opm\tours/static/renders
+[11/Jul/2017 01:08:05] DEBUG [Tours:28] objInputPath= 
+[11/Jul/2017 01:08:05] DEBUG [Tours:29] /media/C%3A/Users/Tfmenard/Documents/GitHub/redpath_prod/opm/tours/media/renders/PasengerPigeon.obj
+[11/Jul/2017 01:08:05] DEBUG [Tours:32] dracoOutputPath= 
+[11/Jul/2017 01:08:05] DEBUG [Tours:33] C:\Users\Tfmenard\Documents\GitHub\redpath_prod\opm\tours/static/renders
+[11/Jul/2017 01:08:05] DEBUG [Tours:37] strIn= 
+[11/Jul/2017 01:08:05] DEBUG [Tours:38] /media/C%3A/Users/Tfmenard/Documents/GitHub/redpath_prod/opm/tours/media/renders/PasengerPigeon.obj
+[11/Jul/2017 01:08:05] DEBUG [Tours:39] strOut= 
+[11/Jul/2017 01:08:05] DEBUG [Tours:40] C:\Users\Tfmenard\Documents\GitHub\redpath_prod\opm\tours/static/renders
+[11/Jul/2017 01:08:05] DEBUG [Tours:44] strIn=unquote(strIn) = 
+[11/Jul/2017 01:08:05] DEBUG [Tours:45] /media/C:/Users/Tfmenard/Documents/GitHub/redpath_prod/opm/tours/media/renders/PasengerPigeon.obj
+[11/Jul/2017 01:08:05] DEBUG [Tours:49] fileNameWExt= 
+[11/Jul/2017 01:08:05] DEBUG [Tours:50] PasengerPigeon.obj
+[11/Jul/2017 01:08:05] DEBUG [Tours:54] fileName= 
+[11/Jul/2017 01:08:05] DEBUG [Tours:55] PasengerPigeon
+[11/Jul/2017 01:08:05] DEBUG [Tours:59] strInPath= 
+[11/Jul/2017 01:08:05] DEBUG [Tours:60] /media/C:/Users/Tfmenard/Documents/GitHub/redpath_prod/opm/tours/media/renders
+[11/Jul/2017 01:08:05] DEBUG [Tours:64] strOutPath= strInPath
+[11/Jul/2017 01:08:05] DEBUG [Tours:65] /media/C:/Users/Tfmenard/Documents/GitHub/redpath_prod/opm/tours/media/renders
+[11/Jul/2017 01:08:05] DEBUG [Tours:86] os.system argument = 
+[11/Jul/2017 01:08:05] DEBUG [Tours:87] C:\Users\Tfmenard\Documents\GitHub\redpath_prod\opm\Draco-Docker draco_encoder.exe -i /media/C:/Users/Tfmenard/Documents/GitHub/redpath_prod/opm/tours/media/renders/PasengerPigeon.obj -o /media/C:/Users/Tfmenard/Documents/GitHub/redpath_prod/opm/tours/media/renders/PasengerPigeon.drc
+[11/Jul/2017 01:08:05] DEBUG [Tours:92] New object path = /media/media/C%3A/Users/Tfmenard/Documents/GitHub/redpath_prod/opm/tours/media/renders/PasengerPigeon.drc
