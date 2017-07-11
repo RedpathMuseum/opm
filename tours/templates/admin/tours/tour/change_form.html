@@ -320,10 +320,10 @@ function DeleteAnnotation(id){
 <input type="submit" value="Save and continue editing" name="_continue">
 </div>
 <div class="col-lg-12 col-md-12 col-sm-12">
-<p><a href='/tours/{{original.id}}/'>/tours/{{original.id}}/</a></p>
+<p><a href='{{ request.get_host }}/tours/{{original.id}}'>{{ request.get_host }}/tours/{{original.id}}</a></p>
 </div>
-<div class="submit-row col-lg-12 col-md-12 col-sm-12">
-  <input type="button" value="Generate QR Code" name=""><a href="https://www.the-qrcode-generator.com/"></a></input>
+<div class="col-lg-12 col-md-12 col-sm-12">
+  <a href="https://www.the-qrcode-generator.com/">Generate QR Code</a>
 </div>
 {% endblock %}
 
