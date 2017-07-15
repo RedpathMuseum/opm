@@ -1,19 +1,14 @@
-
-
-<h3 class="heading-list">Tour list</h3>
-
+{% include "header.html" %}
 {% load i18n admin_urls %}
 {% load staticfiles %}
-<script src="{% static "bower_components/jquery/dist/jquery.js" %}" ></script>
-<link rel="stylesheet" href="{% static "styles/" %}article-list-basic.css">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"></link>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<script src="https://use.fontawesome.com/5fcca142be.js"></script>
-<link rel="stylesheet" href="{% static "styles/" %}main.scss">
-<link rel="stylesheet" href="{% static "styles/" %}that.css">
-<link rel="stylesheet" href="{% static "styles/" %}article-list-basic.css">
-<script type="text/javascript" script-name="ubuntu" src="http://use.edgefonts.net/ubuntu.js"></script>
+{% load static %}
+{% get_media_prefix as media %}
 
+{% include "navbar.html" %}
+
+<!-- <h3 class="heading-list">Tour list</h3> -->
+
+<!-- <script type="text/javascript" script-name="ubuntu" src="http://use.edgefonts.net/ubuntu.js"></script> -->
 
 <div class="fa fa-2x scan-qr-code badge scan-qr-code-index col-lg-3 col-md-3 col-sm-6 col-lg-offset-9 col-md-offset-9col-sm-offset-6" ><a href="https://webqr.com/index.html">SCAN QR CODE</a></div>
 <ul class="article-list-basic">

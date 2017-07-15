@@ -1,14 +1,7 @@
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"></link>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<script src="https://use.fontawesome.com/5fcca142be.js"></script>
-<script type="text/javascript"></script>
+{% include "header.html" %}
 {% load staticfiles %}
 {% load static %}
 {% get_media_prefix as media %}
-<link rel="stylesheet" href="{% static "styles/" %}main.scss">
-<link rel="stylesheet" href="{% static "styles/" %}that.css">
-<link rel="stylesheet" href="{% static "styles/" %}article-list-basic.css">
 
 <!-- Script to load 3D object  -->
 <script>
@@ -27,21 +20,34 @@
 
 </script>
 
+
 <div class="" style="height: 100%; ">
+
+  {% include "navbar.html" %}
+
   <div class="col-lg-9 col-md-9 col-sm-6" id="3d_content" style=" height:100%; overflow-y:hidden; overflow-x: hidden; ">
 
     <div id="blocker"></div>
     <div id="mydiv"></div>
     <div id="contain">
-      <div id="icon-bar" class="icon-bar" style="z-index: 30;">
-        <div id="annotation-badge" class="numberCircle fa play-btn badge"></div>
-        <i class="fa fa-step-backward fa-2x play-btn" onClick=PreviousView()></i>
+      <!-- <div id="icon-bar" class="icon-bar" style="z-index: 30;"> -->
+        <!-- <div id="annotation-badge" class="numberCircle fa  badge"></div> -->
+        <i id="annotation-badge" class="btn btn-default btn-lg btn-raised fa" ></i>
+        <i id="prev-btn" class=" btn btn-default btn-lg btn-raised fa fa-step-backward fa-2x play-btn" style="display: none" onClick=PreviousView()></i>
         <!-- <i id="play-stop"></i> -->
-        <i class="fa fa-play-circle fa-2x play-btn" onClick=StopTour()></i>
-        <i class="fa fa-pause fa-2x play-btn" onClick=StopTour()></i>
-        <i class="fa fa-step-forward fa-2x play-btn" onClick=NextView()></i>
+        &nbsp;
+        &nbsp;
+        &nbsp;
+        <!-- <i id="play-btn" class="btn btn-default btn-lg  btn-raised fa fa-play-circle fa-3x play-btn" onClick=PlayTour()></i> -->
+        <i id="play-btn" class="btn btn-default btn-lg  btn-raised fa fa-play-circle fa-4x play-btn" onClick=PlayTour()></i>
+        <i id="stop-btn" class="btn btn-default btn-lg btn-raised fa fa-pause fa-4x play-btn"style="display: none" onClick=StopTour()></i>
+        &nbsp;
+        &nbsp;
+        &nbsp;
+        <i id="next-btn" class="btn btn-default btn-lg btn-raised fa fa-step-forward fa-2x play-btn" style="display: none" onClick=NextView()></i>
 
-      </div>
+
+      <!-- </div> -->
       <canvas id="canvas3D">
 
       </canvas>
@@ -68,7 +74,7 @@
     {% endfor %}
   </div>
 </div>
-<div class="fa fa-2x scan-qr-code badge scan-qr-code-index col-lg-3 col-md-3 col-sm-6 col-lg-offset-9 col-md-offset-9col-sm-offset-6" ><a href="https://webqr.com/index.html">SCAN QR CODE</a></div>
+<!-- <div class="fa fa-2x scan-qr-code badge scan-qr-code-index col-lg-3 col-md-3 col-sm-6 col-lg-offset-9 col-md-offset-9col-sm-offset-6" ><a href="https://webqr.com/index.html">SCAN QR CODE</a></div> -->
 
 
 
@@ -118,12 +124,13 @@
 
   function PlayTour(){
     //TODO: Make the function work
-    // togglePlayBtn();
+    togglePlayBtn();
     Annotation_Set.StartAnnotationTour(); };
     badge.innerHTML = Annotation_Set.queue.curr_annot_index+1;
   function StopTour(){
     Annotation_Set.StopAnnotationTour();
     badge.innerHTML = Annotation_Set.queue.curr_annot_index+1;
+    togglePlayBtn();
    };
   function NextView(){
     Annotation_Set.NextAnnotation();
@@ -134,28 +141,28 @@
     badge.innerHTML = Annotation_Set.queue.curr_annot_index+1;
    };
 
-  var playBtn = document.createElement('i');
-  playBtn.setAttribute("class","fa fa-play-circle fa-2x play-btn");
-  playBtn.onclick = PlayTour;
 
-
-  var stopBtn = document.createElement('i');
-  stopBtn.setAttribute("class","fa fa-play-pause fa-2x play-btn");
-  stopBtn.onclick = StopTour;
+  document.getElementById("stop-btn").style.display = "none";
+  document.getElementById("prev-btn").style.display = "none";
+  document.getElementById("next-btn").style.display = "none";
   var playingTour = false;
-  // document.getElementById("icon-bar").appendChild(playBtn);
-
   function togglePlayBtn() {
 
     if(playingTour) {
-      stopBtn.parentNode.removeChild(stopBtn);
-      playBtn.parentNode.appendChild(playBtn);
+      document.getElementById("stop-btn").style.display = "none";
+      document.getElementById("prev-btn").style.display = "none";
+      document.getElementById("next-btn").style.display = "none";
+
+      document.getElementById("play-btn").style.display = "";
       playingTour = false;
     }
     else {
-      console.log("lalalla")
-      playBtn.parentNode.appendChild(stopBtn);
-      playBtn.parentNode.removeChild(playBtn);
+      console.log("lalalla");
+      document.getElementById("stop-btn").style.display = "";
+      document.getElementById("prev-btn").style.display = "";
+      document.getElementById("next-btn").style.display = "";
+
+      document.getElementById("play-btn").style.display = "none";
       playingTour =true;
     }
 
