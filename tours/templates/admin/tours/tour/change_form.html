@@ -173,6 +173,17 @@ function refreshAnnotationMenu( AnnotationSet) {
 
 }
 
+function getAnnotationById(id) {
+  for(var i=0; i< Annotation_Set.queue.length; i++) {
+    if(Annotation_Set.queue[i].id == id){
+      return Annotation_Set.queue[i];
+    }
+  }
+  console.log("Id not found");
+  return -1;
+
+}
+
 function createAnnotation(id, position, text) {
   var newLabel = document.createElement("label");
   newLabel.innerHTML = "Annotation "+(position+1);
@@ -182,11 +193,7 @@ function createAnnotation(id, position, text) {
   newTextArea.innerHTML = text;
   newTextArea.setAttribute("class", "form-control");
   newTextArea.setAttribute("rows", "1");
-
-  var newEditBtn = document.createElement("button");
-  newEditBtn.innerHTML = "Edit";
-  newEditBtn.setAttribute("class", "btn-primary");
-  newEditBtn.setAttribute("type", "button");
+  newTextArea.disabled = true;
 
   var newDeleteBtn = document.createElement("button");
   newDeleteBtn.innerHTML = "Delete";
@@ -202,14 +209,54 @@ function createAnnotation(id, position, text) {
     };
 
   var newSaveBtn = document.createElement("button");
-  newSaveBtn.innerHTML = "Save";
+  newSaveBtn.innerHTML = "Save Changes";
   newSaveBtn.setAttribute("class", "btn-success");
   newSaveBtn.setAttribute("type", "button");
+  newEditBtn.setAttribute("name", "save-changes");
+  newSaveBtn.style.display = "none";
+
+  var newEditBtn = document.createElement("button");
+  newEditBtn.innerHTML = "Edit";
+  newEditBtn.setAttribute("class", "btn-primary");
+  newEditBtn.setAttribute("type", "button");
+  newEditBtn.onclick = function() {
+      var id = newEditBtn.parentNode.id;
+      newTextArea.disabled = false;
+      // var newTitleTextArea = newTextArea.cloneNode(true);
+      // newTitleTextArea.value = $(newLabel).contents()[0].data
+      // $(newLabel).contents()[0].data = "";
+      // newLabel.insertBefore(newTitleTextArea, newLabel.firstChild);
+
+      //load into annot buffer and start Wizard
+      newDeleteBtn.style.display = "none";
+      EditTrgtNCamBtn.style.display = "";
+      newSaveBtn.style.display = "";
+      newEditBtn.style.display = "none";
+      annot_buffer = getAnnotationById(id);
+
+
+    };
+
+    var EditTrgtNCamBtn = document.createElement("button");
+    EditTrgtNCamBtn.innerHTML = "Edit Target";
+    EditTrgtNCamBtn.setAttribute("class", "btn-primary");
+    EditTrgtNCamBtn.setAttribute("type", "button");
+    EditTrgtNCamBtn.setAttribute("name", "edit-target");
+    EditTrgtNCamBtn.style.display = "none";
+    EditTrgtNCamBtn.onclick = function() {
+      //Go to wizard step1
+      var id = newLabel.id;
+      EditTrgtNCamBtn.style.display = "none";
+      newSaveBtn.style.display = "none";
+      EditAnnotationTrgt(id);
+
+    }
 
   annotationList.appendChild(newLabel);
   newLabel.appendChild(newTextArea);
   newLabel.appendChild(newEditBtn);
   newLabel.appendChild(newDeleteBtn);
+  newLabel.appendChild(EditTrgtNCamBtn);
   newLabel.appendChild(newSaveBtn);
 
 }

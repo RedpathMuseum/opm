@@ -779,11 +779,62 @@ function ChangeToolTipText(tooltiptext, tooltip_id){
 
 
 function NewAnnotation(){
-  console.log("----------------------------------Creating new annotation--------------------0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000");
+  console.log("----------------------------------Creating new annotation--------------------");
   window.addEventListener("keydown", SaveCurrentTarget, false);
   document.getElementById("myWizard-top").style.display = "";
   document.getElementById("myWizard-start").style.display = "";
   document.getElementById("new-annotation-btn").style.display ="none";
+
+}
+
+var stepNode;
+var helpMsgNode;
+var confirmBtn;
+var parentStepNode;
+var topNode;
+function EditAnnotationTrgt(id){
+  console.log("----------------------------------Editing annotation-----------------------");
+  window.addEventListener("keydown", SaveCurrentTarget, false);
+  parentStepNode = document.getElementById(id);
+  stepNode = document.getElementById("myWizard-start").cloneNode(true);
+  stepNode.style.display = "";
+
+  confirmBtn = $(stepNode).find("[name='Continue']");
+  confirmBtn.get()[0].disabled = false;
+  confirmBtn.bind("click",function() {
+    //Go to next camera view step and then to Save And Cancel state
+    //Go back to Save and cancel state
+    confirmBtn = $(parentStepNode).find("[name='edit-target']").get()[0].style.display = "";
+    confirmBtn = $(parentStepNode).find("[name='save-changes']").get()[0].style.display = "";
+  });
+
+  // stepNode.style.display = "";
+  //
+  // helpMsgNode = stepNode.firstChild;
+  // stepNode.firstChild.remove();
+  // confirmBtn = $(stepNode).find("[name='Continue']");
+  // stepNode.insertBefore(confirmBtn, stepNode.firstChild);
+  // stepNode.insertBefore(helpMsgNode, stepNode.firstChild);
+  // confirmBtn.disabled = true;
+
+  parentStepNode.appendChild(stepNode);
+  topNode = document.getElementById("myWizard-top").cloneNode(true);
+  topNode.style.display = "";
+  //Set controls target to camera_target and enabled updates
+  controls.target = annot_buffer.camera_target;
+  camera.position.x = annot_buffer.camera_position.x;
+  camera.position.y = annot_buffer.camera_position.y;
+  camera.position.z = annot_buffer.camera_position.z;
+
+  //TODO: Add marker to DB to be able to simply clone it
+  //marker_copy = annot_buffer.marker.clone();
+  scene.remove(marker_copy);
+  marker_copy = mesh.clone();
+  marker_copy.position.copy(annot_buffer.camera_target);
+  marker_copy.visible = true;
+  scene.add(marker_copy);
+
+
 
 }
 
