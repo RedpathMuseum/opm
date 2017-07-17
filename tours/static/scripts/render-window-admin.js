@@ -45,6 +45,8 @@ var x;
 var y;
 var raycaster;
 var mesh;
+var marker_copy = new THREE.Mesh();
+marker_copy.visible = false;
 var stl_1 = new THREE.Mesh();
 var cameraTarget = new THREE.Mesh( new THREE.CubeGeometry(0,0,0));
 var line;
@@ -79,6 +81,8 @@ var tooltiptext = [];
 var pTagArray = [];
 //Variables for annotation sphere
 
+//Annot Wizard Variables
+var step_num = 1;
 
 //3D Web content initialization
 var Element = function ( id, x, y, z, ry ) {
@@ -174,6 +178,8 @@ function init() {
 
       }
      );
+
+     scene.add(marker_copy);
 
       // camera.lookAt(stl_1.position)
       // camera.position.x=stl_1.position.x - 40;
@@ -295,7 +301,7 @@ function checkIntersection() {
     mouseHelper.position.copy( p );
     intersection.point.copy( p );
     var n = intersects[ 0 ].face.normal.clone();
-    n.multiplyScalar( 10 );
+    n.multiplyScalar( 100 );
     n.add( intersects[ 0 ].point );
     intersection.normal.copy( intersects[ 0 ].face.normal );
     mouseHelper.lookAt( n );
@@ -592,39 +598,123 @@ function ResetCamera() {
       // console.log('Reset camera');
 }
 
-function NkeyDown(event){
-  var keyCode = event.keyCode;
-  if(keyCode==78){
-    console.log("N key pressed");
-    FreezeSphere(CurrSphereData[0], CurrSphereData[1]);
-    window.removeEventListener("keydown", NkeyDown, false);
-    window.addEventListener("keydown", SkeyDown, false);
+//Different than the AnnotationSet function with TWEEN as the annotation text is hidden
+function camAndCtrlTransition(nxtCamPos, nxtCtrlsTrgt) {
+  //Reset TWEEN
+  TWEEN.removeAll();
 
+  //Starting position of camera
+  var from = {
+    x: camera.position.x,
+    y: camera.position.y,
+    z: camera.position.z
+  };
+
+  //Next position of camera
+  var to = {
+    x: nxtCamPos.x,
+    y: nxtCamPos.y,
+    z: nxtCamPos.z
+  };
+  //Camera smooth transition handlers
+  var tween_camera = new TWEEN.Tween(from)
+    .to(to, 3000)
+    .easing(TWEEN.Easing.Exponential.InOut)
+    .onUpdate(function () {
+
+    camera.position.x = from.x;
+    camera.position.y = from.y;
+    camera.position.z = from.z;
+
+    camera.up = new THREE.Vector3(0,0,1);
+
+  })
+
+  //Starting position of controls target
+  var from_t = {
+    x: controls.target.x,
+    y: controls.target.y,
+    z: controls.target.z
+  };
+
+  //Next position of controls target
+  var to_t = {
+    x: nxtCtrlsTrgt.x,
+    y: nxtCtrlsTrgt.y,
+    z: nxtCtrlsTrgt.z
+  };
+
+  //Controls target smooth transition handlers
+  var tween_lookat = new TWEEN.Tween(from_t)
+    .to(to_t, 1000)
+    .easing(TWEEN.Easing.Linear.None)
+    //onComplete happens way after NextView has finished
+    .onComplete(function () {
+
+
+    })
+    .onUpdate(function () {
+
+    controls.target.x = from_t.x;
+    controls.target.y = from_t.y;
+    controls.target.z = from_t.z;
+
+  })
+
+  //Initiate smooth transitions
+  tween_lookat.start();
+  tween_camera.start();
+}
+
+//TODO: Recode this function and put in GUI to handle user putting object out of sight
+function resetCameraAndControls() {
+  var origin = new THREE.Vector3(0,0,0);
+  //TODO: make a new field for Tours or Renders called initial_camera_position
+  var initial_cam_pos = new THREE.Vector3(1000,1000,1000);
+  camAndCtrlTransition(initial_cam_pos, origin);
+}
+
+function SaveCurrentTarget(event){
+  var keyCode = event.keyCode;
+  if(keyCode==13 && step_num==1 ){
+    console.log("N key pressed");
+    FreezeNewTarget(CurrSphereData[0], CurrSphereData[1]);
+    document.getElementById("step-target-nxt-btn").disabled = false;
   }
 }
 
-function SkeyDown(event){
+function SaveCameraView(event){
   var keyCode = event.keyCode;
-  if(keyCode==83){
-    window.removeEventListener("keydown", SkeyDown, false);
+  if(keyCode==83 && step_num==2){
     var CurrCamPos = new THREE.Vector3();
     CurrCamPos.set(camera.position.x, camera.position.y, camera.position.z);
     console.log("CurrCamPos = ", CurrCamPos);
     //AnnotCamPos.push(CurrCamPos)
-    annot_buffer.camera_position.copy(CurrCamPos);
-    console.log("BUFFER", annot_buffer);
-    Annotation_Set.AddAnnotation(annot_buffer);
-    console.log(annot_buffer.name, "ADDED ANNOTATION TO ANNOTATION SET");
-    console.log(Annotation_Set, "THIS IS THE ANNOTATION SET");
-    document.getElementById("annot-txt-buffer").style.visibility='visible';
+    // annot_buffer.camera_position.copy(CurrCamPos);
+    // console.log("BUFFER", annot_buffer);
+    // Annotation_Set.AddAnnotation(annot_buffer);
+    // console.log(annot_buffer.name, "ADDED ANNOTATION TO ANNOTATION SET");
+    // console.log(Annotation_Set, "THIS IS THE ANNOTATION SET");
+    //
+    // console.log(Annotation_Set.queue.length);
+    // CreateToolTip(Annotation_Set.queue[Annotation_Set.queue.length-1].text, Annotation_Set.queue.length-1);
+    // camcounter += 1;
+    // console.log("AnnotCamPos=  ", AnnotCamPos[camcounter -1]);
 
-    console.log(Annotation_Set.queue.length);
-    CreateToolTip(Annotation_Set.queue[Annotation_Set.queue.length-1].text, Annotation_Set.queue.length-1);
-    camcounter += 1;
-    console.log("AnnotCamPos=  ", AnnotCamPos[camcounter -1]);
-
+    document.getElementById("step-camview-nxt-btn").disabled = false;
   }
 
+}
+
+function SaveAnnotationText(){
+  annot_buffer.text = document.getElementById("annot-txt-buffer-val").value
+  console.log(annot_buffer.text);
+}
+
+function SaveAnnotationBufferText(){
+  annot_buffer.text = document.getElementById("annot-txt-buffer-val").value;
+  document.getElementById("tooltip777").getElementsByTagName("p")[0].innerHTML = annot_buffer.text;
+  console.log(annot_buffer.text);
 }
 
 function PopulateDiv(id, text) {
@@ -667,9 +757,11 @@ function CreateToolTip(tooltiptext, camcounter){
 
   console.log(color);
 
-  var annot_div = document.getElementsByClassName("element")[camcounter];
- annot_div.style.zIndex = -1-camcounter;
- annot_div.style.visibility = "hidden";
+ //  var annot_div = document.getElementsByClassName("element")[camcounter];
+ // annot_div.style.zIndex = -1-camcounter;
+ // annot_div.style.visibility = "hidden";
+  newdiv.style.zIndex = -1-camcounter;
+  newdiv.style.visibility = "hidden";
 
 }
 
@@ -688,16 +780,21 @@ function ChangeToolTipText(tooltiptext, tooltip_id){
 
 function NewAnnotation(){
   console.log("----------------------------------Creating new annotation--------------------0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000");
-  window.addEventListener("keydown", NkeyDown, false);
-  document.getElementById("annot-txt-buffer").style.visibility = "visible"
+  window.addEventListener("keydown", SaveCurrentTarget, false);
+  document.getElementById("myWizard-top").style.display = "";
+  document.getElementById("myWizard-start").style.display = "";
+  document.getElementById("new-annotation-btn").style.display ="none";
 
 }
 
 function CancelNewAnnotation(){
   console.log("Canceled New Annotation");
-  annot_buffer = null;
+  annot_buffer = new AnnotationObj(0,0);
   console.log(annot_buffer);
-  window.removeEventListener("keydown", NkeyDown, false);
+  marker_copy.visible = false;
+  window.removeEventListener("keydown", SaveCurrentTarget, false);
+  resetCameraAndControls();
+  EndAnnotationWizard();
 }
 
 
@@ -725,6 +822,59 @@ function FreezeSphere(camlookatpoint, camposalongnormal) {
   // console.log("AnnotCamPos = ", AnnotCamPos[camcounter]);
   // camera.lookAt(AnnotCamLookatPts[camcounter]);
   annot_buffer = new AnnotationObj(camlookatpoint, camposalongnormal);
+  annot_buffer.marker =  marker_copy;
+
+  //-Change camera position and target
+  console.log("camera.up=",camera.up);
+
+  //Note that you set controls.target to an object's position, it will follow its postiiton
+  controls.target=marker_copy.position;
+  camera.up = new THREE.Vector3(0,1,0);
+
+  // camera.position.x=AnnotCamPos[camcounter].x;
+  // camera.position.y=AnnotCamPos[camcounter].y;
+  // camera.position.z=AnnotCamPos[camcounter].z;
+  camera.position.x=dummycamposnormal.x;
+  camera.position.y=dummycamposnormal.y;
+  camera.position.z=dummycamposnormal.z;
+
+  //-Create Buffer View.camera_target
+  //-Create Buffer View.camera_position
+  //-Wait for user input (Save or Cancel)
+  //-Create and populate new View
+  //-Add View to Queue/Annot tour
+  //-Prompt user to edit text
+
+
+}
+
+annot_buffer = new AnnotationObj(0, 0);
+function FreezeNewTarget(camlookatpoint, camposalongnormal) {
+  scene.remove(marker_copy);
+  //FreezeMarker
+  console.log('FreezingSphere');
+
+  marker_copy = mesh.clone();
+  marker_copy.visible = true;
+
+  marker_copy.position.copy(camlookatpoint);
+
+  scene.add(marker_copy);
+
+  var dummycamposnormal = new THREE.Vector3();
+  dummycamposnormal.copy(camposalongnormal);
+
+  AnnotSpheres.push(marker_copy);
+  // AnnotCamPos.push(dummycamposnormal);
+
+  AnnotCamLookatPts.push(marker_copy.position);
+  // console.log("AnnotCamPos = ", AnnotCamPos[camcounter]);
+  // camera.lookAt(AnnotCamLookatPts[camcounter]);
+  // annot_buffer = new AnnotationObj(camlookatpoint, camposalongnormal);
+
+  //Update annot_buffer object
+  annot_buffer.camera_target.copy(camlookatpoint);
+  annot_buffer.camera_position.copy(camposalongnormal);
   annot_buffer.marker =  marker_copy;
 
   //-Change camera position and target

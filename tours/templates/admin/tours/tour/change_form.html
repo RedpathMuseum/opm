@@ -12,6 +12,10 @@
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"></link>
+
+<link rel="stylesheet" href="{% static "styles/" %}main.scss">
+<link rel="stylesheet" href="{% static "styles/" %}that.css">
+
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script type="text/javascript"></script>
 
@@ -67,8 +71,14 @@
 
     </div>
     <div id="blocker"></div>
-    <div id="mydiv"></div>
-    <canvas id="canvas3D" ></canvas>
+
+    <div id="mydiv">
+      <button class="fa fa-camera" style="z-index: 20"></button>
+
+    </div>
+
+    <div><canvas id="canvas3D" ></canvas></div>
+
 
   </div>
 
@@ -91,15 +101,50 @@
     <form>
 
       <div class="form-group">
-        <div style="visibility: hidden;" id="annot-txt-buffer">
+        <div style="display: none;" id="annot-txt-buffer">
           <label for="comment">Add Text</label>
-          <textarea class="form-control" rows="5" id="annot-txt-buffer-val" ></textarea>
+          <textarea class="form-control" rows="5" id="annot-txt-buffer-val" disabled="true"></textarea>
 
         </div>
-        <button type="button" class="btn-primary" value ="New Annotation" onClick=NewAnnotation() > New Annotation</button>
 
-        <button type="button" class="btn-success" value ="Save Annotation" onClick=SaveNewAnnotation() >Save</button>
-        <button type="button" class="btn-danger" value ="Cancel Annotation" onClick=CancelNewAnnotation() >Cancel </button>
+        <!-- Annotation Wizard -->
+        <div id="myWizard-top"style="display: none">
+           <div class="navbar" id="myWizard">
+              <div class="navbar-inner">
+                    <ul class="nav nav-pills">
+                       <li class="active"><a id="annot-wizard-step-header"href="#step1" data-toggle="tab">Step 1 of 4</a></li>
+                    </ul>
+              </div>
+           </div>
+           <div class="">
+              <div class="tab-pane active" step="1" id="myWizard-start" style="display: none">
+                 <p>Press Enter to select a target for the annotation</p>
+                 <button href="#" type="button" id="step-target-nxt-btn" name="Continue" onClick="ConfirmTargetStep()" class="btn btn-default next" disabled>Continue</button>
+                 <button type="button" class="btn btn-danger cancel-annot-wizard" onClick=CancelNewAnnotation() >Cancel</button>
+              </div>
+              <div class="tab-pane" step="2" style="display: none">
+                 <p>Press "S" to select the current camera view for the annotation</p>
+                 <button href="#" type="button" id="step-camview-nxt-btn" name="Continue" onclick="ConfirmCameraViewStep()" class="btn btn-default next" disabled>Continue</button>
+                 <button type="button" class="btn btn-danger cancel-annot-wizard" onClick=CancelNewAnnotation()>Cancel</button>
+              </div>
+              <div class="tab-pane" step="3" style="display: none">
+                 <p>Enter the the text for the annotation</p>
+                 <button type="button" id="step-annot-txt-nxt-btn" name="Continue" onclick="ConfirmAnnotTextStep()" class="btn btn-default next" disabled>Continue</button>
+                 <button type="button" class="btn btn-danger cancel-annot-wizard" onClick=CancelNewAnnotation()>Cancel</button>
+              </div>
+              <div class="tab-pane" step="4" style="display: none">
+                 <p>This is the last step. Save your new annotation. You can always edit it later</p>
+                 <button id="step-save-btn" type="button" class="btn-success next" value ="Save Annotation" onClick="SaveNewAnnotation(); EndAnnotationWizard()" >Save New Annotation</button>
+              </div>
+           </div>
+         </div>
+
+
+
+        <button id="new-annotation-btn" type="button" class="btn-primary" value ="New Annotation" onClick=NewAnnotation() > New Annotation</button>
+
+        <!-- <button type="button" class="btn-success" value ="Save Annotation" onClick=SaveNewAnnotation() >Save</button> -->
+        <!-- <button type="button" class="btn-danger" value ="Cancel Annotation" onClick=CancelNewAnnotation() >Cancel </button> -->
 
       </div>
     </form>
@@ -264,10 +309,14 @@ $.ajaxSetup({
 
 <script>
  function SaveNewAnnotation() {
+     Annotation_Set.AddAnnotation(annot_buffer);
+     console.log(annot_buffer.name, "ADDED ANNOTATION TO ANNOTATION SET");
+     console.log(Annotation_Set, "THIS IS THE ANNOTATION SET");
+
      console.log("Save new Annotation");
      var annot = Annotation_Set.queue[Annotation_Set.queue.length-1];
-     annot.text = document.getElementById("annot-txt-buffer-val").value
-     document.getElementById("annot-txt-buffer").style.visibility = "hidden"
+     annot.text = document.getElementById("annot-txt-buffer-val").value;
+     document.getElementById("annot-txt-buffer").style.display = "none";
      var data = {
          camera_position: {},
          camera_target: {},
@@ -304,6 +353,66 @@ function DeleteAnnotation(id){
     refreshAnnotationMenu(Annotation_Set);
   })
 }
+
+function ConfirmTargetStep() {
+  window.removeEventListener("keydown", SaveCurrentTarget, false);
+  window.addEventListener("keydown", SaveCameraView, false);
+}
+
+function ConfirmCameraViewStep() {
+  document.getElementById("annot-txt-buffer").style.display = "";
+  document.getElementById("annot-txt-buffer-val").disabled = false;
+  document.getElementById("annot-txt-buffer-val").addEventListener("input", SaveAnnotationBufferText);
+  document.getElementById("annot-txt-buffer-val").value = "Default text";
+  document.getElementById("step-annot-txt-nxt-btn").disabled = false;
+
+
+  window.removeEventListener("keydown", SaveCameraView, false);
+
+  console.log(Annotation_Set.queue.length);
+  CreateToolTip(document.getElementById("annot-txt-buffer-val").value, 777);
+  document.getElementById("tooltip"+777).style.zIndex=5;
+  document.getElementById("tooltip"+777).style.visibility="visible";
+}
+
+function ConfirmAnnotTextStep() {
+  document.getElementById("annot-txt-buffer").style.display = "none";
+  document.getElementById("annot-txt-buffer-val").disabled = true;
+  document.getElementById("annot-txt-buffer-val").removeEventListener("input", SaveAnnotationBufferText);
+
+}
+
+function EndAnnotationWizard() {
+  step_num = 1;
+  document.getElementById("new-annotation-btn").style.display ="";
+  document.getElementById("myWizard-top").style.display = "none";
+  document.getElementById("step-save-btn").style.display ="none";
+  document.getElementById("annot-txt-buffer").style.display = "none";
+  $('.tab-pane').hide();
+  $('#annot-wizard-step-header').text("Step "+1+ " of 4");
+  if(document.getElementById("tooltip"+777)!=null) {
+    document.getElementById("tooltip"+777).remove();
+  }
+
+
+}
+
+$('.next').bind("click",function(){
+
+  var nextId = parseInt($(this).parents('.tab-pane').attr("step")) + 1;
+  $(this).parents('.tab-pane').hide();
+  $(this).parents('.tab-pane').next().show();
+  $('#annot-wizard-step-header').text("Step "+nextId+ " of 4");
+  step_num = nextId%5;
+  console.log("step_num= "+ step_num);
+
+})
+
+$('.first').click(function(){
+
+  $('#myWizard button:first').tab('show')
+
+})
 
 </script>
 
