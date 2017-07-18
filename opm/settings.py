@@ -31,6 +31,7 @@ ALLOWED_HOSTS = ['redpath.mamss.ca', 'localhost', '67.212.82.214']
 # Application definition
 
 INSTALLED_APPS = [
+    'navapp.apps.NavappConfig',
     'tours.apps.ToursConfig',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -56,7 +57,7 @@ ROOT_URLCONF = 'opm.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': ["tours/templates/admin/tours",],
+        'DIRS': ["tours/templates/admin/tours","navapp/templates",],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -118,7 +119,6 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.10/howto/static-files/
-
 STATIC_URL = '/static/'
 
 #STATIC_ROOT = "/var/www/opm/public/"

@@ -18,11 +18,13 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from django.conf import settings
 from tours import views as tours_views
+from navapp import views as navapp_views
 
 urlpatterns = [
 
     url(r'^admin/tours/tours-annotations', tours_views.annotations_admin_view),
     url(r'^tours/', include('tours.urls')),
+    url(r'^$', include('navapp.urls')),
     url(r'^admin/', admin.site.urls),
 
 
