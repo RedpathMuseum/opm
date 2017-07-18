@@ -184,6 +184,17 @@ function getAnnotationById(id) {
 
 }
 
+function getAnnotationIndexById(id) {
+  for(var i=0; i< Annotation_Set.queue.length; i++) {
+    if(Annotation_Set.queue[i].id == id){
+      return i;
+    }
+  }
+  console.log("Index not found");
+  return -1;
+
+}
+
 function createAnnotation(id, position, text) {
   var newLabel = document.createElement("label");
   newLabel.innerHTML = "Annotation "+(position+1);
@@ -193,6 +204,7 @@ function createAnnotation(id, position, text) {
   newTextArea.innerHTML = text;
   newTextArea.setAttribute("class", "form-control");
   newTextArea.setAttribute("rows", "1");
+  newTextArea.setAttribute("text", "description");
   newTextArea.disabled = true;
 
   var newDeleteBtn = document.createElement("button");
@@ -212,7 +224,7 @@ function createAnnotation(id, position, text) {
   newSaveBtn.innerHTML = "Save Changes";
   newSaveBtn.setAttribute("class", "btn-success");
   newSaveBtn.setAttribute("type", "button");
-  newEditBtn.setAttribute("name", "save-changes");
+  newSaveBtn.setAttribute("name", "save-changes");
   newSaveBtn.style.display = "none";
 
   var newEditBtn = document.createElement("button");
@@ -221,7 +233,7 @@ function createAnnotation(id, position, text) {
   newEditBtn.setAttribute("type", "button");
   newEditBtn.onclick = function() {
       var id = newEditBtn.parentNode.id;
-      newTextArea.disabled = false;
+      // newTextArea.disabled = false;
       // var newTitleTextArea = newTextArea.cloneNode(true);
       // newTitleTextArea.value = $(newLabel).contents()[0].data
       // $(newLabel).contents()[0].data = "";
@@ -230,10 +242,8 @@ function createAnnotation(id, position, text) {
       //load into annot buffer and start Wizard
       newDeleteBtn.style.display = "none";
       EditTrgtNCamBtn.style.display = "";
-      newSaveBtn.style.display = "";
       newEditBtn.style.display = "none";
       annot_buffer = getAnnotationById(id);
-
 
     };
 
@@ -247,7 +257,6 @@ function createAnnotation(id, position, text) {
       //Go to wizard step1
       var id = newLabel.id;
       EditTrgtNCamBtn.style.display = "none";
-      newSaveBtn.style.display = "none";
       EditAnnotationTrgt(id);
 
     }
@@ -397,6 +406,33 @@ function DeleteAnnotation(id){
     Annotation_Set.DeleteAnnotation(data.position);
     console.log("change_form.html-DeleteAnnotation() - Annotation_Set AFTER= ",Annotation_Set);
     removeAnnotationById(id);
+    refreshAnnotationMenu(Annotation_Set);
+  })
+}
+
+function EditAnnotationById(id){
+  var annot2Edit = getAnnotationById(id);
+  console.log("EditAnnotationById - annot2Edit = ", annot2Edit);
+  var data = {
+      camera_position: {},
+      camera_target: {},
+      name: "",
+      position: 0
+  };
+  data.camera_position.x = annot2Edit.camera_position.x;
+  data.camera_position.y = annot2Edit.camera_position.y;
+  data.camera_position.z = annot2Edit.camera_position.z;
+  data.camera_target.x = annot2Edit.camera_target.x;
+  data.camera_target.y = annot2Edit.camera_target.y;
+  data.camera_target.z = annot2Edit.camera_target.z;
+  data.name = annot2Edit.name;
+  data.text = annot2Edit.text;
+  data.position = getAnnotationIndexById(id);
+  $.post('/tours/edit_annotation/'+id+'/', JSON.stringify({annotation: data}), function(data) {
+    console.log(data);
+    console.log("Edited annotation");
+    console.log("change_form.html-DeleteAnnotation() - Annotation_Set BEFORE= ",Annotation_Set);
+    console.log("change_form.html-DeleteAnnotation() - Annotation_Set AFTER= ",Annotation_Set);
     refreshAnnotationMenu(Annotation_Set);
   })
 }

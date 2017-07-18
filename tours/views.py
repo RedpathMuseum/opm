@@ -136,6 +136,32 @@ def delete_annotation(request, annotation_id):
     annotObj.delete()
     return JsonResponse({'position': position})
 
+def edit_annotation(request, annotation_id):
+
+    #Load JSON of new annotation from POST request in change_form.html
+    loaded_json = json.loads(request.body.decode('utf-8'))
+    annotation_json = loaded_json["annotation"]
+
+    annotObj = Annotation.objects.get(pk=annotation_id)
+
+    annotObj.title = annotation_json["name"]
+    annotObj.position = annotation_json["position"]
+
+    annotObj.camera_pos_x = annotation_json["camera_position"]["x"]
+    annotObj.camera_pos_y = annotation_json["camera_position"]["y"]
+    annotObj.camera_pos_z = annotation_json["camera_position"]["z"]
+
+    annotObj.target_pos_x = annotation_json["camera_target"]["x"]
+    annotObj.target_pos_y = annotation_json["camera_target"]["y"]
+    annotObj.target_pos_z = annotation_json["camera_target"]["z"]
+
+    annotObj.annotation_text = annotation_json["text"]
+
+    annotObj.save()
+    annotObj_json = serializers.serialize("json", [annotObj])
+    # annotObj_json_ser = json.dumps(annotations_json)
+    return HttpResponse(annotObj_json, content_type='application/json')
+
 @staff_member_required
 
 def annotations_admin_view(request):

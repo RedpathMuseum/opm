@@ -792,10 +792,12 @@ var helpMsgNode;
 var confirmBtn;
 var parentStepNode;
 var topNode;
+var saveChangesBtn;
 function EditAnnotationTrgt(id){
   console.log("----------------------------------Editing annotation-----------------------");
   window.addEventListener("keydown", SaveCurrentTarget, false);
   parentStepNode = document.getElementById(id);
+  // parentStepNode.appendChild()
   stepNode = document.getElementById("myWizard-start").cloneNode(true);
   stepNode.style.display = "";
 
@@ -804,18 +806,18 @@ function EditAnnotationTrgt(id){
   confirmBtn.bind("click",function() {
     //Go to next camera view step and then to Save And Cancel state
     //Go back to Save and cancel state
-    confirmBtn = $(parentStepNode).find("[name='edit-target']").get()[0].style.display = "";
-    confirmBtn = $(parentStepNode).find("[name='save-changes']").get()[0].style.display = "";
+    confirmBtn = $(parentStepNode).find("[name='edit-target']").get()[0].style.display = "none";
+    // confirmBtn = $(parentStepNode).find("[name='save-changes']").get()[0].style.display = "";
+    // parentStepNode.removeChild(stepNode);
+    stepNode.style.display  = "none";
+    stepNode = $( "div[step='2']" ).get()[0];
+    parentStepNode.appendChild(stepNode);
+    stepNode.style.display = "";
+    window.removeEventListener("keydown", SaveCurrentTarget, false);
+    window.addEventListener("keydown", SaveCameraView, false);
+    step_num = 2;
+    EditCameraView(id, stepNode, parentStepNode);
   });
-
-  // stepNode.style.display = "";
-  //
-  // helpMsgNode = stepNode.firstChild;
-  // stepNode.firstChild.remove();
-  // confirmBtn = $(stepNode).find("[name='Continue']");
-  // stepNode.insertBefore(confirmBtn, stepNode.firstChild);
-  // stepNode.insertBefore(helpMsgNode, stepNode.firstChild);
-  // confirmBtn.disabled = true;
 
   parentStepNode.appendChild(stepNode);
   topNode = document.getElementById("myWizard-top").cloneNode(true);
@@ -825,6 +827,8 @@ function EditAnnotationTrgt(id){
   camera.position.x = annot_buffer.camera_position.x;
   camera.position.y = annot_buffer.camera_position.y;
   camera.position.z = annot_buffer.camera_position.z;
+
+  camera.up = new THREE.Vector3(0,0,1);
 
   //TODO: Add marker to DB to be able to simply clone it
   //marker_copy = annot_buffer.marker.clone();
@@ -836,6 +840,28 @@ function EditAnnotationTrgt(id){
 
 
 
+}
+
+function EditCameraView(id, stepNode, parentStepNode) {
+
+  var confirmBtn = $(stepNode).find("[name='Continue']");
+  confirmBtn.get()[0].disabled = false;
+  confirmBtn.bind("click",function() {
+    // $(parentStepNode).find("[text='description']").get()[0].disabled = false;
+    window.removeEventListener("keydown", SaveCameraView, false);
+    //TODO: Show annotation with correct text
+
+    saveChangesBtn = $(parentStepNode).find("[name='save-changes']");
+    saveChangesBtn.get()[0].style.display = "";
+    saveChangesBtn.bind("click", function(){
+      console.log(annot_buffer);
+      console.log(getAnnotationById(id));
+      annot_buffer.text = $(parentStepNode).find("[text='description']").get()[0].value;
+      EditAnnotationById(id);
+      annot_buffer = new AnnotationObj(0, 0);
+      step_num =1;
+    })
+  });
 }
 
 function CancelNewAnnotation(){
