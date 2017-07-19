@@ -2,7 +2,7 @@ $(document).ready(function() {
 	"use strict";
 
 
-// ------------- Pre-loader--------------  
+// ------------- Pre-loader--------------
 
 // makes sure the whole site is loaded
 
@@ -20,7 +20,7 @@ $(window).load(function() {
     scrollOffset: 90 //Height of Navigation Bar
   });
 
- 
+
   //var winWidth = $(window).width();
   $(window).scroll(function() {
     //if (winWidth > 767) {
@@ -31,22 +31,22 @@ $(window).load(function() {
         $('#home').slideUp(400);
       }
     //}
-	
+
 	//got o top
 	  if ($(this).scrollTop() > 200) {
 			$('#go-to-top a').fadeIn('slow');
 		  } else {
 			$('#go-to-top a').fadeOut('slow');
-	  }  
+	  }
   });
-  
+
   //-------scroll to top---------
-  
+
  $('#go-to-top a').click(function(){
 	$("html,body").animate({ scrollTop: 0 }, 750);
 	return false;
   });
-  
+
 //--------------- SmoothSroll--------------------
 
 var scrollAnimationTime = 1200,
@@ -72,11 +72,11 @@ $('a.scrollto').bind('click.smoothscroll', function (event) {
   });
 
 //--------------- for navigation---------------------
-  
+
     $('.navbar-collapse ul li a').click(function() {
       $('.navbar-toggle:visible').click();
   });
-  
+
 //--------------- -Loading the map ------------------
 
  $(document).on('click','.contact-map',function(event){
@@ -111,8 +111,8 @@ $('a.scrollto').bind('click.smoothscroll', function (event) {
           //tCounter: '<span class="mfp-counter">%curr% of %total%</span>' // markup of counter
         }
    });
- 
-// ------------------Carousel-------------- 
+
+// ------------------Carousel--------------
 
 $('#myCarousel, #myCarousel2').carousel({
   interval: 4000,
@@ -130,10 +130,10 @@ $('#myCarousel, #myCarousel2').carousel({
     touch: true,
     useCSS: false,
     direction: "vertical",
-        before: function(slider){        
+        before: function(slider){
      var height = $('.flex_text').find('.flex-viewport').innerHeight();
      $('.flex_text').find('li').css({ height: height + 'px' });
-        }   
+        }
     });
 
 // ----------initializing the wow.js ---------
@@ -159,22 +159,22 @@ $('.play').magnificPopup({
   fixedContentPos: false
 });
 
-    
+
 // --------------Newsletter-----------------------
 
 $(".newsletter-signup").ajaxChimp({
     callback: mailchimpResponse,
-    url: "http://codepassenger.us10.list-manage.com/subscribe/post?u=6b2e008d85f125cf2eb2b40e9&id=6083876991" // Replace your mailchimp post url inside double quote "".  
+    url: "http://codepassenger.us10.list-manage.com/subscribe/post?u=6b2e008d85f125cf2eb2b40e9&id=6083876991" // Replace your mailchimp post url inside double quote "".
 });
 
 function mailchimpResponse(resp) {
      if(resp.result === 'success') {
-	 
+
         $('.newsletter-success').html(resp.msg).fadeIn().delay(3000).fadeOut();
-        
+
     } else if(resp.result === 'error') {
         $('.newsletter-error').html(resp.msg).fadeIn().delay(3000).fadeOut();
-    }  
+    }
 };
 
   // --------------Contact Form Ajax request-----------------------
@@ -201,7 +201,7 @@ function mailchimpResponse(resp) {
       }
     });
   });
-  
+
 });
 
 
@@ -221,3 +221,9 @@ var fullScreenHome = function() {
 
 $(document).ready(fullScreenHome);
 $(window).resize(fullScreenHome);
+
+
+// Added functions
+$('#show-top').click(function(){
+  $('#header-wrapper').toggleClass('active');
+});

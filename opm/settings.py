@@ -57,7 +57,7 @@ ROOT_URLCONF = 'opm.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': ["tours/templates/admin/tours","navapp/templates",],
+        'DIRS': ["tours/templates/admin/tours","navapp/templates",os.path.join(BASE_DIR, "navapp/templates/navapp"),],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

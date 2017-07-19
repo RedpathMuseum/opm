@@ -1,16 +1,15 @@
-{% include "header.html" %}
-{% load i18n admin_urls %}
+{% extends "navapp_base.html" %}
 {% load staticfiles %}
 {% load static %}
 {% get_media_prefix as media %}
 
-{% include "navbar.html" %}
+
 
 <!-- <h3 class="heading-list">Tour list</h3> -->
 
 <!-- <script type="text/javascript" script-name="ubuntu" src="http://use.edgefonts.net/ubuntu.js"></script> -->
 
-<div class="fa fa-2x scan-qr-code badge scan-qr-code-index col-lg-3 col-md-3 col-sm-6 col-lg-offset-9 col-md-offset-9col-sm-offset-6" ><a href="https://webqr.com/index.html">SCAN QR CODE</a></div>
+<!-- <div class="fa fa-2x scan-qr-code badge scan-qr-code-index col-lg-3 col-md-3 col-sm-6 col-lg-offset-9 col-md-offset-9col-sm-offset-6" ><a href="https://webqr.com/index.html">SCAN QR CODE</a></div>
 <ul class="article-list-basic">
 
 {% for tour in tours %}
@@ -26,4 +25,39 @@
     </li>
 {% endfor %}
 
-</ul>
+</ul> -->
+
+
+  {% block logo %}
+  <!-- Logo -->
+    <div id="logo">
+      <h1><a href="{% url 'navapp:index' %}">The Redpath Museum's Virtual Exhibit</a></h1>
+      <p>Enhancing museum experience</p>
+      <!-- <button class="launcher">Launch Virtual Exhibit</button> -->
+    </div>
+  {% endblock %}
+
+{% block content %}
+<div id="intro-wrapper" class="wrapper style1">
+
+  <div class="title arrow up" id="show-top">Exhibits</div>
+  <section id="intro" class="container">
+    <ul class="article-list-basic">
+
+    {% for tour in tours %}
+        <li class="tours-panel">
+            <a href="/tours/{{ tour.id }}/">
+                <img src="{% static "static_images/redpath-inside.jpg" %}" />
+            </a>
+            <div>
+                <h2><a href="/tours/{{ tour.id }}/" style="color: #2b2b2b !important;">{{ tour.title }}</a></h2>
+                <p>{{ tour.description }}</p>
+                <a href="/tours/{{ tour.id }}/" class="read-more">See Tour &rarr;</a>
+            </div>
+        </li>
+    {% endfor %}
+
+    </ul>
+  </section>
+</div>
+{% endblock %}
