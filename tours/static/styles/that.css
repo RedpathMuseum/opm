@@ -17,16 +17,26 @@ div.bubble p {
 
 .play-btn {
 
-  position: relative;/* or absolute */
-   top: 50%;
-   left: 45%;
-  z-index: 6;
+   /*position: absolute !important;*/
+   /*top: 0px;
+   left: 10%;*/
+   z-index: 30;
   text-align: center;
+  opacity: 0.5;
 }
 
 .play-btn:hover {
+  opacity: 0.8;
+  background: #FFFF;
+}
 
-  background: #4CAF50;
+.play-ctr {
+  position:absolute !important;
+  top:0px !important;
+  left:0px !important;
+  z-index: 31;
+  /*text-align: unset;*/
+  border-radius: 50% 50% !important;
 }
 
 .element {
@@ -234,4 +244,28 @@ div.bubble p {
   -webkit-box-shadow: 0 15px 20px rgba(0, 0, 0, 0.3) !important;
   -moz-box-shadow: 0 15px 20px rgba(0, 0, 0, 0.3) !important;
   box-shadow: 0 15px 20px rgba(0, 0, 0, 0.3) !important;
+}
+
+.parent {
+  background-color:#CCCCCC;
+  position:relative;
+}
+
+.child {
+  display: block !important;
+  width:100% !important;
+  text-align:center;
+  margin: 0 auto !important;
+  position:absolute !important;
+  top:0px;
+
+  /*left:50%;*/
+}
+.child-nav {
+  display: block !important;
+
+  text-align:center;
+  margin: 0 auto !important;
+  position:absolute !important;
+  top:0px;
 }

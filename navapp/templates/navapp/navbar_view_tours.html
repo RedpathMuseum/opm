@@ -1,0 +1,42 @@
+{% include "header_navapp.html" %}
+{% load staticfiles %}
+{% load static %}
+<nav id="nav" class="">
+        <ul>
+          <li class="current"><a href="/">Home</a></li>
+          <!-- <li>
+            <a href="#">Dropdown</a>
+            <ul>
+              <li><a href="#">Lorem ipsum</a></li>
+              <li><a href="#">Magna veroeros</a></li>
+              <li><a href="#">Etiam nisl</a></li>
+              <li>
+                <a href="#">Sed consequat</a>
+                <ul>
+                  <li><a href="#">Lorem dolor</a></li>
+                  <li><a href="#">Amet consequat</a></li>
+                  <li><a href="#">Magna phasellus</a></li>
+                  <li><a href="#">Etiam nisl</a></li>
+                  <li><a href="#">Sed feugiat</a></li>
+                </ul>
+              </li>
+              <li><a href="#">Nisl tempus</a></li>
+            </ul>
+          </li> -->
+
+          <li><a href="/tours/">Collections</a></li>
+          <li><a href="no-sidebar.html">Team</a></li>
+          <li><a href="right-sidebar.html">About</a></li>
+          <li><a href="no-sidebar.html">Contact</a></li>
+        </ul>
+      </nav>
+
+      <!-- Scripts -->
+
+        <script src="{% static "assets/" %}js/jquery.min.js"></script>
+        <script src="{% static "assets/" %}js/jquery.dropotron.min.js"></script>
+        <script src="{% static "assets/" %}js/skel.min.js"></script>
+        <script src="{% static "assets/" %}js/skel-viewport.min.js"></script>
+        <script src="{% static "assets/" %}js/util.js"></script>
+        <!--[if lte IE 8]><script src="{% static "assets/" %}js/ie/respond.min.js"></script><![endif]-->
+        <script src="{% static "assets/" %}js/main.js"></script>

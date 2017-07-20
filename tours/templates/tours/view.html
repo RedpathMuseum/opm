@@ -1,4 +1,4 @@
-{% include "header.html" %}
+
 {% load staticfiles %}
 {% load static %}
 {% get_media_prefix as media %}
@@ -19,38 +19,53 @@
 
 
 </script>
+{% include 'header.html' %}
 
 
-<div class="" style="height: 100%; ">
+<div class="" style=" ">
 
-  {% include "navbar.html" %}
+
 
   <div class="col-lg-9 col-md-9 col-sm-6" id="3d_content" style=" height:100%; overflow-y:hidden; overflow-x: hidden; ">
-
+    <div class="child" style="z-index: 10; ">
+      {% include 'navbar_view_tours.html' %}
+    </div>
     <div id="blocker"></div>
     <div id="mydiv"></div>
-    <div id="contain">
-      <!-- <div id="icon-bar" class="icon-bar" style="z-index: 30;"> -->
-        <!-- <div id="annotation-badge" class="numberCircle fa  badge"></div> -->
-        <i id="annotation-badge" class="btn btn-default btn-lg btn-raised fa" ></i>
-        <i id="prev-btn" class=" btn btn-default btn-lg btn-raised fa fa-step-backward fa-2x play-btn" style="display: none" onClick=PreviousView()></i>
-        <!-- <i id="play-stop"></i> -->
-        &nbsp;
-        &nbsp;
-        &nbsp;
-        <!-- <i id="play-btn" class="btn btn-default btn-lg  btn-raised fa fa-play-circle fa-3x play-btn" onClick=PlayTour()></i> -->
-        <i id="play-btn" class="btn btn-default btn-lg  btn-raised fa fa-play-circle fa-4x play-btn" onClick=PlayTour()></i>
-        <i id="stop-btn" class="btn btn-default btn-lg btn-raised fa fa-pause fa-4x play-btn"style="display: none" onClick=StopTour()></i>
-        &nbsp;
-        &nbsp;
-        &nbsp;
-        <i id="next-btn" class="btn btn-default btn-lg btn-raised fa fa-step-forward fa-2x play-btn" style="display: none" onClick=NextView()></i>
+    <div id="contain" class="parent">
 
-
-      <!-- </div> -->
-      <canvas id="canvas3D">
+      <canvas id="canvas3D" >
 
       </canvas>
+
+      <!-- <div id="icon-bar" class="icon-bar" style="z-index: 30;"> -->
+        <!-- <div id="annotation-badge" class="numberCircle fa  badge"></div> -->
+        <div class="child">
+
+
+
+        <i id="play-btn" class="btn btn-default btn-lg  btn-raised fa fa-play-circle fa-4x play-btn" onClick=PlayTour()></i>
+        <div class="">
+
+          <i id="prev-btn" class=" btn btn-default btn-lg btn-raised fa fa-step-backward fa-2x play-btn" style="display: none" onClick=PreviousView()></i>
+          <!-- <i id="play-stop"></i> -->
+          &nbsp;
+          &nbsp;
+          &nbsp;
+          <!-- <i id="play-btn" class="btn btn-default btn-lg  btn-raised fa fa-play-circle fa-3x play-btn" onClick=PlayTour()></i> -->
+
+          <i id="stop-btn" class="btn btn-default btn-lg btn-raised fa fa-pause fa-4x play-btn"style="display: none" onClick=StopTour()></i>
+          &nbsp;
+          &nbsp;
+          &nbsp;
+          <i id="next-btn" class="btn btn-default btn-lg btn-raised fa fa-step-forward fa-2x play-btn" style="display: none" onClick=NextView()></i>
+        </div>
+
+
+      </div>
+      <i id="annotation-badge" class="play-ctr btn btn-default btn-lg btn-raised fa" style="display: none"></i>
+
+      <!-- </div> -->
     </div>
 
     <!-- <div id="css3d_div"></div> -->
@@ -76,7 +91,13 @@
 </div>
 <!-- <div class="fa fa-2x scan-qr-code badge scan-qr-code-index col-lg-3 col-md-3 col-sm-6 col-lg-offset-9 col-md-offset-9col-sm-offset-6" ><a href="https://webqr.com/index.html">SCAN QR CODE</a></div> -->
 
-
+<div id="titleBar"><a href="#navPanel" class="toggle"></a><span class="title">
+        <h1><a href="/">The Redpath Museum's Virtual Exhibit</a></h1>
+        <p>Enhancing museum experience</p>
+        <button class="launcher">Launch Virtual Exhibit</button>
+      </span>
+</div>
+<div id="navPanel"><nav><a class="link depth-0" href="/" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"><span class="indent-0"></span>Home</a><a class="link depth-0" href="/tours/" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"><span class="indent-0"></span>Virtual Exhibit</a><a class="link depth-0" href="no-sidebar.html" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"><span class="indent-0"></span>Our Team</a><a class="link depth-0" href="right-sidebar.html" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"><span class="indent-0"></span>About</a><a class="link depth-0" href="no-sidebar.html" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"><span class="indent-0"></span>Contact</a></nav></div>
 
 <script src="{% static "bower_components/jquery/dist/jquery.js" %}" ></script>
 <!-- <script src="{% static "bower_components/three.js/build/three.js" %}" ></script> -->
@@ -161,6 +182,7 @@
       document.getElementById("stop-btn").style.display = "";
       document.getElementById("prev-btn").style.display = "";
       document.getElementById("next-btn").style.display = "";
+      document.getElementById("annotation-badge").style.display = "";
 
       document.getElementById("play-btn").style.display = "none";
       playingTour =true;
