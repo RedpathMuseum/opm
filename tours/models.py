@@ -25,6 +25,16 @@ class Tour(models.Model):
     def __str__(self):
         return str(self.title)
 
+class TourGroup(models.Model):
+    title = models.CharField(max_length=100)
+    tours = models.ManyToManyField(Tour)
+
+    def __str__(self):              # __unicode__ on Python 2
+        return self.title
+
+    class Meta:
+        ordering = ('title',)
+
 class Section(models.Model):
     title = models.CharField(max_length=50)
     tour = models.ForeignKey(

@@ -5,6 +5,7 @@ from .models import Render
 from .models import Paragraph
 from .models import Image
 from .models import Annotation
+from .models import TourGroup
 
 class ParagraphInline(admin.TabularInline):
     model = Paragraph
@@ -28,3 +29,4 @@ admin.site.register(Tour, TourAdmin)
 admin.site.register(Render)
 admin.site.register(Paragraph)
 admin.site.register(Image)
+admin.site.register(TourGroup)
