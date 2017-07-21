@@ -84,7 +84,7 @@
       {% endif %}
 
       {% if section.class_name == 'Image' %}
-      <img src="{% static "renders/" %}{{section.file_name}}"></img>
+      <img src="{{ media }}images/{{section.file_name}}"></img>
       {% endif %}
     {% endfor %}
   </div>

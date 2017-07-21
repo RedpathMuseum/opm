@@ -1,5 +1,7 @@
 from django.shortcuts import render
+from .models import TeamMember
 
-# Create your views here.
+
 def index(request):
-    return render(request, 'navapp/index.html')
+    teamMembers = TeamMember.objects.all()
+    return render(request, 'navapp/index.html', { 'teamMembers' : teamMembers})

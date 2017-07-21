@@ -42,9 +42,12 @@
 
   <div class="title arrow up" id="show-top">Exhibits</div>
   <section id="intro" class="container">
-    <ul class="article-list-basic">
 
-    {% for tour in tours %}
+    {% for group in tourGroups %}
+    <h1>{{ group.title }}</h1>
+    <hr></hr>
+      <ul class="article-list-basic">
+        {% for tour in group.tours.all %}
         <li class="tours-panel">
             <a href="/tours/{{ tour.id }}/">
                 <img src="{% static "static_images/redpath-inside.jpg" %}" />
@@ -55,9 +58,9 @@
                 <a href="/tours/{{ tour.id }}/" class="read-more">See Tour &rarr;</a>
             </div>
         </li>
+        {% endfor %}
+      </ul>
     {% endfor %}
-
-    </ul>
   </section>
 </div>
 {% endblock %}

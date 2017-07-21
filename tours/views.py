@@ -13,13 +13,15 @@ from .models import Render
 from .models import Paragraph
 from .models import Image
 from .models import Annotation
+from .models import TourGroup
 
 from itertools import chain
 
 
 def index(request):
     tours = Tour.objects.all()
-    return render(request, 'tours/index.html', {'tours': tours})
+    tourGroups = TourGroup.objects.all()
+    return render(request, 'tours/index.html', {'tours': tours, 'tourGroups': tourGroups})
 
 def view(request):
     tours = Tour.objects.all()
