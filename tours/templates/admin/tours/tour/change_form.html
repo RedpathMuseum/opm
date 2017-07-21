@@ -134,7 +134,7 @@
               </div>
               <div class="tab-pane" step="4" style="display: none">
                  <p>This is the last step. Save your new annotation. You can always edit it later</p>
-                 <button id="step-save-btn" type="button" class="btn-success next" value ="Save Annotation" onClick="SaveNewAnnotation(); EndAnnotationWizard()" >Save New Annotation</button>
+                 <button id="step-save-btn" type="button" class="btn-success" value ="Save Annotation" onClick="SaveNewAnnotation(); EndAnnotationWizard()" >Save New Annotation</button>
               </div>
            </div>
          </div>
@@ -461,6 +461,7 @@ function ConfirmCameraViewStep() {
 function ConfirmAnnotTextStep() {
   document.getElementById("annot-txt-buffer").style.display = "none";
   document.getElementById("annot-txt-buffer-val").disabled = true;
+  document.getElementById("step-save-btn").style.display ="";
   document.getElementById("annot-txt-buffer-val").removeEventListener("input", SaveAnnotationBufferText);
 
 }
@@ -472,7 +473,7 @@ function EndAnnotationWizard() {
   document.getElementById("step-save-btn").style.display ="none";
   document.getElementById("annot-txt-buffer").style.display = "none";
   $('.tab-pane').hide();
-  $('#annot-wizard-step-header').text("Step "+1+ " of 4");
+  $('#annot-wizard-step-header').text("Step 1 of 4");
   if(document.getElementById("tooltip"+777)!=null) {
     document.getElementById("tooltip"+777).remove();
   }
@@ -485,8 +486,9 @@ $('.next').bind("click",function(){
   var nextId = parseInt($(this).parents('.tab-pane').attr("step")) + 1;
   $(this).parents('.tab-pane').hide();
   $(this).parents('.tab-pane').next().show();
-  $('#annot-wizard-step-header').text("Step "+nextId+ " of 4");
-  step_num = nextId%5;
+  step_num = nextId%num_of_steps;
+  $('#annot-wizard-step-header').text("Step "+step_num+ " of 4");
+
   console.log("step_num= "+ step_num);
 
 })

@@ -83,6 +83,7 @@ var pTagArray = [];
 
 //Annot Wizard Variables
 var step_num = 1;
+var num_of_steps = 4+1;
 
 //3D Web content initialization
 var Element = function ( id, x, y, z, ry ) {
