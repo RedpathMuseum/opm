@@ -33,10 +33,18 @@ div.bubble p {
 .play-ctr {
   position:absolute !important;
   top:0px !important;
-  left:0px !important;
+  right:0px !important;
   z-index: 31;
   /*text-align: unset;*/
-  border-radius: 50% 50% !important;
+  /*border-radius: 50% 50% !important;*/
+}
+
+.toggle-screen {
+  position: absolute !important;
+  top: 1%;
+  right: 1% !important;
+  z-index: 31;
+  font-size: 150%;
 }
 
 .element {
@@ -261,11 +269,42 @@ div.bubble p {
 
   /*left:50%;*/
 }
-.child-nav {
-  display: block !important;
 
+.child-player {
+  display: block !important;
   text-align:center;
   margin: 0 auto !important;
   position:absolute !important;
-  top:0px;
+  bottom:0px;
+}
+
+.child-player-ctrls-child {
+  display: block !important;
+  position:absolute !important;
+  bottom: 200%;
+  right: 35%;
+}
+
+.child-player-ctrls-parent {
+  /*display: block !important;
+  text-align:center;
+  margin: 0 auto !important;*/
+  /*position:absolute !important;
+  top:0px;*/
+}
+
+.parent-play-btn {
+  /*display: block !important;
+  text-align:center;
+  margin: 0 auto !important;*/
+  position:absolute !important;
+  /*bottom:0px;*/
+}
+
+.child-play-btn {
+  display: block !important;
+  text-align:center;
+  margin: 0 auto !important;
+  position:absolute !important;
+  bottom:0px;
 }

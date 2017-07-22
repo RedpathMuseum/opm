@@ -26,44 +26,50 @@
 
 
 
-  <div class="col-lg-9 col-md-9 col-sm-6" id="3d_content" style=" height:100%; overflow-y:hidden; overflow-x: hidden; ">
+  <div class="col-lg-9 col-md-9 col-sm-8 " id="3d_content" style=" height:100%; overflow-y:hidden; overflow-x: hidden; ">
     <div class="child" style="z-index: 10; ">
       {% include 'navbar_view_tours.html' %}
+
     </div>
     <div id="blocker"></div>
     <div id="mydiv"></div>
     <div id="contain" class="parent">
-
+      <i id="full-screen-btn" class="toggle-screen glyphicon glyphicon-fullscreen play-btn" onclick="toggleFullScreen()"></i>
       <canvas id="canvas3D" >
 
       </canvas>
 
       <!-- <div id="icon-bar" class="icon-bar" style="z-index: 30;"> -->
         <!-- <div id="annotation-badge" class="numberCircle fa  badge"></div> -->
-        <div class="child">
+        <div class="child-player">
 
 
 
-        <i id="play-btn" class="btn btn-default btn-lg  btn-raised fa fa-play-circle fa-4x play-btn" onClick=PlayTour()></i>
-        <div class="">
+        <!-- <i id="play-btn" class="btn btn-default btn-lg  btn-raised fa fa-play-circle fa-4x play-btn child-play-btn" onClick=PlayTour()></i> -->
+        <div class="child-player-ctrls-parent">
 
           <i id="prev-btn" class=" btn btn-default btn-lg btn-raised fa fa-step-backward fa-2x play-btn" style="display: none" onClick=PreviousView()></i>
           <!-- <i id="play-stop"></i> -->
           &nbsp;
           &nbsp;
           &nbsp;
-          <!-- <i id="play-btn" class="btn btn-default btn-lg  btn-raised fa fa-play-circle fa-3x play-btn" onClick=PlayTour()></i> -->
+          <i id="play-btn" class="btn btn-default btn-lg  btn-raised fa fa-play-circle fa-3x play-btn" onClick=PlayTour()></i>
 
           <i id="stop-btn" class="btn btn-default btn-lg btn-raised fa fa-pause fa-4x play-btn"style="display: none" onClick=StopTour()></i>
           &nbsp;
           &nbsp;
           &nbsp;
           <i id="next-btn" class="btn btn-default btn-lg btn-raised fa fa-step-forward fa-2x play-btn" style="display: none" onClick=NextView()></i>
+          <div class="child-player-ctrls-child">
+            <i id="annotation-badge" class="play-ctr play-btn btn btn-default btn-lg btn-raised fa" style="display: none"></i>
+          </div>
+
         </div>
 
 
+
       </div>
-      <i id="annotation-badge" class="play-ctr btn btn-default btn-lg btn-raised fa" style="display: none"></i>
+      <!-- <i id="annotation-badge" class="play-ctr btn btn-default btn-lg btn-raised fa" style="display: none"></i> -->
 
       <!-- </div> -->
     </div>
@@ -74,7 +80,7 @@
 
 
   </div>
-  <div class="col-lg-3 col-md-3 col-sm-6" id="docked_content" style="height:100%; overflow-y: auto">
+  <div class="col-lg-3 col-md-3 col-sm-4" id="docked_content" style="height:100%; overflow-y: auto">
 
     <h1>{{tour.title}}</h1>
     {% for section in all_content %}
@@ -147,19 +153,19 @@
     //TODO: Make the function work
     togglePlayBtn();
     Annotation_Set.StartAnnotationTour(); };
-    badge.innerHTML = Annotation_Set.queue.curr_annot_index+1;
+    badge.innerHTML = Annotation_Set.queue.curr_annot_index+1+ "/" +Annotation_Set.queue.length;
   function StopTour(){
     Annotation_Set.StopAnnotationTour();
-    badge.innerHTML = Annotation_Set.queue.curr_annot_index+1;
+    badge.innerHTML = Annotation_Set.queue.curr_annot_index+1+ "/" +Annotation_Set.queue.length;
     togglePlayBtn();
    };
   function NextView(){
     Annotation_Set.NextAnnotation();
-    badge.innerHTML = Annotation_Set.queue.curr_annot_index+1;
+    badge.innerHTML = Annotation_Set.queue.curr_annot_index+1+ "/" +Annotation_Set.queue.length;
   };
   function PreviousView(){
     Annotation_Set.PreviousAnnotation();
-    badge.innerHTML = Annotation_Set.queue.curr_annot_index+1;
+    badge.innerHTML = Annotation_Set.queue.curr_annot_index+1+ "/" +Annotation_Set.queue.length;
    };
 
 
@@ -188,5 +194,17 @@
       playingTour =true;
     }
 
+  }
+
+  function toggleFullScreen() {
+    console.log("TOGGLE FULL SCREEN");
+    if(!document.webkitIsFullScreen) {
+      console.log("Enter Full Screen");
+      document.documentElement.webkitRequestFullScreen();
+    }
+    else {
+      console.log("Exit Full screen");
+      document.webkitExitFullscreen();
+    }
   }
 </script>

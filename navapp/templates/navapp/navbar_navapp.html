@@ -11,7 +11,7 @@
       <div id="logo">
         <h1><a href="{% url 'navapp:index' %}">The Redpath Museum's Virtual Exhibit</a></h1>
         <p>Enhancing museum experience</p>
-        <button class="launcher">Go To Virtual Museum Tours</button>
+        <a href="{% url 'tours:index' %}"><button class="launcher">Go To Virtual Museum Tours</button></a>
       </div>
     {% endblock %}
 
