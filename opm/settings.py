@@ -25,7 +25,7 @@ SECRET_KEY = '#^7e0hqlf+antm=8r0_fo7n3!fqhl__4hzqzy+#lk^zt81ooba'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['redpath.mamss.ca', 'localhost', '67.212.82.214']
+ALLOWED_HOSTS = ['redpath.mamss.ca', 'localhost', '67.212.82.214', '3d.redpath.mamss.ca']
 
 
 # Application definition
