@@ -26,7 +26,7 @@
 
 
 
-  <div class="col-lg-9 col-md-9 col-sm-8 " id="3d_content" style=" height:100%; overflow-y:hidden; overflow-x: hidden; ">
+  <div class="col-lg-9 col-md-9 col-sm-6 " id="3d_content" style=" overflow-y:auto; overflow-x: hidden; ">
     <div class="child" style="z-index: 10; ">
       {% include 'navbar_view_tours.html' %}
 
@@ -80,7 +80,7 @@
 
 
   </div>
-  <div class="col-lg-3 col-md-3 col-sm-4" id="docked_content" style="height:100%; overflow-y: auto">
+  <div class="col-lg-3 col-md-3 col-sm-6" id="docked_content" style="height:100%; overflow-y: auto">
 
     <h1>{{tour.title}}</h1>
     {% for section in all_content %}
