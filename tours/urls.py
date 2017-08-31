@@ -11,5 +11,7 @@ urlpatterns = [
     url(r'^delete_annotation/(?P<annotation_id>[0-9]+)/$', views.delete_annotation, name='delete_annotation'),
     url(r'^edit_annotation/(?P<annotation_id>[0-9]+)/$', views.edit_annotation, name='edit_annotation'),
 
+    url(r'^kahdeau/$', views.kahdeau, name='kahdeau'),
+
 
 ]

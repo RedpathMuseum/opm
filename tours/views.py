@@ -23,6 +23,11 @@ def index(request):
     tourGroups = TourGroup.objects.all()
     return render(request, 'tours/index.html', {'tours': tours, 'tourGroups': tourGroups})
 
+def kahdeau(request):
+    tours = Tour.objects.all()
+    tourGroups = TourGroup.objects.all()
+    return render(request, 'tours/kahdeau.html', {'tours': tours, 'tourGroups': tourGroups})
+
 def view(request):
     tours = Tour.objects.all()
     return render(request, 'tours/view.html', {'tours': tours})
