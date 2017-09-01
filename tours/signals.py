@@ -24,7 +24,7 @@ def create_draco(sender, instance, **kwargs):
     log.debug("UPLOAD_DIR= ")
     log.debug(upload_dir)
     # Path to the .obj uploaded
-    objInputPath = instance.object_path.url
+    objInputPath = instance.object_path.path
     log.debug("objInputPath= ")
     log.debug(objInputPath)
 
