@@ -66,6 +66,14 @@ class Image(Section):
         image_name = basename(self.path.name)
         return image_name
 
+class Video(Section):
+    path = models.FileField(upload_to=settings.MEDIA_ROOT+"/videos")
+
+    def file_name(self):
+        video_name = basename(self.path.name)
+        return video_name
+
+
 class Annotation(models.Model):
     title = models.CharField(max_length=50)
     position = models.IntegerField()

@@ -4,6 +4,7 @@ from .models import Tour
 from .models import Render
 from .models import Paragraph
 from .models import Image
+from .models import Video
 from .models import Annotation
 from .models import TourGroup
 
@@ -29,4 +30,5 @@ admin.site.register(Tour, TourAdmin)
 admin.site.register(Render)
 admin.site.register(Paragraph)
 admin.site.register(Image)
+admin.site.register(Video)
 admin.site.register(TourGroup)

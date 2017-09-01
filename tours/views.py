@@ -12,6 +12,7 @@ from .models import Tour
 from .models import Render
 from .models import Paragraph
 from .models import Image
+from .models import Video
 from .models import Annotation
 from .models import TourGroup
 
@@ -52,6 +53,8 @@ def detail(request, tour_id):
 
     images = Image.objects.filter(tour__id=tour_id)
 
+    videos = Video.objects.filter(tour__id=tour_id)
+
     annotations = Annotation.objects.filter(tour__id=tour_id)
 
     annotations = annotations.order_by('position')
@@ -61,13 +64,14 @@ def detail(request, tour_id):
     POSITION_FIELD_MAPPING = {
     Paragraph: 'position',
     Image: 'position',
+    Video: 'position',
     }
 
     def my_key_func(obj):
         return getattr(obj, POSITION_FIELD_MAPPING[type(obj)])
 
     # Concatenating two query sets
-    all_content = sorted(chain(images, paragraphs), key=my_key_func)
+    all_content = sorted(chain(images, videos, paragraphs), key=my_key_func)
 
     return render(request, 'tours/view.html', {
         'tour': tour,
@@ -75,6 +79,7 @@ def detail(request, tour_id):
         'renders_2': renders_2,
         'paragraphs': paragraphs,
         'images': images,
+        'videos': videos,
         'annotations_list': annotations_list,
         'all_content': all_content
         })

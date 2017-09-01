@@ -92,6 +92,13 @@
       {% if section.class_name == 'Image' %}
       <img src="{{ media }}images/{{section.file_name}}"></img>
       {% endif %}
+
+      {% if section.class_name == 'Video' %}
+      <video width="320" height="240" controls>
+        <source src="{{ media }}videos/{{section.file_name}}" type="video/mp4">
+      </video>
+      {% endif %}
+
     {% endfor %}
   </div>
 </div>
