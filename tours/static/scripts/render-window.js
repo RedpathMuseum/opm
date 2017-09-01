@@ -510,7 +510,7 @@ AnnotationSet.prototype.NextView = function(){
     controls.target.y = from_t.y;
     controls.target.z = from_t.z;
 
-    //camera.up = new THREE.Vector3(0,1,0);
+    //camera.up = new THREE.Vector3(0,0,1);
 
   })
   tween_lookat.start();
@@ -557,7 +557,7 @@ AnnotationSet.prototype.PreviousView = function(){
   camera.position.z = this.queue[this.queue.curr_annot_index].camera_position.z;
 
   controls.target = this.queue[this.queue.curr_annot_index].camera_target;
-  camera.up = new THREE.Vector3(0,1,0);
+  camera.up = new THREE.Vector3(0,0,1);
 
   for(var i = 0; i<= cameraGUI.Tips.length-1; i++){
     if(i!=this.queue.curr_annot_index){
@@ -580,7 +580,7 @@ AnnotationSet.prototype.PlayTour = function(){
 
     console.log("camera.up=",camera.up);
     // controls.target=AnnotCamLookatPts[tour_counter];
-    camera.up = new THREE.Vector3(0,1,0);
+    camera.up = new THREE.Vector3(0,0,1);
 
 
 
@@ -610,7 +610,7 @@ AnnotationSet.prototype.PlayTour = function(){
       camera.position.z = from.z;
 
       //controls.target = next_cam_target;
-      camera.up = new THREE.Vector3(0,1,0);
+      camera.up = new THREE.Vector3(0,0,1);
 
     })
     // tween_camera.start();
@@ -635,14 +635,14 @@ AnnotationSet.prototype.PlayTour = function(){
       controls.target.y = from_t.y;
       controls.target.z = from_t.z;
 
-      //camera.up = new THREE.Vector3(0,1,0);
+      //camera.up = new THREE.Vector3(0,0,1);
 
     })
     tween_lookat.start();
     tween_camera.start();
     // controls.target = this.queue[this.queue.curr_annot_index].camera_target;
 
-    //camera.up = new THREE.Vector3(0,1,0);
+    //camera.up = new THREE.Vector3(0,0,1);
 
   // //TODO:Make this a function of AnnotationSet
     for(var i = 0; i<= this.queue.length-1; i++){
@@ -1051,7 +1051,7 @@ function FreezeSphere(camlookatpoint, camposalongnormal) {
 
   //Note that you set controls.target to an object's position, it will follow its postiiton
   controls.target=marker_copy.position;
-  camera.up = new THREE.Vector3(0,1,0);
+  camera.up = new THREE.Vector3(0,0,1);
 
   // camera.position.x=AnnotCamPos[camcounter].x;
   // camera.position.y=AnnotCamPos[camcounter].y;
@@ -1083,7 +1083,7 @@ function SelectViewFromIndex(view_index){
   camera.position.y=AnnotCamPos[view_index].y;
   camera.position.z=AnnotCamPos[view_index].z;
   controls.target=AnnotCamLookatPts[view_index];
-  camera.up = new THREE.Vector3(0,1,0);
+  camera.up = new THREE.Vector3(0,0,1);
   for(var i = 0; i<= cameraGUI.Tips.length-1; i++){
     if(i!=tour_counter){
       document.getElementById("tooltip"+i).style.visibility='hidden';
