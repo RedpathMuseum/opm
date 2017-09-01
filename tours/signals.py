@@ -83,8 +83,7 @@ def create_draco(sender, instance, **kwargs):
     os.system("docker cp "+"dracoctn4:draco/objPool/"+fileName+".drc"+" /"+strOutPath)
     os.system("docker cp "+"dracoctn4:draco/objPool/"+fileName+".drc"+" /"+"/var/www/opm/media/renders")
     #TODO Add in production condition for static collection
-    os.system("python3 manage.py collectstatic")
-    os.system("yes")
+    os.system("python3 manage.py collectstatic --noinput")
 
     log.debug("os.system argument = ")
     log.debug(pathToDracoEncoder+" draco_encoder.exe -i "+strIn+" -o "+strOutPath+"/"+fileName+".drc")
