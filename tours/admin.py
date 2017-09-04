@@ -16,6 +16,10 @@ class ImageInline(admin.TabularInline):
     model = Image
     extra = 0
 
+class VideoInline(admin.TabularInline):
+    model = Video
+    extra = 0
+
 class AnnotationInline(admin.TabularInline):
     model = Annotation
     extra = 0
@@ -24,7 +28,7 @@ class AnnotationInline(admin.TabularInline):
 
 
 class TourAdmin(admin.ModelAdmin):
-    inlines = [ ParagraphInline, ImageInline, AnnotationInline]
+    inlines = [ ParagraphInline, ImageInline, VideoInline, AnnotationInline]
 
 admin.site.register(Tour, TourAdmin)
 admin.site.register(Render)
