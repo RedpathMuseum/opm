@@ -82,7 +82,8 @@
   </div>
   <div class="col-lg-3 col-md-3 col-sm-6" id="docked_content" style="height:100%; overflow-y: auto">
 
-    <h1>{{tour.title}}</h1>
+    <h1 style="font-size:150%; color: #f5f5f5;"><u>{{tour.title}}</u></h1>
+    <br>
     {% for section in all_content %}
       {% if section.class_name == 'Paragraph' %}
         <h3>{{section.title}}</h3>
