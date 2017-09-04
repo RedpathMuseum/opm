@@ -15,7 +15,7 @@ class Render(models.Model):
 
 class Tour(models.Model):
     title = models.CharField(max_length=50)
-    description = models.TextField(max_length=5000)
+    text = models.TextField(max_length=5000)
     render = models.ForeignKey(
         Render,
         null=True,
@@ -40,9 +40,10 @@ class Section(models.Model):
     tour = models.ForeignKey(
         Tour,
         null=True,
-        on_delete=models.CASCADE
+        on_delete=models.CASCADE,
+        help_text="Select to which Tour you want to link this content"
     )
-    position = models.IntegerField()
+    position = models.IntegerField(help_text="Write down the position of the content as an integer. Increasing positions are placed on a top to bottom scale.")
 
     # Inherited method to get class name of the a model.
     #Necessary to filter etween different types of content that Section childs
@@ -67,7 +68,7 @@ class Image(Section):
         return image_name
 
 class Video(Section):
-    path = models.FileField(upload_to=settings.MEDIA_ROOT+"/videos")
+    path = models.FileField(upload_to=settings.MEDIA_ROOT+"/videos", help_text="Only mp4 format is suported")
 
     def file_name(self):
         video_name = basename(self.path.name)

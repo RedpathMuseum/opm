@@ -87,17 +87,19 @@
     {% for section in all_content %}
       {% if section.class_name == 'Paragraph' %}
         <h3>{{section.title}}</h3>
-        <p>{{section.description}}</p>
+        <p>{{section.text}}</p>
       {% endif %}
 
       {% if section.class_name == 'Image' %}
-      <img src="{{ media }}images/{{section.file_name}}"></img>
+        <img src="{{ media }}images/{{section.file_name}}"></img>
+        <p>{{section.title}}</p>
       {% endif %}
 
       {% if section.class_name == 'Video' %}
-      <video width="320" height="240" controls>
-        <source src="{{ media }}videos/{{section.file_name}}" type="video/mp4">
-      </video>
+        <p>{{section.title}}</p>
+        <video width="320" height="240" controls>
+          <source src="{{ media }}videos/{{section.file_name}}" type="video/mp4">
+        </video>
       {% endif %}
 
     {% endfor %}
