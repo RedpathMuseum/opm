@@ -31,7 +31,7 @@
 			<!-- Intro -->
 				<div id="intro-wrapper" class="wrapper style1">
 
-					<div class="title arrow up" id="show-top">Show Launcher</div>
+					<div class="title arrow up" id="show-top">About Us</div>
 					<section id="intro" class="container">
 						<p class="style1">So in case you were wondering what this is all about, well...</p>
 						<p class="style2">
@@ -43,9 +43,7 @@
 							  in collaboration with students from <strong>ÉTS</strong> and <strong>Université de Montréal</strong>. <br></br>
 
 						This project aims to enhance museum experiences by leveraging cutting <strong>3D technologies</strong> and the <strong>IoT</strong>.
-						<ul class="actions">
-							<li><a href="#" class="button style3 big">Proceed</a></li>
-						</ul>
+						
 					</section>
 				</div>
 
@@ -54,65 +52,75 @@
 					<div class="title">The Details</div>
 					<div id="main" class="container">
 
-						<!-- Image -->
-							<a href="#" class="image featured">
+						<!-- <!-- Image -->
+							<!-- <a href="#" class="image featured">
 								<img src="{% static "images/" %}pic01.jpg" alt="" />
-							</a>
+							</a>  -->
 
 						<!-- Features -->
 							<section id="features">
 								<header class="style1">
-									<h2>Dolor consequat feugiat amet veroeros</h2>
-									<p>Feugiat dolor nullam orci pretium phasellus justo</p>
+									<h2>Our Goals </h2>
+									
+									<p>We aim to virtualize all artifacts in the Redpath Museum with only volunteers and students from the participating universities. This way we want to give visitors the ability to interact with artifacts, deliver more information on the displayed artifacts and give access to the undisplayed ones.</p>
+									<br>
+									<p>
+										To achieve this ambitious objective, we created a production line for which we continously improve all 3 main components: 3D scanning artifacts, Virtual Exhibit App and 3D Printing artifacts.
+									</p>
 								</header>
 								<div class="feature-list">
-									<div class="row">
-										<div class="6u 12u(mobile)">
+									<div class="row center">
+										<div class="12u 12u(mobile)">
 											<section>
-												<h3 class="icon fa-comment">Mattis velit diam vulputate</h3>
-												<p>Eget mattis at, laoreet vel et velit aliquam diam ante, aliquet sit amet vulputate. Eget mattis at, laoreet vel velit lorem.</p>
+												<h3 class="icon fa-comment">3D Scanning</h3>
+												<p>
+													To 3D scan our objects, we chose to use photogrammetry as it is the most versatile and cheapest
+													way to of 3D scanning artifacts. Briefly, 3D scanning consists of taking photos of an object from all angles and stitching those photos to create a virtual replica.
+
+												</p>
+												<br>
+												<p>
+													We are currently doing the whole process manually, but simultaneously are developing an automate. Here is a test from our first prototype.
+												</p>
 											</section>
 										</div>
-										<div class="6u 12u(mobile)">
+										
+									</div>
+									<div class="row">
+										<div class="12u 12u(mobile)">
 											<section>
-												<h3 class="icon fa-refresh">Lorem ipsum dolor sit veroeros</h3>
-												<p>Eget mattis at, laoreet vel et velit aliquam diam ante, aliquet sit amet vulputate. Eget mattis at, laoreet vel velit lorem.</p>
+												<h3 class="icon fa-picture-o">Virtual Exhibit App</h3>
+												<p>We developed a web application that displays our 3D scans along with 3D annotations and an accompanied article containing texts, images and videos. Click <a href="{% url 'tours:index' %}">here</a> to see it in action</p>
+												<br>
+												<p>
+													To start the app, visitors must walk close to a bluetooth beacon to get introductory videos and information about the collection which they are visiting. Then, the visitors must scan a QR code that is on te artifact so that he can see both physical and virtual artifact simultaneously.
+												</p>
+												<br>
+												<p>
+													Our app was designed to enable the creation of completely different content for the same virtual artifact. This way we hope to be able to reach a wider audience no matter their age, expertise or spoken language. Our content creators, with the help from students in REDM 400, continously create and improve our content.
+												</p>
+												<br>
+												<p>
+													We just launched the first version of our app and are currently developping the next version which will include interactive educational games and the ability for visitors to order 3D prints of their favorite artifact and receive it on the same day.
+												</p>
+											</section>
+										</div>
+										<div class="12u 12u(mobile)">
+											<section>
+												<h3 class="icon fa-cog">3D printing</h3>
+												<p>
+													We are continously creating 3D printable versions of our 3D scans to create educational tools and souvenirs. We optimized our 3D prints so that they can be printed in 1 hour or less.
+													We are now testing new materials and adding mechanical features to our 3D scans with the help of MAMSS's 3D printing experts and participants in their Quickfire competition.
+												</p>
 											</section>
 										</div>
 									</div>
-									<div class="row">
-										<div class="6u 12u(mobile)">
-											<section>
-												<h3 class="icon fa-picture-o">Pretium phasellus justo lorem</h3>
-												<p>Eget mattis at, laoreet vel et velit aliquam diam ante, aliquet sit amet vulputate. Eget mattis at, laoreet vel velit lorem.</p>
-											</section>
-										</div>
-										<div class="6u 12u(mobile)">
-											<section>
-												<h3 class="icon fa-cog">Tempus sed pretium orci</h3>
-												<p>Eget mattis at, laoreet vel et velit aliquam diam ante, aliquet sit amet vulputate. Eget mattis at, laoreet vel velit lorem.</p>
-											</section>
-										</div>
-									</div>
-									<div class="row">
-										<div class="6u 12u(mobile)">
-											<section>
-												<h3 class="icon fa-wrench">Aliquam consequat et feugiat</h3>
-												<p>Eget mattis at, laoreet vel et velit aliquam diam ante, aliquet sit amet vulputate. Eget mattis at, laoreet vel velit lorem.</p>
-											</section>
-										</div>
-										<div class="6u 12u(mobile)">
-											<section>
-												<h3 class="icon fa-check">Dolore laoreet aliquam mattis</h3>
-												<p>Eget mattis at, laoreet vel et velit aliquam diam ante, aliquet sit amet vulputate. Eget mattis at, laoreet vel velit lorem.</p>
-											</section>
-										</div>
-									</div>
+									
 								</div>
-								<ul class="actions actions-centered">
+								<!-- <ul class="actions actions-centered">
 									<li><a href="#" class="button style1 big">Get Started</a></li>
 									<li><a href="#" class="button style2 big">More Info</a></li>
-								</ul>
+								</ul> -->
 							</section>
 
 					</div>
@@ -252,9 +260,10 @@
 
 		</div>
 		<script>
-			$('#show-top').click(function(){
-				$('#header-wrapper').toggleClass('active');
-			});
+			// Uncomment to hide first section
+			// $('#show-top').click(function(){
+			// 	$('#header-wrapper').toggleClass('active');
+			// });
 		</script>
 
 	</body>
