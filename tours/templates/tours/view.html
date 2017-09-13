@@ -87,7 +87,7 @@
     {% for section in all_content %}
       {% if section.class_name == 'Paragraph' %}
         <h3>{{section.title}}</h3>
-        <p>{{section.text}}</p>
+        <p>{{section.description}}</p>
       {% endif %}
 
       {% if section.class_name == 'Image' %}
