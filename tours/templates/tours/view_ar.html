@@ -1,0 +1,221 @@
+
+{% load staticfiles %}
+{% load static %}
+{% get_media_prefix as media %}
+
+<!-- Script to load 3D object  -->
+<script>
+
+  // var object_to_load_obj_path = "{% static "renders/" %}{{renderObj.object_path}}";
+  var object_to_load_obj_path ="";
+  var object_to_load_colormap_path = "";
+  var object_to_load_specmap_path = "";
+  var object_to_load_normalmap_path = "";
+
+  object_to_load_obj_path = "{{ media }}renders/{{ renderObj.object_path }}";
+  object_to_load_colormap_path = "{{ media }}renders/{{ renderObj.colormap_path }}";
+  object_to_load_specmap_path = "{{ media }}renders/{{ renderObj.specmap_path }}";
+  object_to_load_normalmap_path = "{{ media }}renders/{{ renderObj.normalmap_path }}";
+
+
+</script>
+{% include 'header.html' %}
+<script src="{% static "three.js/build/ar.js" %}"></script>
+<script>THREEx.ArToolkitContext.baseURL = '{% static "three.js" %}'</script>
+
+<div class="" style=" ">
+
+
+
+  <div class="col-lg-9 col-md-9 col-sm-6 " id="3d_content" style=" overflow-y:auto; overflow-x: hidden; ">
+    <div class="child" style="z-index: 10; ">
+      {% include 'navbar_view_tours.html' %}
+
+    </div>
+    <div id="blocker"></div>
+    <div id="mydiv"></div>
+    <div id="contain" class="parent">
+      <i id="full-screen-btn" class="toggle-screen glyphicon glyphicon-fullscreen play-btn" onclick="toggleFullScreen()"></i>
+      <canvas id="canvas3D" >
+
+      </canvas>
+
+      <!-- <div id="icon-bar" class="icon-bar" style="z-index: 30;"> -->
+        <!-- <div id="annotation-badge" class="numberCircle fa  badge"></div> -->
+        <div class="child-player">
+
+
+
+        <!-- <i id="play-btn" class="btn btn-default btn-lg  btn-raised fa fa-play-circle fa-4x play-btn child-play-btn" onClick=PlayTour()></i> -->
+        <div class="child-player-ctrls-parent">
+
+          <i id="prev-btn" class=" btn btn-default btn-lg btn-raised fa fa-step-backward fa-2x play-btn" style="display: none" onClick=PreviousView()></i>
+          <!-- <i id="play-stop"></i> -->
+          &nbsp;
+          &nbsp;
+          &nbsp;
+          <i id="play-btn" class="btn btn-default btn-lg  btn-raised fa fa-play-circle fa-3x play-btn" onClick=PlayTour()></i>
+
+          <i id="stop-btn" class="btn btn-default btn-lg btn-raised fa fa-pause fa-4x play-btn"style="display: none" onClick=StopTour()></i>
+          &nbsp;
+          &nbsp;
+          &nbsp;
+          <i id="next-btn" class="btn btn-default btn-lg btn-raised fa fa-step-forward fa-2x play-btn" style="display: none" onClick=NextView()></i>
+          <div class="child-player-ctrls-child">
+            <i id="annotation-badge" class="play-ctr play-btn btn btn-default btn-lg btn-raised fa" style="display: none"></i>
+          </div>
+
+        </div>
+
+
+
+      </div>
+      <!-- <i id="annotation-badge" class="play-ctr btn btn-default btn-lg btn-raised fa" style="display: none"></i> -->
+
+      <!-- </div> -->
+    </div>
+
+    <!-- <div id="css3d_div"></div> -->
+
+
+
+
+  </div>
+  <div class="col-lg-3 col-md-3 col-sm-6" id="docked_content" style="height:100%; overflow-y: auto">
+
+    <h1 style="font-size:150%; color: #f5f5f5;"><u>{{tour.title}}</u></h1>
+    <br>
+    {% for section in all_content %}
+      {% if section.class_name == 'Paragraph' %}
+        <h3>{{section.title}}</h3>
+        <p>{{section.description}}</p>
+      {% endif %}
+
+      {% if section.class_name == 'Image' %}
+        <img src="{{ media }}images/{{section.file_name}}"></img>
+        <p>{{section.title}}</p>
+      {% endif %}
+
+      {% if section.class_name == 'Video' %}
+        <p>{{section.title}}</p>
+        <video width="320" height="240" controls>
+          <source src="{{ media }}videos/{{section.file_name}}" type="video/mp4">
+        </video>
+      {% endif %}
+
+    {% endfor %}
+  </div>
+</div>
+<!-- <div class="fa fa-2x scan-qr-code badge scan-qr-code-index col-lg-3 col-md-3 col-sm-6 col-lg-offset-9 col-md-offset-9col-sm-offset-6" ><a href="https://webqr.com/index.html">SCAN QR CODE</a></div> -->
+
+<div id="titleBar"><a href="#navPanel" class="toggle"></a><span class="title">
+        <h1><a href="/">The Redpath Museum's Virtual Exhibit</a></h1>
+        <p>Enhancing museum experience</p>
+        <button class="launcher">Launch Virtual Exhibit</button>
+      </span>
+</div>
+<div id="navPanel"><nav><a class="link depth-0" href="/" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"><span class="indent-0"></span>Home</a><a class="link depth-0" href="/tours/" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"><span class="indent-0"></span>Virtual Exhibit</a><a class="link depth-0" href="no-sidebar.html" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"><span class="indent-0"></span>Our Team</a><a class="link depth-0" href="right-sidebar.html" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"><span class="indent-0"></span>About</a><a class="link depth-0" href="no-sidebar.html" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"><span class="indent-0"></span>Contact</a></nav></div>
+
+<script src="{% static "bower_components/jquery/dist/jquery.js" %}" ></script>
+<!-- <script src="{% static "bower_components/three.js/build/three.js" %}" ></script> -->
+<script src="https://cdn.rawgit.com/mrdoob/three.js/r84/build/three.min.js" ></script>
+<script src="{% static "bower_components/threejs-trackball-controls/TrackballControls.js" %}" ></script>
+<script src="{% static "bower_components/tween.js/src/Tween.js" %}" ></script>
+<script src="{% static "bower_components/dat-gui/build/dat.gui.js" %}" ></script>
+<script src="{% static "scripts/draco_decoder.js" %}"></script>
+<script src="{% static "scripts/STLLoader.js" %}" ></script>
+<script src="{% static "scripts/OBJLoader.js" %}" ></script>
+<script src="{% static "scripts/DRACOLoader.js" %}" ></script>
+<script src="{% static "scripts/CSS3DRenderer.js" %}" ></script>
+<script src="{% static "scripts/render-window-ar.js" %}" ></script>
+
+<script>
+  var tools = "{% for section in all_content %}{% if section.class_name == 'Image' %}{{section.title}}{% endif %}{% endfor %}";
+  console.log(tools);
+</script>
+
+<!-- Script to load annotations -->
+<script>
+
+  var Annotation_Set = new AnnotationSet();
+  var i = 0;
+  console.log({{annotations_list|safe}});
+  var annotations = JSON.parse({{annotations_list|safe}});
+  console.log(annotations);
+  console.log(annotations[0].fields.position);
+
+  var badge = document.getElementById("annotation-badge");
+
+
+  for(var i=0; i< annotations.length; i++){
+      var cam_pos = new THREE.Vector3(annotations[i].fields.camera_pos_x,annotations[i].fields.camera_pos_y,annotations[i].fields.camera_pos_z);
+      var target_pos = new THREE.Vector3(annotations[i].fields.target_pos_x,annotations[i].fields.target_pos_y,annotations[i].fields.target_pos_z);
+      var Annot_obj = new AnnotationObj(target_pos, cam_pos);
+      Annot_obj.text = annotations[i].fields.annotation_text;
+      CreateToolTip(Annot_obj.text, i);
+      // PopulateDiv("annotation", Annot_obj.text);
+      console.log(Annot_obj);
+      console.log("annotations.length = ",annotations.length)
+      Annotation_Set.AddAnnotation(Annot_obj);
+      console.log(Annotation_Set);
+  }
+
+  function PlayTour(){
+    //TODO: Make the function work
+    togglePlayBtn();
+    Annotation_Set.StartAnnotationTour(); };
+    badge.innerHTML = Annotation_Set.queue.curr_annot_index+1+ "/" +Annotation_Set.queue.length;
+  function StopTour(){
+    Annotation_Set.StopAnnotationTour();
+    badge.innerHTML = Annotation_Set.queue.curr_annot_index+1+ "/" +Annotation_Set.queue.length;
+    togglePlayBtn();
+   };
+  function NextView(){
+    Annotation_Set.NextAnnotation();
+    badge.innerHTML = Annotation_Set.queue.curr_annot_index+1+ "/" +Annotation_Set.queue.length;
+  };
+  function PreviousView(){
+    Annotation_Set.PreviousAnnotation();
+    badge.innerHTML = Annotation_Set.queue.curr_annot_index+1+ "/" +Annotation_Set.queue.length;
+   };
+
+
+  document.getElementById("stop-btn").style.display = "none";
+  document.getElementById("prev-btn").style.display = "none";
+  document.getElementById("next-btn").style.display = "none";
+  var playingTour = false;
+  function togglePlayBtn() {
+
+    if(playingTour) {
+      document.getElementById("stop-btn").style.display = "none";
+      document.getElementById("prev-btn").style.display = "none";
+      document.getElementById("next-btn").style.display = "none";
+
+      document.getElementById("play-btn").style.display = "";
+      playingTour = false;
+    }
+    else {
+      console.log("lalalla");
+      document.getElementById("stop-btn").style.display = "";
+      document.getElementById("prev-btn").style.display = "";
+      document.getElementById("next-btn").style.display = "";
+      document.getElementById("annotation-badge").style.display = "";
+
+      document.getElementById("play-btn").style.display = "none";
+      playingTour =true;
+    }
+
+  }
+
+  function toggleFullScreen() {
+    console.log("TOGGLE FULL SCREEN");
+    if(!document.webkitIsFullScreen) {
+      console.log("Enter Full Screen");
+      document.documentElement.webkitRequestFullScreen();
+    }
+    else {
+      console.log("Exit Full screen");
+      document.webkitExitFullscreen();
+    }
+  }
+</script>
