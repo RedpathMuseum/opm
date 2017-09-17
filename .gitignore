@@ -3,6 +3,9 @@ env
 tours/static/bower_components
 tours/static/renders
 *.pyc
+*.pyo
 tours\static\models\Homo_Erectus
 tours\static\models\cedar_wax
 tours\static\models\pigeon
+tours/migrations/*
+navapp/migrations/*
