@@ -4,8 +4,13 @@ tours/static/bower_components
 tours/static/renders
 *.pyc
 *.pyo
+**/__pycache__/
 tours\static\models\Homo_Erectus
 tours\static\models\cedar_wax
 tours\static\models\pigeon
 tours/migrations/*
 navapp/migrations/*
+logfile.txt
+db.sqlite3
+media/*
+consoleLog.log
