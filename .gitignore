@@ -5,6 +5,9 @@ tours/static/renders
 *.pyc
 *.pyo
 **/__pycache__/
+/tours/__pycache__/
+/navapp/__pycache__/
+/opm/__pycache__/
 tours\static\models\Homo_Erectus
 tours\static\models\cedar_wax
 tours\static\models\pigeon
