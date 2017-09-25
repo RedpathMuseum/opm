@@ -15,11 +15,12 @@ DEBUG = False
 # Note different secret key for dev and prod
 SECRET_KEY = '#^7e0hqlf+antm=8r0_fo7n3!fqhl__4hzqzy+#lk^zt81ooba'
 
-STATIC_ROOT = "/var/www/opm/public/static/"
+STATIC_ROOT = "/var/www/3d.redpath.mamss.ca/public/static/"
 MEDIA_ROOT = '/var/www/opm/public/media/'
 
 
 ALLOWED_HOSTS = [
+    '.3d.redpath.mamss.ca',
     '.3d.redpath.mamss.ca',
 ]
 
