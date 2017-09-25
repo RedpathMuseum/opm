@@ -1,0 +1,3 @@
+#virtual env
+Before doing anything with django, make sure to activate the virtual environment on the server:
+-source /root/.virtualenvs/opm-env-1/bin/activate
