@@ -1,0 +1,31 @@
+#MySQL/Dreamhost checklist
+
+-In panel.dreamhost.com Go to Goodies->MySQL Databases
+-If needed Create a new database and make sure it matches it matches what you wrote in your Django settings. For example, if in your production_settings.py file you have something like this:
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'the_db_name',                         # Or path to database file, if using sqlite3.
+        'USER': 'username',                               # Not used in sqlite3.
+        'PASSWORD': 'password',                         # Not used in sqlite3.
+        'HOST': 'mysql.db.mamss.ca',                    # Set to empty string for localhost. Not used in sqlite3.
+        'PORT': '',                                     # Set to empty string for default. Not used in sqlite3.
+    }
+}
+
+You must match the following items when creating the database:
+NAME = Database Name (In Dreamhost)
+USER = The user in dreamhost
+Password = The user's password in dreamhost
+HOST = The Database host name set in dreamhost
+
+-Then you must add the allowed host. If the server is not on the mamss.ca domain but on a remote machine. you may follow these instructions for this https://help.dreamhost.com/hc/en-us/articles/214883058-How-do-I-connect-to-my-database-using-a-third-party-program-
+(Basically, click on the user name of your newly created database and add the machine name or Ip in the Allowable Hosts section)
+
+-You should be able to access the database now
+to test, do:
+ -manage.py createsuperuser
+-Go to the admin section and enter the super user credentials
+
+-If the database is already created, you can connect to it by entering the host name in your browser (i.e mysql.db.mamss.ca). You will be redirected to phpMyadmin page which is a web page dreamhost gives you access to. Enter you dreamhost credentials and you should be able to your database and all the data. 
