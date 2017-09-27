@@ -101,6 +101,9 @@ var Element = function ( id, x, y, z, ry ) {
 };
 //3D Web content initialization
 
+let arToolkitSource;
+let arToolkitContext;
+
 init();
 animate();
 
@@ -305,7 +308,11 @@ function init() {
         ////////////////////////////////////////////////////////////////////////////////
         //          handle arToolkitSource
         ////////////////////////////////////////////////////////////////////////////////
-        var arToolkitSource = new THREEx.ArToolkitSource({
+        
+        console.log("HERE--------------------------------")
+
+        console.log(THREEx);
+        console.log(new THREEx.ArToolkitSource({
           // to read from the webcam 
           sourceType : 'webcam',
           
@@ -315,10 +322,28 @@ function init() {
           // to read from a video
           // sourceType : 'video',
           // sourceUrl : THREEx.ArToolkitContext.baseURL + '../data/videos/headtracking.mp4',   
-        })
+        }))
+        
+
+
+
+
+
+
+        arToolkitSource = new THREEx.ArToolkitSource({
+          // to read from the webcam 
+          sourceType : 'webcam',
+          
+          // // to read from an image
+          // sourceType : 'image',
+          // sourceUrl : THREEx.ArToolkitContext.baseURL + '../data/images/img.jpg',    
+          // to read from a video
+          // sourceType : 'video',
+          // sourceUrl : THREEx.ArToolkitContext.baseURL + '../data/videos/headtracking.mp4',   
+        });
         arToolkitSource.init(function onReady(){
           onWindowResize()
-        })
+        });
 
 
         ////////////////////////////////////////////////////////////////////////////////
@@ -326,15 +351,15 @@ function init() {
         ////////////////////////////////////////////////////////////////////////////////
         
         // create atToolkitContext
-        var arToolkitContext = new THREEx.ArToolkitContext({
-          cameraParametersUrl: THREEx.ArToolkitContext.baseURL + '../data/data/camera_para.dat',
+        arToolkitContext = new THREEx.ArToolkitContext({
+          cameraParametersUrl: '/static/camera_para.dat',
           detectionMode: 'mono',
-        })
+        });
         // initialize it
         arToolkitContext.init(function onCompleted(){
           // copy projection matrix to camera
           camera.projectionMatrix.copy( arToolkitContext.getProjectionMatrix() );
-        })
+        });
 
 
         ////////////////////////////////////////////////////////////////////////////////
@@ -344,13 +369,13 @@ function init() {
         // init controls for camera
         var markerControls = new THREEx.ArMarkerControls(arToolkitContext, camera, {
           type : 'pattern',
-          patternUrl : THREEx.ArToolkitContext.baseURL + '../data/data/patt.hiro',
+          patternUrl : "https://raw.githubusercontent.com/jeromeetienne/AR.js/master/data/data/patt.hiro",
           // patternUrl : THREEx.ArToolkitContext.baseURL + '../data/data/patt.kanji',
           // as we controls the camera, set changeMatrixMode: 'cameraTransformMatrix'
           changeMatrixMode: 'cameraTransformMatrix'
-        })
+        });
         // as we do changeMatrixMode: 'cameraTransformMatrix', start with invisible scene
-        scene.visible = false
+        scene.visible = false;
 
 }
 
@@ -1283,8 +1308,8 @@ function onWindowResize() {
       renderer.setSize( document.getElementById('3d_content').getBoundingClientRect().width, window.innerHeight );
       css3d_renderer.setSize( document.getElementById('3d_content').getBoundingClientRect().width, window.innerHeight );
 
-      arToolkitSource.onResize()  
-      arToolkitSource.copySizeTo(renderer.domElement) 
+      arToolkitSource.onResize() ; 
+      arToolkitSource.copySizeTo(document.getElementById('3d_content')); 
       if( arToolkitContext.arController !== null ){
         arToolkitSource.copySizeTo(arToolkitContext.arController.canvas)  
       } 
