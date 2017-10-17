@@ -1,11 +1,13 @@
-var container, camera, scene, scene_css3d, renderer, css3d_renderer, LeePerryMesh, loaded_mesh, controls, group;
+var container, camera, scene, renderer, css3d_renderer, LeePerryMesh, loaded_mesh, controls, group;
+
+//Global variables for pointing in 3D view
 var canvas_dim =  document.getElementById('canvas3D');
 var canvas_rect = canvas_dim.getBoundingClientRect();
 
 //Set true in browser console to debug THREE.js actions
 
 var DebugMode = false;
-var InEditMode = true;
+var InEditMode = false;
 
 var LENGTH = screen.height;
 var WIDTH = screen.width * .75;
@@ -17,14 +19,6 @@ var CAMERA_DISTANCE = -20;
 
 var camcounter =0;
 var tour_counter=0;
-
-var DebugMode = false;
-var InEditMode = false;
-//JSON Loader's variables for files paths
-// var object_to_load_obj_path = '../models/Homo_Erectus/Low_180.json';
-// var object_to_load_colormap_path = '../models/Homo_Erectus/ALBEDO1k.jpg';
-// var object_to_load_specmap_path = '../models/Homo_Erectus/SPEC1K.jpg';
-// var object_to_load_normalmap_path = '../models/Homo_Erectus/NORMAL1K.jpg';
 
 
 var camlookat_start = new THREE.Vector3(0.018518396076858696, 0.08320761783954866,-0.9963601669693058);
@@ -135,7 +129,7 @@ function init() {
 
     // Loading a .stl file
     var loader = new THREE.STLLoader();
-    loader.load( '../../static/models/Arrow.stl', function ( geometry ) {
+    loader.load( '../../../../../static/models/Arrow.stl', function ( geometry ) {
 
        var material = new THREE.MeshPhongMaterial( { color: 0xff5533 } );
        mesh = new THREE.Mesh( geometry, material );
@@ -147,9 +141,6 @@ function init() {
       }
      );
 
-    if( InEditMode ==  true ){
-      scene.add(marker_copy);   
-    }
 
 var texture = new THREE.Texture();
 				var onProgress = function ( xhr ) {

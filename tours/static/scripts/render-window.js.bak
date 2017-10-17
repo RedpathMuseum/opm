@@ -81,7 +81,9 @@ init();
 animate();
 
 
+
 function init() {
+
 
     // HTML Container for the 3D widget
     var canvas3D = document.getElementById('canvas3D');
@@ -98,7 +100,7 @@ function init() {
     // scene
     scene = new THREE.Scene();
 
- 	// renderer
+    // renderer
     renderer = new THREE.WebGLRenderer({canvas: canvas3D});
     renderer.alpha = true;
     renderer.domElement.style.zIndex = 20;
@@ -127,7 +129,7 @@ function init() {
 
     // Loading a .stl file
     var loader = new THREE.STLLoader();
-    loader.load( '../../../../../static/models/Arrow.stl', function ( geometry ) {
+    loader.load( '../../static/models/Arrow.stl', function ( geometry ) {
 
        var material = new THREE.MeshPhongMaterial( { color: 0xff5533 } );
        mesh = new THREE.Mesh( geometry, material );
@@ -138,9 +140,9 @@ function init() {
 
       }
      );
-  
 
-      var texture = new THREE.Texture();
+
+var texture = new THREE.Texture();
 				var onProgress = function ( xhr ) {
 					if ( xhr.lengthComputable ) {
 						var percentComplete = xhr.loaded / xhr.total * 100;
@@ -222,7 +224,7 @@ function onTouchMove( event ) {
 
 function checkIntersection() {
   // if ( ! LeePerryMesh ) return;
- console.log("checkIntersection - BEGIN")
+  console.log("checkIntersection - BEGIN")
   raycaster.setFromCamera( mouse, camera );
   var intersects = raycaster.intersectObjects( [ loaded_mesh ] );
   if ( intersects.length > 0 ) {
@@ -230,7 +232,7 @@ function checkIntersection() {
     mouseHelper.position.copy( p );
     intersection.point.copy( p );
     var n = intersects[ 0 ].face.normal.clone();
-    n.multiplyScalar( 100 );
+	n.multiplyScalar( 100 );
     n.add( intersects[ 0 ].point );
     intersection.normal.copy( intersects[ 0 ].face.normal );
     mouseHelper.lookAt( n );
@@ -349,6 +351,7 @@ function camAndCtrlTransition(nxtCamPos, nxtCtrlsTrgt) {
   tween_camera.start();
 }
 
+
 //TODO: Recode this function and put in GUI to handle user putting object out of sight
 function resetCameraAndControls() {
   var origin = new THREE.Vector3(0,0,0);
@@ -357,7 +360,6 @@ function resetCameraAndControls() {
   camAndCtrlTransition(initial_cam_pos, origin);
 }
 
-
 function PopulateDiv(id, text) {
   var div = document.getElementById(id);
   p_tag = div.getElementsByTagName("p")[0];
@@ -365,7 +367,6 @@ function PopulateDiv(id, text) {
 
 
 }
-
 function CreateToolTip(tooltiptext, camcounter){
   //Function to remove a div
   // if(annotcounter != 0){
@@ -401,6 +402,7 @@ function CreateToolTip(tooltiptext, camcounter){
   newdiv.style.zIndex = -1-camcounter;
   newdiv.style.visibility = "hidden";
 
+
 }
 
 function ChangeToolTipText(tooltiptext, tooltip_id){
@@ -414,6 +416,8 @@ function ChangeToolTipText(tooltiptext, tooltip_id){
   console.log('----Selected DIV------', selected_div);
   selected_div.innerHTML = newPTag;
 }
+
+
 
 //TODO:Recode this function with new AnnotationSet object
 function SelectViewFromIndex(view_index){
@@ -433,15 +437,16 @@ function SelectViewFromIndex(view_index){
   }
 }
 
+
 //LoadOneDracoModel
 function loadDracoModel() {
   var loader = new THREE.DRACOLoader();
 
   //TODO: This takes out the extension and replaces it for a .drc. This is because the post_save signal function updates after a few saved_annotations
   //Should solve this issue in backend else the input obj will always be needed and take storage space on server
-	console.log(object_to_load_obj_path);
+console.log(object_to_load_obj_path);
   object_to_load_obj_path = object_to_load_obj_path.substr(0, object_to_load_obj_path.lastIndexOf(".")) + ".drc";
-	 console.log(object_to_load_obj_path);
+  console.log(object_to_load_obj_path);
   // TEST speed .obj vs .obj
   // object_to_load_path = "../../static\models\Homo_Erectus\he_og\Taung_Child_Top\Taung_Child_Top.obj"
     loader.load( object_to_load_obj_path, function ( geometry ) {
@@ -487,6 +492,7 @@ function onWindowResize() {
       camera.updateProjectionMatrix();
 
       renderer.setSize( document.getElementById('3d_content').getBoundingClientRect().width, window.innerHeight );
+
 
 }
 

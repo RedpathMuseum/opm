@@ -2,6 +2,10 @@
 var step_num = 1;
 var num_of_steps = 4+1;
 
+var DebugMode = false;
+//Setting InEditMode to true to enable admin specific functions
+var InEditMode = true;
+
 
 AnnotationSet.prototype.AddAnnotation = function(AnnotationObj) {
   this.queue.push(AnnotationObj);
