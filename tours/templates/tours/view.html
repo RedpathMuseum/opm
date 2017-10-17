@@ -127,6 +127,7 @@
 <script src="{% static "scripts/DRACOLoader.js" %}" ></script>
 <script src="{% static "scripts/CSS3DRenderer.js" %}" ></script>
 <script src="{% static "scripts/render-window.js" %}" ></script>
+<script src="{% static "scripts/annotation-class.js" %}" ></script>
 
 <script>
   var tools = "{% for section in all_content %}{% if section.class_name == 'Image' %}{{section.title}}{% endif %}{% endfor %}";
