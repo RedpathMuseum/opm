@@ -1,3 +1,8 @@
+//Annot Wizard Variables
+var step_num = 1;
+var num_of_steps = 4+1;
+
+
 AnnotationSet.prototype.AddAnnotation = function(AnnotationObj) {
   this.queue.push(AnnotationObj);
 };

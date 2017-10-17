@@ -53,7 +53,6 @@ var line;
 var mouseHelper;
 var mouse = new THREE.Vector2();
 
-
 var intersection = {
 intersects: false,
 point: new THREE.Vector3(),
@@ -81,7 +80,6 @@ var CurrSphereData = [];
 var tooltiptext = [];
 var pTagArray = [];
 //Variables for annotation sphere
-
 
 
 
@@ -137,7 +135,6 @@ function init() {
 
     // Loading a .stl file
     var loader = new THREE.STLLoader();
-
     loader.load( '../../static/models/Arrow.stl', function ( geometry ) {
 
        var material = new THREE.MeshPhongMaterial( { color: 0xff5533 } );
@@ -150,7 +147,9 @@ function init() {
       }
      );
 
-      
+    if( InEditMode ==  true ){
+      scene.add(marker_copy);   
+    }
 
 var texture = new THREE.Texture();
 				var onProgress = function ( xhr ) {
@@ -193,10 +192,10 @@ var texture = new THREE.Texture();
         }, false );
 
         window.addEventListener( 'mouseup', function() {
-          // checkIntersection();
-          // if ( ! moved ){
-          //   FreezeSphere(CurrSphereData[0], CurrSphereData[1]);
-          // }
+          if( InEditMode ==  true ){
+            checkIntersection();
+          }
+
         });
         window.addEventListener( 'mousemove', onTouchMove );
         window.addEventListener( 'touchmove', onTouchMove );
@@ -361,18 +360,6 @@ function camAndCtrlTransition(nxtCamPos, nxtCtrlsTrgt) {
   tween_camera.start();
 }
 
-//update 3D pointer position to match the position of the annotation being viewed
-function update3DPointerPostion(mesh, AnnotationSet) {
-  //Show annotation marker implemented as global pointer in the scene
-  mesh.position.copy(AnnotationSet.queue[AnnotationSet.queue.curr_annot_index].camera_target);
-  //update the 3D marker's up vector to point in the right direction
-  mesh.up.copy(AnnotationSet.queue[AnnotationSet.queue.curr_annot_index].camera_target);
-  mesh.visible = true;
-}
-
-function hide3DPointerPostion(mesh) {
-  mesh.visible = false;
-}
 
 //TODO: Recode this function and put in GUI to handle user putting object out of sight
 function resetCameraAndControls() {
@@ -421,9 +408,8 @@ function CreateToolTip(tooltiptext, camcounter){
 
   console.log(color);
 
-  var annot_div = document.getElementsByClassName("element")[camcounter];
-  annot_div.style.zIndex = -1-camcounter;
-  annot_div.style.visibility = "hidden";
+  newdiv.style.zIndex = -1-camcounter;
+  newdiv.style.visibility = "hidden";
 
 
 }
@@ -458,24 +444,6 @@ function SelectViewFromIndex(view_index){
       document.getElementById("tooltip"+i).style.visibility='visible';
     }
   }
-}
-
-
-
-//TODO: Make EraseTour function and EditSlectedView function
-Array.prototype.move = function (from, to) {
-  this.splice(to, 0, this.splice(from, 1)[0]);
-};
-
-//TODO: Adapt this to new AnnotationSet object
-function ChangeAnnotOrder(){
-  console.log("-----Before Move AnnotCamPos =",AnnotCamPos[0]);
-  console.log("-----Before Move AnnotCamPos =",AnnotCamPos[1]);
-  AnnotCamPos.move(0, 1);
-  AnnotCamLookatPts.move(0,1);
-  console.log("-----After Move AnnotCamPos =",AnnotCamPos[0]);
-  console.log("-----After Move AnnotCamPos =",AnnotCamPos[1]);
-
 }
 
 
@@ -520,7 +488,7 @@ console.log(object_to_load_obj_path);
 
       //geometry.scale(scale,scale,scale);
       geometry.scale(10,10,10);
-      var loaded_mesh = new THREE.Mesh( geometry, material );
+      loaded_mesh = new THREE.Mesh( geometry, material );
       scene.add( loaded_mesh );
     } );
 }
@@ -528,13 +496,10 @@ console.log(object_to_load_obj_path);
 
 function onWindowResize() {
 
-
-      // camera.aspect = window.innerWidth / window.innerHeight;
       camera.aspect = document.getElementById('3d_content').getBoundingClientRect().width/window.innerHeight;
 
       camera.updateProjectionMatrix();
 
-      // renderer.setSize( window.innerWidth, window.innerHeight );
       renderer.setSize( document.getElementById('3d_content').getBoundingClientRect().width, window.innerHeight );
 
 
@@ -551,30 +516,7 @@ function animate() {
 
 function render() {
 
-    // camera.lookAt(cameraTarget.position);
     renderer.render( scene, camera );
 
     var intersects = raycaster.intersectObjects(scene.children);
 }
-
-
-function toScreenPosition(obj, camera)
-{
-    var vector = new THREE.Vector3();
-
-    var widthHalf = 0.5*renderer.context.canvas.width;
-    var heightHalf = 0.5*renderer.context.canvas.height;
-
-    obj.updateMatrixWorld();
-    vector.setFromMatrixPosition(obj.matrixWorld);
-    vector.project(camera);
-
-    vector.x = ( vector.x * widthHalf ) + widthHalf;
-    vector.y = - ( vector.y * heightHalf ) + heightHalf;
-
-    return {
-        x: vector.x,
-        y: vector.y
-    };
-
-};

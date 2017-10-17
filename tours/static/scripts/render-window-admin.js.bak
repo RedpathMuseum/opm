@@ -144,10 +144,8 @@ function init() {
 
       }
      );
-    
-    if( InEditMode ==  true ){
-      scene.add(marker_copy);  
-    }
+
+     scene.add(marker_copy);
 
       var texture = new THREE.Texture();
 				var onProgress = function ( xhr ) {
@@ -190,10 +188,10 @@ function init() {
         }, false );
 
         window.addEventListener( 'mouseup', function() {
-          if( InEditMode ==  true ){
-            checkIntersection();
-          }
-
+          checkIntersection();
+          // if ( ! moved ){
+          //   FreezeSphere(CurrSphereData[0], CurrSphereData[1]);
+          // }
         });
         window.addEventListener( 'mousemove', onTouchMove );
         window.addEventListener( 'touchmove', onTouchMove );
@@ -407,6 +405,9 @@ function CreateToolTip(tooltiptext, camcounter){
 
   console.log(color);
 
+ //  var annot_div = document.getElementsByClassName("element")[camcounter];
+ // annot_div.style.zIndex = -1-camcounter;
+ // annot_div.style.visibility = "hidden";
   newdiv.style.zIndex = -1-camcounter;
   newdiv.style.visibility = "hidden";
 
