@@ -128,85 +128,20 @@
 <script src="{% static "scripts/DRACOLoader.js" %}" ></script>
 <script src="{% static "scripts/CSS3DRenderer.js" %}" ></script>
 <script src="{% static "scripts/render-window-ar.js" %}" ></script>
+<script src="{% static "scripts/annotation-class.js" %}" ></script>
+<script src="{% static "scripts/annotation-class-client-ext.js" %}" ></script>
+<script src="{% static "scripts/annotation-loading.js" %}" ></script>
+<script src="{% static "scripts/annotation-player.js" %}" ></script>
 
+<!-- Debugging script -->
 <script>
   var tools = "{% for section in all_content %}{% if section.class_name == 'Image' %}{{section.title}}{% endif %}{% endfor %}";
   console.log(tools);
 </script>
 
-<!-- Script to load annotations -->
+<!-- Toogle full screen function -->
 <script>
-
-  var Annotation_Set = new AnnotationSet();
-  var i = 0;
-  console.log({{annotations_list|safe}});
-  var annotations = JSON.parse({{annotations_list|safe}});
-  console.log(annotations);
-  console.log(annotations[0].fields.position);
-
-  var badge = document.getElementById("annotation-badge");
-
-
-  for(var i=0; i< annotations.length; i++){
-      var cam_pos = new THREE.Vector3(annotations[i].fields.camera_pos_x,annotations[i].fields.camera_pos_y,annotations[i].fields.camera_pos_z);
-      var target_pos = new THREE.Vector3(annotations[i].fields.target_pos_x,annotations[i].fields.target_pos_y,annotations[i].fields.target_pos_z);
-      var Annot_obj = new AnnotationObj(target_pos, cam_pos);
-      Annot_obj.text = annotations[i].fields.annotation_text;
-      CreateToolTip(Annot_obj.text, i);
-      // PopulateDiv("annotation", Annot_obj.text);
-      console.log(Annot_obj);
-      console.log("annotations.length = ",annotations.length)
-      Annotation_Set.AddAnnotation(Annot_obj);
-      console.log(Annotation_Set);
-  }
-
-  function PlayTour(){
-    //TODO: Make the function work
-    togglePlayBtn();
-    Annotation_Set.StartAnnotationTour(); };
-    badge.innerHTML = Annotation_Set.queue.curr_annot_index+1+ "/" +Annotation_Set.queue.length;
-  function StopTour(){
-    Annotation_Set.StopAnnotationTour();
-    badge.innerHTML = Annotation_Set.queue.curr_annot_index+1+ "/" +Annotation_Set.queue.length;
-    togglePlayBtn();
-   };
-  function NextView(){
-    Annotation_Set.NextAnnotation();
-    badge.innerHTML = Annotation_Set.queue.curr_annot_index+1+ "/" +Annotation_Set.queue.length;
-  };
-  function PreviousView(){
-    Annotation_Set.PreviousAnnotation();
-    badge.innerHTML = Annotation_Set.queue.curr_annot_index+1+ "/" +Annotation_Set.queue.length;
-   };
-
-
-  document.getElementById("stop-btn").style.display = "none";
-  document.getElementById("prev-btn").style.display = "none";
-  document.getElementById("next-btn").style.display = "none";
-  var playingTour = false;
-  function togglePlayBtn() {
-
-    if(playingTour) {
-      document.getElementById("stop-btn").style.display = "none";
-      document.getElementById("prev-btn").style.display = "none";
-      document.getElementById("next-btn").style.display = "none";
-
-      document.getElementById("play-btn").style.display = "";
-      playingTour = false;
-    }
-    else {
-      console.log("lalalla");
-      document.getElementById("stop-btn").style.display = "";
-      document.getElementById("prev-btn").style.display = "";
-      document.getElementById("next-btn").style.display = "";
-      document.getElementById("annotation-badge").style.display = "";
-
-      document.getElementById("play-btn").style.display = "none";
-      playingTour =true;
-    }
-
-  }
-
+  //toogle full screen of the 3D scene. Only works for Desktops devices
   function toggleFullScreen() {
     console.log("TOGGLE FULL SCREEN");
     if(!document.webkitIsFullScreen) {
