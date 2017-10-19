@@ -55,7 +55,6 @@ AnnotationSet.prototype.DeleteAnnotation = function(queue_index){
 };
 
 
-
 //Go to beggining of the annotation set
 AnnotationSet.prototype.StartAnnotationTour = function(){
   //Set pointer to start of list
