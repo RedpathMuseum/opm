@@ -1,48 +1,47 @@
 var container, camera, scene, renderer, css3d_renderer, LeePerryMesh, loaded_mesh, controls, group;
 
-//Global variables for pointing in 3D view
-var canvas_dim =  document.getElementById('canvas3D');
-var canvas_rect = canvas_dim.getBoundingClientRect();
+//Canvas element
+var canvas_el =  document.getElementById('canvas3D');
+//Canvas rectangle dimensions
+var canvas_rect = canvas_el.getBoundingClientRect();
 
 //Set true in browser console to debug THREE.js actions
-
 var DebugMode = false;
+//Set to true for creating 3D annotations in admin panel
 var InEditMode = false;
 
-var LENGTH = screen.height;
-var WIDTH = screen.width * .75;
-if (screen.width <= 960) {
-    WIDTH = screen.width * .50;
-}
-
-var CAMERA_DISTANCE = -20;
-
+//TODO: Make sure deleteing the counter does not affect anything
+//Deprecated counters
 var camcounter =0;
 var tour_counter=0;
 
-
+//Deprecated variables
 var camlookat_start = new THREE.Vector3(0.018518396076858696, 0.08320761783954866,-0.9963601669693058);
 var camposition_start = new THREE.Vector3(-5.488823519163917, 4.861637666233516, 221.22000845737145);
 
-//Configuration variables set in edit mode
+
+//Arrays used as buffer when creating 3D annotations
 var AnnotSpheres = [];
 var AnnotCamPos = [];
 var AnnotCamLookatPts = [];
-//Configuration variables set in edit mode
 
-//Needed for OBJLoader
+
+//Texture loader used by OBJLoader
 var textureLoader = new THREE.TextureLoader();
 
 
-//Variables for Raycaster
+//*******Variables for Raycaster*********
 var x;
 var y;
 var raycaster;
 var mesh;
 var marker_copy = new THREE.Mesh();
 marker_copy.visible = false;
-var stl_1 = new THREE.Mesh();
+
+//TODO: Make sure it can be deleted
+//Deprecated variable
 var cameraTarget = new THREE.Mesh( new THREE.CubeGeometry(0,0,0));
+
 var line;
 var mouseHelper;
 var mouse = new THREE.Vector2();
@@ -61,10 +60,10 @@ var r = new THREE.Vector3( 0, 0, 0 );
 var s = new THREE.Vector3( 10, 10, 10 );
 var up = new THREE.Vector3( 0, 1, 0 );
 var check = new THREE.Vector3( 1, 1, 1 );
+//*******Variables for Raycaster*********
 
-//Variables for Raycaster
 
-//Variables for annotation sphere
+//*******Variables for 3D annotations*********
 var SphereGeometry = new THREE.SphereGeometry( 5, 32, 32 );
 var SphereMaterial = new THREE.MeshBasicMaterial( {color: 0xffff00} );
 var Sphere = new THREE.Mesh( SphereGeometry, SphereMaterial );
@@ -73,11 +72,13 @@ var CurrSphereData = [];
 
 var tooltiptext = [];
 var pTagArray = [];
-//Variables for annotation sphere
+//*******Variables for 3D annotations*********
 
 
 
+//Initialize scene
 init();
+//Animate scene
 animate();
 
 
@@ -85,7 +86,7 @@ animate();
 function init() {
 
 
-    // HTML Container for the 3D widget
+    // HTML Container/canvas element for the 3D Scene
     var canvas3D = document.getElementById('canvas3D');
 
     //Uncomment or place in main.css to set the canvas parameters
@@ -101,8 +102,11 @@ function init() {
     scene = new THREE.Scene();
 
     // renderer
+    //render element is put inside the canvas element
     renderer = new THREE.WebGLRenderer({canvas: canvas3D});
+    //Alpha set to true for better resolution
     renderer.alpha = true;
+    //Setting z-index of canvas element to 20
     renderer.domElement.style.zIndex = 20;
     console.log( document.getElementById('3d_content').getBoundingClientRect());
     renderer.setSize( document.getElementById('3d_content').getBoundingClientRect().width, window.innerHeight );
@@ -110,24 +114,25 @@ function init() {
 
 
 
-    // camera
+    // Setting camera
     camera = new THREE.PerspectiveCamera( 50, window.innerWidth/window.innerHeight, 1, 5000 );
     camera.position.set(500, 350, 750);
 
-    scene.add( camera ); // required, because we are adding a light as a child of the camera
+    //Add camera to scene
+    scene.add( camera );
 
     //Add annotation sphere
     scene.add( Sphere );
     Sphere.visible = false;
 
-
+    //3-axis helper to visualize x-y-z axis in scene
     var axisHelper = new THREE.AxisHelper( 5 );
     scene.add( axisHelper );
 
     // lights
     scene.add( new THREE.AmbientLight( 0xffffff ) );
 
-    // Loading a .stl file
+    // Loading a .stl file to be used as 3D marker
     var loader = new THREE.STLLoader();
     loader.load( '../../../../../static/models/Arrow.stl', function ( geometry ) {
 
@@ -135,64 +140,83 @@ function init() {
        mesh = new THREE.Mesh( geometry, material );
        //mesh.scale.set(10,10,10);
 
-      //  stl_1 = mesh.clone();
        scene.add( mesh );
 
       }
      );
 
 
-var texture = new THREE.Texture();
-				var onProgress = function ( xhr ) {
-					if ( xhr.lengthComputable ) {
-						var percentComplete = xhr.loaded / xhr.total * 100;
-						console.log( Math.round(percentComplete, 2) + '% downloaded' );
-					}
-				};
-				var onError = function ( xhr ) {
-				};
+    var texture = new THREE.Texture();
+		
+    //Progress loading used for debugging
+    var onProgress = function ( xhr ) {
+			if ( xhr.lengthComputable ) {
+				var percentComplete = xhr.loaded / xhr.total * 100;
+				console.log( Math.round(percentComplete, 2) + '% downloaded' );
+			}
+		};
+		var onError = function ( xhr ) {
+		};
 
-        loadDracoModel();
+    //Load Draco Model
+    loadDracoModel();
 
 
-        //Code for Raycaster
-        var geometry = new THREE.Geometry();
-        geometry.vertices.push( new THREE.Vector3(), new THREE.Vector3() );
+    // Controls forintereacting with 3D scene
+    controls = new THREE.TrackballControls( camera, canvas3D );
+    //Minimal distance from camera to object
+  	controls.minDistance = 1;
+    //Maximum distance from camera to object
+  	controls.maxDistance = 1000;
 
-        // Controls
-        controls = new THREE.TrackballControls( camera, canvas3D );
-      	controls.minDistance = 1;
-      	controls.maxDistance = 1000;
+    //Code for Raycaster
+    var geometry = new THREE.Geometry();
+    geometry.vertices.push( new THREE.Vector3(), new THREE.Vector3() );
 
-        raycaster = new THREE.Raycaster()
+    //Raycaster used to retrieve information from an object in the scene by pointing at it
+    // Objects like vertices, faces, edges and more can be retrieve. Though it is used for faces in this script
+    raycaster = new THREE.Raycaster()
 
-        mouseHelper = new THREE.Mesh( new THREE.BoxGeometry( 1, 1, 10 ), new THREE.MeshNormalMaterial() );
-        mouseHelper.visible = false;
-        scene.add( mouseHelper );
+    //Mouse helper used for raycasting actions
+    mouseHelper = new THREE.Mesh( new THREE.BoxGeometry( 1, 1, 10 ), new THREE.MeshNormalMaterial() );
+    mouseHelper.visible = false;
+    scene.add( mouseHelper );
 
-        line = new THREE.Line( geometry, new THREE.LineBasicMaterial( { linewidth: 4 } ) );
-      	scene.add( line );
+    //Line used for raycasting actions
+    line = new THREE.Line( geometry, new THREE.LineBasicMaterial( { linewidth: 4 } ) );
+  	scene.add( line );
 
-        window.addEventListener( 'resize', onWindowResize, false );
-        var moved = false;
-        controls.addEventListener( 'change', function() {
-          moved = true;
-        } );
-        window.addEventListener( 'mousedown', function () {
-          moved = false;
-        }, false );
 
-        window.addEventListener( 'mouseup', function() {
-          if( InEditMode ==  true ){
-            checkIntersection();
-          }
+    //Listen to window size changes
+    window.addEventListener( 'resize', onWindowResize, false );
+    var moved = false;
 
-        });
-        window.addEventListener( 'mousemove', onTouchMove );
-        window.addEventListener( 'touchmove', onTouchMove );
+    //Listen to changes made by user to controls
+    controls.addEventListener( 'change', function() {
+      moved = true;
+    } );
+
+    //Listen to mouse click press
+    window.addEventListener( 'mousedown', function () {
+      moved = false;
+    }, false );
+
+    //Listen to mouse click releases
+    window.addEventListener( 'mouseup', function() {
+      if( InEditMode ==  true ){
+        checkIntersection();
+      }
+
+    });
+
+    //Listen to mouse move events
+    window.addEventListener( 'mousemove', onTouchMove );
+    //Listen to mouse cursor touching window
+    window.addEventListener( 'touchmove', onTouchMove );
 
 }
 
+//Handle mouse move and touchmove events to retrieve mouse positions, bounding rectangle of canvas and trigger the raycaster
 function onTouchMove( event ) {
   if ( event.changedTouches ) {
     x = event.changedTouches[ 0 ].pageX;
@@ -201,12 +225,15 @@ function onTouchMove( event ) {
     x = event.clientX;
     y = event.clientY;
   }
+
+  //Retrieve mouse position
   if (DebugMode == true)
   {
     console.log('This is mouse x real '+event.clientX);
     console.log('This is mouse y real '+event.clientY);
   }
 
+  //Mouse position relative to 3D canvas
   mouse.x = ( (x - canvas_rect.left) / (canvas_rect.right - canvas_rect.left) ) * 2 - 1;
   mouse.y = - ( (y -  canvas_rect.top) / (canvas_rect.bottom - canvas_rect.top) ) * 2 + 1;
   if (DebugMode == true)
@@ -215,6 +242,7 @@ function onTouchMove( event ) {
     console.log('This is mouse x relative '+mouse.x);
     console.log('This is mouse y relative '+mouse.y);
   }
+  //Trigger checkIntersection to start Raycasting and get infromation about object user is pointing to
   if(InEditMode ==  true)
   {
       checkIntersection();
@@ -222,17 +250,30 @@ function onTouchMove( event ) {
 
 }
 
+//This function checks the intersection between the raycaster and the object.
+//The raycaster creates a ray or a line that goes from the camera to the first object it encounters.
+//The direction of the raycaster is determined by the position of the mouse.
 function checkIntersection() {
-  // if ( ! LeePerryMesh ) return;
-  console.log("checkIntersection - BEGIN")
+
+  console.log("checkIntersection - BEGIN");
+  //Setting raycaster from camera to where mous is pointing
   raycaster.setFromCamera( mouse, camera );
   var intersects = raycaster.intersectObjects( [ loaded_mesh ] );
+
+  //Check if raycaster retrieve an object
   if ( intersects.length > 0 ) {
+    //Take first element intersecting raycaster
     var p = intersects[ 0 ].point;
+
+    //Set helper position to retrieved object
     mouseHelper.position.copy( p );
     intersection.point.copy( p );
+
+    //Clone the normal of the face retirieved by raycaster
     var n = intersects[ 0 ].face.normal.clone();
-	n.multiplyScalar( 100 );
+
+    //Create line that is aligned with normal vector
+	  n.multiplyScalar( 100 );
     n.add( intersects[ 0 ].point );
     intersection.normal.copy( intersects[ 0 ].face.normal );
     mouseHelper.lookAt( n );
@@ -240,8 +281,13 @@ function checkIntersection() {
     line.geometry.vertices[ 1 ].copy( n );
     line.geometry.verticesNeedUpdate = true;
     intersection.intersects = true;
+
+    //Update the point that the camera is looking at
     camlookatpoint = line.geometry.vertices[ 0 ].copy( intersection.point );
+    //Update camera position to be along normal
     camposalongnormal = line.geometry.vertices[ 1 ].copy( n );
+
+    //Debugging logs
     if(DebugMode == true)
     {
       console.log("camlookatpoint");
@@ -253,37 +299,40 @@ function checkIntersection() {
       console.log('camcurrentposition');
       console.log(camera.position);
     }
+
+    //Update Sphere/Object data used to Freeze 3D marker
     CurrSphereData[0] = camlookatpoint;
     CurrSphereData[1] = camposalongnormal;
+
+    //Update 3D marker position and direction
     if(InEditMode == true){
-      // Sphere.position.copy(camlookatpoint);
-      // Sphere.visible = true;
+
+      //Update position
       mesh.position.copy(camlookatpoint);
       mesh.visible = true;
+      //Updating direction
       var focalPoint = new THREE.Vector3(
           mesh.position.x + camposalongnormal.x,
           mesh.position.y + camposalongnormal.y,
           mesh.position.z + camposalongnormal.z
       );
-      //mesh.up.set(1,0,0);
+
+      //Setting 3D marker direction along normal
       mesh.lookAt(focalPoint);
     }
     else{
-      // Sphere.visible= false;
-      //mesh.visible= false;
+      //Do nothing
     }
 
   }
   else {
+    //No intersecting objects
     intersection.intersects = false;
-    // Sphere.visible = false;
-    //mesh.visible = false;
   }
 }
-//Code for Raycaster
 
-
-//Different than the AnnotationSet function with TWEEN as the annotation text is hidden
+//Handle transitions for camera and control when outside the annotation player
+//Different than the AnnotationSet function with TWEEN as the annotation text is hidden so the function is not a function of the class
 function camAndCtrlTransition(nxtCamPos, nxtCtrlsTrgt) {
   //Reset TWEEN
   TWEEN.removeAll();
@@ -353,6 +402,7 @@ function camAndCtrlTransition(nxtCamPos, nxtCtrlsTrgt) {
 
 
 //TODO: Recode this function and put in GUI to handle user putting object out of sight
+//Rest camera and control to start position. controls at origin camera is far away.
 function resetCameraAndControls() {
   var origin = new THREE.Vector3(0,0,0);
   //TODO: make a new field for Tours or Renders called initial_camera_position
@@ -360,6 +410,7 @@ function resetCameraAndControls() {
   camAndCtrlTransition(initial_cam_pos, origin);
 }
 
+//Create p element in element with the input id and populate it with input text 
 function PopulateDiv(id, text) {
   var div = document.getElementById(id);
   p_tag = div.getElementsByTagName("p")[0];
@@ -367,6 +418,8 @@ function PopulateDiv(id, text) {
 
 
 }
+
+//Create a the annotation div with input text and camcounter as its id
 function CreateToolTip(tooltiptext, camcounter){
   //Function to remove a div
   // if(annotcounter != 0){
@@ -374,23 +427,34 @@ function CreateToolTip(tooltiptext, camcounter){
   //   element.parentNode.removeChild(element);
   //   console.log('remove');
   // }
+
+  //mydiv contains all the annotation div elements
   var mydiv = document.getElementById('mydiv');
   console.log(mydiv);
+
+  //create new div
   var newdiv = document.createElement("div");
 
+  //Create new p element with input text
   pTagArray[0] = "<p>";
   pTagArray[1] = tooltiptext;
   pTagArray[2] = "</p>";
   var newPTag = pTagArray.join("");
 
+  //Adding new p element to new div
   newdiv.innerHTML = newPTag;
+
+  //Setting class of new annotation div
   newdiv.setAttribute("class", "element");
+  //Setting id of new div
   var div_id = "tooltip"+camcounter;
   newdiv.setAttribute("id", div_id);
+
+  //Add newdiv element to mydiv element
   mydiv.appendChild(newdiv);
   console.log('Im fine');
 
-  //Change annotation
+  //Change annotation style properties
   var color = window.getComputedStyle(
     document.querySelector('.element'), ':after'
   ).getPropertyValue('left');
@@ -399,12 +463,14 @@ function CreateToolTip(tooltiptext, camcounter){
 
   console.log(color);
 
+  //Setting z-index as a negative number and hiding it
   newdiv.style.zIndex = -1-camcounter;
   newdiv.style.visibility = "hidden";
 
 
 }
 
+//Used to change text dynamically as user is writing its text
 function ChangeToolTipText(tooltiptext, tooltip_id){
 
   pTagArray[0] = "<p>";
@@ -420,6 +486,7 @@ function ChangeToolTipText(tooltiptext, tooltip_id){
 
 
 //TODO:Recode this function with new AnnotationSet object
+//Unused function but could be useful
 function SelectViewFromIndex(view_index){
 
   camera.position.x=AnnotCamPos[view_index].x;
@@ -437,54 +504,56 @@ function SelectViewFromIndex(view_index){
   }
 }
 
+//TODO:- Make the function modular by adding input paths
+//-Clean function
+//-Make specular map optional
 
-//LoadOneDracoModel
+//Load Draco Model
 function loadDracoModel() {
   var loader = new THREE.DRACOLoader();
 
   //TODO: This takes out the extension and replaces it for a .drc. This is because the post_save signal function updates after a few saved_annotations
   //Should solve this issue in backend else the input obj will always be needed and take storage space on server
-console.log(object_to_load_obj_path);
+  console.log(object_to_load_obj_path);
   object_to_load_obj_path = object_to_load_obj_path.substr(0, object_to_load_obj_path.lastIndexOf(".")) + ".drc";
   console.log(object_to_load_obj_path);
-  // TEST speed .obj vs .obj
-  // object_to_load_path = "../../static\models\Homo_Erectus\he_og\Taung_Child_Top\Taung_Child_Top.obj"
-    loader.load( object_to_load_obj_path, function ( geometry ) {
-      geometry.computeVertexNormals();
-      var material = new THREE.MeshPhongMaterial( {
-        specular: 0x111111,
-        //map: textureLoader.load( '../../static/models/Homo_Erectus/he_og/Taung_Child_Top/Taung_Child_Top01.jpg' ),
-        //specularMap: textureLoader.load('../../static/models/leeperrysmith/Map-SPEC.jpg' ),
-        //normalMap: textureLoader.load( '../../static/models/Homo_Erectus/he_og/Taung_Child_Top/NormalMap_1.jpg'),
-        map: textureLoader.load( object_to_load_colormap_path ),
-        normalMap: textureLoader.load( object_to_load_normalmap_path),
-        normalScale: new THREE.Vector2( 0.75, 0.75 ),
-        shininess: 25
-      } );
-
-      //var bufferGeometry = new THREE.BufferGeometry().fromGeometry( geometry );
-      console.log("loadDracomodel - geometry = ",geometry);
-
-      var bufferGeometry = geometry;
-      bufferGeometry.computeVertexNormals();
-      bufferGeometry.computeBoundingBox();
-      const sizeX = bufferGeometry.boundingBox.max.x - bufferGeometry.boundingBox.min.x;
-      const sizeY = bufferGeometry.boundingBox.max.y - bufferGeometry.boundingBox.min.y;
-      const sizeZ = bufferGeometry.boundingBox.max.z - bufferGeometry.boundingBox.min.z;
-      const diagonalSize = Math.sqrt(sizeX * sizeX + sizeY * sizeY + sizeZ * sizeZ);
-      const scale = 1.0 / diagonalSize;
-      const midX = (bufferGeometry.boundingBox.min.x + bufferGeometry.boundingBox.max.x) / 2;
-      const midY = (bufferGeometry.boundingBox.min.y + bufferGeometry.boundingBox.max.y) / 2;
-      const midZ = (bufferGeometry.boundingBox.min.z + bufferGeometry.boundingBox.max.z) / 2;
-
-      //geometry.scale(scale,scale,scale);
-      geometry.scale(10,10,10);
-      loaded_mesh = new THREE.Mesh( geometry, material );
-      scene.add( loaded_mesh );
+  loader.load( object_to_load_obj_path, function ( geometry ) {
+    geometry.computeVertexNormals();
+    var material = new THREE.MeshPhongMaterial( {
+      specular: 0x111111,
+      //map: textureLoader.load( '../../static/models/Homo_Erectus/he_og/Taung_Child_Top/Taung_Child_Top01.jpg' ),
+      //specularMap: textureLoader.load('../../static/models/leeperrysmith/Map-SPEC.jpg' ),
+      //normalMap: textureLoader.load( '../../static/models/Homo_Erectus/he_og/Taung_Child_Top/NormalMap_1.jpg'),
+      map: textureLoader.load( object_to_load_colormap_path ),
+      normalMap: textureLoader.load( object_to_load_normalmap_path),
+      normalScale: new THREE.Vector2( 0.75, 0.75 ),
+      shininess: 25
     } );
+
+    console.log("loadDracomodel - geometry = ",geometry);
+
+    var bufferGeometry = geometry;
+    bufferGeometry.computeVertexNormals();
+    bufferGeometry.computeBoundingBox();
+    const sizeX = bufferGeometry.boundingBox.max.x - bufferGeometry.boundingBox.min.x;
+    const sizeY = bufferGeometry.boundingBox.max.y - bufferGeometry.boundingBox.min.y;
+    const sizeZ = bufferGeometry.boundingBox.max.z - bufferGeometry.boundingBox.min.z;
+    const diagonalSize = Math.sqrt(sizeX * sizeX + sizeY * sizeY + sizeZ * sizeZ);
+    const scale = 1.0 / diagonalSize;
+    const midX = (bufferGeometry.boundingBox.min.x + bufferGeometry.boundingBox.max.x) / 2;
+    const midY = (bufferGeometry.boundingBox.min.y + bufferGeometry.boundingBox.max.y) / 2;
+    const midZ = (bufferGeometry.boundingBox.min.z + bufferGeometry.boundingBox.max.z) / 2;
+
+    //geometry.scale(scale,scale,scale);
+    geometry.scale(10,10,10);
+    loaded_mesh = new THREE.Mesh( geometry, material );
+    scene.add( loaded_mesh );
+
+  } );
 }
 
 
+//Handle window resize changes
 function onWindowResize() {
 
       camera.aspect = document.getElementById('3d_content').getBoundingClientRect().width/window.innerHeight;
@@ -496,8 +565,9 @@ function onWindowResize() {
 
 }
 
+//Function called at every frame
 function animate() {
-    canvas_rect = canvas_dim.getBoundingClientRect();
+    canvas_rect = canvas_el.getBoundingClientRect();
     requestAnimationFrame( animate );
     controls.update();
     TWEEN.update();
@@ -505,9 +575,12 @@ function animate() {
 
 }
 
+//render function
 function render() {
 
+    //render scene
     renderer.render( scene, camera );
 
+    //Check raycaster intersecting objects
     var intersects = raycaster.intersectObjects(scene.children);
 }
