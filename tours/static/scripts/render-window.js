@@ -1,3 +1,5 @@
+//This script is the main file for Three.js 3D scene.
+
 var container, camera, scene, renderer, css3d_renderer, LeePerryMesh, loaded_mesh, controls, group;
 
 //Canvas element

@@ -1,18 +1,24 @@
+//This script contains functions used to create 3D annotations in the admin panel
+//It adds function to the AnnotationSet class
+//and contains the annotation wizard functions
+
+
 //Annot Wizard Variables
 var step_num = 1;
 var num_of_steps = 4+1;
 
+//Debug variable
 var DebugMode = false;
 //Setting InEditMode to true to enable admin specific functions
 var InEditMode = true;
 
-
+//Add AnnotationObj to AnnotationSet
 AnnotationSet.prototype.AddAnnotation = function(AnnotationObj) {
   this.queue.push(AnnotationObj);
 };
 
-//Delete when Object is put in seperate file
-var temp_array
+//Delete AnnotationObj to AnnotationSet
+var temp_array;
 AnnotationSet.prototype.DeleteAnnotation = function(queue_index){
   temp_array = [];
   for(var i=0; i<this.queue.length-1; i++){
@@ -25,16 +31,22 @@ AnnotationSet.prototype.DeleteAnnotation = function(queue_index){
 };
 
 
-
+//Freeze/Save temporarily current target when admin user presses Enter key in buffere array CurrSphereData[]
 function SaveCurrentTarget(event){
   var keyCode = event.keyCode;
   if(keyCode==13 && step_num==1 ){
-    console.log("N key pressed");
+    console.log("Enter key pressed");
+
+    //Freeze 3D marker at point retrieved by latest point saved in CurrSphereData array during checkIntersection() execution
     FreezeNewTarget(CurrSphereData[0], CurrSphereData[1]);
+
+    //Enable confirmation button for the user to save the current target
     document.getElementById("step-target-nxt-btn").disabled = false;
   }
 }
 
+
+//Save current camera position when S key is pressed by admin user in vector buffer
 function SaveCameraView(event){
   var keyCode = event.keyCode;
   if(keyCode==83 && step_num==2){
@@ -53,16 +65,20 @@ function SaveCameraView(event){
     // camcounter += 1;
     // console.log("AnnotCamPos=  ", AnnotCamPos[camcounter -1]);
 
+    //Enable confirmation button for the user to save the current camera position
     document.getElementById("step-camview-nxt-btn").disabled = false;
   }
 
 }
 
+//TODO: Figure out which of the two functions below is used and delete the deprecated one
+//Save annotation text in text buffer
 function SaveAnnotationText(){
   annot_buffer.text = document.getElementById("annot-txt-buffer-val").value
   console.log(annot_buffer.text);
 }
 
+//Save annotation text in text buffer
 function SaveAnnotationBufferText(){
   annot_buffer.text = document.getElementById("annot-txt-buffer-val").value;
   document.getElementById("tooltip777").getElementsByTagName("p")[0].innerHTML = annot_buffer.text;
@@ -71,15 +87,19 @@ function SaveAnnotationBufferText(){
 
 
 
+//Start the creation of a new  3D annotation
 function NewAnnotation(){
   console.log("----------------------------------Creating new annotation--------------------");
+  //Add listener to any keydown events
   window.addEventListener("keydown", SaveCurrentTarget, false);
+  //Start Annotation wizard
   document.getElementById("myWizard-top").style.display = "";
   document.getElementById("myWizard-start").style.display = "";
   document.getElementById("new-annotation-btn").style.display ="none";
 
 }
 
+//Annotation wizard
 var stepNode;
 var helpMsgNode;
 var confirmBtn;
@@ -157,6 +177,8 @@ function EditCameraView(id, stepNode, parentStepNode) {
   });
 }
 
+
+//Cancel new annotation at any point in the wizard
 function CancelNewAnnotation(){
   console.log("Canceled New Annotation");
   annot_buffer = new AnnotationObj(0,0);
@@ -168,7 +190,7 @@ function CancelNewAnnotation(){
 }
 
 
-
+//Freeze Sphere/3D marker at target point
 var annot_buffer;
 function FreezeSphere(camlookatpoint, camposalongnormal) {
 
@@ -218,6 +240,8 @@ function FreezeSphere(camlookatpoint, camposalongnormal) {
 
 }
 
+
+//Freeze Sphere/3D marker at target point
 annot_buffer = new AnnotationObj(0, 0);
 function FreezeNewTarget(camlookatpoint, camposalongnormal) {
   scene.remove(marker_copy);
