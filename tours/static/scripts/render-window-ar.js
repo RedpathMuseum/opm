@@ -80,26 +80,29 @@ var pTagArray = [];
 //3D Web content initialization
 var Element = function ( id, x, y, z, ry ) {
 
-				var div = document.createElement( 'div' );
-				div.style.width = '10%';
-				div.style.height = '10%';
-				div.style.backgroundColor = '#000';
+        var div = document.createElement( 'div' );
+        div.style.width = '10%';
+        div.style.height = '10%';
+        div.style.backgroundColor = '#000';
 
-				var iframe = document.createElement( 'iframe' );
-				iframe.style.width = '10%';
-				iframe.style.height = '10%';
-				iframe.style.border = '0px';
-				iframe.src = [ 'http://www.youtube.com/embed/', id, '?rel=0' ].join( '' );
-				div.appendChild( iframe );
+        var iframe = document.createElement( 'iframe' );
+        iframe.style.width = '10%';
+        iframe.style.height = '10%';
+        iframe.style.border = '0px';
+        iframe.src = [ 'http://www.youtube.com/embed/', id, '?rel=0' ].join( '' );
+        div.appendChild( iframe );
 
-				var object = new THREE.CSS3DObject( div );
-				object.position.set( x, y, z );
-				object.rotation.y = ry;
+        var object = new THREE.CSS3DObject( div );
+        object.position.set( x, y, z );
+        object.rotation.y = ry;
 
-				return object;
+        return object;
 
 };
 //3D Web content initialization
+
+let arToolkitSource;
+let arToolkitContext;
 
 init();
 animate();
@@ -130,14 +133,14 @@ function init() {
     scene_css3d = new THREE.Scene();
 
     // renderer
-    renderer = new THREE.WebGLRenderer({canvas: canvas3D});
+    renderer = new THREE.WebGLRenderer({canvas: canvas3D, alpha: true});
     renderer.alpha = true;
     //renderer.setClearColor( 0x0fff00, 0.5 );
     renderer.domElement.style.zIndex = 20;
     //renderer.setSize( window.innerWidth, window.innerHeight );
     console.log( document.getElementById('3d_content').getBoundingClientRect());
     renderer.setSize( document.getElementById('3d_content').getBoundingClientRect().width, window.innerHeight );
-    renderer.setClearColor( 0xffffff, 0);
+    renderer.setClearColor( new THREE.Color('lightgrey'), 0);
 
     //Cast renderers in DOM elements
     //canvas3D.appendChild(renderer.domElement);
@@ -170,11 +173,11 @@ function init() {
 
     //3D Web content
     // group = new THREE.Group();
-		// group.add( new Element( 'njCDZWTI-xg', -1000,-1110,1110, 0 ) );
-		// //group.add( new Element( 'HDh4uK9PvJU', 0, 0, 0, Math.PI / 2 ) );
-		// //group.add( new Element( 'OX9I1KyNa8M', 0, 0, 0, Math.PI ) );
-		// group.add( new Element( 'nhORZ6Ep_jE', -1000,-1110,1110, - Math.PI / 2 ) );
-		// scene_css3d.add( group );
+    // group.add( new Element( 'njCDZWTI-xg', -1000,-1110,1110, 0 ) );
+    // //group.add( new Element( 'HDh4uK9PvJU', 0, 0, 0, Math.PI / 2 ) );
+    // //group.add( new Element( 'OX9I1KyNa8M', 0, 0, 0, Math.PI ) );
+    // group.add( new Element( 'nhORZ6Ep_jE', -1000,-1110,1110, - Math.PI / 2 ) );
+    // scene_css3d.add( group );
     // console.log('added group')
     // console.log(group);
     //
@@ -187,10 +190,10 @@ function init() {
     // scene_css3d.add(object_div);
     //
     // var blocker = document.getElementById( 'blocker' );
-		// blocker.style.display = 'none';
+    // blocker.style.display = 'none';
     //
-		// document.addEventListener( 'mousedown', function () { blocker.style.display = ''; } );
-		// document.addEventListener( 'mouseup', function () { blocker.style.display = 'none'; } );
+    // document.addEventListener( 'mousedown', function () { blocker.style.display = ''; } );
+    // document.addEventListener( 'mouseup', function () { blocker.style.display = 'none'; } );
     //3D Web content
 
 
@@ -235,29 +238,29 @@ function init() {
       //Successfully load the original texture
 
       var texture = new THREE.Texture();
-				var onProgress = function ( xhr ) {
-					if ( xhr.lengthComputable ) {
-						var percentComplete = xhr.loaded / xhr.total * 100;
-						console.log( Math.round(percentComplete, 2) + '% downloaded' );
-					}
-				};
-				var onError = function ( xhr ) {
-				};
+        var onProgress = function ( xhr ) {
+          if ( xhr.lengthComputable ) {
+            var percentComplete = xhr.loaded / xhr.total * 100;
+            console.log( Math.round(percentComplete, 2) + '% downloaded' );
+          }
+        };
+        var onError = function ( xhr ) {
+        };
 
     // TODO: Save OBJLoader initialization
 //      var manager = new THREE.LoadingManager();
 //      // model
-//				var loader = new THREE.OBJLoader( manager );
-//				loader.load( '../models/Trott_life_tentacules_with_colors_smooth_E_texture.obj', function ( object ) {
+//        var loader = new THREE.OBJLoader( manager );
+//        loader.load( '../models/Trott_life_tentacules_with_colors_smooth_E_texture.obj', function ( object ) {
 //
 //          object.traverse( function ( child ) {
-//						if ( child instanceof THREE.Mesh ) {
-//							child.material.map = texture;
-//						}
-//					} );
-//					object.position.y = - 95;
-//					scene.add( object );
-//				}, onProgress, onError );
+//            if ( child instanceof THREE.Mesh ) {
+//              child.material.map = texture;
+//            }
+//          } );
+//          object.position.y = - 95;
+//          scene.add( object );
+//        }, onProgress, onError );
 
         //Load JSON 3D object
         //loadJSON();
@@ -271,8 +274,8 @@ function init() {
 
         // Controls
         controls = new THREE.TrackballControls( camera, canvas3D );
-      	controls.minDistance = 1;
-      	controls.maxDistance = 1000;
+        controls.minDistance = 1;
+        controls.maxDistance = 1000;
         console.log("init() --- controls.target = ", controls.target);
 
         raycaster = new THREE.Raycaster()
@@ -282,7 +285,7 @@ function init() {
         scene.add( mouseHelper );
 
         line = new THREE.Line( geometry, new THREE.LineBasicMaterial( { linewidth: 4 } ) );
-      	scene.add( line );
+        scene.add( line );
 
         window.addEventListener( 'resize', onWindowResize, false );
         var moved = false;
@@ -305,7 +308,11 @@ function init() {
         ////////////////////////////////////////////////////////////////////////////////
         //          handle arToolkitSource
         ////////////////////////////////////////////////////////////////////////////////
-        var arToolkitSource = new THREEx.ArToolkitSource({
+        
+        console.log("HERE--------------------------------")
+
+        console.log(THREEx);
+        console.log(new THREEx.ArToolkitSource({
           // to read from the webcam 
           sourceType : 'webcam',
           
@@ -315,10 +322,28 @@ function init() {
           // to read from a video
           // sourceType : 'video',
           // sourceUrl : THREEx.ArToolkitContext.baseURL + '../data/videos/headtracking.mp4',   
-        })
+        }))
+        
+
+
+
+
+
+
+        arToolkitSource = new THREEx.ArToolkitSource({
+          // to read from the webcam 
+          sourceType : 'webcam',
+          
+          // // to read from an image
+          // sourceType : 'image',
+          // sourceUrl : THREEx.ArToolkitContext.baseURL + '../data/images/img.jpg',    
+          // to read from a video
+          // sourceType : 'video',
+          // sourceUrl : THREEx.ArToolkitContext.baseURL + '../data/videos/headtracking.mp4',   
+        });
         arToolkitSource.init(function onReady(){
           onWindowResize()
-        })
+        });
 
 
         ////////////////////////////////////////////////////////////////////////////////
@@ -326,15 +351,15 @@ function init() {
         ////////////////////////////////////////////////////////////////////////////////
         
         // create atToolkitContext
-        var arToolkitContext = new THREEx.ArToolkitContext({
-          cameraParametersUrl: THREEx.ArToolkitContext.baseURL + '../data/data/camera_para.dat',
+        arToolkitContext = new THREEx.ArToolkitContext({
+          cameraParametersUrl: '/static/camera_para.dat',
           detectionMode: 'mono',
-        })
+        });
         // initialize it
         arToolkitContext.init(function onCompleted(){
           // copy projection matrix to camera
           camera.projectionMatrix.copy( arToolkitContext.getProjectionMatrix() );
-        })
+        });
 
 
         ////////////////////////////////////////////////////////////////////////////////
@@ -344,13 +369,13 @@ function init() {
         // init controls for camera
         var markerControls = new THREEx.ArMarkerControls(arToolkitContext, camera, {
           type : 'pattern',
-          patternUrl : THREEx.ArToolkitContext.baseURL + '../data/data/patt.hiro',
+          patternUrl : "https://raw.githubusercontent.com/jeromeetienne/AR.js/master/data/data/patt.hiro",
           // patternUrl : THREEx.ArToolkitContext.baseURL + '../data/data/patt.kanji',
           // as we controls the camera, set changeMatrixMode: 'cameraTransformMatrix'
           changeMatrixMode: 'cameraTransformMatrix'
-        })
+        });
         // as we do changeMatrixMode: 'cameraTransformMatrix', start with invisible scene
-        scene.visible = false
+        // scene.visible = false;
 
 }
 
@@ -1283,10 +1308,10 @@ function onWindowResize() {
       renderer.setSize( document.getElementById('3d_content').getBoundingClientRect().width, window.innerHeight );
       css3d_renderer.setSize( document.getElementById('3d_content').getBoundingClientRect().width, window.innerHeight );
 
-      arToolkitSource.onResize()  
-      arToolkitSource.copySizeTo(renderer.domElement) 
+      arToolkitSource.onResizeElement(); 
+      arToolkitSource.copyElementSizeTo(document.getElementById('3d_content')); 
       if( arToolkitContext.arController !== null ){
-        arToolkitSource.copySizeTo(arToolkitContext.arController.canvas)  
+        arToolkitSource.copyElementSizeTo(arToolkitContext.arController.canvas)  
       } 
 }
 
@@ -1310,7 +1335,7 @@ function render() {
     if( arToolkitSource.ready === false ) return
     arToolkitContext.update( arToolkitSource.domElement )
 
-    scene.visible = camera.visible
+    // scene.visible = camera.visible
 }
 
 //loadGeometry

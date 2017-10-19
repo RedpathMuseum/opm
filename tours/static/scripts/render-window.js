@@ -105,7 +105,7 @@ function init() {
 
     // renderer
     //render element is put inside the canvas element
-    renderer = new THREE.WebGLRenderer({canvas: canvas3D});
+    renderer = new THREE.WebGLRenderer({canvas: canvas3D, alpha: true});
     //Alpha set to true for better resolution
     renderer.alpha = true;
     //Setting z-index of canvas element to 20
