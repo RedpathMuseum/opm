@@ -1,13 +1,4 @@
-//This script loads all annotations from the DB into an AnnotationSet object
-
-var Annotation_Set = new AnnotationSet();
-var i = 0;
-console.log({{annotations_list|safe}});
-
-//Load annotations in javascript variable as a parsed JSON
-var annotations = JSON.parse({{annotations_list|safe}});
-console.log(annotations);
-console.log(annotations[0].fields.position);
+//This script loads all annotations from the existing AnnotationSet object into divs in the page
 
 
 //Create annotation divs that will be hidden from the loaded information and add them to the Annotation Set

@@ -9,13 +9,14 @@ function PlayTour(){
   //TODO: Make the function work
   togglePlayBtn();
   Annotation_Set.StartAnnotationTour(); 
-  
+  badge.innerHTML = 1+ "/" +Annotation_Set.queue.length;
 };
-  badge.innerHTML = Annotation_Set.queue.curr_annot_index+1+ "/" +Annotation_Set.queue.length;
 
 //Stop annotation tour and handle player button interactions and update badge
+function StopTour(){
   Annotation_Set.StopAnnotationTour();
   badge.innerHTML = Annotation_Set.queue.curr_annot_index+1+ "/" +Annotation_Set.queue.length;
+  badge.style.display = "none";
   togglePlayBtn();
  };
 

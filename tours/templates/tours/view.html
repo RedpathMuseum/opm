@@ -131,14 +131,37 @@
 <script src="{% static "scripts/render-window.js" %}" ></script>
 <script src="{% static "scripts/annotation-class.js" %}" ></script>
 <script src="{% static "scripts/annotation-class-client-ext.js" %}" ></script>
+
+<!-- ******************Scripts to load annotations*********** -->
+<script>
+  //This script loads all annotations from the DB into an AnnotationSet object
+  //The script needs to be in the html file and not in a seperate javascript to easily load annotations using Jinja and not use Ajax
+  var Annotation_Set = new AnnotationSet();
+  var i = 0;
+  console.log({{annotations_list|safe}});
+
+  //Load annotations in javascript variable as a parsed JSON
+  var annotations = JSON.parse({{annotations_list|safe}});
+  console.log("LOADED annotations from DB as parsed JSON")
+  console.log(annotations);
+  console.log(annotations[0].fields.position);
+
+</script>
 <script src="{% static "scripts/annotation-loading.js" %}" ></script>
+<!-- ******************Scripts to load annotations*********** -->
+
+<!-- Annotation player functions -->
 <script src="{% static "scripts/annotation-player.js" %}" ></script>
+
 
 <!-- Debugging script -->
 <script>
   var tools = "{% for section in all_content %}{% if section.class_name == 'Image' %}{{section.title}}{% endif %}{% endfor %}";
   console.log(tools);
 </script>
+
+
+
 
 <!-- Toogle full screen function -->
 <script>
