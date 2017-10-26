@@ -1,64 +1,79 @@
 
-{% extends "navbar_view_tours.html" %}
 {% load staticfiles %}
 {% load static %}
+{% get_media_prefix as media %}
+
+
+{% include 'header.html' %}
+
+
+<div class="" style=" ">
+
+
+
+  <div class="col-lg-12 col-md-12 col-sm-12 ">
+    <div class="child"  >
+      {% include 'navbar_view_tours.html' %}
+
+    </div>
+    
+
+
+    <section style="padding-top: 10%;">
+        <div style="text-align: center;">
+          <h1 style="color: #fff !important;">Scan QR Code with your camera<h1>
+          <h4 style="color: #fff !important;">(Tip: Try to have the QR Code take all of the space of the camera feed)</h4>
+          <a id="link" href="#" style="display: none;">Click HERE to go to exhibit</a>
+        </div>
+
+        
+        <!-- QR CODE Scanner  -->
+        <div align="center" id="reader" style=" width:300px;height:250px">   
+        </div>
+
+    </section>
+
+
+  </div>
+  
+</div>
+<!-- <div class="fa fa-2x scan-qr-code badge scan-qr-code-index col-lg-3 col-md-3 col-sm-6 col-lg-offset-9 col-md-offset-9col-sm-offset-6" ><a href="https://webqr.com/index.html">SCAN QR CODE</a></div> -->
+
+<div id="titleBar"><a href="#navPanel" class="toggle"></a><span class="title">
+        <h1><a href="/">The Redpath Museum's Virtual Exhibit</a></h1>
+        <p>Enhancing museum experience</p>
+        <button class="launcher">Launch Virtual Exhibit</button>
+      </span>
+</div>
+<div id="navPanel"><nav><a class="link depth-0" href="/" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"><span class="indent-0"></span>Home</a><a class="link depth-0" href="/tours/" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"><span class="indent-0"></span>Virtual Exhibit</a><a class="link depth-0" href="no-sidebar.html" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"><span class="indent-0"></span>Our Team</a><a class="link depth-0" href="right-sidebar.html" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"><span class="indent-0"></span>About</a><a class="link depth-0" href="no-sidebar.html" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"><span class="indent-0"></span>Contact</a></nav></div>
+
+
+<script src="{% static "qrcode_lib/" %}html5-qrcode.min.js"></script>
+<script src="{% static "qrcode_lib/" %}jsqrcode-combined.min.js"></script>
+ <script>
+
+      window.addEventListener("load", function load(event){
+
+        $('#reader').html5_qrcode(function(data){
+               // do something when code is read
+               console.log("data READ");
+               console.log(data);
+
+               //console.log(document.getElementById("link").style.href);
+               document.getElementById("link").href = "http://"+data;
+               document.getElementById("link").style.display = "";
 
 
 
 
 
-	{% block scripts %}
-		{% include 'header.html' %}
-		<script src="{% static "qrcode_lib/" %}html5-qrcode.min.js"></script>
-		<script src="{% static "qrcode_lib/" %}jsqrcode-combined.min.js"></script>
-	{% endblock %}
+            },
+            function(error){
+            //show read errors 
+            }, function(videoError){
+            //the video stream could be opened
+            }
+          );
+        },false);
 
-	{% block content %}
-
-		<div class="container">
-			<div class="col-lg-12 col-md-12 col-sm-12">
-
-				<div style="text-align: center;"><
-					<h1 style="color: #fff !important;">Scan QR Code with your camera<h1>
-					<h4 style="color: #fff !important;">(Tip: Try to have the QR Code take all of the space of the camera feed)</h4>
-					<a id="link" href="#" style="display: none;">Click Here to go to to Exhibit</a>
-				</div>
-
-				
-				<!-- QR CODE Scanner  -->
-				<div align="center" id="reader" style="width:300px;height:250px">		
-				</div>
-				
-			</div>
-		</div>
-
-		<script>
-
-			window.addEventListener("load", function load(event){
-
-				$('#reader').html5_qrcode(function(data){
-							 // do something when code is read
-							 console.log("data READ");
-							 console.log(data);
-
-							 //console.log(document.getElementById("link").style.href);
-							 document.getElementById("link").href = "http://"+data;
-							 document.getElementById("link").style.display = "";
-
-
-
-
-
-						},
-						function(error){
-						//show read errors 
-						}, function(videoError){
-						//the video stream could be opened
-						}
-					);
-				},false);
-
-		</script>
-	{% endblock %}
-
-
+    </script>
