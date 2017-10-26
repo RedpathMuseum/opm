@@ -11,8 +11,8 @@ tours/static/renders
 tours\static\models\Homo_Erectus
 tours\static\models\cedar_wax
 tours\static\models\pigeon
-tours\migrations/*
-navapp\migrations/*
+tours\migrations\*
+navapp\migrations\*
 logfile.txt
 db.sqlite3
 media/*
