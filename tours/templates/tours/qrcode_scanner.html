@@ -1,56 +1,64 @@
 
-
+{% extends "navbar_view_tours.html" %}
 {% load staticfiles %}
 {% load static %}
 
 
-{% include 'header.html' %}
-<script src="{% static "qrcode_lib/" %}html5-qrcode.min.js"></script>
-<script src="{% static "qrcode_lib/" %}jsqrcode-combined.min.js"></script>
 
-<body style="background-color:black">
 
-	<div class="container">
-		<div class="col-lg-12 col-md-12 col-sm-12">
-			<div style="text-align: center; color: #fff !important;"></div>>
-				<h1 style="color: #fff !important;">Scan QR Code with your camera<h1>
-				<h4 style="color: #fff !important;">(Tip: Try to have the QR Code take all of the space of the camera feed)</h4>
-				<a id="link" href="#" style="display: none;">Click Here to go to to Exhibit</a>
+
+	{% block scripts %}
+		{% include 'header.html' %}
+		<script src="{% static "qrcode_lib/" %}html5-qrcode.min.js"></script>
+		<script src="{% static "qrcode_lib/" %}jsqrcode-combined.min.js"></script>
+	{% endblock %}
+
+	{% block content %}
+
+		<div class="container">
+			<div class="col-lg-12 col-md-12 col-sm-12">
+
+				<div style="text-align: center;"><
+					<h1 style="color: #fff !important;">Scan QR Code with your camera<h1>
+					<h4 style="color: #fff !important;">(Tip: Try to have the QR Code take all of the space of the camera feed)</h4>
+					<a id="link" href="#" style="display: none;">Click Here to go to to Exhibit</a>
+				</div>
+
+				
+				<!-- QR CODE Scanner  -->
+				<div align="center" id="reader" style="width:300px;height:250px">		
+				</div>
+				
 			</div>
-
-			
-			<!-- QR CODE Scanner  -->
-			<div align="center" id="reader" style="width:300px;height:250px">			
-			</div>
-			
 		</div>
-	</div>
-</body>
 
-<script>
+		<script>
 
-window.addEventListener("load", function load(event){
+			window.addEventListener("load", function load(event){
 
-	$('#reader').html5_qrcode(function(data){
-				 // do something when code is read
-				 console.log("data READ");
-				 console.log(data);
+				$('#reader').html5_qrcode(function(data){
+							 // do something when code is read
+							 console.log("data READ");
+							 console.log(data);
 
-				 //console.log(document.getElementById("link").style.href);
-				 document.getElementById("link").href = "http://"+data;
-				 document.getElementById("link").style.display = "";
+							 //console.log(document.getElementById("link").style.href);
+							 document.getElementById("link").href = "http://"+data;
+							 document.getElementById("link").style.display = "";
 
 
 
 
 
-			},
-			function(error){
-			//show read errors 
-			}, function(videoError){
-			//the video stream could be opened
-			}
-		);
-	},false);
+						},
+						function(error){
+						//show read errors 
+						}, function(videoError){
+						//the video stream could be opened
+						}
+					);
+				},false);
 
-</script>
+		</script>
+	{% endblock %}
+
+

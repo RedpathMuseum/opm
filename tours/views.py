@@ -227,4 +227,4 @@ def annotations_admin_view(request):
 
 
 def qrcode_scanner(request):
-    return render(request, 'tours/qrcode_scanner.html')
+    return render(request, 'tours/qrcode_scanner_2.html')
