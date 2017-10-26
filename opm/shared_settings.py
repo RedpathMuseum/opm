@@ -123,7 +123,9 @@ STATIC_URL = '/static/'
 
 STATICFILES_DIR = [
     os.path.join(BASE_DIR, "static"),
-    '/var/www/3d.redpath.mamss.ca/public/static/',
+      os.path.join(BASE_DIR, "public/static/"),
+       os.path.join(BASE_DIR, "tours/static/"),
+        '/var/www/3d.redpath.mamss.ca/public/static/',
 ]
 
 MEDIA_URL = '/media/'
