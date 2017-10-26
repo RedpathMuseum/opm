@@ -224,3 +224,7 @@ def edit_annotation(request, annotation_id):
 
 def annotations_admin_view(request):
     return render(request, 'tours/annotations_menu.html')
+
+
+def qrcode_scanner(request):
+    return render(request, 'tours/qrcode_scanner.html')
