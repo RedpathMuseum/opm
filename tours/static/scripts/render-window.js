@@ -77,6 +77,14 @@ var pTagArray = [];
 //*******Variables for 3D annotations*********
 
 
+//*******GLTF Variables*********
+var gltf;
+var mixer;
+var clock = new THREE.Clock();
+var gltf_loader = new THREE.GLTFLoader();
+var gltfloaded=false;
+//*******GLTF Variables*********
+
 
 //Initialize scene
 init();
@@ -149,7 +157,7 @@ function init() {
 
 
     var texture = new THREE.Texture();
-		
+
     //Progress loading used for debugging
     var onProgress = function ( xhr ) {
 			if ( xhr.lengthComputable ) {
@@ -160,8 +168,15 @@ function init() {
 		var onError = function ( xhr ) {
 		};
 
-    //Load Draco Model
-    loadDracoModel();
+    //Load glTF model
+    if (object_to_load_is_gltf){
+      // Load glTF model
+      loadGltf(object_to_load_gltf_file_path);
+    }
+    else {
+      // Load draco model
+      loadDracoModel();
+    }
 
 
     // Controls forintereacting with 3D scene
@@ -412,7 +427,7 @@ function resetCameraAndControls() {
   camAndCtrlTransition(initial_cam_pos, origin);
 }
 
-//Create p element in element with the input id and populate it with input text 
+//Create p element in element with the input id and populate it with input text
 function PopulateDiv(id, text) {
   var div = document.getElementById(id);
   p_tag = div.getElementsByTagName("p")[0];
@@ -555,6 +570,40 @@ function loadDracoModel() {
 }
 
 
+function loadGltf(url){
+//TODO fix substr
+
+  console.log(url);
+
+  gltf_loader.load(
+    url,
+
+    function(data) {
+      gltf = data;
+      var object = gltf.scene;
+      var animations = gltf.animations;
+
+      mixer = new THREE.AnimationMixer(object);
+
+      //console.log("Number of animations: %d", animations.length);
+      for (var i = 0; i < animations.length; i++) {
+        var animation = animations[i];
+        mixer.clipAction(animation).play();
+      }
+
+      // mixer.clipAction(animations[18]).play();
+
+      scene.add(object);
+      gltfloaded=true;
+    },
+
+    undefined,
+    function(error) {
+      console.error(error)
+    }
+  );
+}
+
 //Handle window resize changes
 function onWindowResize() {
 
@@ -570,7 +619,13 @@ function onWindowResize() {
 //Function called at every frame
 function animate() {
     canvas_rect = canvas_el.getBoundingClientRect();
-    requestAnimationFrame( animate );
+    requestAnimationFrame( animate )
+
+    // ------PROCESS GLTF ANIMATIONS-----
+    if (gltfloaded){
+      mixer.update(clock.getDelta());
+    }
+
     controls.update();
     TWEEN.update();
     render();
