@@ -136,7 +136,9 @@ function init() {
     scene = new THREE.Scene();
 
     // renderer
-    renderer = new THREE.WebGLRenderer({canvas: canvas3D} );
+    renderer = new THREE.WebGLRenderer({
+       preserveDrawingBuffer: true,
+      canvas: canvas3D} );
     // renderer.setSize( window.innerWidth, window.innerHeight );
     console.log( document.getElementById('3d_content').getBoundingClientRect());
     renderer.setSize( document.getElementById('3d_content').getBoundingClientRect().width, window.innerHeight );
