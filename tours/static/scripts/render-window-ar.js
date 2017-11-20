@@ -1,5 +1,5 @@
 var container, camera, scene, scene_css3d, renderer, css3d_renderer, LeePerryMesh, loaded_mesh, controls, group;
-var canvas_dim =  document.getElementById('canvas3D');
+var canvas_dim =  document.body;
 var canvas_rect = canvas_dim.getBoundingClientRect();
 /*var WIDTH = 3/4 * screen.width;*/
 var LENGTH = screen.height;
@@ -114,7 +114,7 @@ function init() {
 
 
     // HTML Container for the 3D widget
-    var canvas3D = document.getElementById('canvas3D');
+    var canvas3D = document.body;
     var css3d_div = document.getElementById('css3d_div');
 
     //Uncomment or place in main.css to set the canvas parameters
@@ -123,7 +123,7 @@ function init() {
     // canvas3D.style.position = 'static';
     // canvas3D.style.top = '100px';
     // canvas3D.style.width = '200px';
-    // //canvas3D.style.backgroundColor = #0000;
+    // canvas3D.style.backgroundColor = #0000;
     // document.body.appendChild( canvas3D );
 
     // scene
@@ -133,14 +133,17 @@ function init() {
     scene_css3d = new THREE.Scene();
 
     // renderer
-    renderer = new THREE.WebGLRenderer({canvas: canvas3D});
+    renderer = new THREE.WebGLRenderer({
+      antialias: true,
+  		alpha: true
+    });
     renderer.alpha = true;
-    //renderer.setClearColor( 0x0fff00, 0.5 );
-    renderer.domElement.style.zIndex = 20;
-    //renderer.setSize( window.innerWidth, window.innerHeight );
-    console.log( document.getElementById('3d_content').getBoundingClientRect());
-    renderer.setSize( document.getElementById('3d_content').getBoundingClientRect().width, window.innerHeight );
-    renderer.setClearColor( 0xffffff, 0);
+    renderer.setClearColor(new THREE.Color('lightgrey'), 0);
+    renderer.setSize( 640, 480 );
+    renderer.domElement.style.position = 'absolute';
+    renderer.domElement.style.top = '0px';
+    renderer.domElement.style.left = '0px';
+    document.body.appendChild( renderer.domElement );
 
     //Cast renderers in DOM elements
     //canvas3D.appendChild(renderer.domElement);
@@ -308,22 +311,22 @@ function init() {
         ////////////////////////////////////////////////////////////////////////////////
         //          handle arToolkitSource
         ////////////////////////////////////////////////////////////////////////////////
-        
+
         console.log("HERE--------------------------------")
 
         console.log(THREEx);
         console.log(new THREEx.ArToolkitSource({
-          // to read from the webcam 
+          // to read from the webcam
           sourceType : 'webcam',
-          
+
           // // to read from an image
           // sourceType : 'image',
-          // sourceUrl : THREEx.ArToolkitContext.baseURL + '../data/images/img.jpg',    
+          // sourceUrl : THREEx.ArToolkitContext.baseURL + '../data/images/img.jpg',
           // to read from a video
           // sourceType : 'video',
-          // sourceUrl : THREEx.ArToolkitContext.baseURL + '../data/videos/headtracking.mp4',   
+          // sourceUrl : THREEx.ArToolkitContext.baseURL + '../data/videos/headtracking.mp4',
         }))
-        
+
 
 
 
@@ -331,15 +334,15 @@ function init() {
 
 
         arToolkitSource = new THREEx.ArToolkitSource({
-          // to read from the webcam 
+          // to read from the webcam
           sourceType : 'webcam',
-          
+
           // // to read from an image
           // sourceType : 'image',
-          // sourceUrl : THREEx.ArToolkitContext.baseURL + '../data/images/img.jpg',    
+          // sourceUrl : THREEx.ArToolkitContext.baseURL + '../data/images/img.jpg',
           // to read from a video
           // sourceType : 'video',
-          // sourceUrl : THREEx.ArToolkitContext.baseURL + '../data/videos/headtracking.mp4',   
+          // sourceUrl : THREEx.ArToolkitContext.baseURL + '../data/videos/headtracking.mp4',
         });
         arToolkitSource.init(function onReady(){
           onWindowResize()
@@ -349,7 +352,7 @@ function init() {
         ////////////////////////////////////////////////////////////////////////////////
         //          initialize arToolkitContext
         ////////////////////////////////////////////////////////////////////////////////
-        
+
         // create atToolkitContext
         arToolkitContext = new THREEx.ArToolkitContext({
           cameraParametersUrl: '/static/camera_para.dat',
@@ -365,7 +368,7 @@ function init() {
         ////////////////////////////////////////////////////////////////////////////////
         //          Create a ArMarkerControls
         ////////////////////////////////////////////////////////////////////////////////
-        
+
         // init controls for camera
         var markerControls = new THREEx.ArMarkerControls(arToolkitContext, camera, {
           type : 'pattern',
@@ -1240,7 +1243,7 @@ function loadDracoModel() {
 
   //TODO: This takes out the extension and replaces it for a .drc. This is because the post_save signal function updates after a few saved_annotations
   //Should solve this issue in backend else the input obj will always be needed and take storage space on server
-console.log(object_to_load_obj_path);
+  console.log(object_to_load_obj_path);
   object_to_load_obj_path = object_to_load_obj_path.substr(0, object_to_load_obj_path.lastIndexOf(".")) + ".drc";
   console.log(object_to_load_obj_path);
   // TEST speed .obj vs .obj
@@ -1280,6 +1283,9 @@ console.log(object_to_load_obj_path);
     } );
 }
 
+
+
+
 //LoadOneDracoModel
 function loadOneModel() {
     let draco_file = new XMLHttpRequest();
@@ -1300,19 +1306,19 @@ function onWindowResize() {
 
 
       // camera.aspect = window.innerWidth / window.innerHeight;
-      camera.aspect = document.getElementById('3d_content').getBoundingClientRect().width/window.innerHeight;
+      // camera.aspect = document.getElementById('3d_content').getBoundingClientRect().width/window.innerHeight;
 
       camera.updateProjectionMatrix();
 
       // renderer.setSize( window.innerWidth, window.innerHeight );
-      renderer.setSize( document.getElementById('3d_content').getBoundingClientRect().width, window.innerHeight );
-      css3d_renderer.setSize( document.getElementById('3d_content').getBoundingClientRect().width, window.innerHeight );
+      // renderer.setSize( document.getElementById('3d_content').getBoundingClientRect().width, window.innerHeight );
+      // css3d_renderer.setSize( document.getElementById('3d_content').getBoundingClientRect().width, window.innerHeight );
 
-      arToolkitSource.onResize() ; 
-      arToolkitSource.copySizeTo(document.getElementById('3d_content')); 
+      arToolkitSource.onResize() ;
+      arToolkitSource.copySizeTo(renderer.domElement);
       if( arToolkitContext.arController !== null ){
-        arToolkitSource.copySizeTo(arToolkitContext.arController.canvas)  
-      } 
+        arToolkitSource.copySizeTo(arToolkitContext.arController.canvas)
+      }
 }
 
 function animate() {
@@ -1335,7 +1341,8 @@ function render() {
     if( arToolkitSource.ready === false ) return
     arToolkitContext.update( arToolkitSource.domElement )
 
-    scene.visible = camera.visible
+  //  scene.visible = camera.visible;
+    // scene.visible = true;
 }
 
 //loadGeometry

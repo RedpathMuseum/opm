@@ -4,9 +4,12 @@
 {% get_media_prefix as media %}
 
 <!-- Script to load 3D object  -->
+<head>
 <script>
 
   // var object_to_load_obj_path = "{% static "renders/" %}{{renderObj.object_path}}";
+
+
   var object_to_load_obj_path ="";
   var object_to_load_colormap_path = "";
   var object_to_load_specmap_path = "";
@@ -19,205 +22,392 @@
 
 
 </script>
-{% include 'header.html' %}
+
 <!--<script src="{% static "three.js/build/ar.js" %}"></script>-->
 <script src="https://cdn.rawgit.com/mrdoob/three.js/r84/build/three.min.js" ></script>
 <script src="{% static 'three.js/build/ar.js'  %}"> </script>
 <script>THREEx.ArToolkitContext.baseURL = '{% static "three.js" %}'</script>
 
-<div class="" style=" ">
-
-
-
-  <div class="col-lg-9 col-md-9 col-sm-6 " id="3d_content" style=" overflow-y:auto; overflow-x: hidden; ">
-    <div class="child" style="z-index: 10; ">
-      {% include 'navbar_view_tours.html' %}
-
-    </div>
-    <div id="blocker"></div>
-    <div id="mydiv"></div>
-    <div id="contain" class="parent">
-      <i id="full-screen-btn" class="toggle-screen glyphicon glyphicon-fullscreen play-btn" onclick="toggleFullScreen()"></i>
-      <canvas id="canvas3D" >
-
-      </canvas>
-
-      <!-- <div id="icon-bar" class="icon-bar" style="z-index: 30;"> -->
-        <!-- <div id="annotation-badge" class="numberCircle fa  badge"></div> -->
-        <div class="child-player">
-
-
-
-        <!-- <i id="play-btn" class="btn btn-default btn-lg  btn-raised fa fa-play-circle fa-4x play-btn child-play-btn" onClick=PlayTour()></i> -->
-        <div class="child-player-ctrls-parent">
-
-          <i id="prev-btn" class=" btn btn-default btn-lg btn-raised fa fa-step-backward fa-2x play-btn" style="display: none" onClick=PreviousView()></i>
-          <!-- <i id="play-stop"></i> -->
-          &nbsp;
-          &nbsp;
-          &nbsp;
-          <i id="play-btn" class="btn btn-default btn-lg  btn-raised fa fa-play-circle fa-3x play-btn" onClick=PlayTour()></i>
-
-          <i id="stop-btn" class="btn btn-default btn-lg btn-raised fa fa-pause fa-4x play-btn"style="display: none" onClick=StopTour()></i>
-          &nbsp;
-          &nbsp;
-          &nbsp;
-          <i id="next-btn" class="btn btn-default btn-lg btn-raised fa fa-step-forward fa-2x play-btn" style="display: none" onClick=NextView()></i>
-          <div class="child-player-ctrls-child">
-            <i id="annotation-badge" class="play-ctr play-btn btn btn-default btn-lg btn-raised fa" style="display: none"></i>
-          </div>
-
-        </div>
-
-
-
-      </div>
-      <!-- <i id="annotation-badge" class="play-ctr btn btn-default btn-lg btn-raised fa" style="display: none"></i> -->
-
-      <!-- </div> -->
-    </div>
-
-    <!-- <div id="css3d_div"></div> -->
-
-
-
-
-  </div>
-  <div class="col-lg-3 col-md-3 col-sm-6" id="docked_content" style="height:100%; overflow-y: auto">
-
-    <h1 style="font-size:150%; color: #f5f5f5;"><u>{{tour.title}}</u></h1>
-    <br>
-    {% for section in all_content %}
-      {% if section.class_name == 'Paragraph' %}
-        <h3>{{section.title}}</h3>
-        <p>{{section.description}}</p>
-      {% endif %}
-
-      {% if section.class_name == 'Image' %}
-        <img src="{{ media }}images/{{section.file_name}}"></img>
-        <p>{{section.title}}</p>
-      {% endif %}
-
-      {% if section.class_name == 'Video' %}
-        <p>{{section.title}}</p>
-        <video width="320" height="240" controls>
-          <source src="{{ media }}videos/{{section.file_name}}" type="video/mp4">
-        </video>
-      {% endif %}
-
-    {% endfor %}
-  </div>
-</div>
-<!-- <div class="fa fa-2x scan-qr-code badge scan-qr-code-index col-lg-3 col-md-3 col-sm-6 col-lg-offset-9 col-md-offset-9col-sm-offset-6" ><a href="https://webqr.com/index.html">SCAN QR CODE</a></div> -->
-
-<div id="titleBar"><a href="#navPanel" class="toggle"></a><span class="title">
-        <h1><a href="/">The Redpath Museum's Virtual Exhibit</a></h1>
-        <p>Enhancing museum experience</p>
-        <button class="launcher">Launch Virtual Exhibit</button>
-      </span>
-</div>
-<div id="navPanel"><nav><a class="link depth-0" href="/" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"><span class="indent-0"></span>Home</a><a class="link depth-0" href="/tours/" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"><span class="indent-0"></span>Virtual Exhibit</a><a class="link depth-0" href="no-sidebar.html" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"><span class="indent-0"></span>Our Team</a><a class="link depth-0" href="right-sidebar.html" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"><span class="indent-0"></span>About</a><a class="link depth-0" href="no-sidebar.html" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"><span class="indent-0"></span>Contact</a></nav></div>
-
-<script src="{% static "bower_components/jquery/dist/jquery.js" %}" ></script>
-<!-- <script src="{% static "bower_components/three.js/build/three.js" %}" ></script> -->
-<!--<script src="https://cdn.rawgit.com/mrdoob/three.js/r84/build/three.min.js" ></script>-->
-<script src="{% static "bower_components/threejs-trackball-controls/TrackballControls.js" %}" ></script>
-<script src="{% static "bower_components/tween.js/src/Tween.js" %}" ></script>
-<script src="{% static "bower_components/dat-gui/build/dat.gui.js" %}" ></script>
 <script src="{% static "scripts/draco_decoder.js" %}"></script>
-<script src="{% static "scripts/STLLoader.js" %}" ></script>
-<script src="{% static "scripts/OBJLoader.js" %}" ></script>
 <script src="{% static "scripts/DRACOLoader.js" %}" ></script>
-<script src="{% static "scripts/CSS3DRenderer.js" %}" ></script>
-<script src="{% static "scripts/render-window-ar.js" %}" ></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+</head>
 
+<!-- BODY BEGINS HERE -->
+<body style='margin : 0px; overflow: hidden; font-family: Monospace;'>
+  <div style='position: absolute; top: 10px; width:100%; text-align: center; z-index: 1;'>
+  <a target="_blank">AR.js - three.js camera transform </a>
+  </div>
+
+<!-- div where we'll put the feed -->
+  <div id = "camera-feed">
+
+
+  <script>
+  ///////////////////////////////////////////////////////////////////////////
+  //		Init
+  ///////////////////////////////////////////////////////////////////////////
+  // init renderer
+  var renderer	= new THREE.WebGLRenderer({
+  antialias: true,
+  alpha: true
+  });
+  renderer.setClearColor(new THREE.Color('lightgrey'), 0)
+  renderer.setSize( 640, 480 );
+  renderer.domElement.style.position = 'absolute'
+  renderer.domElement.style.top = '0px'
+  renderer.domElement.style.left = '0px'
+  document.body.appendChild( renderer.domElement );
+  // array of functions for the rendering loop
+  var onRenderFcts= [];
+  // init scene and camera
+  var scene	= new THREE.Scene();
+
+  //////////////////////////////////////////////////////////////////////////////////
+  //		Initialize a basic camera
+  //////////////////////////////////////////////////////////////////////////////////
+  // Create a camera
+  var camera = new THREE.Camera();
+  scene.add(camera);
+
+
+  ////////////////////////////////////////////////////////////////////////////////
+  //          handle arToolkitSource
+  ////////////////////////////////////////////////////////////////////////////////
+  var arToolkitSource = new THREEx.ArToolkitSource({
+  // to read from the webcam
+  sourceType : 'webcam',
+
+  // // to read from an image
+  // sourceType : 'image',
+  // sourceUrl : THREEx.ArToolkitContext.baseURL + '../data/images/img.jpg',
+  // to read from a video
+  // sourceType : 'video',
+  // sourceUrl : THREEx.ArToolkitContext.baseURL + '../data/videos/headtracking.mp4',
+  })
+  arToolkitSource.init(function onReady(){
+  onResize()
+  })
+
+  // handle resize
+  window.addEventListener('resize', function(){
+  onResize()
+  })
+  function onResize(){
+  arToolkitSource.onResize()
+  arToolkitSource.copySizeTo(renderer.domElement)
+  if( arToolkitContext.arController !== null ){
+  	arToolkitSource.copySizeTo(arToolkitContext.arController.canvas)
+  }
+  }
+  ////////////////////////////////////////////////////////////////////////////////
+  //          initialize arToolkitContext
+  ////////////////////////////////////////////////////////////////////////////////
+
+  // create atToolkitContext
+  var arToolkitContext = new THREEx.ArToolkitContext({
+  cameraParametersUrl: THREEx.ArToolkitContext.baseURL + '../../camera_para.dat',
+  detectionMode: 'mono',
+  })
+  // initialize it
+  arToolkitContext.init(function onCompleted(){
+  // copy projection matrix to camera
+  camera.projectionMatrix.copy( arToolkitContext.getProjectionMatrix() );
+  })
+  </script>
+  <script>
+  // TODO: what triggers the loadDoc function?
+  // function needs to be called when a new marker is detected
+  // how and where are the markers detected??
+
+  // IDEA: a function trigger() that checks what the current marker is. If the marker has changed, it triggers a state change by calling loadDoc, which requests and displays the new AR image
+  function trigger () {
+    // if marker is the same
+      // do nothing
+    // else marker has changed
+      // call loadDoc and make server request
+
+  }
+  //calls the trigger function every 5000ms
+  setInterval(trigger, 5000);
+
+  // LINE 8: displays data on our webpage. what is Id name of where our content is to be displayed?
+  // LINE 11: need filepath for our data
+  var ajaxRequest;
+  // function loadDoc(marker_id) {
+  //
+  //   // console.log("bro");
+  //   // account for different browsers
+  //   if (window.XMLHttpRequest) {
+  //     request = new XMLHttpRequest();
+  //   } else {
+  //     request = new ActiveXObject("Microsoft.XMLHTTP");
+  //   }
+  //
+  //
+  //   request.open("GET", "practice.txt", true);
+  //   request.onreadystatechange = function () {
+  //     if (this.readyState == 4 && this.status == 200) {
+  //       document.getElementById("camera-feed").innerHTML = this.responseText; //LINE 8
+  //
+  //     } else {
+  //       alert("problem with request");
+  //     }
+  //
+  //   };
+  //   // request.open("GET", '/tours/get_render/1/', true); //LINE 11
+  //
+  //   // here is where we need to access database
+  //   var url;
+  //   //
+  //   // request.open("GET", url, true);
+  //   request.send();
+  // }
+  var data_parse
+  function loadDoc(marker_id) {
+    // console.log("hello")
+      $.get('/tours/get_render/1', function(data) {
+
+          data_parse = JSON.parse(data);
+          // var sample = 'Remove stuff before this word. Hello!';
+          // var substr = sample.substring(sample.indexOf('word'));
+          var path = data_parse[0].fields.colormap_path;;
+          var new_path = path.substring(path.indexOf('/media'));;
+          data_parse[0].fields.colormap_path = new_path;;
+
+          path = data_parse[0].fields.normalmap_path;;
+          new_path = path.substring(path.indexOf('/media'));;
+          data_parse[0].fields.normalmap_path = new_path;;
+
+          path = data_parse[0].fields.object_path;;
+          new_path = path.substring(path.indexOf('/media'));;
+          data_parse[0].fields.object_path = new_path;;
+
+          path = data_parse[0].fields.specmap_path;;
+          new_path = path.substring(path.indexOf('/media'));;
+          data_parse[0].fields.specmap_path = new_path;;
+
+          console.log(data_parse);
+          loadDracoModel_json(data_parse);
+
+      });
+  }
+  </script>
+  <script>
+  onRenderFcts.push(function(){
+  if( arToolkitSource.ready === false )	return
+  arToolkitContext.update( arToolkitSource.domElement )
+
+  // update scene.visible if the marker is seen
+  scene.visible = camera.visible
+  })
+
+  ////////////////////////////////////////////////////////////////////////////////
+  //          Create a ArMarkerControls
+  ////////////////////////////////////////////////////////////////////////////////
+
+  // init controls for camera
+  var markerControls = new THREEx.ArMarkerControls(arToolkitContext, camera, {
+  type : 'pattern',
+  patternUrl : 'https://raw.githubusercontent.com/jeromeetienne/AR.js/master/data/data/patt.hiro',
+  // patternUrl : THREEx.ArToolkitContext.baseURL + '../data/data/patt.kanji',
+  // as we controls the camera, set changeMatrixMode: 'cameraTransformMatrix'
+  changeMatrixMode: 'cameraTransformMatrix'
+  })
+  // as we do changeMatrixMode: 'cameraTransformMatrix', start with invisible scene
+  scene.visible = false
+  //////////////////////////////////////////////////////////////////////////////////
+  //		add an object in the scene
+  //////////////////////////////////////////////////////////////////////////////////
+  // add a torus knot
+  var geometry	= new THREE.CubeGeometry(1,1,1);
+  var material	= new THREE.MeshNormalMaterial({
+  transparent : true,
+  opacity: 0.5,
+  side: THREE.DoubleSide
+  });
+  var mesh	= new THREE.Mesh( geometry, material );
+  mesh.position.y	= geometry.parameters.height/2
+  scene.add( mesh );
+
+  var geometry	= new THREE.TorusKnotGeometry(0.3,0.1,64,16);
+  var material	= new THREE.MeshNormalMaterial();
+  var mesh	= new THREE.Mesh( geometry, material );
+  mesh.position.y	= 0.5
+  scene.add( mesh );
+  console.log("b4 draco load");
+  var textureLoader = new THREE.TextureLoader();
+  loadDracoModel();
+  console.log("after load");
+  onRenderFcts.push(function(delta){
+  mesh.rotation.x += Math.PI*delta
+  })
+  //////////////////////////////////////////////////////////////////////////////////
+  //		render the whole thing on the page
+  //////////////////////////////////////////////////////////////////////////////////
+  // render the scene
+  onRenderFcts.push(function(){
+  renderer.render( scene, camera );
+  })
+  // run the rendering loop
+  var lastTimeMsec= null
+  requestAnimationFrame(function animate(nowMsec){
+  // keep looping
+  requestAnimationFrame( animate );
+  // measure time
+  lastTimeMsec	= lastTimeMsec || nowMsec-1000/60
+  var deltaMsec	= Math.min(200, nowMsec - lastTimeMsec)
+  lastTimeMsec	= nowMsec
+  // call each update function
+  onRenderFcts.forEach(function(onRenderFct){
+  	onRenderFct(deltaMsec/1000, nowMsec/1000)
+  })
+  })
+
+  //TODO: have function take args: object
+
+
+  function loadDracoModel() {
+    var loader = new THREE.DRACOLoader();
+
+    //TODO: This takes out the extension and replaces it for a .drc. This is because the post_save signal function updates after a few saved_annotations
+    //Should solve this issue in backend else the input obj will always be needed and take storage space on server
+    console.log(object_to_load_obj_path);
+    object_to_load_obj_path = object_to_load_obj_path.substr(0, object_to_load_obj_path.lastIndexOf(".")) + ".drc";
+    console.log(object_to_load_obj_path);
+    // TEST speed .obj vs .obj
+    // object_to_load_path = "../../static\models\Homo_Erectus\he_og\Taung_Child_Top\Taung_Child_Top.obj"
+      loader.load( object_to_load_obj_path, function ( geometry ) {
+        geometry.computeVertexNormals();
+        var material = new THREE.MeshPhongMaterial( {
+          specular: 0x111111,
+          //map: textureLoader.load( '../../static/models/Homo_Erectus/he_og/Taung_Child_Top/Taung_Child_Top01.jpg' ),
+          //specularMap: textureLoader.load('../../static/models/leeperrysmith/Map-SPEC.jpg' ),
+          //normalMap: textureLoader.load( '../../static/models/Homo_Erectus/he_og/Taung_Child_Top/NormalMap_1.jpg'),
+          map: textureLoader.load( object_to_load_colormap_path ),
+          normalMap: textureLoader.load( object_to_load_normalmap_path),
+          normalScale: new THREE.Vector2( 0.75, 0.75 ),
+          shininess: 25
+        } );
+
+        //var bufferGeometry = new THREE.BufferGeometry().fromGeometry( geometry );
+        console.log("loadDracomodel - geometry = ",geometry);
+
+        var bufferGeometry = geometry;
+        bufferGeometry.computeVertexNormals();
+        bufferGeometry.computeBoundingBox();
+        const sizeX = bufferGeometry.boundingBox.max.x - bufferGeometry.boundingBox.min.x;
+        const sizeY = bufferGeometry.boundingBox.max.y - bufferGeometry.boundingBox.min.y;
+        const sizeZ = bufferGeometry.boundingBox.max.z - bufferGeometry.boundingBox.min.z;
+        const diagonalSize = Math.sqrt(sizeX * sizeX + sizeY * sizeY + sizeZ * sizeZ);
+        const scale = 1.0 / diagonalSize;
+        const midX = (bufferGeometry.boundingBox.min.x + bufferGeometry.boundingBox.max.x) / 2;
+        const midY = (bufferGeometry.boundingBox.min.y + bufferGeometry.boundingBox.max.y) / 2;
+        const midZ = (bufferGeometry.boundingBox.min.z + bufferGeometry.boundingBox.max.z) / 2;
+
+        // //geometry.scale(scale,scale,scale);
+        // geometry.scale(0.10,0.10,0.10);
+        // var loaded_mesh = new THREE.Mesh( geometry, material );
+        // scene.add( loaded_mesh );
+      } );
+  }
+
+
+  function loadDracoModel_json(json_data) {
+    var loader = new THREE.DRACOLoader();
+
+    //TODO: This takes out the extension and replaces it for a .drc. This is because the post_save signal function updates after a few saved_annotations
+    //Should solve this issue in backend else the input obj will always be needed and take storage space on server
+    var object_path = json_data[0].fields.object_path;
+    object_path = object_path.substr(0, object_path.lastIndexOf(".")) + ".drc";
+
+    // TEST speed .obj vs .obj
+    // object_to_load_path = "../../static\models\Homo_Erectus\he_og\Taung_Child_Top\Taung_Child_Top.obj"
+      loader.load( object_path, function ( geometry ) {
+        geometry.computeVertexNormals();
+        var material = new THREE.MeshPhongMaterial( {
+          specular: 0x111111,
+          //map: textureLoader.load( '../../static/models/Homo_Erectus/he_og/Taung_Child_Top/Taung_Child_Top01.jpg' ),
+          //specularMap: textureLoader.load('../../static/models/leeperrysmith/Map-SPEC.jpg' ),
+          //normalMap: textureLoader.load( '../../static/models/Homo_Erectus/he_og/Taung_Child_Top/NormalMap_1.jpg'),
+          map: textureLoader.load( json_data[0].fields.colormap_path ),
+          normalMap: textureLoader.load( json_data[0].fields.normalmap_path),
+          normalScale: new THREE.Vector2( 0.75, 0.75 ),
+          shininess: 25
+        } );
+
+        //var bufferGeometry = new THREE.BufferGeometry().fromGeometry( geometry );
+        console.log("loadDracomodel - geometry = ",geometry);
+
+        var bufferGeometry = geometry;
+        bufferGeometry.computeVertexNormals();
+        bufferGeometry.computeBoundingBox();
+        const sizeX = bufferGeometry.boundingBox.max.x - bufferGeometry.boundingBox.min.x;
+        const sizeY = bufferGeometry.boundingBox.max.y - bufferGeometry.boundingBox.min.y;
+        const sizeZ = bufferGeometry.boundingBox.max.z - bufferGeometry.boundingBox.min.z;
+        const diagonalSize = Math.sqrt(sizeX * sizeX + sizeY * sizeY + sizeZ * sizeZ);
+        const scale = 1.0 / diagonalSize;
+        const midX = (bufferGeometry.boundingBox.min.x + bufferGeometry.boundingBox.max.x) / 2;
+        const midY = (bufferGeometry.boundingBox.min.y + bufferGeometry.boundingBox.max.y) / 2;
+        const midZ = (bufferGeometry.boundingBox.min.z + bufferGeometry.boundingBox.max.z) / 2;
+
+        //geometry.scale(scale,scale,scale);
+        geometry.scale(10,10,10);
+        var loaded_mesh = new THREE.Mesh( geometry, material );
+        scene.remove(scene.children[scene.children.length-1]);
+        scene.add( loaded_mesh );
+      } );
+  }
+
+
+  </script>
+
+
+<!-- AJAX Setup -->
 <script>
-  var tools = "{% for section in all_content %}{% if section.class_name == 'Image' %}{{section.title}}{% endif %}{% endfor %}";
-  console.log(tools);
+function getCookie(name) {
+    var cookieValue = null;
+    if (document.cookie && document.cookie != '') {
+        var cookies = document.cookie.split(';');
+        for (var i = 0; i < cookies.length; i++) {
+            var cookie = jQuery.trim(cookies[i]);
+            // Does this cookie string begin with the name we want?
+            if (cookie.substring(0, name.length + 1) == (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+}
+function csrfSafeMethod(method) {
+    // these HTTP methods do not require CSRF protection
+    return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+}
+function sameOrigin(url) {
+   // test that a given url is a same-origin URL
+   // url could be relative or scheme relative or absolute
+   var host = document.location.host; // host + port
+   var protocol = document.location.protocol;
+   var sr_origin = '//' + host;
+   var origin = protocol + sr_origin;
+   // Allow absolute or scheme relative URLs to same origin
+   return (url == origin || url.slice(0, origin.length + 1) == origin + '/') ||
+   (url == sr_origin || url.slice(0, sr_origin.length + 1) == sr_origin + '/') ||
+   // or any other URL that isn't scheme relative or absolute i.e relative.
+   !(/^(\/\/|http:|https:).*/.test(url));
+}
+var csrftoken = getCookie('csrftoken')
+$.ajaxSetup({
+    beforeSend: function(xhr, settings) {
+        if (!csrfSafeMethod(settings.type) && sameOrigin(settings.url)) {
+            // Send the token to same-origin, relative URLs only.
+            // Send the token only if the method warrants CSRF protection
+            // Using the CSRFToken value acquired earlier
+            xhr.setRequestHeader("X-CSRFToken", csrftoken);
+        }
+    }
+});
 </script>
 
-<!-- Script to load annotations -->
-<script>
-
-  var Annotation_Set = new AnnotationSet();
-  var i = 0;
-  console.log({{annotations_list|safe}});
-  var annotations = JSON.parse({{annotations_list|safe}});
-  console.log(annotations);
-  console.log(annotations[0].fields.position);
-
-  var badge = document.getElementById("annotation-badge");
-
-
-  for(var i=0; i< annotations.length; i++){
-      var cam_pos = new THREE.Vector3(annotations[i].fields.camera_pos_x,annotations[i].fields.camera_pos_y,annotations[i].fields.camera_pos_z);
-      var target_pos = new THREE.Vector3(annotations[i].fields.target_pos_x,annotations[i].fields.target_pos_y,annotations[i].fields.target_pos_z);
-      var Annot_obj = new AnnotationObj(target_pos, cam_pos);
-      Annot_obj.text = annotations[i].fields.annotation_text;
-      CreateToolTip(Annot_obj.text, i);
-      // PopulateDiv("annotation", Annot_obj.text);
-      console.log(Annot_obj);
-      console.log("annotations.length = ",annotations.length)
-      Annotation_Set.AddAnnotation(Annot_obj);
-      console.log(Annotation_Set);
-  }
-
-  function PlayTour(){
-    //TODO: Make the function work
-    togglePlayBtn();
-    Annotation_Set.StartAnnotationTour(); };
-    badge.innerHTML = Annotation_Set.queue.curr_annot_index+1+ "/" +Annotation_Set.queue.length;
-  function StopTour(){
-    Annotation_Set.StopAnnotationTour();
-    badge.innerHTML = Annotation_Set.queue.curr_annot_index+1+ "/" +Annotation_Set.queue.length;
-    togglePlayBtn();
-   };
-  function NextView(){
-    Annotation_Set.NextAnnotation();
-    badge.innerHTML = Annotation_Set.queue.curr_annot_index+1+ "/" +Annotation_Set.queue.length;
-  };
-  function PreviousView(){
-    Annotation_Set.PreviousAnnotation();
-    badge.innerHTML = Annotation_Set.queue.curr_annot_index+1+ "/" +Annotation_Set.queue.length;
-   };
-
-
-  document.getElementById("stop-btn").style.display = "none";
-  document.getElementById("prev-btn").style.display = "none";
-  document.getElementById("next-btn").style.display = "none";
-  var playingTour = false;
-  function togglePlayBtn() {
-
-    if(playingTour) {
-      document.getElementById("stop-btn").style.display = "none";
-      document.getElementById("prev-btn").style.display = "none";
-      document.getElementById("next-btn").style.display = "none";
-
-      document.getElementById("play-btn").style.display = "";
-      playingTour = false;
-    }
-    else {
-      console.log("lalalla");
-      document.getElementById("stop-btn").style.display = "";
-      document.getElementById("prev-btn").style.display = "";
-      document.getElementById("next-btn").style.display = "";
-      document.getElementById("annotation-badge").style.display = "";
-
-      document.getElementById("play-btn").style.display = "none";
-      playingTour =true;
-    }
-
-  }
-
-  function toggleFullScreen() {
-    console.log("TOGGLE FULL SCREEN");
-    if(!document.webkitIsFullScreen) {
-      console.log("Enter Full Screen");
-      document.documentElement.webkitRequestFullScreen();
-    }
-    else {
-      console.log("Exit Full screen");
-      document.webkitExitFullscreen();
-    }
-  }
-</script>
+</body>

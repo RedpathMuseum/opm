@@ -220,6 +220,16 @@ def edit_annotation(request, annotation_id):
     # annotObj_json_ser = json.dumps(annotations_json)
     return HttpResponse(annotObj_json, content_type='application/json')
 
+def get_render(request, render_id):
+    #get Renderr model with input render_id
+    #return Render model as JSON or Serialize JSON
+
+    my_render = Render.objects.filter(id=render_id)
+    render_json = serializers.serialize("json", my_render)
+    render_list = json.dumps(render_json)
+    # print(my_render)
+    return HttpResponse(render_list, content_type='application/json')
+
 @staff_member_required
 
 def annotations_admin_view(request):
