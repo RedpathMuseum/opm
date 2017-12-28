@@ -7,6 +7,7 @@ from django.contrib.admin.views.decorators import staff_member_required
 import simplejson
 import json
 from django.core import serializers
+import base64
 
 from .models import Tour
 from .models import Render
@@ -153,7 +154,36 @@ def get_annotations(request, tour_id):
     print("get_annotations --- RETURNING")
     return JsonResponse(annotations_list, safe=False)
 
+def add_img(request, tour_id):
+    loaded_data = json.loads(request.body)
+    data_json = loaded_data["img"]
 
+
+    tour = Tour.objects.get(id=tour_id)
+    print(tour)
+
+    #print("before overwrite")
+    # print(tour.snapshot)
+
+    # print("after overwrite")
+    # print(tour.snapshot)
+    img_data = data_json["url"]
+    img_data_bytes = str.encode(img_data)
+
+    with open(settings.MEDIA_ROOT+"snapshots/"+"imageToSave.png", "wb") as fh:
+        fh.write(base64.decodebytes(img_data_bytes))
+
+
+    tour.snapshot = settings.MEDIA_ROOT+"snapshots/"+"imageToSave.png"
+
+    tour.save()
+
+
+    status = "success"
+    print("imgData")
+    #print(request.body)
+
+    return JsonResponse({'img': "imageToSave.png"}) #returning the filename
 
 def add_annotation(request, tour_id):
 

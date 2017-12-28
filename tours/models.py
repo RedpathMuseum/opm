@@ -16,6 +16,8 @@ class Render(models.Model):
 class Tour(models.Model):
     title = models.CharField(max_length=50)
     text = models.TextField(max_length=5000)
+    snapshot = models.FileField(upload_to=settings.MEDIA_ROOT+"snapshots")
+    #,default=settings.STATIC_URL+"/static_images/redpath-inside.jpg"
     render = models.ForeignKey(
         Render,
         null=True,
@@ -24,6 +26,11 @@ class Tour(models.Model):
 
     def __str__(self):
         return str(self.title)
+
+    def snapshot_name(self):
+        image_name = basename(self.snapshot.name)
+        print(image_name)
+        return image_name
 
 class TourGroup(models.Model):
     title = models.CharField(max_length=100)

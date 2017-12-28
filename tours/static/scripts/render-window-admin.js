@@ -99,8 +99,9 @@ function init() {
     scene = new THREE.Scene();
 
  	// renderer
-    renderer = new THREE.WebGLRenderer({canvas: canvas3D});
-    renderer.alpha = true;
+    renderer = new THREE.WebGLRenderer({
+      preserveDrawingBuffer: true,
+      canvas: canvas3D} );
     renderer.domElement.style.zIndex = 20;
     console.log( document.getElementById('3d_content').getBoundingClientRect());
     renderer.setSize( document.getElementById('3d_content').getBoundingClientRect().width, window.innerHeight );

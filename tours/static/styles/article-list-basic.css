@@ -33,7 +33,11 @@
 }
 
 .article-list-basic li > a img{
-    width: 100%;
+  /*  object-fit: contain; */
+  width: 261px;
+  height: 155px;
+
+  /* why is it fucking up the quality */
 }
 
 .article-list-basic li div{

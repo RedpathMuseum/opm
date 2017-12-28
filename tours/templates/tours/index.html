@@ -50,7 +50,7 @@
         {% for tour in group.tours.all %}
         <li class="tours-panel">
             <a href="/tours/{{ tour.id }}/">
-                <img src="{% static "static_images/redpath-inside.jpg" %}" />
+                <img src="/media/snapshots/{{ tour.snapshot_name }}" />
             </a>
             <div>
                 <h2><a href="/tours/{{ tour.id }}/" style="color: #2b2b2b !important;">{{ tour.title }}</a></h2>

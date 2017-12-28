@@ -12,6 +12,7 @@ urlpatterns = [
     url(r'^edit_annotation/(?P<annotation_id>[0-9]+)/$', views.edit_annotation, name='edit_annotation'),
     url(r'^(?P<tour_id>[0-9]+)/ar$', views.view_ar, name='view_ar'),
     url(r'^qrcode-scanner$', views.qrcode_scanner, name='qrcode_scanner'),
+    url(r'^add_img/(?P<tour_id>[0-9]+)/$', views.add_img, name='add_img'), 
 
 
 ]

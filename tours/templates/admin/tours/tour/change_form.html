@@ -149,6 +149,25 @@
       </div>
     </form>
   </div>
+
+  <div class="col-lg-12 col-md-12 col-sm-12">
+    <button type="button" onclick="loadImg()">Generate Snapshot</button>
+
+    <button type="button" id="save_picture" value="Save" onclick="SaveImg()"> Save </button>
+  </div>
+
+  <div class="col-lg-12 col-md-12 col-sm-12" id="snapshot_id">
+    <h3 > Current Snapshot </h3>
+    <img class="col-lg-6 col-md-6 col-sm-6" src="{{ media }}snapshots/{{original.snapshot_name}}" id="snapshot_element" style="width:30%; height:30%;"> </img>
+
+    <div  class="col-lg-6 col-md-6 col-sm-6" style="display: none;" id="preview_snapshot_container">
+      <h2>Preview</h2>
+      <img src="" id="preview_snapshot" style="width:40%; height:40%;"> </img>
+    </div>
+
+  </div>
+
+
 </div>
 
 <script src="https://cdn.rawgit.com/mrdoob/three.js/r84/build/three.min.js" ></script>
@@ -167,6 +186,36 @@
 <script src="{% static "scripts/annotation-class-admin-ext.js" %}" ></script>
 <script src="{% static "scripts/render-window-admin-ext.js" %}" ></script>
 
+
+
+
+<!-- load snapshot -->
+<script>
+var times =0;
+var imgData;
+var imgNode;
+var imgContainer;
+/*** ADDING SCREEN SHOT ABILITY ***/
+function loadImg() {
+//window.addEventListener("keydown", function(e){
+  //Listen to 'P' key
+  try {
+      imgData = renderer.domElement.toDataURL();
+    // console.log(imgData);
+  }
+  catch(e) {
+      console.log("Browser does not support taking screenshot of 3d context");
+      return;
+  }
+ imgNode = document.getElementById("preview_snapshot");
+ imgNode.src = imgData;
+ document.getElementById("preview_snapshot_container").style.display = "";
+ times++;
+ console.log(times);
+//});
+}
+
+</script>
 
 <!-- Load annotation script -->
 <script>
@@ -368,6 +417,24 @@ $.ajaxSetup({
 </script>
 
 <script>
+function SaveImg(){
+  var data = {
+      url: "",
+    // container: {}
+  };
+data.url = imgData.split(",")[1];
+//data.node = node;
+//data.container = container;
+  $.post('/tours/add_img/{{original.id}}/', JSON.stringify({img: data}), function(data, status) {
+      console.log(data);
+      console.log("status is = ",status); //new path with the filename
+      // add cache-breaker to update without refresing page 
+      document.getElementById("snapshot_element").src = "/media/snapshots/" + data.img + '?' + new Date().getTime();
+  })
+  console.log(data);
+  document.getElementById("preview_snapshot_container").style.display = "none";
+}
+
  function SaveNewAnnotation() {
      Annotation_Set.AddAnnotation(annot_buffer);
      console.log(annot_buffer.name, "ADDED ANNOTATION TO ANNOTATION SET");
