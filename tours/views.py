@@ -155,7 +155,7 @@ def get_annotations(request, tour_id):
     return JsonResponse(annotations_list, safe=False)
 
 def add_img(request, tour_id):
-    loaded_data = json.loads(request.body)
+    loaded_data = json.loads(request.body.decode('utf-8'))
     data_json = loaded_data["img"]
 
 

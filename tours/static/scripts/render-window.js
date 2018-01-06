@@ -105,7 +105,9 @@ function init() {
 
     // renderer
     //render element is put inside the canvas element
-    renderer = new THREE.WebGLRenderer({canvas: canvas3D});
+    renderer = new THREE.WebGLRenderer({
+      preserveDrawingBuffer: true,
+      canvas: canvas3D});
     //Alpha set to true for better resolution
     renderer.alpha = true;
     //Setting z-index of canvas element to 20
@@ -113,8 +115,6 @@ function init() {
     console.log( document.getElementById('3d_content').getBoundingClientRect());
     renderer.setSize( document.getElementById('3d_content').getBoundingClientRect().width, window.innerHeight );
     renderer.setClearColor( 0xffffff, 0);
-
-
 
     // Setting camera
     camera = new THREE.PerspectiveCamera( 50, window.innerWidth/window.innerHeight, 1, 5000 );
