@@ -25,6 +25,12 @@
   var object_to_load_colormap_path = "{{ media }}renders/" + "{{ original.render.colormap_path }}".split(/[\\/]/).pop();
   var object_to_load_specmap_path = "{{ media }}renders/" + "{{ original.render.specmap_path }}".split(/[\\/]/).pop();
   var object_to_load_normalmap_path = "{{ media }}renders/" + "{{ original.render.normalmap_path }}".split(/[\\/]/).pop();
+
+  var object_to_load_gltf_file_path = "{{ media }}renders/" + "{{ original.render.gltf_file_path }}".split(/[\\/]/).pop();
+  var object_to_load_gltf_colormap_path = "{{ media }}renders/" + "{{ original.render.gltf_colormap_path }}".split(/[\\/]/).pop();
+  var object_to_load_gltf_bin_path = "{{ media }}renders/" + "{{ original.render.gltf_bin_path}}".split(/[\\/]/).pop();
+
+  var object_to_load_is_gltf = "{{ original.render.is_gltf}}";
   function changeAllObjPaths(render_obj) {
     object_to_load_obj_path = "{% static "renders/" %}"+render_obj;
     console.log(object_to_load_obj_path);
@@ -180,6 +186,7 @@
 <script src="{% static "scripts/STLLoader.js" %}" ></script>
 <script src="{% static "scripts/OBJLoader.js" %}" ></script>
 <script src="{% static "scripts/DRACOLoader.js" %}" ></script>
+<script src="{% static "scripts/GLTFLoader.js" %}" ></script>
 <script src="{% static "scripts/CSS3DRenderer.js" %}" ></script>
 <script src="{% static "scripts/render-window.js" %}" ></script>
 <script src="{% static "scripts/annotation-class.js" %}" ></script>

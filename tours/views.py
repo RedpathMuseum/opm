@@ -174,11 +174,13 @@ def add_img(request, tour_id):
     img_data = data_json["url"]
     img_data_bytes = str.encode(img_data)
 
-    with open(settings.MEDIA_ROOT+"snapshots/"+"imageToSave.png", "wb") as fh:
+    snapshot_img_name = "snapshot_tour_"+tour_id
+
+    with open(settings.MEDIA_ROOT+"snapshots/"+snapshot_img_name, "wb") as fh:
         fh.write(base64.decodebytes(img_data_bytes))
 
 
-    tour.snapshot = settings.MEDIA_ROOT+"snapshots/"+"imageToSave.png"
+    tour.snapshot = settings.MEDIA_ROOT+"snapshots/"+snapshot_img_name
 
     tour.save()
 
@@ -187,7 +189,7 @@ def add_img(request, tour_id):
     print("imgData")
     #print(request.body)
 
-    return JsonResponse({'img': "imageToSave.png"}) #returning the filename
+    return JsonResponse({'img': snapshot_img_name}) #returning the filename
 
 def add_annotation(request, tour_id):
 

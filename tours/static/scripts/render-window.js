@@ -169,11 +169,13 @@ function init() {
 		};
 
     //Load glTF model
-    if (object_to_load_is_gltf){
+    if (object_to_load_is_gltf == "True"){
+      console.log("Loading a GLTF file");
       // Load glTF model
       loadGltf(object_to_load_gltf_file_path);
     }
     else {
+      console.log("Loading a DRACO file");
       // Load draco model
       loadDracoModel();
     }
