@@ -10,6 +10,11 @@ class Render(models.Model):
     specmap_path = models.FileField(upload_to=settings.MEDIA_ROOT+"/renders")
     normalmap_path = models.FileField(upload_to=settings.MEDIA_ROOT+"/renders")
 
+    is_gltf = models.BooleanField();
+    gltf_file_path = models.FileField(upload_to=settings.MEDIA_ROOT+"/renders")
+    gltf_colormap_path = models.FileField(upload_to=settings.MEDIA_ROOT+"/renders")
+    gltf_bin_path = models.FileField(upload_to=settings.MEDIA_ROOT+"/renders")
+
     def __str__(self):
         return str(self.title)
 

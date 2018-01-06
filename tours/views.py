@@ -92,6 +92,10 @@ def detail(request, tour_id):
     renderObj.specmap_path = basename(renderObj.specmap_path.path)
     renderObj.normalmap_path = basename(renderObj.normalmap_path.path)
 
+    renderObj.gltf_file_path = basename(renderObj.gltf_file_path.path)
+    renderObj.gltf_colormap_path = basename(renderObj.gltf_colormap_path.path)
+    renderObj.gltf_bin_path = basename(renderObj.gltf_bin_path.path)
+
 
     # Filtering through all Paragraph models with the id of the tour being viewed
     # Notice the double underscore in tour__id accesses the tours related to the paragraphs by Foreign key
