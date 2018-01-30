@@ -22,7 +22,6 @@ class Tour(models.Model):
     title = models.CharField(max_length=50)
     text = models.TextField(max_length=5000)
     snapshot = models.FileField(upload_to=settings.MEDIA_ROOT+"snapshots")
-    #,default=settings.STATIC_URL+"/static_images/redpath-inside.jpg"
     render = models.ForeignKey(
         Render,
         null=True,
