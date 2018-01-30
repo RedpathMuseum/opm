@@ -1,3 +1,0 @@
-#Dependencies that need to be installed globally before installing mysqlclient on virtualenv
-sudo yum install mysql-devel
-sudom yum install python34-devel
