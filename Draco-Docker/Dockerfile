@@ -8,21 +8,23 @@ RUN apk update && \
         g++ \
         build-base \
         cmake \
-		git \
+        git \
         bash \
         libstdc++ && \
     rm -rf /var/cache/apk/*
 
 RUN git clone https://github.com/google/draco.git; \
-	pwd; \
-	ls; \
-	cd draco; \
-	ls; \
-    cmake .; \
+    pwd; \
+    ls; \
+    mkdir draco_build; \
+    ls; \
+    cd draco_build; \
+    cmake ../draco; \
     make; \
-	ls; \
-	mkdir objPool; \
-	cd ..;
+    ls; \
+    cd /draco; \
+    mkdir objPool; \
+    cd ..;
 
 VOLUME ["/project/draco"]
 WORKDIR ["/draco"]
