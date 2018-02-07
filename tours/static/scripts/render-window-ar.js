@@ -369,10 +369,14 @@ function init() {
         //          Create a ArMarkerControls
         ////////////////////////////////////////////////////////////////////////////////
 
+        //uses hiro marker in pattern url
         // init controls for camera
+
         var markerControls = new THREEx.ArMarkerControls(arToolkitContext, camera, {
           type : 'pattern',
-          patternUrl : "https://raw.githubusercontent.com/jeromeetienne/AR.js/master/data/data/patt.hiro",
+          patternUrl: "C:/Users/Tanner Ducharme/Downloads/pattern-marker.patt",
+
+           // patternUrl : "https://raw.githubusercontent.com/jeromeetienne/AR.js/master/data/data/patt.hiro",
           // patternUrl : THREEx.ArToolkitContext.baseURL + '../data/data/patt.kanji',
           // as we controls the camera, set changeMatrixMode: 'cameraTransformMatrix'
           changeMatrixMode: 'cameraTransformMatrix'

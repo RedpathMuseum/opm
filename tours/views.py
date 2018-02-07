@@ -86,6 +86,8 @@ def detail(request, tour_id):
         render_0.object_path = basename(render_0.object_path.path)
     tour = Tour.objects.get(id=tour_id)
     renderObj = tour.render
+    print("Render Id =")
+    print(tour.render.id)
     renderObj.object_path = basename(renderObj.object_path.path)
     renderObj.colormap_path = basename(renderObj.colormap_path.path)
     renderObj.specmap_path = basename(renderObj.specmap_path.path)
@@ -227,6 +229,8 @@ def get_render(request, render_id):
     my_render = Render.objects.filter(id=render_id)
     render_json = serializers.serialize("json", my_render)
     render_list = json.dumps(render_json)
+    print("Render Id = ")
+    print(render_id)
     # print(my_render)
     return HttpResponse(render_list, content_type='application/json')
 

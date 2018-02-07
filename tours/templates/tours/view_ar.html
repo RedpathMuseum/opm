@@ -31,19 +31,50 @@
 <script src="{% static "scripts/draco_decoder.js" %}"></script>
 <script src="{% static "scripts/DRACOLoader.js" %}" ></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+<script src="{% static "qrcode_lib/" %}html5-qrcode.min.js"></script>
+<script src="{% static "qrcode_lib/" %}jsqrcode-combined.min.js"></script>
 </head>
 
 <!-- BODY BEGINS HERE -->
 <body style='margin : 0px; overflow: hidden; font-family: Monospace;'>
   <div style='position: absolute; top: 10px; width:100%; text-align: center; z-index: 1;'>
   <a target="_blank">AR.js - three.js camera transform </a>
+  <button type = "button" onclick = "startqrscan()">Start Qr Scan</button>
   </div>
 
 <!-- div where we'll put the feed -->
-  <div id = "camera-feed">
+  <div id = "camera-feed" style = " width:300px;height:250px"></div>
 
+<script>
+
+   window.addEventListener("load", function load(event){
+     $('#camera-feed').html5_qrcode(function(data){
+            // do something when code is read
+            console.log("data READ");
+            console.log(data);
+            loadDoc(data);
+            //switch camera feeds
+            document.getElementsByTagName('video')[0].style.display = 'none';
+            document.getElementsByTagName('video')[1].style.display = '';
+            //console.log(document.getElementById("link").style.href);
+            document.getElementById("link").href = "http://"+data;
+            document.getElementById("link").style.display = "";
+         },
+         function(error){
+         //show read errors
+         //console.log("QR Read Error")
+         }, function(videoError){
+         //the video stream could be opened
+         }
+       );
+     },false);
+
+
+ </script>
 
   <script>
+
   ///////////////////////////////////////////////////////////////////////////
   //		Init
   ///////////////////////////////////////////////////////////////////////////
@@ -92,7 +123,7 @@
   // handle resize
   window.addEventListener('resize', function(){
   onResize()
-  })
+})
   function onResize(){
   arToolkitSource.onResize()
   arToolkitSource.copySizeTo(renderer.domElement)
@@ -121,6 +152,7 @@
   // how and where are the markers detected??
 
   // IDEA: a function trigger() that checks what the current marker is. If the marker has changed, it triggers a state change by calling loadDoc, which requests and displays the new AR image
+  //TODO: figure out how to access marker id (ar.js)
   function trigger () {
     // if marker is the same
       // do nothing
@@ -166,7 +198,7 @@
   var data_parse
   function loadDoc(marker_id) {
     // console.log("hello")
-      $.get('/tours/get_render/1', function(data) {
+      $.get('/tours/get_render/' + marker_id , function(data) {
 
           data_parse = JSON.parse(data);
           // var sample = 'Remove stuff before this word. Hello!';
@@ -194,6 +226,9 @@
   }
   </script>
   <script>
+  //  when marker is found, arToolkitSource.ready === true
+  //
+
   onRenderFcts.push(function(){
   if( arToolkitSource.ready === false )	return
   arToolkitContext.update( arToolkitSource.domElement )
@@ -202,10 +237,15 @@
   scene.visible = camera.visible
   })
 
+
   ////////////////////////////////////////////////////////////////////////////////
   //          Create a ArMarkerControls
   ////////////////////////////////////////////////////////////////////////////////
 
+//below code responsible for recognizing pattern
+//look into THREEx.ArMarkerControls on ArToolKit
+//arToolkitContext: "finds marker position in img source"
+//ArMarkerControls: controls position of marker, positions content on top of marker
   // init controls for camera
   var markerControls = new THREEx.ArMarkerControls(arToolkitContext, camera, {
   type : 'pattern',
@@ -216,6 +256,12 @@
   })
   // as we do changeMatrixMode: 'cameraTransformMatrix', start with invisible scene
   scene.visible = false
+
+
+
+
+
+
   //////////////////////////////////////////////////////////////////////////////////
   //		add an object in the scene
   //////////////////////////////////////////////////////////////////////////////////
@@ -227,14 +273,15 @@
   side: THREE.DoubleSide
   });
   var mesh	= new THREE.Mesh( geometry, material );
-  mesh.position.y	= geometry.parameters.height/2
+  mesh.visible = false;
+  // mesh.position.y	= geometry.parameters.height/2
   scene.add( mesh );
 
-  var geometry	= new THREE.TorusKnotGeometry(0.3,0.1,64,16);
-  var material	= new THREE.MeshNormalMaterial();
-  var mesh	= new THREE.Mesh( geometry, material );
-  mesh.position.y	= 0.5
-  scene.add( mesh );
+  // var geometry	= new THREE.TorusKnotGeometry(0.3,0.1,64,16);
+  // var material	= new THREE.MeshNormalMaterial();
+  // var mesh	= new THREE.Mesh( geometry, material );
+  // mesh.position.y	= 0.5
+  // scene.add( mesh );
   console.log("b4 draco load");
   var textureLoader = new THREE.TextureLoader();
   loadDracoModel();
@@ -408,6 +455,14 @@ $.ajaxSetup({
         }
     }
 });
+
+document.getElementsByTagName('video')[0].style.display = 'none';
+
+function startqrscan () {
+
+  document.getElementsByTagName('video')[0].style.display = '';
+  document.getElementsByTagName('video')[1].style.display = 'none';
+}
 </script>
 
 </body>
