@@ -21,6 +21,19 @@ html, body {
   background-color: #030303 ;
 }
 
+#qr-scan-state span.icon-success {
+    color: #5CB85C !important;
+}
+
+#qr-scan-state:hover span.icon-success {
+    color: #80f984 !important;
+}
+
+.icon-remove {
+   color: #f98780;
+}
+
+
 img {
   width: 100%;
 }

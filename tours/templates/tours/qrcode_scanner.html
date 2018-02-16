@@ -23,8 +23,23 @@
         <div style="text-align: center;">
           <h1 style="color: #fff !important;">Scan QR Code with your camera<h1>
           <h4 style="color: #fff !important;">(Tip: Try to have the QR Code take all of the space of the camera feed)</h4>
-          <a id="link" href="#" style="display: none;">Click HERE to go to exhibit</a>
+
+        <br>
+      <!--   <div id="no-qr" href="#">
+            <div >NO QR CODE DETECTED <span class="glyphicon glyphicon-remove icon-remove"></span></div>
+          </div>
+        </div> -->
+
+        <div id="qr-scan-state" href="#">
+          <div>
+            <div id="qr-scan-state-txt">NO QR CODE DETECTED</div>
+              <span id="qr-state-icon" class="glyphicon glyphicon-remove icon-remove"></span>
+          </div>
         </div>
+        
+        <button id="found-qr-btn" style="display: none;" ><a >GO TO EXHIBIT</a></button>
+
+      </div>
 
         
         <!-- QR CODE Scanner  -->
@@ -60,11 +75,10 @@
                console.log(data);
 
                //console.log(document.getElementById("link").style.href);
-               document.getElementById("link").href = "http://"+data;
-               document.getElementById("link").style.display = "";
-
-    
-
+               document.getElementById("found-qr-btn").href = "http://"+data;
+               document.getElementById("qr-scan-state-txt").innerHTML = "QR CODE DETECTED";
+               document.getElementById("qr-state-icon").className = "glyphicon glyphicon-ok icon-success";
+               document.getElementById("found-qr-btn").style.display = "";
 
 
 
