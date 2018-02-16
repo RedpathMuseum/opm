@@ -37,7 +37,9 @@
           </div>
         </div>
         
-        <button id="found-qr-btn" style="display: none;" ><a >GO TO EXHIBIT</a></button>
+        <div >
+          <a  href="#" style="display: none;" id="found-qr-btn-link" class="btn btn-success">CLICK HERE TO GO TO EXHIBIT</a>
+        </div>
 
       </div>
 
@@ -74,11 +76,11 @@
                console.log("data READ");
                console.log(data);
 
-               //console.log(document.getElementById("link").style.href);
-               document.getElementById("found-qr-btn").href = "http://"+data;
+               var exhibitHyperLink = "https://" + data;
+               document.getElementById("found-qr-btn-link").href = exhibitHyperLink;
                document.getElementById("qr-scan-state-txt").innerHTML = "QR CODE DETECTED";
                document.getElementById("qr-state-icon").className = "glyphicon glyphicon-ok icon-success";
-               document.getElementById("found-qr-btn").style.display = "";
+               document.getElementById("found-qr-btn-link").style.display = "";
 
 
 
