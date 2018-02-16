@@ -27,6 +27,8 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['redpath.mamss.ca', 'localhost', '67.212.82.214', '3d.redpath.mamss.ca']
 
+# Need to be disabled if run in debug or localhost
+SECURE_SSL_REDIRECT = False if DEBUG == 'True' else True
 
 # Application definition
 
