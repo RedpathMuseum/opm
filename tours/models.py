@@ -35,6 +35,9 @@ class Tour(models.Model):
         image_name = basename(self.snapshot.name)
         print(image_name)
         return image_name
+		
+    class Meta:
+        managed = True
 
 class TourGroup(models.Model):
     title = models.CharField(max_length=100)
