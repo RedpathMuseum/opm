@@ -204,9 +204,8 @@ var imgNode;
 var imgContainer;
 /*** ADDING SCREEN SHOT ABILITY ***/
 function loadImg() {
-//window.addEventListener("keydown", function(e){
-  //Listen to 'P' key
   try {
+      render();
       imgData = renderer.domElement.toDataURL();
     // console.log(imgData);
   }
@@ -214,12 +213,11 @@ function loadImg() {
       console.log("Browser does not support taking screenshot of 3d context");
       return;
   }
- imgNode = document.getElementById("preview_snapshot");
- imgNode.src = imgData;
- document.getElementById("preview_snapshot_container").style.display = "";
- times++;
- console.log(times);
-//});
+   imgNode = document.getElementById("preview_snapshot");
+   imgNode.src = imgData;
+   document.getElementById("preview_snapshot_container").style.display = "";
+   times++;
+   console.log(times);
 }
 
 </script>

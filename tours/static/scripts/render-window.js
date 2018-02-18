@@ -114,7 +114,6 @@ function init() {
     // renderer
     //render element is put inside the canvas element
     renderer = new THREE.WebGLRenderer({
-      preserveDrawingBuffer: true,
       canvas: canvas3D});
     //Alpha set to true for better resolution
     renderer.alpha = true;
