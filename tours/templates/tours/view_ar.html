@@ -7,6 +7,11 @@
 
 <!-- Script to load 3D object  -->
 <head>
+  <!-- temp css declaration
+    figure out how to import the django way-->
+  <link rel="stylesheet" href="../../static/styles/view_ar.css">
+
+
   <title> Display Model </title>
   <script>
 
@@ -87,6 +92,7 @@
         loadDoc(data);
 
         startButton.style.display = 'block';
+        startButton.style.margin = 'auto';
         qrFeed.style.display = 'none';
 
 
@@ -131,6 +137,7 @@
       document.getElementsByTagName('video')[1].style.display = 'block';
       //show the start button
       startButton.style.display = 'block';
+      startButton.style.margin = 'auto';
       //hide the cancel button
       stopButton.style.display = "none";
       //hide qrFeed
